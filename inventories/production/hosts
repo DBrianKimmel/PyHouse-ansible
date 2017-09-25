@@ -1,0 +1,100 @@
+# Name:    PyHouse-ansible/inventories/production/hosts
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-09-22
+
+
+[pp-nuc]
+# Pink Poppy Nucs (Jump Box)
+nuc-01 ansible_host=192.168.1.10
+
+[ct-nuc]
+# Cannon Trail Nucs (Jump Box)
+nuc-01 ansible_host=192.168.9.10
+
+
+[pp-pis]
+# Pink Poppy Raspberry Pis
+pi-02-pp  ansible_host=192.168.1.12
+pp-pi-03 ansible_host=192.168.1.13
+pp-pi-04 ansible_host=192.168.1.14
+pp-pi-08 ansible_host=192.168.1.18
+pp-pi-10 ansible_host=192.168.1.20
+
+[ct-pis]
+# Cannon Trail Raspberry Pis
+ct-pi-01 ansible_host=192.168.9.11
+ct-pi-02 ansible_host=192.168.9.12
+ct-pi-03 ansible_host=192.168.9.13
+ct-pi-05 ansible_host=192.168.9.15
+ct-pi-06 ansible_host=192.168.9.16
+ct-pi-07 ansible_host=192.168.9.17
+ct-pi-11 ansible_host=192.168.9.21
+ct-pi-12 ansible_host=192.168.9.22
+
+
+[piduino]
+piduino-01 ansible_host=192.168.8.81
+
+[insteon]
+hub-01 ansible_host=192.168.9.133
+
+[remotealki]
+alki ansible_host="pinkpoppy.asuscomm.com" ansible_port=2254
+
+
+
+# PyHouse Servers
+[pinkpoppy_pyhouse]
+pi-01.local 
+pi-02.local
+
+[cannontrail_pyhouse]
+pi-01.local
+pi-02.local
+pi-07.local
+
+
+# Node Red Servers
+[cannontrail_nodered]
+pi-11.local
+pi-02.local
+
+[pinkpoppy_nodered]
+pi-06.local
+
+
+# Mqtt Brokers
+[cannontrail_mqtt]
+nuc-01.local
+
+[pinkpoppy_mqtt]
+nuc-01.local
+
+
+[pyhouse:children]
+pinkpoppy_pyhouse
+cannontrail_pyhouse
+
+[node_red:children]
+pinkpoppy_nodered
+cannontrail_nodered
+
+[mqtt:children]
+pinkpoppy_mqtt
+cannontrail_mqtt
+
+
+# All of pink poppy
+[pinkpoppy:children]
+pinkpoppy_pyhouse
+pinkpoppy_nodered
+pinkpoppy_mqtt
+
+# All of cannon trail
+[cannontrail:children]
+cannontrail_pyhouse
+cannontrail_nodered
+cannontrail_mqtt
+
+### END DBK

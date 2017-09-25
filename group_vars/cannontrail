@@ -1,0 +1,7 @@
+# PyHouse-ansible/group_vars/cannontrail
+#
+# Variables for the cannon trail house.
+
+access_points: {"CannonTrail": "Koepfinger-59", "CannonTrail-2": "Koepfinger-59"}
+
+### END DBK

@@ -1,0 +1,30 @@
+# Name:    PyHouse-ansible/roles/common/tasks/avahi.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-09-22
+#
+# Add the avahi config files and restart
+---
+
+- name: task-avahi-01 - Add avahi service files
+  copy:
+    src:    ./avahi/ssh.service
+    dest:   /etc/avahi/services/ssh.service
+    owner:  root
+    group:  root
+    mode:   0644
+
+- name: task-avahi-02 - Add avahi service files
+  copy:
+    src:    ./avahi/vnc.service
+    dest:   /etc/avahi/services/vnc.service
+    owner:  root
+    group:  root
+    mode:   0644
+
+- name: task-avahi-03 - Enable avahi so it runs at boot time.
+  systemd:
+    name: avahi-daemon.service
+    enabled:
+
+### END DBK

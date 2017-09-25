@@ -1,0 +1,27 @@
+# Name:    PyHouse-ansible/pis.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-09-22
+
+# configure / update all the Pi computers.
+
+---
+- hosts: pp-pis
+  remote_user: briank
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  serial: 5
+
+  vars:
+    - uUserName:    briank
+    - uComment:     "D. Brian Kimmel"
+    - uHomeDir:     "/home/{{ uUserName }}"
+    - uPrivateKey:  "{{ uHomeDir }}/.ssh/id_rsa"
+
+  roles:
+    - common
+    - pyhouse
+    - wifi
+
+### END DBK

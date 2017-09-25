@@ -1,0 +1,33 @@
+#
+# inventories/testing/hosts
+#
+
+cannontrail   ansible_host=cannontrail.asuscomm.com  ansible_port=2210
+pinkpoppy     ansible_host=pinkpoppy.asuscomm.com    ansible_port=2210
+
+[pp-nuc]
+nuc-01        ansible_host=192.168.1.10
+
+[ct-nuc]
+nuc-01        ansible_host=192.168.9.10
+
+
+[pp-pis]
+pi-02		  ansible_host=192.168.1.12
+pi-03		  ansible_host=192.168.1.13
+pi-04		  ansible_host=192.168.1.14
+pi-08		  ansible_host=192.168.1.18
+pi-10		  ansible_host=192.168.1.20
+pi-12
+
+[ct-pis]
+pi-01         ansible_host=192.168.9.11
+pi-02         ansible_host=192.168.9.12
+pi-03         ansible_host=192.168.9.13
+pi-05         ansible_host=192.168.9.15
+pi-06         ansible_host=192.168.9.16
+pi-07         ansible_host=192.168.9.17
+pi-11         ansible_host=192.168.9.21
+pi-12         ansible_host=192.168.9.22
+
+### END DBK

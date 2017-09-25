@@ -1,0 +1,7 @@
+---
+# Add wifi to raspi
+
+- name: WiFi setup
+  hosts: all
+
+### END DBK

@@ -1,0 +1,29 @@
+# Name:    PyHouse-ansible/roles/pyhouse/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-09-22
+#
+# This  is to add/maintain the pyhouse system on a node computer such as a raspberry pi.
+
+---
+
+- name: task-01 - Create admin user
+  user:
+    name:    "pyhouse"
+    comment: "PyHouse User"
+    groups:  dialout,audio,video,input
+
+- name: Task-02 pyhouse tasks Update apt cache
+  apt: update_cache=yes
+
+
+#    - name: Add the 'pyhouse' user
+#      command: ls
+
+#    - name: Clone the PyHouse package
+#      command: ls
+
+#    - name: next step
+#      command: ls
+
+### END DBK
