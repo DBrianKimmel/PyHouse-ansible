@@ -7,20 +7,57 @@
 
 ---
 
-- name: task-01 - Create admin user
+- name: PyHouse-task-01 - Create PyHouse user
   user:
     name:    "pyhouse"
     comment: "PyHouse User"
     groups:  dialout,audio,video,input
 
-- name: Task-02 pyhouse tasks Update apt cache
+- name: PyHouse-task-02 - pyhouse tasks Update apt cache
   apt: update_cache=yes
 
+- name: PyHouse-task-03 - Create Directory
+  file:
+    name:  "/etc/pyhouse"
+    state: directory
+    owner: pyhouse
+    group: pyhouse
+    mode:  0755
 
-#    - name: Add the 'pyhouse' user
-#      command: ls
+- name: PyHouse-task-04 - Create Directory
+  file:
+    name:  "/var/log/pyhouse"
+    state: directory
+    owner: pyhouse
+    group: pyhouse
+    mode:  0755
 
-#    - name: Clone the PyHouse package
+- name: PyHouse-task-05 - Create Directory
+  file:
+    name:  "/home/pyhouse/workspace"
+    state: directory
+    owner: pyhouse
+    group: pyhouse
+    mode:  0755
+
+- name: PyHouse-task-06 - Create Directory
+  file:
+    name:  "/home/pyhouse/bin"
+    state: directory
+    owner: pyhouse
+    group: pyhouse
+    mode:  0755
+
+- name: PyHouse-task-07 - Copy files
+  copy:
+    src:  "./bin/"
+    dst:  "/home/pyhouse/bin/"
+    owner: pyhouse
+    group: pyhouse
+    mode:  0755
+
+
+#    - name: PyHouse-task-05 - Clone the PyHouse package
 #      command: ls
 
 #    - name: next step
