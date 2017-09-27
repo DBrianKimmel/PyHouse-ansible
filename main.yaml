@@ -7,11 +7,12 @@
 
 ---
 
-# next the master computers (nuc)
-#- include: nucs.yaml
+# Do the master computer (nuc)
+- include: nucs.yaml
 
-# Do all the raspberries (pi)
+# Do all the raspberry Pis (pi)
 - include: pis.yaml
 
+# Do other computers
+
 ### END DBK
-...

@@ -16,10 +16,10 @@ nuc-01 ansible_host=192.168.9.10
 [pp-pis]
 # Pink Poppy Raspberry Pis
 pi-02-pp  ansible_host=192.168.1.12
-pp-pi-03 ansible_host=192.168.1.13
-pp-pi-04 ansible_host=192.168.1.14
-pp-pi-08 ansible_host=192.168.1.18
-pp-pi-10 ansible_host=192.168.1.20
+pi-03-pp  ansible_host=192.168.1.13
+pi-04-pp  ansible_host=192.168.1.14
+pi-08-pp  ansible_host=192.168.1.18
+pi-10-pp  ansible_host=192.168.1.20
 
 [ct-pis]
 # Cannon Trail Raspberry Pis
