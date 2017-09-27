@@ -3,7 +3,10 @@
 # Created: 2017-09-18
 # Updated: 2017-09-22
 
-# Author:  D. Brian Kimmel
-# Created: 2017-09-18
-# Updated: 2017-09-22
+vars:
+  - uUserName:    briank
+  - uComment:     "D. Brian Kimmel"
+  - uHomeDir:     "/home/{{ uUserName }}"
+  - uPrivateKey:  "{{ uHomeDir }}/.ssh/id_rsa"
+
 ### END DBK
