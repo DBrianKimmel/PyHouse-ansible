@@ -6,7 +6,7 @@
 # Add the avahi config files and restart
 ---
 
-- name: task-avahi-01 - Add avahi service files
+- name: avahi-task-01 - Add avahi service files
   copy:
     src:    ./avahi/ssh.service
     dest:   /etc/avahi/services/ssh.service
@@ -14,7 +14,7 @@
     group:  root
     mode:   0644
 
-- name: task-avahi-02 - Add avahi service files
+- name: avahi-task-02 - Add avahi service files
   copy:
     src:    ./avahi/vnc.service
     dest:   /etc/avahi/services/vnc.service
@@ -22,9 +22,9 @@
     group:  root
     mode:   0644
 
-- name: task-avahi-03 - Enable avahi so it runs at boot time.
-  systemd:
-    name: avahi-daemon.service
-    enabled:
+#- name: avahi-task-03 - Enable avahi so it runs at boot time.
+#  systemd:
+#    name: avahi-daemon.service
+#    enabled:
 
 ### END DBK

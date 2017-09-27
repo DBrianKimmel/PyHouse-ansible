@@ -15,9 +15,37 @@
     recurse: yes
     path:    /etc/ansible/facts.d
 
-- name: task-03 - Update Apt
+- name: task-03A - Update Apt
   apt:
-    update_cache: yes
+      update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: task-03B - Upgrade packages
+  apt: upgrade=dist
+  when: ansible_os_family == 'Debian'
+
+- name: task-03C - Check what the new version is
+  shell:  lsb_release -r | awk '{print $2}'
+  changed_when: False
+  register: new_release
+
+- name: task-03D - Notify distribution version upgrade
+  debug: msg="Debian has been upgraded from {{ ansible_lsb.release }} to {{ new_release.stdout }}"
+  when: ansible_lsb.release != new_release.stdout
+
+- name: task-03E - List services to restart (1/2)
+  shell: checkrestart | grep ^service | awk '{print $2}'
+  register: services
+  changed_when: False
+  when: ansible_os_family == 'Debian'
+
+- name: task-03F - List services to restart (2/2)
+  debug: msg="{{ services.stdout_lines | count }} services to restart ({{ services.stdout_lines | join (', ') }})"
+  when: (ansible_os_family == 'Debian' and services.stdout_lines)
+
+
+
+
 
 - name: task-04 - Install all required common packages
   apt:
