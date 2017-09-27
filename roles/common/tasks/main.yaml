@@ -15,11 +15,10 @@
     recurse: yes
     path:    /etc/ansible/facts.d
 
-
 - name: task-03A - Update Apt
   apt:
-  update_cache: yes
-  when: ansible_os_family == 'Debian'
+      update_cache: yes
+      when: ansible_os_family == 'Debian'
 
 - name: task-03B - List packages to upgrade (1/2)
   shell: aptitude -q -F%p --disable-columns search "~U"
