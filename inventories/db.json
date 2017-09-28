@@ -1,0 +1,11 @@
+{
+	pi-01-pp: {
+		pyh_service: pyhouse
+	}
+	pi-10-pp: {
+		pyh_service: pyhouse
+	}
+	nuc-01-pp" {
+		pyh_service: mqtt
+	}
+}

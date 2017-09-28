@@ -50,17 +50,18 @@
 
 - name: PyHouse-task-07 - Copy files
   copy:
-    src:  "./bin/"
-    dst:  "/home/pyhouse/bin/"
+    src:   "./bin/"
+    dest:  "/home/pyhouse/bin"
     owner: pyhouse
     group: pyhouse
     mode:  0755
 
 
-#    - name: PyHouse-task-05 - Clone the PyHouse package
-#      command: ls
+- name: PyHouse-task-08 - Clone the PyHouse package
+  git:
+    repo: ssh://git@github.com/DBrianKimmel/PyHouse.git
+    dest: /home/pyhouse/workspace/PyHouse
 
-#    - name: next step
-#      command: ls
+
 
 ### END DBK

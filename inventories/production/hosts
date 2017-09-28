@@ -6,15 +6,16 @@
 
 [pp-nuc]
 # Pink Poppy Nucs (Jump Box)
-nuc-01 ansible_host=192.168.1.10
+nuc-01-pp  ansible_host=192.168.1.10
 
 [ct-nuc]
 # Cannon Trail Nucs (Jump Box)
-nuc-01 ansible_host=192.168.9.10
+nuc-01-ct  ansible_host=192.168.9.10
 
 
 [pp-pis]
 # Pink Poppy Raspberry Pis
+pi-01-pp  ansible_host=192.168.1.102
 pi-02-pp  ansible_host=192.168.1.12
 pi-03-pp  ansible_host=192.168.1.13
 pi-04-pp  ansible_host=192.168.1.14
@@ -23,14 +24,14 @@ pi-10-pp  ansible_host=192.168.1.20
 
 [ct-pis]
 # Cannon Trail Raspberry Pis
-ct-pi-01 ansible_host=192.168.9.11
-ct-pi-02 ansible_host=192.168.9.12
-ct-pi-03 ansible_host=192.168.9.13
-ct-pi-05 ansible_host=192.168.9.15
-ct-pi-06 ansible_host=192.168.9.16
-ct-pi-07 ansible_host=192.168.9.17
-ct-pi-11 ansible_host=192.168.9.21
-ct-pi-12 ansible_host=192.168.9.22
+pi-01-pp  ansible_host=192.168.9.11
+pi-02-pp  ansible_host=192.168.9.12
+pi-03-pp  ansible_host=192.168.9.13
+pi-05-pp  ansible_host=192.168.9.15
+pi-06-pp  ansible_host=192.168.9.16
+pi-07-pp  ansible_host=192.168.9.17
+pi-11-pp  ansible_host=192.168.9.21
+pi-12-pp  ansible_host=192.168.9.22
 
 
 [piduino]
@@ -46,8 +47,9 @@ alki ansible_host="pinkpoppy.asuscomm.com" ansible_port=2254
 
 # PyHouse Servers
 [pinkpoppy_pyhouse]
-pi-01.local 
-pi-02.local
+pi-01-pp.local 
+pi-02-pp.local
+pi-10-pp.local
 
 [cannontrail_pyhouse]
 pi-01.local
@@ -61,7 +63,7 @@ pi-11.local
 pi-02.local
 
 [pinkpoppy_nodered]
-pi-06.local
+pi-04-pp.local
 
 
 # Mqtt Brokers
@@ -69,7 +71,7 @@ pi-06.local
 nuc-01.local
 
 [pinkpoppy_mqtt]
-nuc-01.local
+nuc-01-pp.local
 
 
 [pyhouse:children]
