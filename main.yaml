@@ -7,12 +7,10 @@
 
 ---
 
-# Do the master computer (nuc)
-- include: nucs.yaml
+# Do all the houses
+- include: houses.yaml
 
-# Do all the raspberry Pis (pi)
-- include: pis.yaml
-
-# Do other computers
+# Do other things
+#- include: xxx.yaml
 
 ### END DBK

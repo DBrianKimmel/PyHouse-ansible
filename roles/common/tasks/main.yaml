@@ -1,0 +1,120 @@
+# Name:    PyHouse-ansible/roles/common/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-09-22
+
+#Things that are common to all servers 
+
+---
+
+- name: Role - Common Tasks Main
+  hosts: all
+  tasks:
+    - name: task-01 - Imports
+      include: roles/common/tasks/avahi.yaml
+
+    - name: task-02 - Create directory for ansible custom facts
+      file:
+        state:   directory
+        recurse: yes
+        path:    /etc/ansible/facts.d
+    
+    - name: task-03 - Update Apt
+      apt:
+          update_cache: yes
+      when: ansible_os_family == 'Debian'
+    
+    - name: task-03A - Add / Update Aptitude
+      apt:
+          name: aptitude
+      when: ansible_os_family == 'Debian'
+    
+    - name: task-03B - Upgrade packages
+      apt: upgrade=dist
+      when: ansible_os_family == 'Debian'
+    
+    - name: task-03C - Check what the new version is
+      shell:  lsb_release -r | awk '{print $2}'
+      changed_when: False
+      register: new_release
+    
+    - name: task-03D - Notify distribution version upgrade
+      debug: msg="Debian has been upgraded from {{ ansible_lsb.release }} to {{ new_release.stdout }}"
+      when: ansible_lsb.release != new_release.stdout
+    
+    - name: task-03E - List services to restart (1/2)
+      shell: checkrestart | grep ^service | awk '{print $2}'
+      register: services
+      changed_when: False
+      when: ansible_os_family == 'Debian'
+    
+    - name: task-03F - List services to restart (2/2)
+      debug: msg="{{ services.stdout_lines | count }} services to restart ({{ services.stdout_lines | join (', ') }})"
+      when: (ansible_os_family == 'Debian' and services.stdout_lines)
+    
+    
+    
+    
+    
+    - name: task-04 - Install all required common packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - git
+        - python3
+        - python3-pip
+    
+    - name: task-05 - Create admin user
+      user:
+        name:    "{{ uUserName }}"
+        comment: "{{ uComment }}"
+        groups:  adm,dialout,sudo,audio,video,plugdev,input,netdev
+    # pi only groups spi, i2c, gpio
+    
+    - name: task-06 - Copy Private Key
+      copy:
+        src: "{{ uPrivateKey }}"
+        dest: "{{ uHomeDir }}/.ssh"
+        mode: 0600
+    
+    # Update roots crontab 
+    - name: task-07 - reboot weekly
+      cron:
+        name:    "Reboot"
+        hour:    "4"
+        minute:  "3"
+        weekday: "1"
+        job:     "/sbin/reboot"
+        user:    "root"
+    
+    #- name: task-08 - Hostname
+    #  hostname:
+    #    name: "{{  }}"
+    
+    
+    #  - name: Create APP Directory
+    #    file: path={{homeDir}}/{{appDir}} state=directory
+    
+    #  - name: Git Clone Repo
+    #    git: repo=git@github.com:{{account}}/{{repo}}.git dest={{homeDir}}/{{appDir}} update=yes force=yes accept_hostkey=yes key_file={{homeDir}}/id_rsa
+    #    register: git_finished
+    
+    #  - name: Running NPM install
+    #    npm: path={{homeDir}}/{{appDir}}/backened
+    #    register: npm_finished
+    #    when: git_finished.changed
+    
+    #  - name: Stop APP
+    #    sudo_user: ubuntu
+    #    command: pm2 stop app chdir={{homeDir}}/{{appDir}}/backened
+    #    ignore_errors: yes
+    
+    #  - name: Start APP
+    #    sudo_user: ubuntu
+    #    command: pm2 start index.js --name app chdir={{homeDir}}/{{appDir}}/backened
+    #    ignore_errors: yes
+    #    when: npm_finished.changed
+    
+    
+### END DBK

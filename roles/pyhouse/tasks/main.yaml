@@ -59,8 +59,10 @@
 
 - name: PyHouse-task-08 - Clone the PyHouse package
   git:
-    repo: ssh://git@github.com/DBrianKimmel/PyHouse.git
-    dest: /home/pyhouse/workspace/PyHouse
+    repo:            https://git@github.com/DBrianKimmel/PyHouse.git
+    dest:            /home/pyhouse/workspace/PyHouse
+    accept_hostkey:  true
+  when:              pyh_roles | search("PyHouse")
 
 
 

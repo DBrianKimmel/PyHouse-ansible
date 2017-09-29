@@ -6,6 +6,7 @@
 # configure / update all the Pi computers.
 
 ---
+
 - hosts: pp-pis
   remote_user: briank
   become: yes

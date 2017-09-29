@@ -34,7 +34,7 @@ pi-11-pp  ansible_host=192.168.9.21
 pi-12-pp  ansible_host=192.168.9.22
 
 
-[piduino]
+[ct-piduino]
 piduino-01 ansible_host=192.168.8.81
 
 [insteon]
@@ -52,7 +52,7 @@ pi-02-pp.local
 pi-10-pp.local
 
 [cannontrail_pyhouse]
-pi-01.local
+pi-01-ct.local
 pi-02.local
 pi-07.local
 
