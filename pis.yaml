@@ -7,12 +7,12 @@
 
 ---
 
-- hosts: pp-pis
+- hosts: pis_ct
   remote_user: briank
   become: yes
   become_method: sudo
   gather_facts: yes
-  serial: 5
+#  serial: 8
 
   vars:
     - uUserName:    briank

@@ -5,6 +5,8 @@
 #
 # the sitewide master file
 
+# see the ssh configuration in     ~/.ssh/config
+
 ---
 
 # Do all the houses

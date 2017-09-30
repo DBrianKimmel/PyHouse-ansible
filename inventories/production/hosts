@@ -4,16 +4,16 @@
 # Updated: 2017-09-22
 
 
-[pp-nuc]
+[nuc_pp]
 # Pink Poppy Nucs (Jump Box)
 nuc-01-pp  ansible_host=192.168.1.10
 
-[ct-nuc]
+[nuc_ct]
 # Cannon Trail Nucs (Jump Box)
 nuc-01-ct  ansible_host=192.168.9.10
 
 
-[pp-pis]
+[pis_pp]
 # Pink Poppy Raspberry Pis
 pi-01-pp  ansible_host=192.168.1.102
 pi-02-pp  ansible_host=192.168.1.12
@@ -22,16 +22,16 @@ pi-04-pp  ansible_host=192.168.1.14
 pi-08-pp  ansible_host=192.168.1.18
 pi-10-pp  ansible_host=192.168.1.20
 
-[ct-pis]
+[pis_ct]
 # Cannon Trail Raspberry Pis
-pi-01-pp  ansible_host=192.168.9.11
-pi-02-pp  ansible_host=192.168.9.12
-pi-03-pp  ansible_host=192.168.9.13
-pi-05-pp  ansible_host=192.168.9.15
-pi-06-pp  ansible_host=192.168.9.16
-pi-07-pp  ansible_host=192.168.9.17
-pi-11-pp  ansible_host=192.168.9.21
-pi-12-pp  ansible_host=192.168.9.22
+pi-01-ct  ansible_host=192.168.9.11
+pi-02-ct  ansible_host=192.168.9.12
+pi-03-ct  ansible_host=192.168.9.13
+pi-05-ct  ansible_host=192.168.9.15
+pi-06-ct  ansible_host=192.168.9.16
+pi-07-ct  ansible_host=192.168.9.17
+pi-11-ct  ansible_host=192.168.9.21
+pi-12-ct  ansible_host=192.168.9.22
 
 
 [ct-piduino]
@@ -63,12 +63,13 @@ pi-11.local
 pi-02.local
 
 [pinkpoppy_nodered]
+pi-02-pp.local
 pi-04-pp.local
 
 
 # Mqtt Brokers
 [cannontrail_mqtt]
-nuc-01.local
+nuc-01-ct.local
 
 [pinkpoppy_mqtt]
 nuc-01-pp.local

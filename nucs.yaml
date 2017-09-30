@@ -7,7 +7,7 @@
 
 ---
 - name: Provision the master computer (Nuc) of each house.
-  hosts: pp-nuc
+  hosts: nuc_ct
   remote_user: briank
   become: yes
   become_method: sudo

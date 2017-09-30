@@ -7,9 +7,9 @@
 
 ---
 
-- name: Role - Common Tasks Main
-  hosts: all
-  tasks:
+#- name: Role - Common Tasks Main
+#- hosts: all
+#- tasks:
     - name: task-01 - Imports
       include: roles/common/tasks/avahi.yaml
 
@@ -24,31 +24,48 @@
           update_cache: yes
       when: ansible_os_family == 'Debian'
     
-    - name: task-03A - Add / Update Aptitude
+    - name: task-04 - Add / Update Aptitude
       apt:
           name: aptitude
       when: ansible_os_family == 'Debian'
-    
-    - name: task-03B - Upgrade packages
-      apt: upgrade=dist
+
+
+
+
+    - name: task-05 - List packages to upgrade (1/2)
+      shell: aptitude -q -F%p --disable-columns search "~U"
+      register: updates
+      changed_when: False
+      when: ansible_os_family == 'Debian'
+
+    - name: task-06 - List packages to upgrade (2/2)
+      debug: msg="{{ updates.stdout_lines | count }} packages to upgrade ({{ updates.stdout_lines | join(', ') }})"
+      when: (ansible_os_family == 'Debian' and updates.stdout_lines)
+
+
+
+
+
+    - name: task-07 - Upgrade packages
+      apt: upgrade=safe
       when: ansible_os_family == 'Debian'
     
-    - name: task-03C - Check what the new version is
+    - name: task-08 - Check what the new version is
       shell:  lsb_release -r | awk '{print $2}'
       changed_when: False
       register: new_release
     
-    - name: task-03D - Notify distribution version upgrade
+    - name: task-09 - Notify distribution version upgrade
       debug: msg="Debian has been upgraded from {{ ansible_lsb.release }} to {{ new_release.stdout }}"
       when: ansible_lsb.release != new_release.stdout
     
-    - name: task-03E - List services to restart (1/2)
+    - name: task-10 - List services to restart (1/2)
       shell: checkrestart | grep ^service | awk '{print $2}'
       register: services
       changed_when: False
       when: ansible_os_family == 'Debian'
     
-    - name: task-03F - List services to restart (2/2)
+    - name: task-11 - List services to restart (2/2)
       debug: msg="{{ services.stdout_lines | count }} services to restart ({{ services.stdout_lines | join (', ') }})"
       when: (ansible_os_family == 'Debian' and services.stdout_lines)
     
@@ -56,7 +73,7 @@
     
     
     
-    - name: task-04 - Install all required common packages
+    - name: task-12 - Install all required common packages
       apt:
         name: "{{ item }}"
         state: latest
@@ -65,21 +82,21 @@
         - python3
         - python3-pip
     
-    - name: task-05 - Create admin user
+    - name: task-13 - Create admin user
       user:
         name:    "{{ uUserName }}"
         comment: "{{ uComment }}"
         groups:  adm,dialout,sudo,audio,video,plugdev,input,netdev
     # pi only groups spi, i2c, gpio
     
-    - name: task-06 - Copy Private Key
+    - name: task-14 - Copy Private Key
       copy:
         src: "{{ uPrivateKey }}"
         dest: "{{ uHomeDir }}/.ssh"
         mode: 0600
     
     # Update roots crontab 
-    - name: task-07 - reboot weekly
+    - name: task-15 - reboot weekly
       cron:
         name:    "Reboot"
         hour:    "4"
@@ -88,7 +105,7 @@
         job:     "/sbin/reboot"
         user:    "root"
     
-    #- name: task-08 - Hostname
+    #- name: task- - Hostname
     #  hostname:
     #    name: "{{  }}"
     
