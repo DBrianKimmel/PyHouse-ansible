@@ -1,0 +1,60 @@
+# Name:    PyHouse-ansible/roles/common/tasks/pkg_mgr.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-10-01
+#
+# Called from common/main.yaml
+#
+# This  is to:
+#   Update the package manager files
+#   Install aptitude since we will need it for later steps
+#   Safely update all packages we alredy have installed
+
+---
+
+    - name: pkg_mgr_task-01 - Update Apt
+      apt:
+          update_cache: yes
+          cache_valid_time: 3600
+      when: ansible_os_family == 'Debian'
+
+    - name: pkg_mgr_task-02 - Add / Update Aptitude
+      apt:
+          name: aptitude
+      when: ansible_os_family == 'Debian'
+
+    - name: pkg_mgr_task-03 - List packages to upgrade (1/2)
+      shell: aptitude -q -F%p --disable-columns search "~U"
+      register: updates
+      changed_when: False
+      when: ansible_os_family == 'Debian'
+      failed_when: updates.rc < 0
+
+    - name: pkg_mgr_task-04 - List packages to upgrade (2/2)
+      debug: msg="{{ updates.stdout_lines | count }} packages to upgrade ({{ updates.stdout_lines | join(', ') }})"
+      when: (ansible_os_family == 'Debian' and updates.stdout_lines)
+
+    - name: pkg_mgr_task-05 - Upgrade packages
+      apt: upgrade=safe
+      when: ansible_os_family == 'Debian'
+
+    - name: pkg_mgr_task-06 - Check what the new version is
+      shell:  lsb_release -r | awk '{print $2}'
+      changed_when: False
+      register: new_release
+
+    - name: pkg_mgr_task-07 - Notify distribution version upgrade
+      debug: msg="Debian has been upgraded from {{ ansible_lsb.release }} to {{ new_release.stdout }}"
+      when: ansible_lsb.release != new_release.stdout
+
+    - name: pkg_mgr_task-08 - List services to restart (1/2)
+      shell: checkrestart | grep ^service | awk '{print $2}'
+      register: services
+      changed_when: False
+      when: ansible_os_family == 'Debian'
+
+    - name: pkg_mgr_task-09 - List services to restart (2/2)
+      debug: msg="{{ services.stdout_lines | count }} services to restart ({{ services.stdout_lines | join (', ') }})"
+      when: (ansible_os_family == 'Debian' and services.stdout_lines)
+
+### END DBK

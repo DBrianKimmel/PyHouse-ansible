@@ -1,4 +1,4 @@
-# Name:    PyHouse-ansible/roles/common/tasks/firewall.yaml
+# Name:    PyHouse-ansible/roles/common/tasks/ethernet.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-01
 # Updated: 2017-10-01
@@ -6,6 +6,5 @@
 # Called from common/network.yaml
 
 ---
-# Firewall
 
 ### END DBK

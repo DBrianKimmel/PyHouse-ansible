@@ -1,0 +1,14 @@
+# Name:    PyHouse-ansible/host_vars/pi-07-ct.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-01
+# Updated: 2017-10-01
+
+---
+
+vars:
+  pyh_family:      "Pi"
+  pyh_ethernet_ip: 192.168.9.47
+  pyh_wifi_ip:     192.168.9.17
+  pyh_roles:       "PyHouse"
+
+### END DBK

@@ -1,0 +1,24 @@
+# Name:    PyHouse-ansible/roles/common/tasks/network.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-10-01
+#
+# Called from common/main.yaml
+#
+# Perform all the tasks necessary to bring a frshly installed machine up to our standards.
+#
+# This  is to:
+#   Ethernet config
+#   WiFi config
+#   Firewall config
+#   Bluetooth config
+
+---
+
+- name: network-task-01 - Imports
+  include: roles/common/tasks/ethernet.yaml
+  include: roles/common/tasks/wifi.yaml
+  include: roles/common/tasks/firewall.yaml
+  include: roles/common/tasks/bluetooth.yaml
+
+### END DBK

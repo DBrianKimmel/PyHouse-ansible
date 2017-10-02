@@ -6,9 +6,9 @@
 ---
 
 vars:
-  - pyh_family:      "Pi"
-  - pyh_ethernet_ip: 192.168.9.41
-  - pyh_wifi_ip:     192.168.9.11
-  - pyh_roles:       "PyHouse"
+  pyh_family:      "Pi"
+  pyh_ethernet_ip: 192.168.9.41
+  'pyh_wifi_ip':     '192.168.9.11'
+  "pyh_roles":       "PyHouse"
 
 ### END DBK
