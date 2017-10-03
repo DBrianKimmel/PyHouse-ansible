@@ -10,9 +10,12 @@
 ---
 
 # The first house is Pink Poppy
-#- include: nucs.yaml
+#- hosts: pinkpoppy
+#  include: nucs.yaml
 
 # The Second house is Cannon Trail
+- hosts: cannontrail
+- include: nucs.yaml
 - include: pis.yaml
 
 ### END DBK

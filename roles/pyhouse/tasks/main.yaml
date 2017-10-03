@@ -18,7 +18,7 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: PyHouse-task-03 - Create Directory
+- name: PyHouse-task-03 - Create Directory /etc/pyhouse
   file:
     name:  "/etc/pyhouse"
     state: directory
@@ -26,7 +26,7 @@
     group: pyhouse
     mode:  0755
 
-- name: PyHouse-task-04 - Create Directory
+- name: PyHouse-task-04 - Create Directory /var/log/pyhouse
   file:
     name:  "/var/log/pyhouse"
     state: directory
@@ -34,7 +34,7 @@
     group: pyhouse
     mode:  0755
 
-- name: PyHouse-task-05 - Create Directory
+- name: PyHouse-task-05 - Create Directory ~/workspace
   file:
     name:  "/home/pyhouse/workspace"
     state: directory
@@ -42,7 +42,7 @@
     group: pyhouse
     mode:  0755
 
-- name: PyHouse-task-06 - Create Directory
+- name: PyHouse-task-06 - Create Directory  ~/bin
   file:
     name:  "/home/pyhouse/bin"
     state: directory
@@ -50,7 +50,7 @@
     group: pyhouse
     mode:  0755
 
-- name: PyHouse-task-07 - Copy files
+- name: PyHouse-task-07 - Copy files to ~/bin
   copy:
     src:   "./bin/"
     dest:  "/home/pyhouse/bin"
@@ -63,7 +63,7 @@
     repo:            https://git@github.com/DBrianKimmel/PyHouse.git
     dest:            /home/pyhouse/workspace/PyHouse
     accept_hostkey:  true
-  when:              hostvars[inventory_hostname].vars.pyh_roles | search("PyHouse")
+  when:              hostvars[inventory_hostname].vars.pyh_roles | search("pyhouse")
 
 
 ### END DBK

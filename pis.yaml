@@ -14,7 +14,6 @@
   become: yes
   become_method: sudo
   gather_facts: yes
-#  serial: 8
 
   vars:
     - uUserName:    briank
@@ -23,7 +22,7 @@
     - uPrivateKey:  "{{ uHomeDir }}/.ssh/id_rsa"
 
   roles:
-#    - common
+    - common
     - pyhouse
 #    - wifi
 

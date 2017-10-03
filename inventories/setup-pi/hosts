@@ -2,13 +2,15 @@
 #
 # this inventory is for setting up a new raspberry pi.
 
-# Staert with a newly flashed SD card with raspbian stretch lite.
+# Start with a newly flashed SD card with raspbian stretch lite.
 # Add the empty file "ssh" in the boot partition - this will allow ssh to work.
 # The inital connection will be via ethernet as the wifi setup is not yet working.
+#
+# Create a host_vars file with the proper information
 
 
 
-
-pi-xx ansible_host=192.168.9.149 ansible_user=pi ansible_passwd=raspberry
+[setup-pi]
+pi-12-ct   ansible_host=192.168.9.22 ansible_user=pi ansible_passwd=raspberry
 
 ### END DBK

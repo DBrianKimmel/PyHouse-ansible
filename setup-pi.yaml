@@ -1,0 +1,18 @@
+# Name:    PyHouse-ansible/houses.yaml - the houses playbook
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2017-09-22
+#
+# This is a playbook that will set up a raspberry pi that is just being put into service.
+#
+# Requirements:
+#   a freshly created ssd card with the latest version of raspbian-lite
+#   an empty "ssh" file in the boot partition.
+#   an ethernet connection.
+#   the IP address of that connection placed in the host ini file
+#
+#
+
+---
+
+### END DBK

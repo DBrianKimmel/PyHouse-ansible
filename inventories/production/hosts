@@ -4,12 +4,12 @@
 # Updated: 2017-09-22
 
 
-[nuc_pp]
 # Pink Poppy Nucs (Jump Box)
+[nuc_pp]
 nuc-01-pp  ansible_host=192.168.1.10
 
-[nuc_ct]
 # Cannon Trail Nucs (Jump Box)
+[nuc_ct]
 nuc-01-ct  ansible_host=192.168.9.10
 
 
@@ -28,7 +28,6 @@ pi-01-ct  ansible_host=192.168.9.11
 pi-02-ct  ansible_host=192.168.9.12
 pi-03-ct  ansible_host=192.168.9.13
 pi-05-ct  ansible_host=192.168.9.15
-pi-06-ct  ansible_host=192.168.9.16
 pi-07-ct  ansible_host=192.168.9.17
 pi-11-ct  ansible_host=192.168.9.21
 pi-12-ct  ansible_host=192.168.9.22
@@ -47,32 +46,33 @@ alki ansible_host="pinkpoppy.asuscomm.com" ansible_port=2254
 
 # PyHouse Servers
 [pinkpoppy_pyhouse]
-pi-01-pp.local 
-pi-02-pp.local
-pi-10-pp.local
+pi-01-pp
+pi-02-pp
+pi-10-pp
 
 [cannontrail_pyhouse]
-pi-01-ct.local
-pi-02.local
-pi-07.local
+pi-01-ct
+pi-02-ct
+pi-03-ct
+
 
 
 # Node Red Servers
 [cannontrail_nodered]
-pi-11.local
-pi-02.local
+pi-11-ct
+pi-02-ct
 
 [pinkpoppy_nodered]
-pi-02-pp.local
-pi-04-pp.local
+pi-02-pp
+pi-04-pp
 
 
 # Mqtt Brokers
 [cannontrail_mqtt]
-nuc-01-ct.local
+nuc-01-ct
 
 [pinkpoppy_mqtt]
-nuc-01-pp.local
+nuc-01-pp
 
 
 [pyhouse:children]
