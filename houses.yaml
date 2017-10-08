@@ -15,8 +15,8 @@
 
 # The Second house is Cannon Trail
 - hosts: cannontrail
-- include: nucs.yaml
-- include: pis.yaml
+- include: nucs.yaml my_hosts=nuc-ct
+- include: pis.yaml  my_host=pi_ct
 
 ### END DBK
 ...

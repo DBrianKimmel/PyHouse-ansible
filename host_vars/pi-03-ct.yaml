@@ -5,11 +5,13 @@
 
 ---
 
+ansible_host:           192.168.9.13
+
 vars:
-  pyh_hostname:    pi-03-ct
-  pyh_family:      Pi
-  pyh_ethernet_ip: 192.168.9.43
-  pyh_wifi_ip:     192.168.9.13
-  pyh_roles:       pyhouse
+  pyh_hostname:         pi-03-ct
+  pyh_family:           Pi
+  pyh_ethernet_ip:      192.168.9.43
+  pyh_wifi_ip:          192.168.9.13
+  pyh_roles:            pyhouse
 
 ### END DBK

@@ -14,10 +14,9 @@
 - name: task-02 - Install the wpa_supplicant file
   template:
     src:    ./wifi.j2
-    dest:   /etc/wpa_supplicant/wpa_supplicant.conf.new
+    dest:   /etc/wpa_supplicant/wpa_supplicant.conf-new
     owner:  root
     group:  root
     mode:   0600
-    
 
 ### END DBK

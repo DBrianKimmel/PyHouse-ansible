@@ -7,6 +7,9 @@
 
 ---
 
+- name: task-dd
+  debug: msg="In PyHouse-main now"
+  
 - name: PyHouse-task-01 - Create PyHouse user
   user:
     name:    "pyhouse"

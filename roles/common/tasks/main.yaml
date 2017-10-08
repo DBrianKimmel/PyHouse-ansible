@@ -3,85 +3,95 @@
 # Created: 2017-09-18
 # Updated: 2017-10-01
 
-#Things that are common to all servers 
+#Things that are common to all servers:
+#   Admin User
+#   Network Setup
+#   Package Manager (apt)
+#   avahi
+#   ansible facts
 
 ---
 
-#- name: Role - Common Tasks Main
-#- hosts: all
-#- tasks:
-    - name: task-01A - Imports
-      include: roles/common/tasks/pkg_mgr.yaml
-    - name: task-01B - Imports
-      include: roles/common/tasks/avahi.yaml
-    - name: task-01C - Imports
-      include: roles/common/tasks/network.yaml
+#- name: task-dd
+#  debug: msg="In common-main now"
 
-    - name: task-02 - Create directory for ansible custom facts
-      file:
-        state:   directory
-        recurse: yes
-        path:    /etc/ansible/facts.d
+# Set up all the network interfaces on this server.
+- name: task-01C - Imports
+  include: roles/common/tasks/network.yaml
 
-    - name: task-03 - Install all required common packages
-      apt:
-        name: "{{ item }}"
-        state: latest
-      with_items:
-        - git
-        - python3
-        - python3-pip
+# Handle the package menager (apt)
+- name: task-01A - Imports
+  include: roles/common/tasks/pkg_mgr.yaml
 
-    - name: task-04 - Create admin user
-      user:
-        name:    "{{ uUserName }}"
-        comment: "{{ uComment }}"
-        groups:  adm,dialout,sudo,audio,video,plugdev,input,netdev
-    # pi only groups spi, i2c, gpio
+# Set upthe avahi (zeroconf, bonjour) to config the servers 
+- name: task-01B - Imports
+  include: roles/common/tasks/avahi.yaml
 
-    - name: task-05 - Copy Private Key
-      copy:
-        src: "{{ uPrivateKey }}"
-        dest: "{{ uHomeDir }}/.ssh"
-        mode: 0600
+- name: task-02 - Create directory for ansible custom facts
+  file:
+    state:   directory
+    recurse: yes
+    path:    /etc/ansible/facts.d
 
-    # Update roots crontab 
-    - name: task-06 - reboot weekly
-      cron:
-        name:    "Reboot"
-        hour:    "4"
-        minute:  "3"
-        weekday: "1"
-        job:     "/sbin/reboot"
-        user:    "root"
+- name: task-03 - Install all required common packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - git
+    - python3
+    - python3-pip
 
-    #- name: task- - Hostname
-    #  hostname:
-    #    name: "{{  }}"
+- name: task-04 - Create admin user
+  user:
+    name:    "{{ uUserName }}"
+    comment: "{{ uComment }}"
+    groups:  adm,dialout,sudo,audio,video,plugdev,input,netdev
+# pi only groups spi, i2c, gpio
+
+- name: task-05 - Copy Private Key
+  copy:
+    src: "{{ uPrivateKey }}"
+    dest: "{{ uHomeDir }}/.ssh"
+    mode: 0600
+
+# Update roots crontab 
+- name: task-06 - reboot weekly
+  cron:
+    name:    "Reboot"
+    hour:    "4"
+    minute:  "3"
+    weekday: "1"
+    job:     "/sbin/reboot"
+    user:    "root"
+
+#- name: task- - Hostname
+#  hostname:
+#    name: "{{  }}"
 
 
-    #  - name: Create APP Directory
-    #    file: path={{homeDir}}/{{appDir}} state=directory
+#  - name: Create APP Directory
+#    file: path={{homeDir}}/{{appDir}} state=directory
 
-    #  - name: Git Clone Repo
-    #    git: repo=git@github.com:{{account}}/{{repo}}.git dest={{homeDir}}/{{appDir}} update=yes force=yes accept_hostkey=yes key_file={{homeDir}}/id_rsa
-    #    register: git_finished
+#  - name: Git Clone Repo
+#    git: repo=git@github.com:{{account}}/{{repo}}.git dest={{homeDir}}/{{appDir}} update=yes force=yes accept_hostkey=yes key_file={{homeDir}}/id_rsa
+#    register: git_finished
 
-    #  - name: Running NPM install
-    #    npm: path={{homeDir}}/{{appDir}}/backened
-    #    register: npm_finished
-    #    when: git_finished.changed
+#  - name: Running NPM install
+#    npm: path={{homeDir}}/{{appDir}}/backened
+#    register: npm_finished
+#    when: git_finished.changed
 
-    #  - name: Stop APP
-    #    sudo_user: ubuntu
-    #    command: pm2 stop app chdir={{homeDir}}/{{appDir}}/backened
-    #    ignore_errors: yes
+#  - name: Stop APP
+#    sudo_user: ubuntu
+#    command: pm2 stop app chdir={{homeDir}}/{{appDir}}/backened
+#    ignore_errors: yes
 
-    #  - name: Start APP
-    #    sudo_user: ubuntu
-    #    command: pm2 start index.js --name app chdir={{homeDir}}/{{appDir}}/backened
-    #    ignore_errors: yes
-    #    when: npm_finished.changed
+#  - name: Start APP
+#    sudo_user: ubuntu
+#    command: pm2 start index.js --name app chdir={{homeDir}}/{{appDir}}/backened
+#    ignore_errors: yes
+#    when: npm_finished.changed
 
 
 ### END DBK

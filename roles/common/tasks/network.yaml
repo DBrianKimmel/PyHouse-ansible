@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/common/tasks/network.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2017-10-01
+# Updated: 2017-10-08
 #
 # Called from common/main.yaml
 #
@@ -15,13 +15,28 @@
 
 ---
 
-- name: network-task-01 - Includes
+- name: network-task-01A - Includes
   include: roles/common/tasks/ethernet.yaml
+
+- name: network-task-01B - Includes
   include: roles/common/tasks/wifi.yaml
+
+- name: network-task-01C - Includes
   include: roles/common/tasks/firewall.yaml
+
+- name: network-task-01D - Includes
   include: roles/common/tasks/bluetooth.yaml
 
+# this will set up static addresses on all interfaces except 'lo'
+# It is the correct method for debian Jessie, Stretch and beond.
+# Earlier releases used a different mechanism.
 - name: network-task-02
-  template
+  template:
+    src:    ./roles/common/files/network/dhcpcd_conf.j2
+    dest:   /etc/dhcpcd.conf
+    owner:  root
+    group:  netdev
+    mode:   0664
+
 
 ### END DBK

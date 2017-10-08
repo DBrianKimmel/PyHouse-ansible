@@ -1,15 +1,17 @@
 # Name:    PyHouse-ansible/host_vars/pi-01-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-29
-# Updated: 2017-10-02
+# Updated: 2017-10-05
 
 ---
 
+ansible_host:           192.168.9.11
+
 vars:
-  pyh_hostname:    pi-01-ct
-  pyh_family:      Pi
-  pyh_ethernet_ip: 192.168.9.41
-  pyh_wifi_ip:     192.168.9.11
-  pyh_roles:       pyhouse
+  pyh_hostname:         pi-01-ct
+  pyh_family:           Pi
+  pyh_ethernet_ip:      192.168.9.41
+  pyh_wifi_ip:          192.168.9.11
+  pyh_roles:            pyhouse
 
 ### END DBK
