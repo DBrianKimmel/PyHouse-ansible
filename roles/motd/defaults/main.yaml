@@ -1,0 +1,14 @@
+# Name:    PyHouse-ansible/roles/motd/defaults/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-12
+# Updated: 2017-10-12
+#
+
+
+---
+
+motd: |
+    This server is configured via Ansible.
+    Do not change configuration settings directly.
+
+### END DBK

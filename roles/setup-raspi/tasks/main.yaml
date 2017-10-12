@@ -8,5 +8,15 @@
 
 ---
 
+-
+#^ the dash above will start the playbook
+
+  name: task-dd
+  debug: msg="In setup-raspi/taska/main now"
+
+# Set up all the network interfaces on this server.
+  name: task-01A - Imports
+  include: roles/setup-raspi/tasks/add-users.yaml
+
 
 ### END DBK

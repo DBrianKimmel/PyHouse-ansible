@@ -1,0 +1,13 @@
+# Name:    PyHouse-ansible/roles/timezone/defaults/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-12
+# Updated: 2017-10-12
+#
+
+---
+
+# Get a valid timezone list via `timedatectl list-timezones`
+
+timezone: "America/New_York"
+
+### END DBK
