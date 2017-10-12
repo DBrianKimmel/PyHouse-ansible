@@ -43,11 +43,7 @@
     - python3-pip
 
 - name: task-04 - Create admin user
-  user:
-    name:    "{{ uUserName }}"
-    comment: "{{ uComment }}"
-    groups:  adm,dialout,sudo,audio,video,plugdev,input,netdev
-# pi only groups spi, i2c, gpio
+  include: roles/common/tasks/add_user.yaml
 
 - name: task-05 - Copy Private Key
   copy:

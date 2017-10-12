@@ -13,6 +13,12 @@
 #- name: wifi-task-01B- Imports
 #  include: roles/common/tasks/pkg_mgr.yaml
 
+
+# The dir /etc/wpa_supplicant exists on raspis but not on a nuc with no wifi card installed.
+- name: wifi-task-01 - Check if path exists
+  stat: path=/etc/wpa_supplicant
+  register: wpa_dir_exists
+
 - name: wifi-task-02 - Install the wpa_supplicant file
   template:
     src:    ./wifi.j2
@@ -20,5 +26,6 @@
     owner:  root
     group:  root
     mode:   0600
+  when: wpa_dir_exists.stat.exists
 
 ### END DBK

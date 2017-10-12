@@ -1,18 +1,24 @@
 # Name:    PyHouse-ansible/inventories/production/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2017-10-04
+# Updated: 2017-10-11
 
 
+# ----- Define all the NUC boxes -----
 # Pink Poppy Nucs (Jump Box)
-[nuc_pp]
-nuc-01-pp  ansible_host=192.168.1.10
+[nucs_pp]
+nuc-01-pp
 
 # Cannon Trail Nucs (Jump Box)
-[nuc_ct]
-nuc-01-ct  ansible_host=192.168.9.10
+[nucs_ct]
+nuc-01-ct
+
+[nucs:children]
+nucs_pp
+nucs_ct
 
 
+# ----- Define all the Raspberry Pis -----
 [pis_pp]
 # Pink Poppy Raspberry Pis
 pi-01-pp  ansible_host=192.168.1.102
@@ -24,7 +30,7 @@ pi-10-pp  ansible_host=192.168.1.20
 
 [pis_ct]
 # Cannon Trail Raspberry Pis
-pi-01-ct  ansible_host=192.168.9.11
+pi-01-ct
 pi-02-ct  ansible_host=192.168.9.12
 pi-03-ct  ansible_host=192.168.9.13
 pi-05-ct  ansible_host=192.168.9.15
@@ -32,7 +38,12 @@ pi-07-ct  ansible_host=192.168.9.17
 pi-11-ct  ansible_host=192.168.9.21
 pi-12-ct  ansible_host=192.168.9.22
 
+#[pis:children]
+pis_pp
+pis_ct
 
+
+# ----- Define all the other computers -----
 [ct-piduino]
 piduino-01 ansible_host=192.168.8.81
 
@@ -44,13 +55,15 @@ alki ansible_host="pinkpoppy.asuscomm.com" ansible_port=2254
 
 
 
-# PyHouse Servers
+# ----- Define all the groups we need todeal with -----
+# Pink Poppy PyHouse Servers
 [pinkpoppy_pyhouse]
 pi-01-pp
 pi-02-pp
 pi-03-pp
 pi-10-pp
 
+# Caannon Trail PyHouse Servers
 [cannontrail_pyhouse]
 pi-01-ct
 pi-02-ct
@@ -84,7 +97,7 @@ nuc-01-pp
 pinkpoppy_pyhouse
 cannontrail_pyhouse
 
-[node_red:children]
+[nodered:children]
 pinkpoppy_nodered
 cannontrail_nodered
 

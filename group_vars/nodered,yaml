@@ -1,0 +1,10 @@
+# Name:     PyHouse-ansible/host_vars/nuc-01-ct
+# Author:  D. Brian Kimmel
+# Created: 2017-10-02
+# Updated: 2017-10-11
+
+---
+
+nodered_user: pi
+
+### END DBK

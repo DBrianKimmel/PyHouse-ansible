@@ -61,12 +61,18 @@
     group: pyhouse
     mode:  0755
 
-- name: PyHouse-task-08 - Clone the PyHouse package
-  git:
-    repo:            https://git@github.com/DBrianKimmel/PyHouse.git
-    dest:            /home/pyhouse/workspace/PyHouse
-    accept_hostkey:  true
-  when:              hostvars[inventory_hostname].vars.pyh_roles | search("pyhouse")
+- name: PyHouse-task-08 - fetch the xml file
+  fetch:
+    src:                /etc/pyhouse/master.xml
+    dest:               xml_files/
+    fail_on_missing:    no
 
+- name: PyHouse-task-09 - Clone the PyHouse package
+  git:
+    repo:               https://git@github.com/DBrianKimmel/PyHouse.git
+    dest:               /home/pyhouse/workspace/PyHouse
+    accept_hostkey:     yes
+    force:              yes
+  when:                 hostvars[inventory_hostname].vars.pyh_roles | search("pyhouse")
 
 ### END DBK

@@ -1,0 +1,9 @@
+# Name:    PyHouse-ansible/group_vars/pis.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-08
+# Updated: 2017-10-08
+#
+
+pis_admin_groups: adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+
+### END DBK

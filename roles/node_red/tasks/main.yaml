@@ -1,0 +1,14 @@
+# Name:    PyHouse-ansible/roles/node_red/tasks/main.yaml - the master playbook
+# Author:  D. Brian Kimmel
+# Created: 2017-10-11
+# Updated: 2017-10-11
+#
+#
+# create a node red user
+# fetch any flows from that user
+# Install node red
+
+
+---
+
+### END DBK

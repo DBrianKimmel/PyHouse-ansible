@@ -11,6 +11,6 @@
 
 
 [setup-pi]
-pi-12-ct   ansible_host=192.168.9.22 ansible_user=pi ansible_passwd=raspberry
+pi-setip   ansible_host=192.168.9.22 ansible_user=pi ansible_passwd=raspberry
 
 ### END DBK
