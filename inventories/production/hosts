@@ -21,24 +21,24 @@ nucs_ct
 # ----- Define all the Raspberry Pis -----
 [pis_pp]
 # Pink Poppy Raspberry Pis
-pi-01-pp  ansible_host=192.168.1.102
-pi-02-pp  ansible_host=192.168.1.12
-pi-03-pp  ansible_host=192.168.1.13
-pi-04-pp  ansible_host=192.168.1.14
-pi-08-pp  ansible_host=192.168.1.18
-pi-10-pp  ansible_host=192.168.1.20
+#pi-01-pp
+pi-02-pp
+pi-03-pp
+pi-04-pp
+pi-08-pp
+pi-10-pp
 
 [pis_ct]
 # Cannon Trail Raspberry Pis
 pi-01-ct
-pi-02-ct  ansible_host=192.168.9.12
-pi-03-ct  ansible_host=192.168.9.13
-pi-05-ct  ansible_host=192.168.9.15
-pi-07-ct  ansible_host=192.168.9.17
-pi-11-ct  ansible_host=192.168.9.21
-pi-12-ct  ansible_host=192.168.9.22
+#pi-02-ct
+pi-03-ct
+pi-05-ct
+pi-07-ct
+pi-11-ct
+pi-12-ct
 
-#[pis:children]
+[pis:children]
 pis_pp
 pis_ct
 
@@ -47,18 +47,18 @@ pis_ct
 [ct-piduino]
 piduino-01 ansible_host=192.168.8.81
 
-[insteon]
-hub-01 ansible_host=192.168.9.133
+#[insteon]
+#hub-01 ansible_host=192.168.9.133
 
 [remotealki]
-alki ansible_host="pinkpoppy.asuscomm.com" ansible_port=2254
+alki
 
 
 
 # ----- Define all the groups we need todeal with -----
 # Pink Poppy PyHouse Servers
 [pinkpoppy_pyhouse]
-pi-01-pp
+#pi-01-pp
 pi-02-pp
 pi-03-pp
 pi-10-pp
@@ -66,7 +66,7 @@ pi-10-pp
 # Caannon Trail PyHouse Servers
 [cannontrail_pyhouse]
 pi-01-ct
-pi-02-ct
+#pi-02-ct
 pi-03-ct
 pi-05-ct
 pi-07-ct
@@ -78,7 +78,7 @@ pi-12-ct
 # Node Red Servers
 [cannontrail_nodered]
 pi-11-ct
-pi-02-ct
+#pi-02-ct
 
 [pinkpoppy_nodered]
 pi-02-pp

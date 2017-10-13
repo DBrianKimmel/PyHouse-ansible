@@ -4,8 +4,8 @@
 # Updated: 2017-10-02
 
 ---
-ansible_host:           192.168.9.12
 
+ansible_host:           192.168.9.12
 
 vars:
   pyh_hostname:    pi-02-ct

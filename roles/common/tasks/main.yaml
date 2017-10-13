@@ -39,8 +39,10 @@
     state: latest
   with_items:
     - git
+    - python
     - python3
     - python3-pip
+    - exim4
 
 - name: task-04 - Create admin user
   include: roles/common/tasks/add_user.yaml

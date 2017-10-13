@@ -21,8 +21,8 @@
 - name: network-task-01B - Includes
   include: roles/common/tasks/wifi.yaml
 
-- name: network-task-01C - Includes
-  include: roles/common/tasks/firewall.yaml
+#- name: network-task-01C - Includes
+#  include: roles/common/tasks/firewall.yaml
 
 - name: network-task-01D - Includes
   include: roles/common/tasks/bluetooth.yaml

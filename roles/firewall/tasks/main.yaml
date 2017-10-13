@@ -12,7 +12,6 @@
 
 ---
 
-
 - name: Enable ufw
   ufw: state=enabled policy=allow
 

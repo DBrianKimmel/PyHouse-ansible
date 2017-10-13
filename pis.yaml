@@ -24,6 +24,7 @@
   roles:
     - common
     - pyhouse
+    - firewall
 #    - wifi
 
 ### END DBK

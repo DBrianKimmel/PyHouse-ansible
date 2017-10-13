@@ -5,6 +5,8 @@
 
 ---
 
+ansible_host:           192.168.9.15
+
 vars:
   pyh_hostname:    pi-05-ct
   pyh_family:      Pi

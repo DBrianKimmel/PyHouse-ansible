@@ -3,6 +3,10 @@
 # Created: 2017-09-28
 # Updated: 2017-09-28
 
+---
+
+ansible_host:           192.168.1.13
+
 vars:
   - pyh_family:      "Pi"
   - pyh_ethernet_ip: 192.168.1.43

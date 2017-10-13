@@ -9,6 +9,33 @@
 
 ---
 
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+
+  pre_tasks:
+
+    - name: Fail if Ansible is ancient
+      fail: msg="We need Ansible >= 2.0. Please update your kit. 'pip install -U Ansible'"
+      when: ansible_version.major < 2
+      tags:
+        - always
+
+    - name: Include vars from local-configure.yml if found
+      include_vars: "{{ item }}"
+      with_first_found:
+       - local-configure.yml
+       - null.yml
+      tags:
+        - update_packages
+        - restart_script
+        - postfix
+        - logwatch
+        - motd
+        - timezone
+        - audit
+
 # Do all the houses
 - include: houses.yaml
 

@@ -139,7 +139,7 @@
     # ansible -m setup -i /path/to/hosts.ini host1
     main_vhost: ${ansible_fqdn}
     public_ip:  ${ansible_eth0.ipv4.address}
-    
+
     # vars_files is better suited for distro-specific settings, however...
     is_ubuntu: "'${ansible_distribution}' == 'ubuntu'"
 

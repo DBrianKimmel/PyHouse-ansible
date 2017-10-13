@@ -1,0 +1,187 @@
+# Name:    PyHouse-ansible/playbook.yaml - the master playbook
+# Author:  D. Brian Kimmel
+# Created: 2017-10-12
+# Updated: 2017-10-12
+#
+# This is the main playbook.  Used to configure after one of the setup playbooks has run.
+
+---
+
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+
+  pre_tasks:
+
+    - name: playbook-pre-task-01 - Fail if Ansible is ancient
+      fail: msg="We need Ansible >= 2.0. Please update your kit. 'pip install -U Ansible'"
+      when: ansible_version.major < 2
+      tags:
+        - always
+
+    - name: playbook-pre-task-02- Include vars from local-configure.yaml if found
+      include_vars: "{{ item }}"
+      with_first_found:
+       - local-configure.yaml
+       - null.yaml
+      tags:
+#        - update_packages
+#        - restart_script
+#        - postfix
+#        - logwatch
+        - motd
+        - timezone
+#        - audit
+
+    - name: playbook-pre-task-03- Fail if no administrative email set
+      fail:
+        msg: "You must set the admin_email variable."
+      when: not admin_email
+      tags:
+#        - plone
+#        - plone1
+#        - plone2
+#        - plone3
+#        - plone4
+#        - haproxy
+#        - varnish
+#        - restart_script
+#        - postfix
+#        - logwatch
+#        - munin
+        - motd
+#        - nginx
+
+    - name: playbook-pre-task-04- Update packages via apt
+      when: ansible_os_family == 'Debian'
+      apt: upgrade=dist update_cache=yes
+      tags:
+        - update_packages
+
+    - name: playbook-pre-task-05- Ensure optional packages via apt
+      when: ansible_os_family == 'Debian'
+      apt: pkg={{ item }} state=present
+      with_items: "{{ additional_packages|default([]) }}"
+
+    - name: playbook-pre-task-06- Enable aditional repos for CentOS
+      yum: pkg={{ item }} state=present
+      when: ansible_distribution == 'CentOS'
+      with_items:
+        - epel-release
+      tags:
+        - munin
+        - varnish
+
+    - name: playbook-pre-task-07- Ensure optional packages via yum
+      when: ansible_os_family == 'RedHat'
+      yum: name={{ item }} state=present update_cache=yes
+      with_items: "{{ additional_packages|default([]) }}"
+
+    - name: playbook-pre-task-08- Ensure selinux packages via yum
+      when: ansible_os_family == 'RedHat' and ansible_selinux
+      yum: name={{ item }} state=present update_cache=yes
+      with_items:
+        - libsemanage-python
+      tags:
+        - nginx
+        - haproxy
+
+  roles:
+
+#    - role: ANXS.hostname
+
+#    - role: jnv.unattended-upgrades
+#      when: auto_upgrades|default(True) and ansible_os_family == 'Debian'
+#      unattended_mail: root
+#      unattended_origins_patterns:
+#        - 'origin=${distro_id},archive=${distro_codename}-security'
+#        - 'o=${distro_id},a=${distro_codename}'
+#        - 'o=${distro_id},a=${distro_codename}-updates'
+
+#    - role: fail2ban
+#      when: install_fail2ban|default(True)
+#      tags: fail2ban
+
+    - role: default_config
+      tags:
+#        - plone
+#        - plone1
+#        - plone2
+#        - plone3
+#        - plone4
+#        - haproxy
+#        - varnish
+#        - restart_script
+#        - nginx
+#        - postfix
+#        - logwatch
+#        - munin
+        - motd
+
+#    - role: plone.plone_server
+#      plone_config: "{{ playbook_plones[0] }}"
+#      tags:
+#        - plone
+#        - plone1
+
+#    - role: plone.plone_server
+#      plone_config: "{{ playbook_plones[1]|default({}) }}"
+#      when: playbook_plones|length > 1
+#      tags:
+#        - plone
+#        - plone2
+
+#    - role: plone.plone_server
+#      plone_config: "{{ playbook_plones[2]|default({}) }}"
+#      when: playbook_plones|length > 2
+#      tags:
+#        - plone
+#        - plone3
+
+#    - role: plone.plone_server
+#      plone_config: "{{ playbook_plones[3]|default({}) }}"
+#      when: playbook_plones|length > 3
+#      tags:
+#        - plone
+#        - plone4
+
+#    - role: haproxy
+#      when: install_loadbalancer|default(True)
+#      tags: haproxy
+
+#    - role: varnish
+#      when: install_proxycache|default(True)
+#      tags: varnish
+
+#    - role: nginx
+#      when: install_webserver|default(True)
+#      tags: nginx
+
+#    - role: restart_script
+#      tags: restart_script
+
+#    - role: postfix
+#      when: install_mailserver|default(True)
+#      tags: postfix
+
+#    - role: logwatch
+#      when: install_logwatch|default(True)
+#      tags: logwatch
+
+#    - role: munin-node
+#      when: install_muninnode|default(True)
+#      tags: munin
+
+    - role: timezone
+      when: set_timezone|default(True)
+      tags: timezone
+
+    - role: motd
+      when: install_motd|default(True)
+      tags: motd
+
+#    - role: audit
+#      tags: audit
+
+### END DBK
