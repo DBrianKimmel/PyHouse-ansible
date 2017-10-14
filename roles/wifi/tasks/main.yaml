@@ -11,6 +11,9 @@
   #include_vars: group_vars/pinkpoppy
   include_vars: group_vars/cannontrail
 
+# To delete:
+#   ansible -m file -a "state=absent path=/etc/wpa_supplicant/wpa_supplicant.conf-new" <host-pattern>
+#   where <host-pattern> is something like "inventory/production/hosts"
 - name: task-02 - Install the wpa_supplicant file
   template:
     src:    ./wifi.j2

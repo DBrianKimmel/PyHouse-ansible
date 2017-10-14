@@ -15,7 +15,9 @@
   pre_tasks:
 
     - name: playbook-pre-task-01 - Fail if Ansible is ancient
-      fail: msg="We need Ansible >= 2.0. Please update your kit. 'pip install -U Ansible'"
+      fail:
+        msg: "We need Ansible >= 2.4. Please update your installed ansible"
+#      when: ansible_version|version_compare('2.4.0.0', '>=')
       when: ansible_version.major < 2
       tags:
         - always
@@ -26,13 +28,13 @@
        - local-configure.yaml
        - null.yaml
       tags:
-#        - update_packages
-#        - restart_script
-#        - postfix
-#        - logwatch
+        - update_packages
+        - restart_script
+        - postfix
+        - logwatch
         - motd
         - timezone
-#        - audit
+        - audit
 
     - name: playbook-pre-task-03- Fail if no administrative email set
       fail:
@@ -53,19 +55,33 @@
         - motd
 #        - nginx
 
-    - name: playbook-pre-task-04- Update packages via apt
+    - name: playbook-pre-task-04D- Update packages
       when: ansible_os_family == 'Debian'
-      apt: upgrade=dist update_cache=yes
+      apt: 
+        upgrade: dist
+        update_cache: yes
       tags:
         - update_packages
 
-    - name: playbook-pre-task-05- Ensure optional packages via apt
+    # Update all packages
+    - name: playbook-pre-task-04S- Update packages
+      when: ansible_os_family == 'Suse'
+      zypper:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+    - name: playbook-pre-task-05D- Ensure optional packages via apt
       when: ansible_os_family == 'Debian'
-      apt: pkg={{ item }} state=present
+      apt:
+        pkg: "{{ item }}"
+        state: present
       with_items: "{{ additional_packages|default([]) }}"
 
-    - name: playbook-pre-task-06- Enable aditional repos for CentOS
-      yum: pkg={{ item }} state=present
+    - name: playbook-pre-task-06C- Enable aditional repos for CentOS
+      yum:
+        pkg: "{{ item }}"
+        state: present
       when: ansible_distribution == 'CentOS'
       with_items:
         - epel-release
@@ -75,12 +91,18 @@
 
     - name: playbook-pre-task-07- Ensure optional packages via yum
       when: ansible_os_family == 'RedHat'
-      yum: name={{ item }} state=present update_cache=yes
+      yum:
+        name: "{{ item }}:"
+        state: present
+        update_cache: yes
       with_items: "{{ additional_packages|default([]) }}"
 
-    - name: playbook-pre-task-08- Ensure selinux packages via yum
+    - name: playbook-pre-task-08R- Ensure selinux packages via yum
       when: ansible_os_family == 'RedHat' and ansible_selinux
-      yum: name={{ item }} state=present update_cache=yes
+      yum:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
       with_items:
         - libsemanage-python
       tags:

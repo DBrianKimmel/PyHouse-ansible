@@ -1,0 +1,17 @@
+# Name:    PyHouse-ansible/host_vars/piduino-01.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-13
+# Updated: 2017-10-13
+
+---
+
+ansible_host:       192.168.8.81
+
+vars:
+  pyh_hostname:      piduino-01
+  pyh_family:        Piduino
+  pyh_ethernet_ip:   192.168.8.81
+  pyh_wifi_ip:       192.168.8.82
+  pyh_roles:         relay
+
+### END DBK

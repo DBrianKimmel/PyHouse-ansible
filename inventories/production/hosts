@@ -13,10 +13,6 @@ nuc-01-pp
 [nucs_ct]
 nuc-01-ct
 
-[nucs:children]
-nucs_pp
-nucs_ct
-
 
 # ----- Define all the Raspberry Pis -----
 [pis_pp]
@@ -38,21 +34,31 @@ pi-07-ct
 pi-11-ct
 pi-12-ct
 
-[pis:children]
-pis_pp
-pis_ct
-
 
 # ----- Define all the other computers -----
-[ct-piduino]
-piduino-01 ansible_host=192.168.8.81
+[ct-pcduino]
+pcduino-01
 
 #[insteon]
-#hub-01 ansible_host=192.168.9.133
+#hub-01-ct ansible_host=192.168.9.133
+#hub-01-pp ansible_host=192.168.1.133
 
 [remotealki]
 alki
 
+[remote_laptop]
+Laptop-3
+
+
+# --------------------------------------------\
+
+[nucs:children]
+nucs_pp
+nucs_ct
+
+[pis:children]
+pis_pp
+pis_ct
 
 
 # ----- Define all the groups we need todeal with -----
