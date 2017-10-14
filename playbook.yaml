@@ -41,19 +41,19 @@
         msg: "You must set the admin_email variable."
       when: not admin_email
       tags:
-#        - plone
-#        - plone1
-#        - plone2
-#        - plone3
-#        - plone4
-#        - haproxy
-#        - varnish
-#        - restart_script
-#        - postfix
-#        - logwatch
-#        - munin
+        - plone
+        - plone1
+        - plone2
+        - plone3
+        - plone4
+        - haproxy
+        - varnish
+        - restart_script
+        - postfix
+        - logwatch
+        - munin
         - motd
-#        - nginx
+        - nginx
 
     - name: playbook-pre-task-04D- Update packages
       when: ansible_os_family == 'Debian'
@@ -134,10 +134,10 @@
 #        - plone4
 #        - haproxy
 #        - varnish
-#        - restart_script
-#        - nginx
-#        - postfix
-#        - logwatch
+        - restart_script
+        - nginx
+        - postfix
+        - logwatch
 #        - munin
         - motd
 

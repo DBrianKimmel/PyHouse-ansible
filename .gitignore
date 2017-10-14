@@ -1,2 +1,4 @@
+.directory
 .project
-main.retry
+.pydevproject
+*.retry
