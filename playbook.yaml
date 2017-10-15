@@ -5,6 +5,17 @@
 #
 # This is the main playbook.  Used to configure after one of the setup playbooks has run.
 
+#
+# Vars:
+#
+#   install_fail2ban
+#   install_loadbalancer
+#   install_logwatch
+#   install_motd
+#   install_proxycache
+#   install_webserver
+#   set_timezone
+
 ---
 
 - hosts: all
@@ -89,7 +100,7 @@
         - munin
         - varnish
 
-    - name: playbook-pre-task-07- Ensure optional packages via yum
+    - name: playbook-pre-task-07R- Ensure optional packages via yum
       when: ansible_os_family == 'RedHat'
       yum:
         name: "{{ item }}:"
@@ -127,11 +138,6 @@
 
     - role: default_config
       tags:
-#        - plone
-#        - plone1
-#        - plone2
-#        - plone3
-#        - plone4
 #        - haproxy
 #        - varnish
         - restart_script
@@ -140,33 +146,6 @@
         - logwatch
 #        - munin
         - motd
-
-#    - role: plone.plone_server
-#      plone_config: "{{ playbook_plones[0] }}"
-#      tags:
-#        - plone
-#        - plone1
-
-#    - role: plone.plone_server
-#      plone_config: "{{ playbook_plones[1]|default({}) }}"
-#      when: playbook_plones|length > 1
-#      tags:
-#        - plone
-#        - plone2
-
-#    - role: plone.plone_server
-#      plone_config: "{{ playbook_plones[2]|default({}) }}"
-#      when: playbook_plones|length > 2
-#      tags:
-#        - plone
-#        - plone3
-
-#    - role: plone.plone_server
-#      plone_config: "{{ playbook_plones[3]|default({}) }}"
-#      when: playbook_plones|length > 3
-#      tags:
-#        - plone
-#        - plone4
 
 #    - role: haproxy
 #      when: install_loadbalancer|default(True)
@@ -180,7 +159,7 @@
 #      when: install_webserver|default(True)
 #      tags: nginx
 
-#    - role: restart_script
+#    - role: restart_scriptset_timezone
 #      tags: restart_script
 
 #    - role: postfix

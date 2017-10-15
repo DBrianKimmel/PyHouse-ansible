@@ -15,10 +15,22 @@
 pyh_router_address: 192.168.9.1
 
 
-install_loadbalancer: no
-install_proxycache: no
-install_muninnode: no
-install_mailserver: no
-install_webserver: no
+# Install haproxy Load Balancer?
+install_loadbalancer:   no
+
+# Instal varnix proxy cache?
+install_proxycache:     no
+
+# Install munin monitoring?
+install_muninnode:      no
+
+# Install Nagios snmp server monitoring?
+install_nagios:         no
+
+# Install postfix mail server?
+install_mailserver:     no
+
+# Install apache webserver?
+install_webserver:      no
 
 ### END DBK

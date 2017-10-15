@@ -6,6 +6,7 @@
 ---
 
 ansible_host:       192.168.8.81
+set_timezone:       False
 
 vars:
   pyh_hostname:      piduino-01

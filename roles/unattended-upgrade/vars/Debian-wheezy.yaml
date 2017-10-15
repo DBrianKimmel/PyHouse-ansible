@@ -1,0 +1,18 @@
+# Name:    PyHouse-ansible/roles/unattended-upgrade/vars/Debian-wheezy.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-14
+# Updated: 2017-10-14
+#
+---
+
+# This workaround for Debian Wheezy which doesn't support ${distro_codename} macro
+# See
+#   https://github.com/jnv/ansible-role-unattended-upgrades/issues/19
+#   https://github.com/jnv/ansible-role-unattended-upgrades/pull/20
+# for details
+
+__unattended_origins_patterns:
+  - 'origin=Debian,archive=stable,label=Debian-Security'
+  - 'origin=Debian,archive=oldstable,label=Debian-Security'
+
+### END DBK
