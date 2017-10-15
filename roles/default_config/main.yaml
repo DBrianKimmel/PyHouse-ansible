@@ -1,4 +1,4 @@
-# Name:    PyHouse-ansible/roles/default_config/main.yaml - the master playbook
+# Name:    PyHouse-ansible/roles/default_config/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
 # Updated: 2017-10-12
@@ -12,7 +12,7 @@
 # in the Plone Ansible Playbook.
 
 # This is a hack - fix it
-pyh_router_address: 192.168.9.1
+#pyh_router_address: 192.168.9.1
 
 
 # Install haproxy Load Balancer?

@@ -121,8 +121,11 @@
         - haproxy
 
   roles:
+    - role: networking
+      when: install_networking|default(True)
+      tags: setup_network
 
-#    - role: ANXS.hostname
+    - role: hostname
 
 #    - role: jnv.unattended-upgrades
 #      when: auto_upgrades|default(True) and ansible_os_family == 'Debian'

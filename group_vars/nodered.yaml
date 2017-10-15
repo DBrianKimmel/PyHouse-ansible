@@ -1,4 +1,4 @@
-# Name:     PyHouse-ansible/host_vars/nuc-01-ct
+# Name:    PyHouse-ansible/group_vars/nodered.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-02
 # Updated: 2017-10-11

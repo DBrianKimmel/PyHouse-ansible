@@ -1,7 +1,16 @@
-# PyHouse-ansible/group_vars/pinkpoppy
+# Name:    PyHouse-ansible/group_vars/pinkpoppy
+# Author:  D. Brian Kimmel
+# Created: 2017-09-29
+# Updated: 2017-10-15
 #
 # Variables for the pink poppy house.
 
+---
 access_points: {"PinkPoppy-1": "Koepfinger-59", "PinkPoppy-5G-1": "Koepfinger-59", "PinkPoppy-2": "Koepfinger-59", "PinkPoppy-5G": "Koepfinger-59"}
+
+pyh_router_address:     192.168.9.1
+pyh_router_netmask:     255.255.255.240
+pyh_router_prefix_len:  20
+pyh_router_nameservers: "192.168.9.1 8.8.8.8"
 
 ### END DBK
