@@ -8,26 +8,26 @@
 ---
 
 # Wemust have ssh in order for ansible to work so we advertise it here.
-- name: avahi-task-01 - Add avahi service files
+- name: task-01 - Add avahi service files
   copy:
-    src:    ./avahi/ssh.service
+    src:    ./ssh.service
     dest:   /etc/avahi/services/ssh.service
     owner:  root
     group:  root
     mode:   0644
 
 # VPN adds a graphic way to talk to the server
-- name: avahi-task-02 - Add avahi service files
+- name: task-02 - Add avahi service files
   copy:
-    src:    ./avahi/vnc.service
+    src:    ./vnc.service
     dest:   /etc/avahi/services/vnc.service
     owner:  root
     group:  root
     mode:   0644
 
-#- name: avahi-task-03 - Enable avahi so it runs at boot time.
-#  systemd:
-#    name: avahi-daemon.service
-#    enabled:
+- name: task-03 - Enable avahi so it runs at boot time.
+  systemd:
+    name: avahi-daemon.service
+    enabled:
 
 ### END DBK

@@ -1,7 +1,7 @@
-# Name:    PyHouse-ansible/host_vars/pi-01-ct.yaml
+# Name:    PyHouse-ansible/host_vars/pi-setup.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-10-12
+# Updated: 2017-10-18
 
 # This is the hosts file for setting up a raspberry pi for my use.
 
@@ -10,6 +10,17 @@
 
 ---
 
-ansible_host:           192.168.9.111
+# These must be changed
+ansible_host:           192.168.9.132
+ansible_user:           briank
+pyh_hostname:           pi-03-ct
+pyh_ethernet_ip:        192.168.9.43
+pyh_wifi_ip:            192.168.9.13
+pyh_roles:              pyhouse
+
+# You should not change the following:
+pyh_family:             Pi
+pyh_domain:             ""
+pyh_in_setup:           yes
 
 ### END DBK

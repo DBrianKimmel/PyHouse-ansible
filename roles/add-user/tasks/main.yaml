@@ -1,0 +1,66 @@
+# Name:    PyHouse-ansible/roles/add-user/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-15
+# Updated: 2017-10-15
+#
+
+---
+
+#- include_vars: admin-user.yaml
+
+# Create the admin user
+- name: task-01 - Add Admin User
+  user:
+    name:       "{{ pyh_admin_user }}"
+    comment:    "Admin User"
+    groups:     adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+
+# Create the Node Red user
+- name: task-02 - Add Node Red User
+  user:
+    name:       "{{ pyh_nodered_user }}"
+    comment:    "Node Red User"
+    groups:     adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+
+# Add the ,ssh dir and authorized keys
+- name: task-03 Create admin user bin dir
+  file:
+    name:       "/home/{{ pyh_admin_user }}/bin"
+    state:      directory
+    owner:      "{{ pyh_admin_user }}"
+    group:      "{{ pyh_admin_user }}"
+    mode:       0755
+
+- name: task-04 - Copy admin files to ~/bin
+  copy:
+    src:        "./ModelDiscovery.sh"
+    dest:       "/home/{{ pyh_admin_user }}/bin"
+    owner:      "{{ pyh_admin_user }}"
+    group:      "{{ pyh_admin_user }}"
+    mode:       0755
+
+- name: task-05 Create admin user .ssh dir
+  file:
+    name:       "/home/{{ pyh_admin_user }}/.ssh"
+    state:      directory
+    owner:      "{{ pyh_admin_user }}"
+    group:      "{{ pyh_admin_user }}"
+    mode:       0755
+
+- name: task-06 - Copy auth file to ~/.ssh
+  copy:
+    src:        "~/.ssh/authorized_keys"
+    dest:       "/home/{{ pyh_admin_user }}/.ssh"
+    owner:      "{{ pyh_admin_user }}"
+    group:      "{{ pyh_admin_user }}"
+    mode:       0600
+
+#- name: task-07 - Copy id_rsa file to ~/.ssh
+#  copy:
+#    src:        "~/.ssh/id_rsa"
+#    dest:       "/home/{{ pyh_admin_user }}/.ssh"
+#    owner:      "{{ pyh_admin_user }}"
+#    group:      "{{ pyh_admin_user }}"
+#    mode:       0600
+
+### END DBK

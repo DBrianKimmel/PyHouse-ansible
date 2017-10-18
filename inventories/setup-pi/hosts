@@ -1,7 +1,10 @@
-# PyHouse-ansible/inventories/setup-pi/hosts
+# Name:    PyHouse-ansible/inventories/setup-pi/hosts
+# Author:  D. Brian Kimmel
+# Created: 2017-09-20
+# Updated: 2017-10-15
 #
-# this inventory is for setting up a new raspberry pi.
-
+# This inventory is for setting up a new raspberry pi.
+#
 # Start with a newly flashed SD card with raspbian stretch lite.
 # Add the empty file "ssh" in the boot partition - this will allow ssh to work.
 # The inital connection will be via ethernet as the wifi setup is not yet working.
@@ -11,6 +14,9 @@
 
 
 [setup-pi]
-pi-setip   ansible_host=192.168.9.22 ansible_user=pi ansible_passwd=raspberry
+pi-setup   ansible_host=192.168.9.22 ansible_user=pi ansible_passwd=raspberry
+
+[raspi]
+pi-setup
 
 ### END DBK

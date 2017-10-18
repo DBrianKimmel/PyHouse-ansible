@@ -3,18 +3,23 @@
 # Created: 2017-10-12
 # Updated: 2017-10-12
 #
-# This is the main playbook.  Used to configure after one of the setup playbooks has run.
+# This is the main playbook.
 
+#
+# Tags:
+#   motd                    - Change motd to ansible configged
+#   setup-network           -
+#   setup-pi                - Initial setup of new image SDcard Pi
 #
 # Vars:
 #
-#   install_fail2ban
-#   install_loadbalancer
-#   install_logwatch
-#   install_motd
-#   install_proxycache
-#   install_webserver
-#   set_timezone
+#   install_fail2ban        -
+#   install_loadbalancer    -
+#   install_logwatch        -
+#   install_motd            -
+#   install_proxycache      -
+#   install_webserver       -
+#   set_timezone            -
 
 ---
 
@@ -28,10 +33,10 @@
     - name: playbook-pre-task-01 - Fail if Ansible is ancient
       fail:
         msg: "We need Ansible >= 2.4. Please update your installed ansible"
-#      when: ansible_version|version_compare('2.4.0.0', '>=')
-      when: ansible_version.major < 2
+      when: ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
       tags:
         - always
+
 
     - name: playbook-pre-task-02- Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
@@ -39,32 +44,17 @@
        - local-configure.yaml
        - null.yaml
       tags:
-        - update_packages
-        - restart_script
-        - postfix
-        - logwatch
-        - motd
-        - timezone
-        - audit
+        - always
+
 
     - name: playbook-pre-task-03- Fail if no administrative email set
       fail:
         msg: "You must set the admin_email variable."
       when: not admin_email
       tags:
-        - plone
-        - plone1
-        - plone2
-        - plone3
-        - plone4
-        - haproxy
-        - varnish
-        - restart_script
-        - postfix
-        - logwatch
-        - munin
         - motd
         - nginx
+        - restart_script
 
     - name: playbook-pre-task-04D- Update packages
       when: ansible_os_family == 'Debian'
@@ -120,12 +110,24 @@
         - nginx
         - haproxy
 
+# ========================================================================
+
   roles:
+
     - role: networking
       when: install_networking|default(True)
-      tags: setup_network
+      tags: 
+        - setup-network
+        - setup-pi
 
     - role: hostname
+      tags: setup-pi
+
+    - role: add-user
+      tags: setup-pi
+      
+    - role: avahi
+      tags: setup-pi
 
 #    - role: jnv.unattended-upgrades
 #      when: auto_upgrades|default(True) and ansible_os_family == 'Debian'

@@ -13,6 +13,7 @@ pyh_router_address:     192.168.9.1
 pyh_router_netmask:     255.255.255.240
 pyh_router_prefix_len:  20
 pyh_router_nameservers: "192.168.9.1 8.8.8.8"
+pyh.domain:             ""
 
 
 ### END DBK

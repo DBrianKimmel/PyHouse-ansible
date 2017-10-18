@@ -1,9 +1,35 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2017-10-15
+# Updated: 2017-10-17
 #
 
 ---
+
+- name: task-01 - include cannontrail.yaml
+  #include_vars: group_vars/pinkpoppy
+  include_vars: group_vars/cannontrail.yaml
+
+# To delete:
+#   ansible -m file -a "state=absent path=/etc/wpa_supplicant/wpa_supplicant.conf-new" <host-pattern>
+#   where <host-pattern> is something like "inventory/production/hosts"
+- name: task-02 - Install the wpa_supplicant file
+  template:
+    src:    ./wifi.j2
+    dest:   /etc/wpa_supplicant/wpa_supplicant.conf
+    owner:  root
+    group:  root
+    mode:   0600
+
+# this will set up static addresses on all interfaces except 'lo'
+# It is the correct method for debian Jessie, Stretch and beond.
+# Earlier releases used a different mechanism.
+- name: network-task-03
+  template:
+    src:    ./dhcpcd_conf.j2
+    dest:   /etc/dhcpcd.conf
+    owner:  root
+    group:  netdev
+    mode:   0664
 
 ### END DBK

@@ -2,3 +2,4 @@
 .project
 .pydevproject
 *.retry
+vault.yaml

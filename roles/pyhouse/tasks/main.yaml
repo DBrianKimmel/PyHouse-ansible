@@ -59,7 +59,7 @@
     dest:  "/home/pyhouse/bin"
     owner: pyhouse
     group: pyhouse
-    mode:  0755
+    mode:   0755
 
 - name: PyHouse-task-08 - fetch the xml file
   fetch:
