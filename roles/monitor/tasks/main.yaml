@@ -1,0 +1,10 @@
+# Name:    PyHouse-ansible/roles/monitor/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-20
+# Updated: 2017-10-20
+#
+# Use nagios to monitor the health of the house network
+
+---
+
+### END DBK

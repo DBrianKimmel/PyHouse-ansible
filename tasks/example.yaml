@@ -326,7 +326,7 @@
 
     ##########
     # Notify handlers when things change!
-    # 
+    #
     # Each task can optionally have one or more handlers that get called when the task changes something -- creates a user,
     # updates a file, etc.
     #

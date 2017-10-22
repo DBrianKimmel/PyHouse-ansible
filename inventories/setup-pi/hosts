@@ -14,7 +14,7 @@
 
 
 [setup-pi]
-pi-setup   ansible_host=192.168.9.22 ansible_user=pi ansible_passwd=raspberry
+pi-setup
 
 [raspi]
 pi-setup

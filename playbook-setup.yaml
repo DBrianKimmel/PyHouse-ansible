@@ -1,0 +1,62 @@
+# Name:    PyHouse-ansible/playbook.yaml - the master playbook
+# Author:  D. Brian Kimmel
+# Created: 2017-10-12
+# Updated: 2017-10-22
+#
+# This is the main raspberry pi initial setup playbook.
+
+---
+
+- hosts: pi-setup
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  vars:
+    ansible_user: pi
+
+  pre_tasks:
+
+    - name: playbook-setup-pre-task-01 - Fail if Ansible is ancient
+      fail:
+        msg: "We need Ansible >= 2.4. Please update your installed ansible"
+      when: ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
+      tags:
+        - always
+
+    - name: playbook-pre-task-02- Include vars from local-configure.yaml if found
+      include_vars: "{{ item }}"
+      with_first_found:
+       - local-configure.yaml
+       - null.yaml
+      tags:
+        - always
+
+    - name: 03 - Working on raspi
+      debug: msg="Host:{{ pyh_hostname }}; WiFi:{{ pyh_wifi_ip }}; Ethernet:{{ pyh_ethernet_ip }}; Access:{{ ansible_host }}"
+      tags:
+        - always
+
+
+# ========================================================================
+
+  roles:
+
+    - role: networking
+      when: install_networking|default(True)
+      tags: 
+        - setup-network
+        - setup-pi
+
+    - role: hostname
+      tags: setup-pi
+
+    - role: add-user
+      tags: setup-pi
+
+    - role: avahi
+      tags: setup-pi
+
+    - role: node_red
+      tags: setup-pi
+
+### END DBK

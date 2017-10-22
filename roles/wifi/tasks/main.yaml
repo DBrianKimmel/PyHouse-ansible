@@ -10,7 +10,7 @@
 - name: task-01 - Create the wpa_supplicant file
   #include_vars: group_vars/pinkpoppy
   include_vars: group_vars/cannontrail.yaml
-                                                                                                                                                
+
 - name: task-02 - delete any new file created
   file:
     name:   /etc/wpa_supplicant/wpa_supplicant.conf-new
