@@ -23,7 +23,7 @@
       tags:
         - always
 
-    - name: playbook-pre-task-02- Include vars from local-configure.yaml if found
+    - name: playbook-setup-pre-task-02- Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
       with_first_found:
        - local-configure.yaml
@@ -31,7 +31,7 @@
       tags:
         - always
 
-    - name: 03 - Working on raspi
+    - name: playbook-setup-pre-task-03 - Working on raspi
       debug: msg="Host:{{ pyh_hostname }}; WiFi:{{ pyh_wifi_ip }}; Ethernet:{{ pyh_ethernet_ip }}; Access:{{ ansible_host }}"
       tags:
         - always

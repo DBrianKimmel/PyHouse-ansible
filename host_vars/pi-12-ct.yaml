@@ -1,17 +1,16 @@
 # Name:    PyHouse-ansible/host_vars/pi-12-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-01
-# Updated: 2017-10-02
+# Updated: 2017-10-22
 
 ---
 
 ansible_host:           192.168.9.22
 
-vars:
-  pyh_hostname:         pi-12-ct
-  pyh_family:           Pi
-  pyh_ethernet_ip:      192.168.9.52
-  pyh_wifi_ip:          192.168.9.22
-  pyh_roles:            pandora
+pyh_hostname:           pi-12-ct
+pyh_family:             Pi
+pyh_ethernet_ip:        192.168.9.52
+pyh_wifi_ip:            192.168.9.22
+pyh_roles:              pandora
 
 ### END DBK

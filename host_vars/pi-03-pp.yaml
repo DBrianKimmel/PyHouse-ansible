@@ -1,16 +1,16 @@
 # Name:    PyHouse-ansible/host_vars/pi-03-pp
 # Author:  D. Brian Kimmel
 # Created: 2017-09-28
-# Updated: 2017-09-28
+# Updated: 2017-10-22
 
 ---
 
 ansible_host:           192.168.1.13
 
-vars:
-  - pyh_family:      "Pi"
-  - pyh_ethernet_ip: 192.168.1.43
-  - pyh_wifi_ip:     192.168.1.13
-  - pyh_roles:       "PyHouse"
+pyh_hostname:           pi-03-pp
+pyh_family:             Pi
+pyh_ethernet_ip:        192.168.1.43
+pyh_wifi_ip:            192.168.1.13
+pyh_roles:              pyhouse
 
 ### END DBK

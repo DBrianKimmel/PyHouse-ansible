@@ -1,16 +1,16 @@
 # Name:    PyHouse-ansible/host_vars/pi-10-pp
 # Author:  D. Brian Kimmel
 # Created: 2017-09-26
-# Updated: 2017-09-28
+# Updated: 2017-10-22
 
 ---
 
 ansible_host:           192.168.1.20
 
-vars:
-  - pyh_family:      "Pi"
-  - pyh_ethernet_ip: 192.168.1.50
-  - pyh_wifi_ip:     192.168.1.20
-  - pyh_roles:       "nodered"
+pyh_hostname:           pi-10-pp
+pyh_family:             Pi
+pyh_ethernet_ip:        192.168.1.50
+pyh_wifi_ip:            192.168.1.20
+pyh_roles:              nodered
 
 ### END DBK

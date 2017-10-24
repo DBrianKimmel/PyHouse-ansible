@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/node_red/tasks/main.yaml - the master playbook
 # Author:  D. Brian Kimmel
 # Created: 2017-10-11
-# Updated: 2017-10-19
+# Updated: 2017-10-22
 #
 #
 # create a node red user
@@ -19,7 +19,7 @@
     shell:      /bin/bash
     groups:     adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
 
-- name: task-02 Create admin user .ssh dir
+- name: task-02 - Create nodered user .ssh dir
   file:
     name:       "/home/{{ pyh_nodered_user }}/.ssh"
     state:      directory
@@ -27,7 +27,7 @@
     group:      "{{ pyh_nodered_user }}"
     mode:       0755
 
-- name: task-03 - Copy auth file to ~/.ssh
+- name: task-03 - Copy nodered auth file to ~/.ssh
   copy:
     src:        "~/.ssh/authorized_keys"
     dest:       "/home/{{ pyh_nodered_user }}/.ssh"
@@ -35,13 +35,12 @@
     group:      "{{ pyh_nodered_user }}"
     mode:       0600
 
-- name: task-08 - Copy id_rsa file to ~/.ssh
+- name: task-04 - Copy id_rsa file to ~/.ssh
   copy:
     src:        "~/.ssh/id_rsa"
     dest:       "/home/{{ pyh_nodered_user }}/.ssh"
     owner:      "{{ pyh_nodered_user }}"
     group:      "{{ pyh_nodered_user }}"
     mode:       0600
-
 
 ### END DBK

@@ -7,11 +7,10 @@
 
 ansible_host:           192.168.1.14
 
-vars:
-  pyh_hostname:      pi-04-ct
-  pyh_family:        Pi
-  pyh_ethernet_ip:   192.168.1.44
-  pyh_wifi_ip:       192.168.1.14
-  pyh_roles:         nodered
+pyh_hostname:           pi-04-ct
+pyh_family:             Pi
+pyh_ethernet_ip:        192.168.1.44
+pyh_wifi_ip:            192.168.1.14
+pyh_roles:              nodered
 
 ### END DBK

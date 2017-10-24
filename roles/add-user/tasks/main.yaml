@@ -6,15 +6,12 @@
 
 ---
 
-#- include_vars: admin-user.yaml
-
-# Change the pi user's password
 - name: task-dd - Info
   debug:
     msg: " Family:{{ pyh_family }}; User:{{ pyh_admin_user }}; Pass:{{ vault_pyh_admin_password }} "
 
 
-
+# --- "pi" user
 # Change the pi user's password
 - name: task-01 - Change "pi" password
   user:
@@ -22,6 +19,8 @@
     password:   "{{ pyh_pi_password }}"
     comment:    "Default User"
 
+
+# --- "Admin" user
 # Create the admin user
 - name: task-02 - Add Admin User
   user:
@@ -31,9 +30,7 @@
     shell:      /bin/bash
     groups:     adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
 
-
-# Sudoers.d
-- name: Create the sudoers.d file
+- name: task-03 - Create the sudoers.d file for admin user
   template:
     src:    ./sudoers.j2
     dest:   "/etc/sudoers.d/{{ pyh_admin_user }}"
@@ -41,9 +38,7 @@
     group:  root
     mode:   0600
 
-
-# Add the .ssh dir and authorized keys
-- name: task-04 Create admin user bin dir
+- name: task-04 - Create admin user bin dir
   file:
     name:       "/home/{{ pyh_admin_user }}/bin"
     state:      directory
@@ -59,7 +54,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0755
 
-- name: task-06 Create admin user .ssh dir
+- name: task-06 - Create admin user .ssh dir
   file:
     name:       "/home/{{ pyh_admin_user }}/.ssh"
     state:      directory

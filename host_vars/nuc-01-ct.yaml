@@ -1,17 +1,16 @@
 # Name:     PyHouse-ansible/host_vars/nuc-01-ct
 # Author:  D. Brian Kimmel
 # Created: 2017-10-02
-# Updated: 2017-10-11
+# Updated: 2017-10-22
 
 ---
 
 ansible_host:           192.168.9.10
 
-vars:
-  pyh_hostname:    nuc-01-ct
-  pyh_family:      Nuc
-  pyh_ethernet_ip: 192.168.9.10
-  pyh_wifi_ip:     192.168.9.40
-  pyh_roles:       mqtt
+pyh_hostname:           nuc-01-ct
+pyh_family:             Nuc
+pyh_ethernet_ip:        192.168.9.10
+pyh_wifi_ip:            192.168.9.40
+pyh_roles:              mqtt
 
 ### END DBK

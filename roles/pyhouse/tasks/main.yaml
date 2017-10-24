@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/pyhouse/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2017-09-22
+# Updated: 2017-10-24
 #
 # This  is to add/maintain the pyhouse system on a node computer such as a raspberry pi.
 
@@ -9,19 +9,22 @@
 
 - name: task-dd
   debug: msg="In PyHouse-main now"
-  
-- name: PyHouse-task-01 - Create PyHouse user
-  user:
-    name:    "pyhouse"
-    comment: "PyHouse User"
-    groups:  dialout,audio,video,input
 
-- name: PyHouse-task-02 - pyhouse tasks Update apt cache
+
+- name: Task-01 - Create PyHouse user
+  user:
+    name:       "pyhouse"
+    password:   "abc"
+    shell:      /bin/bash
+    comment:    "PyHouse User"
+    groups:     dialout,audio,video,input
+
+- name: Task-02 - pyhouse tasks Update apt cache
   apt:
     update_cache: yes
     cache_valid_time: 3600
 
-- name: PyHouse-task-03 - Create Directory /etc/pyhouse
+- name: Task-03 - Create Directory /etc/pyhouse
   file:
     name:  "/etc/pyhouse"
     state: directory
@@ -29,37 +32,37 @@
     group: pyhouse
     mode:  0755
 
-- name: PyHouse-task-04 - Create Directory /var/log/pyhouse
+- name: Task-04 - Create Directory /var/log/pyhouse
   file:
-    name:  "/var/log/pyhouse"
-    state: directory
-    owner: pyhouse
-    group: pyhouse
-    mode:  0755
+    name:       "/var/log/pyhouse"
+    state:      directory
+    owner:      pyhouse
+    group:      pyhouse
+    mode:       0755
 
 - name: PyHouse-task-05 - Create Directory ~/workspace
   file:
-    name:  "/home/pyhouse/workspace"
-    state: directory
-    owner: pyhouse
-    group: pyhouse
-    mode:  0755
+    name:       "/home/pyhouse/workspace"
+    state:      directory
+    owner:      pyhouse
+    group:      pyhouse
+    mode:       0755
 
 - name: PyHouse-task-06 - Create Directory  ~/bin
   file:
-    name:  "/home/pyhouse/bin"
-    state: directory
-    owner: pyhouse
-    group: pyhouse
-    mode:  0755
+    name:       "/home/pyhouse/bin"
+    state:      directory
+    owner:      pyhouse
+    group:      pyhouse
+    mode:       0755
 
 - name: PyHouse-task-07 - Copy files to ~/bin
   copy:
-    src:   "./bin/"
-    dest:  "/home/pyhouse/bin"
-    owner: pyhouse
-    group: pyhouse
-    mode:   0755
+    src:        "./bin/"
+    dest:       "/home/pyhouse/bin"
+    owner:      pyhouse
+    group:      pyhouse
+    mode:       0755
 
 - name: PyHouse-task-08 - fetch the xml file
   fetch:
