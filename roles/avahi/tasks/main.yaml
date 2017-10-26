@@ -1,14 +1,14 @@
-# Name:    PyHouse-ansible/roles/common/tasks/avahi.yaml
+# Name:    PyHouse-ansible/roles/avahi/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2017-10-08
+# Updated: 2017-10-25
 #
 # The avahi package is used to advertise various communications to the server (ssh, vpn etc.)
-# Add the avahi config files and restart
+# Add the avahi config files and restart the daemon
 ---
 
-# Wemust have ssh in order for ansible to work so we advertise it here.
-- name: task-01 - Add avahi service files
+# We must have ssh in order for ansible to work so we advertise it here.
+- name: Task-01 - Add avahi service files
   copy:
     src:    ./ssh.service
     dest:   /etc/avahi/services/ssh.service
@@ -17,7 +17,7 @@
     mode:   0644
 
 # VPN adds a graphic way to talk to the server
-- name: task-02 - Add avahi service files
+- name: Task-02 - Add avahi service files
   copy:
     src:    ./vnc.service
     dest:   /etc/avahi/services/vnc.service
@@ -25,7 +25,7 @@
     group:  root
     mode:   0644
 
-- name: task-03 - Enable avahi so it runs at boot time.
+- name: Task-03 - Enable avahi so it runs at boot time.
   systemd:
     name: avahi-daemon.service
     enabled:

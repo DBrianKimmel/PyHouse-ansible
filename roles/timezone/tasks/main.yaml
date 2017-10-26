@@ -1,22 +1,24 @@
 # Name:    PyHouse-ansible/roles/motd/timezone/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-10-12
-#
+# Updated: 2017-10-25
+
 ---
+
 # Set target server timezone from 'timezone' variable.
 # Works on systems with timedatectl.
 
-- name: Look for timedatectl
+- name: Task-01 - Look for timedatectl
   shell: "which timedatectl"
   ignore_errors: yes
   register: which_timedatectl
 
-- name: "Set timezone to {{ timezone }}"
+- name: Task-02Pass - "Set timezone to {{ timezone }}"
   shell: 'timedatectl set-timezone "{{ timezone }}"'
   when: which_timedatectl.rc == 0
 
-- debug: msg="We don't know how to set timezone in systems without timedatectl. You'll need to do it yourself."
+- name: Task-02Fail - No timedatectl
+  debug: msg="We don't know how to set timezone in systems without timedatectl. You'll need to do it yourself."
   when: which_timedatectl.rc > 0
 
 ### END DBK

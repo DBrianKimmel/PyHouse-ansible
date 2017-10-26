@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/hostname/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-14
-# Updated: 2017-10-14
+# Updated: 2017-10-25
 #
 # Set up the computer's hostname
 #
@@ -16,18 +16,19 @@
 
 ---
 
-- name: task-01 | Ensure dbus installed
+- name: Task-01Debian - Ensure dbus installed
   apt:
-    name:   dbus
-    state:  installed
-  tags: hostname
+    name:       dbus
+    state:      installed
+  when:         ansible_os_family == 'Debian'
+  tags:         hostname
 
-- name: task-02 | Update the hostname (pt. 1) - hostname cmd
+- name: Task-02A - Update the hostname (pt. 1) - hostname cmd
   hostname:
-    name: "{{pyh_hostname}}"
+    name:       "{{pyh_hostname}}"
   tags: hostname
 
-- name: task-03 | Update the hostname (pt. 2) - (/etc/hostname)
+- name: Task-02B - Update the hostname (pt. 2) - (/etc/hostname)
   copy:
     content:    "{{pyh_hostname}}{{'\n'}}"
     dest:       /etc/hostname
@@ -36,23 +37,23 @@
     mode:       0644
   tags: hostname
 
-- name: task-04 | Update the IPv4 hostname (pt. 3) - (/etc/hosts)
+- name: Task-02C - Update the IPv4 hostname (pt. 3) - (/etc/hosts)
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^127.0.1.1"
-    line: "127.0.1.1{{'\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost"
+    line:       "127.0.1.1{{'\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost"
     state:      present
   tags: hostname
 
-- name: task-05 | Update the IPv6 hostname (pt. 3) - (/etc/hosts)
+- name: Task-02D - Update the IPv6 hostname (pt. 3) - (/etc/hosts)
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^::1"
-    line: "::1{{'\t\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost ip6-localhost ip6-loopback"
+    line:       "::1{{'\t\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost ip6-localhost ip6-loopback"
     state:      present
   tags: hostname
 
-#- name: task-06 | Install MDNS Components
+#- name: Task-06 - Install MDNS Components
 #  apt:
 #    pkg:        avahi-daemon,libnss-mdns
 #    state:      latest

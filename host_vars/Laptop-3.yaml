@@ -11,6 +11,6 @@ pyh_hostname:           Laptop-3
 pyh_family:             kubuntu
 pyh_ethernet_ip:        192.168.9.154
 pyh_wifi_ip:            192.168.9.140
-pyh_roles:              control
+pyh_roles:              control,ansible
 
 ### END DBK

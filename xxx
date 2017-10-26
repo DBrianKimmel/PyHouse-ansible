@@ -1,0 +1,30 @@
+fatal: [nuc-01-pp]: FAILED! => {
+	"changed": false,
+	"failed": true,
+	"msg": "'/usr/bin/apt-get dist-upgrade' failed: E: Sub-process /usr/bin/dpkg returned an error code (1)\",
+	"rc": 100,
+	"stdout": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nCalculating upgrade...\n
+	The following packages were automatically installed and are no longer required:\n
+		linux-headers-4.4.0-81 linux-headers-4.4.0-81-generic\n
+		linux-image-4.4.0-81-generic linux-image-extra-4.4.0-81-generic\n
+		linux-signed-image-4.4.0-81-generic\n
+	Use 'sudo apt autoremove' to remove them.\n
+	0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.\n
+	1 not fully installed or removed.\n
+	After this operation, 0 B of additional disk space will be used.\n
+	Setting up linux-firmware (1.157.13) ...\r\n
+	update-initramfs:
+	Generating /boot/initrd.img-4.4.0-97-generic\r\n\r\ngzip: stdout: No space left on device\r\n
+	E: mkinitramfs failure find 141 cpio 141 gzip 1\r\nupdate-initramfs: failed for /boot/initrd.img-4.4.0-97-generic with 1.\r\nd
+	pkg: error processing package linux-firmware (--configure):\r\n subprocess installed post-installation script returned error exit status 1\r\n
+	Errors were encountered while processing:\r\n linux-firmware\r\n",
+	"stdout_lines": ["Reading package lists...", "Building dependency tree...", "Reading state information...", "Calculating upgrade...",
+	"The following packages were automatically installed and are no longer required:", "  linux-headers-4.4.0-81 linux-headers-4.4.0-81-generic",
+	"  linux-image-4.4.0-81-generic linux-image-extra-4.4.0-81-generic", "  linux-signed-image-4.4.0-81-generic", "Use 'sudo apt autoremove' to remove them.",
+	"0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.", "1 not fully installed or removed.", "After this operation, 0 B of additional disk space will be used.",
+	"Setting up linux-firmware (1.157.13) ...", "update-initramfs: Generating /boot/initrd.img-4.4.0-97-generic", "", "gzip: stdout: No space left on device",
+	"E: mkinitramfs failure find 141 cpio 141 gzip 1", "update-initramfs: failed for /boot/initrd.img-4.4.0-97-generic with 1.",
+	"dpkg: error processing package linux-firmware (--configure):",
+	" subprocess installed post-installation script returned error exit status 1",
+	"Errors were encountered while processing:", " linux-firmware"]
+}

@@ -7,8 +7,8 @@
 
 ---
 
-- name: task-dd
-  debug: msg="In PyHouse-main now"
+- name: Task-dd
+  debug:        msg="In PyHouse-main now"
 
 
 - name: Task-01 - Create PyHouse user
@@ -19,18 +19,20 @@
     comment:    "PyHouse User"
     groups:     dialout,audio,video,input
 
-- name: Task-02 - pyhouse tasks Update apt cache
+- name: Task-02 - Be sure git is installed so we can fetch the reposotory
   apt:
-    update_cache: yes
-    cache_valid_time: 3600
+    name:               git
+    state:              latest
+    update_cache:       yes
+    cache_valid_time:   3600
 
 - name: Task-03 - Create Directory /etc/pyhouse
   file:
-    name:  "/etc/pyhouse"
-    state: directory
-    owner: pyhouse
-    group: pyhouse
-    mode:  0755
+    name:       "/etc/pyhouse"
+    state:      directory
+    owner:      pyhouse
+    group:      pyhouse
+    mode:       0755
 
 - name: Task-04 - Create Directory /var/log/pyhouse
   file:
@@ -40,7 +42,7 @@
     group:      pyhouse
     mode:       0755
 
-- name: PyHouse-task-05 - Create Directory ~/workspace
+- name: Task-05 - Create Directory ~/workspace
   file:
     name:       "/home/pyhouse/workspace"
     state:      directory
@@ -48,7 +50,7 @@
     group:      pyhouse
     mode:       0755
 
-- name: PyHouse-task-06 - Create Directory  ~/bin
+- name: Task-06 - Create Directory  ~/bin
   file:
     name:       "/home/pyhouse/bin"
     state:      directory
@@ -56,7 +58,7 @@
     group:      pyhouse
     mode:       0755
 
-- name: PyHouse-task-07 - Copy files to ~/bin
+- name: Task-07 - Copy files to ~/bin
   copy:
     src:        "./bin/"
     dest:       "/home/pyhouse/bin"
@@ -64,18 +66,18 @@
     group:      pyhouse
     mode:       0755
 
-- name: PyHouse-task-08 - fetch the xml file
+- name: Task-08 - fetch the xml config files
   fetch:
     src:                /etc/pyhouse/master.xml
-    dest:               xml_files/
+    dest:               host_files/
     fail_on_missing:    no
 
-- name: PyHouse-task-09 - Clone the PyHouse package
+- name: Task-09 - Clone the PyHouse package
   git:
     repo:               https://git@github.com/DBrianKimmel/PyHouse.git
     dest:               /home/pyhouse/workspace/PyHouse
     accept_hostkey:     yes
     force:              yes
-  when:                 hostvars[inventory_hostname].vars.pyh_roles | search("pyhouse")
+  when:                 hostvars[inventory_hostname].pyh_roles | search("pyhouse")
 
 ### END DBK

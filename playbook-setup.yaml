@@ -8,11 +8,19 @@
 ---
 
 - hosts: pi-setup
+  remote_user: pi
   become: yes
   become_method: sudo
   gather_facts: yes
   vars:
     ansible_user: pi
+    ansible_ssh_private_key_file: "files/keys/id_rsa"
+
+  vars_prompt:
+    - name: "password"
+      prompt: "Enter new password for user pi"
+      private: yes
+
 
   pre_tasks:
 

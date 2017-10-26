@@ -37,7 +37,7 @@ pi-12-ct
 
 # ----- Define all the other computers -----
 [ct-pcduino]
-pcduino-01
+pcduino-01-ct
 
 #[insteon]
 #hub-01-ct ansible_host=192.168.9.133
@@ -72,7 +72,7 @@ pi-10-pp
 # Caannon Trail PyHouse Servers
 [cannontrail_pyhouse]
 pi-01-ct
-#pi-02-ct
+pi-02-ct
 pi-03-ct
 pi-05-ct
 pi-07-ct
@@ -84,7 +84,7 @@ pi-12-ct
 # Node Red Servers
 [cannontrail_nodered]
 pi-11-ct
-#pi-02-ct
+pi-02-ct
 
 [pinkpoppy_nodered]
 pi-02-pp

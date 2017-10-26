@@ -1,17 +1,16 @@
 # Name:    PyHouse-ansible/roles/mqtt/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-04
-# Updated: 2017-10-04
+# Updated: 2017-10-25
 
 # Install MQTT broker on a computer
 
 ---
 
-- name: MQTT-task-02 - install mqtt broker
+- name: Task-02 - install mqtt broker
   apt:
     name: mosquitto
     update_cache: yes
     cache_valid_time: 3600
-
 
 ### END DBK

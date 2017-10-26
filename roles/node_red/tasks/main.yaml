@@ -11,7 +11,7 @@
 ---
 
 # Create the Node Red user
-- name: task-01 - Add Node Red User
+- name: Task-01 - Add Node Red User
   user:
     name:       "{{ pyh_nodered_user }}"
     password:   "{{ pyh_nodered_password }}"
@@ -19,7 +19,7 @@
     shell:      /bin/bash
     groups:     adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
 
-- name: task-02 - Create nodered user .ssh dir
+- name: Task-02 - Create nodered user .ssh dir
   file:
     name:       "/home/{{ pyh_nodered_user }}/.ssh"
     state:      directory
@@ -27,7 +27,7 @@
     group:      "{{ pyh_nodered_user }}"
     mode:       0755
 
-- name: task-03 - Copy nodered auth file to ~/.ssh
+- name: Task-03 - Copy nodered auth file to ~/.ssh
   copy:
     src:        "~/.ssh/authorized_keys"
     dest:       "/home/{{ pyh_nodered_user }}/.ssh"
@@ -35,12 +35,18 @@
     group:      "{{ pyh_nodered_user }}"
     mode:       0600
 
-- name: task-04 - Copy id_rsa file to ~/.ssh
+- name: Task-04 - Copy id_rsa file to ~/.ssh
   copy:
     src:        "~/.ssh/id_rsa"
     dest:       "/home/{{ pyh_nodered_user }}/.ssh"
     owner:      "{{ pyh_nodered_user }}"
     group:      "{{ pyh_nodered_user }}"
     mode:       0600
+
+- name: Task-05 - Pull back the flows for backup / archive
+  fetch:
+    src:                "/home/{{ pyh_nodered_user }}/flows*"
+    dest:               host_files/
+    fail_on_missing:    no
 
 ### END DBK

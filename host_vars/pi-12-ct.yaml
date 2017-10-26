@@ -11,6 +11,6 @@ pyh_hostname:           pi-12-ct
 pyh_family:             Pi
 pyh_ethernet_ip:        192.168.9.52
 pyh_wifi_ip:            192.168.9.22
-pyh_roles:              pandora
+pyh_roles:              pandora,pyhouse
 
 ### END DBK

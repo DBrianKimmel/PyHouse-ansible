@@ -142,4 +142,13 @@
       when: install_motd|default(True)
       tags: motd
 
+    - role: node_red
+      when: pyh_roles.find("nodered") != -1
+
+    - role: mqtt
+      when: pyh_roles.find("mqtt") != -1
+
+    - role: pyhouse
+      when: pyh_roles.find("pyhouse") != -1
+
 ## END DBK

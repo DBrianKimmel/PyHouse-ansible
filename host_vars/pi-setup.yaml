@@ -12,7 +12,7 @@
 ---
 
 # These must be changed
-ansible_host:           192.168.9.43
+ansible_host:           192.168.9.132
 pyh_hostname:           pi-03-ct
 pyh_ethernet_ip:        192.168.9.43
 pyh_wifi_ip:            192.168.9.13
