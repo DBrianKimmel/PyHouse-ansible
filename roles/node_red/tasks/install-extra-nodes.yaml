@@ -1,0 +1,12 @@
+# Name:    PyHouse-ansible/roles/node_red/tasks/install-extra-nodes.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-29
+# Updated: 2017-10-29
+#
+# The extra node  names are stored in "pyh_extra_nodes" in each host_vars file that installs node-red.
+#
+---
+
+- name: ExtraNodes-01 
+
+### END DBK

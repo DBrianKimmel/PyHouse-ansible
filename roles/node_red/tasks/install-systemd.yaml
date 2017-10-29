@@ -1,0 +1,36 @@
+# Name:    PyHouse-ansible/roles/node_red/tasks/install-systemd.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-29
+# Updated: 2017-10-29
+#
+---
+
+# this creates a systemd service
+- name: nr-systemd-01 Create nodered.service
+  template:
+    # in /roles/node-red/templates/
+    src: nodered.service
+    dest: /lib/systemd/system/nodered.service
+  when: 'ansible_os_family == "Debian"'
+
+- name: Enable & start Node-RED
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: nodered
+  when: 'ansible_os_family == "Debian"'
+  notify:
+    # this calls a handler in /roles/web/handlers/main.yml, the contents of which are:
+    # ---
+    # - name: restart nginx
+    #   service:
+    #     name: nginx
+    #     enabled: yes
+    #     state: restarted
+    #     become: yes
+
+    - restart nginx
+
+
+### END DBK

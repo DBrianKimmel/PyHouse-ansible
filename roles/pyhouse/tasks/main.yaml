@@ -1,19 +1,20 @@
 # Name:    PyHouse-ansible/roles/pyhouse/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2017-10-24
+# Updated: 2017-10-26
 #
 # This  is to add/maintain the pyhouse system on a node computer such as a raspberry pi.
-
+#
+# called       when: pyh_roles.find("pyhouse") != -1
+#
 ---
 
-- name: Task-dd
-  debug:        msg="In PyHouse-main now"
-
+#- name: Task-dd
+#  debug:        msg="In PyHouse-main now"
 
 - name: Task-01 - Create PyHouse user
   user:
-    name:       "pyhouse"
+    name:       "{{ pyh_pyhouse_user }}"
     password:   "abc"
     shell:      /bin/bash
     comment:    "PyHouse User"
@@ -30,40 +31,40 @@
   file:
     name:       "/etc/pyhouse"
     state:      directory
-    owner:      pyhouse
-    group:      pyhouse
+    owner:      '{{ pyh_pyhouse_user }}'
+    group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
 - name: Task-04 - Create Directory /var/log/pyhouse
   file:
     name:       "/var/log/pyhouse"
     state:      directory
-    owner:      pyhouse
-    group:      pyhouse
+    owner:      '{{ pyh_pyhouse_user }}'
+    group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
 - name: Task-05 - Create Directory ~/workspace
   file:
     name:       "/home/pyhouse/workspace"
     state:      directory
-    owner:      pyhouse
-    group:      pyhouse
+    owner:      '{{ pyh_pyhouse_user }}'
+    group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
 - name: Task-06 - Create Directory  ~/bin
   file:
     name:       "/home/pyhouse/bin"
     state:      directory
-    owner:      pyhouse
-    group:      pyhouse
+    owner:      '{{ pyh_pyhouse_user }}'
+    group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
 - name: Task-07 - Copy files to ~/bin
   copy:
     src:        "./bin/"
     dest:       "/home/pyhouse/bin"
-    owner:      pyhouse
-    group:      pyhouse
+    owner:      '{{ pyh_pyhouse_user }}'
+    group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
 - name: Task-08 - fetch the xml config files
@@ -79,5 +80,18 @@
     accept_hostkey:     yes
     force:              yes
   when:                 hostvars[inventory_hostname].pyh_roles | search("pyhouse")
+
+# todo:
+# Autologin
+- name: Task-10 - Autologin as pyhouse user
+  lineinfile:
+    path:               '/etc/systemd/system/autologin@.service'
+    regexp:             '--autologin '
+    line:               'ExecStart=-/sbin/agetty --autologin {{ pyh_pyhouse_user }} --noclear %I $TERM'
+  when:                 hostvars[inventory_hostname].pyh_roles | search("pyhouse")
+
+# Autostart pyhouse
+
+
 
 ### END DBK

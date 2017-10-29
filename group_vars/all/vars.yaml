@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/group_vars/all/vars.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-23
-# Updated: 2017-10-23
+# Updated: 2017-10-25
 #
 # The vault variables are stored in group_vars/all/vault.yaml
 #
@@ -28,6 +28,8 @@ pyh_nodered_user:       "{{ vault_pyh_nodered_user }}"
 pyh_nodered_password:   "{{ vault_pyh_nodered_password }}"
 pyh_long_nodered_name:  "{{ vault_pyh_long_nodered_name }}"
 
-pyh_pyhouse_user:       pyhouse
+pyh_pyhouse_user:       "{{ vault_pyh_pyhouse_user }}"
+pyh_pyhouse_password:   "{{ vault_pyh_pyhouse_password }}"
+pyh_long_pyhouse_name:  "{{ vault_pyh_long_pyhouse_name }}"
 
 ### END DBK

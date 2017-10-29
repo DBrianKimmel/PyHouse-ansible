@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Run ansible to set up a new raspberry pi.
+# Works with raspbian stretch and possibly later.
+#
+# Edit the file !/workspace/PyHouse-ansible/host_vars/pi-setup.yaml and put in the new IP address
+
+INV="-i inventories/testing/hosts"
+PLAY="playbook.yaml"
+PSWD="~/.vault-pass.txt"
+PSWD1=" --vault-password-file ${PSWD}"
+PSWD2="--ask-vault-pass"
+SYNTAX="--syntax-check"
+TAGS="--tags=setup-pi"
+
+
+cd ~/workspace/PyHouse-ansible
+ansible-playbook ${INV} ${PLAY} ${PSWD1} ${TAGS}
+
+### END DBK
