@@ -1,64 +1,26 @@
 # Name:    PyHouse-ansible/roles/node_red/tasks/main.yaml - the master playbook
 # Author:  D. Brian Kimmel
 # Created: 2017-10-11
-# Updated: 2017-10-28
+# Updated: 2017-10-30
 #
-#
-# create a node red user
-# fetch any flows from that user
-# Install node red
+# Lite versions of the os do not install node-red.
+# The install scripts and apt both sorta do the wrong versions so do it all manually here.
 
 ---
 
-- include_tasks:    "setup-{{ansible_os_family}}.yaml"
-- include_tasks:    install-nodejs.yaml
-
-- name: Task-01 - Define nodejs_install_npm_user
-  set_fact:
-    nodejs_install_npm_user: "{{ ansible_user | default(lookup('env', 'USER')) }}"
-  when:         nodejs_install_npm_user is not defined
-
-- name: Task-02 - Create npm global directory
-  file:
-    path:       "{{ npm_config_prefix }}"
-    owner:      "{{ nodejs_install_npm_user }}"
-    group:      "{{ nodejs_install_npm_user }}"
-    state:      directory
-
-- name: Task-03 - Add npm_config_prefix bin directory to global $PATH.
-  template:
-    src:        npm.sh.j2
-    dest:       /etc/profile.d/npm.sh
-    mode:       0644
-
-- name: Task-04 - Ensure npm global packages are installed.
-  npm:
-    name:       "{{ item.name | default(item) }}"
-    version:    "{{ item.version | default('latest') }}"
-    global:     yes
-    state:      latest
-  environment:
-    NPM_CONFIG_PREFIX:          "{{ npm_config_prefix }}"
-    NODE_PATH:                  "{{ npm_config_prefix }}/lib/node_modules"
-    NPM_CONFIG_UNSAFE_PERM:     "{{ npm_config_unsafe_perm }}"
-  with_items:   "{{ nodejs_npm_global_packages }}"
-
-- name: task-05 - Install packages defined in a given package.json.
-  npm:
-    path:       "{{ nodejs_package_json_path }}"
-  when: nodejs_package_json_path is defined and nodejs_package_json_path
-
+- name: Task-01 - Set up the proper OS distribution
+  include_tasks:    "setup-{{ansible_os_family}}.yaml"
 
 # Create the Node Red user
-- name: Task-06 - Add Node Red User
+- name: Task-02 - Add Node Red User
   user:
     name:           "{{ pyh_nodered_user }}"
     password:       "{{ pyh_nodered_password }}"
     comment:        "Node Red User"
     shell:          /bin/bash
-    groups:         adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+    groups:         "{{ pyh_nodered_user_groups }}"
 
-- name: Task-07 - Create nodered user .ssh dir
+- name: Task-03 - Create nodered user .ssh dir
   file:
     name:           "/home/{{ pyh_nodered_user }}/.ssh"
     state:          directory
@@ -66,7 +28,7 @@
     group:          "{{ pyh_nodered_user }}"
     mode:           0700
 
-- name: Task-08 - Copy nodered authorized_keys file to ~/.ssh
+- name: Task-04 - Copy nodered authorized_keys file to ~/.ssh
   copy:
     src:            "~/.ssh/authorized_keys"
     dest:           "/home/{{ pyh_nodered_user }}/.ssh"
@@ -74,7 +36,7 @@
     group:          "{{ pyh_nodered_user }}"
     mode:           0600
 
-- name: Task-09 - Copy id_rsa file to ~/.ssh
+- name: Task-05 - Copy id_rsa file to ~/.ssh
   copy:
     src:            "~/.ssh/id_rsa"
     dest:           "/home/{{ pyh_nodered_user }}/.ssh"
@@ -82,64 +44,22 @@
     group:          "{{ pyh_nodered_user }}"
     mode:           0600
 
+- name: Task-06 - Install extra apt packages for node red
+  import_tasks:    install-extra-packages.yaml
 
-#
-# For now, we have to name each file as wildcards are not yet supported.
-#
-- name: Task-10-A-old - Pull back the flows for backup / archive
-  fetch:
-    src:                "/home/pi/.node-red/flows_{{ inventory_hostname }}.json"
-    dest:               host_files/
-    fail_on_missing:    no
+- name: Task-07 - Install Node.js (correct version)
+  import_tasks:    install-nodejs.yaml
 
-- name: Task-10-B-old - Pull back the flows for backup / archive
-  fetch:
-    src:                "/home/pi/.node-red/flows_{{ inventory_hostname }}_cred.json"
-    dest:               host_files/
-    fail_on_missing:    no
+- name: Task-08 - Install Node-Red (correct version)
+  import_tasks:    install-nodered.yaml
 
-- name: Task-11-A - Pull back the flows for backup / archive
-  fetch:
-    src:                "/home/{{ pyh_nodered_user }}/.node-red/flows_{{ inventory_hostname }}.json"
-    dest:               host_files/
-    fail_on_missing:    no
+- name: Task-09 - Install extra node red nodes
+  import_tasks:    install-extra-nodes.yaml
 
-- name: Task-11-B - Pull back the flows for backup / archive
-  fetch:
-    src:                "/home/{{ pyh_nodered_user }}/.node-red/flows_{{ inventory_hostname }}_cred.json"
-    dest:               host_files/
-    fail_on_missing:    no
+- name: Task-10 - Setup auto run on reboot
+  include_tasks:    install-systemd.yaml
 
-
-#
-# Lite versions of the os do not install node-red.
-# The install scripts sorta do the wrong versions so do it all manually here.
-#
-- name: Task-12 - install prerequisites
-  apt:
-    name:               "{{ item }}"
-    state:              latest
-  with_items:
-#    - npm
-    - sqlite3
-    - build-essential
-    - python-rpi.gpio
-
-#- name: Task-13 - install npm packages
-#  npm:
-#    name:               node-red
-#    global:             yes
-
-- name: Task-14-v6 - install nodejs
-  debug:
-    msg: "Host {{ansible_hostname}} {{ansible_architecture}}"
-  when:     "ansible_architecture == 'armv6l'"
-
-
-
-# ToDo:
-# Autostart Node Red
-
-
+- name: Task-11 - Save the flows we have
+  include_tasks:    backup-flows.yaml
 
 ### END DBK

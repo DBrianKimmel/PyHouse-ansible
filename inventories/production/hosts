@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2017-10-23
+# Updated: 2017-10-31
 
 
 # ----- Define all the NUC boxes -----
@@ -12,6 +12,11 @@ nuc-01-pp
 # Cannon Trail Nucs (Jump Box)
 [nucs_ct]
 nuc-01-ct
+
+[nucs:children]
+nucs_pp
+nucs_ct
+
 
 
 # ----- Define all the Raspberry Pis -----
@@ -34,35 +39,39 @@ pi-07-ct
 pi-11-ct
 pi-12-ct
 
+[pis:children]
+pis_pp
+pis_ct
+
+
 
 # ----- Define all the other computers -----
-[ct-pcduino]
+[pcduino-ct]
 pcduino-01-ct
 
 #[insteon]
 #hub-01-ct ansible_host=192.168.9.133
 #hub-01-pp ansible_host=192.168.1.133
 
-[remotealki]
+[alki-pp]
 alki
 
-[remote_laptop]
+[laptop-roam]
 Laptop-3
+
+[others:children]
+pcduino-ct
+alki-pp
+laptop-roam
+
 
 
 # --------------------------------------------\
 
-[nucs:children]
-nucs_pp
-nucs_ct
 
-[pis:children]
-pis_pp
-pis_ct
-
-
-# ----- Define all the groups we need todeal with -----
+# ----- Define all the groups we need to deal with -----
 # Pink Poppy PyHouse Servers
+# All computers using the Pink Poppy WiFi Access Points 
 [pinkpoppy_pyhouse]
 #pi-01-pp
 pi-02-pp
@@ -70,6 +79,7 @@ pi-03-pp
 pi-10-pp
 
 # Caannon Trail PyHouse Servers
+# All computers using the Cannon Trail WiFi Access Points 
 [cannontrail_pyhouse]
 pi-01-ct
 pi-02-ct

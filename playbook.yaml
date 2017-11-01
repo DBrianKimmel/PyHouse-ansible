@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbook.yaml - the master playbook
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-10-22
+# Updated: 2017-10-30
 #
 # This is the main playbook.
 
@@ -23,10 +23,10 @@
 
 ---
 
-- hosts: all
-  become: yes
-  become_method: sudo
-  gather_facts: yes
+- hosts:            all
+  become:           yes
+  become_method:    sudo
+  gather_facts:     yes
 
   pre_tasks:
 
@@ -54,7 +54,7 @@
         - nginx
         - restart_script
 
-    - name: playbook-pre-task-04D - Update packages
+    - name: playbook-pre-task-04-Debian - Update packages
       when: ansible_os_family == 'Debian'
       apt: 
         upgrade: dist
@@ -63,21 +63,21 @@
         - update_packages
 
     # Update all packages
-    - name: playbook-pre-task-04S - Update packages
+    - name: playbook-pre-task-04-Suse - Update packages
       when: ansible_os_family == 'Suse'
       zypper:
         name: "*"
         state: latest
         update_cache: yes
 
-    - name: playbook-pre-task-05D - Ensure optional packages via apt
+    - name: playbook-pre-task-05-Debian - Ensure optional packages via apt
       when: ansible_os_family == 'Debian'
       apt:
         pkg: "{{ item }}"
         state: present
       with_items: "{{ additional_packages|default([]) }}"
 
-    - name: playbook-pre-task-06C - Enable aditional repos for CentOS
+    - name: playbook-pre-task-06-CentOS - Enable aditional repos for CentOS
       yum:
         pkg: "{{ item }}"
         state: present
@@ -88,7 +88,7 @@
         - munin
         - varnish
 
-    - name: playbook-pre-task-07R - Ensure optional packages via yum
+    - name: playbook-pre-task-07-RedHat - Ensure optional packages via yum
       when: ansible_os_family == 'RedHat'
       yum:
         name: "{{ item }}:"
@@ -96,7 +96,7 @@
         update_cache: yes
       with_items: "{{ additional_packages|default([]) }}"
 
-    - name: playbook-pre-task-08R  - Ensure selinux packages via yum
+    - name: playbook-pre-task-08-RedHat  - Ensure selinux packages via yum
       when: ansible_os_family == 'RedHat' and ansible_selinux
       yum:
         name: "{{ item }}"
@@ -136,22 +136,45 @@
 
     - role: timezone
       when: set_timezone|default(True)
-      tags: timezone
+      tags:
+        - timezone
 
     - role: motd
       when: install_motd|default(True)
-      tags: motd
+      tags:
+        - motd
+
+# ==== pyh_roles dispatch
+
+#  ansible
+#  control
+#  mqtt
+#  nodered
+#  octoprint
+#  pandora
+#  postgresql
+#  pyhouse
+#  relay
 
     - role: node_red
       when: pyh_roles.find("nodered") != -1
-      tags: nodered
+      tags:
+        - nodered
 
     - role: mqtt
       when: pyh_roles.find("mqtt") != -1
-      tags: mqtt
+      tags:
+        - mqtt
 
     - role: pyhouse
       when: pyh_roles.find("pyhouse") != -1
-      tags: pyhouse
+      tags:
+        - pyhouse
+
+    - role: pandora
+      when: pyh_roles.find("pandora") != -1
+      tags:
+        - pandora
+
 
 ## END DBK

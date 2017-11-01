@@ -5,4 +5,14 @@
 #
 ---
 
+- name: InstallNodeRed-01 - Node
+  become:           yes
+  become_user:      root
+  become_method:    sudo
+  npm:
+    name:           node-red
+    path:           "/home/{{pyh_nodered_user}}/.node-red/"
+    global:         yes
+    state:          latest
+
 ### END DBK

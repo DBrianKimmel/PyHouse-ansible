@@ -13,4 +13,7 @@ pyh_ethernet_ip:        192.168.9.52
 pyh_wifi_ip:            192.168.9.22
 pyh_roles:              pandora,pyhouse
 
+pyh_extra_apt_packages:
+    - sqlite3
+
 ### END DBK

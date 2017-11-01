@@ -1,0 +1,14 @@
+# Name:    PyHouse-ansible/roles/pyhouse/tasks/install-systemd.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-31
+# Updated: 2017-10-31
+
+---
+
+- name: Systemd-02 - Autologin as pyhouse user
+  lineinfile:
+    path:               '/etc/systemd/system/autologin@.service'
+    regexp:             'ExecStart=-/sbin/agetty --autologin '
+    line:               'ExecStart=-/sbin/agetty --autologin {{ pyh_pyhouse_user }} --noclear %I $TERM'
+
+### END DBK

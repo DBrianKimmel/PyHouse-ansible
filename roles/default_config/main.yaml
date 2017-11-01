@@ -1,18 +1,17 @@
 # Name:    PyHouse-ansible/roles/default_config/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-10-12
+# Updated: 2017-10-31
 #
 # This is the main playbook default config.
 # Used to configure after one of the setup playbooks has run.
 
 ---
 
-# Default variables that are shared by more than one role
-# in the Plone Ansible Playbook.
+# Default variables that are shared by more than one role in the Playbook.
 
-# This is a hack - fix it
-#pyh_router_address: 192.168.9.1
+install_networking:     no
+install_webserver:      no
 
 
 # Install haproxy Load Balancer?
@@ -29,8 +28,5 @@ install_nagios:         no
 
 # Install postfix mail server?
 install_mailserver:     no
-
-# Install apache webserver?
-install_webserver:      no
 
 ### END DBK

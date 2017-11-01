@@ -1,0 +1,12 @@
+# Name:    PyHouse-ansible/roles/pandora/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-31
+# Updated: 2017-10-31
+
+---
+
+- name: ID
+  debug:
+    msg: "Running Pandora role now."
+
+### END DBK
