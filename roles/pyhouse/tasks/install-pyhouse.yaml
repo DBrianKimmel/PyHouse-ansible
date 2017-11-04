@@ -5,7 +5,7 @@
 
 ---
 
-- name: install-01 - Create PyHouse user
+- name: InstallPyhouse-01 - Create PyHouse user
   user:
     name:       "{{ pyh_pyhouse_user }}"
     password:   "{{ pyh_pyhouse_password }}"
@@ -13,14 +13,14 @@
     comment:    "PyHouse User"
     groups:     "{{ pyh_pyhouse_user_groups }}"
 
-- name: Task-02 - Be sure git is installed so we can fetch the reposotory
+- name: InstallPyhouse-02 - Be sure git is installed so we can fetch the reposotory
   apt:
     name:               git
     state:              latest
     update_cache:       yes
     cache_valid_time:   3600
 
-- name: Task-03 - Create Directory /etc/pyhouse
+- name: InstallPyhouse-03 - Create Directory /etc/pyhouse
   file:
     name:       "/etc/pyhouse"
     state:      directory
@@ -28,7 +28,7 @@
     group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
-- name: Task-04 - Create Directory /var/log/pyhouse
+- name: InstallPyhouse-04 - Create Directory /var/log/pyhouse
   file:
     name:       "/var/log/pyhouse"
     state:      directory
@@ -36,7 +36,7 @@
     group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
-- name: Task-05 - Create Directory ~/workspace
+- name: InstallPyhouse-05 - Create Directory ~/workspace
   file:
     name:       "/home/pyhouse/workspace"
     state:      directory
@@ -44,7 +44,7 @@
     group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
-- name: Task-06-A - Create Directory  ~/bin
+- name: InstallPyhouse-06-A - Create Directory  ~/bin
   file:
     name:       "/home/pyhouse/bin"
     state:      directory
@@ -52,7 +52,7 @@
     group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
-- name: Task-06-B - Copy files to ~/bin
+- name: InstallPyhouse-06-B - Copy files to ~/bin
   copy:
     src:        "./bin/"
     dest:       "/home/pyhouse/bin"
@@ -60,8 +60,9 @@
     group:      '{{ pyh_pyhouse_user }}'
     mode:       0755
 
-- name: Task-07 - Clone the PyHouse package
+- name: InstallPyhouse-07 - Clone the PyHouse package
   become_user:          '{{ pyh_pyhouse_user }}'
+  ignore_errors:    yes
   git:
     repo:               https://git@github.com/DBrianKimmel/PyHouse.git
     dest:               /home/pyhouse/workspace/PyHouse

@@ -40,10 +40,10 @@ nohook lookup-hostname
 
 interface {{ if_name }}
 {% if if_name.startswith('e') %}
-    static ip_address={{hostvars[inventory_hostname].pyh_ethernet_ip}}/{{pyh_router_prefix_len}}
+    static ip_address={{pyh_ethernet_ip}}/{{pyh_router_prefix_len}}
 {% endif %}
 {% if if_name.startswith('w') %}
-    static ip_address={{hostvars[inventory_hostname].pyh_wifi_ip}}/{{pyh_router_prefix_len}}
+    static ip_address={{pyh_wifi_ip}}/{{pyh_router_prefix_len}}
 {% endif %}
     static routers={{pyh_router_address}}
     static domain_name_servers={{pyh_router_nameservers}}

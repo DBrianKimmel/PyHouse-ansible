@@ -1,0 +1,14 @@
+# Name:    PyHouse-ansible/roles/packages/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-01
+# Updated: 2017-11-01
+
+---
+
+#- name: Task-01 - Set up the proper OS distribution
+#  include_tasks:    "setup-{{ansible_os_family}}.yaml"
+
+#- name: Task-06 - Install extra apt packages for node red
+#  import_tasks:    install-extra-packages.yaml
+
+### END DBK

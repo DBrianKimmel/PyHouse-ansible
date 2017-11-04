@@ -1,19 +1,19 @@
 # Name:    PyHouse-ansible/roles/add-user/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2017-10-25
+# Updated: 2017-11-01
 #
 
 ---
 
 - name: Task-dd - Info
   debug:
-    msg: " Family:{{ pyh_family }}; User:{{ pyh_admin_user }}; Pass:{{ vault_pyh_admin_password }} "
+    msg: " User:{{ pyh_admin_user }}; Pass:{{ vault_pyh_admin_password }} "
 
 
 # --- "pi" user
 # Change the pi user's password
-- name: Task-01Deb - Change "pi" password
+- name: Task-01-Debian - Change "pi" password
   user:
     name:       pi
     password:   "{{ pyh_pi_password }}"
@@ -23,23 +23,35 @@
 
 # --- "Admin" user
 # Create the admin user
-- name: Task-02Suse - Add Admin User
+- name: Task-02-Suse - Add Admin User
+  ignore_errors:    yes
   user:
     name:       "{{ pyh_admin_user }}"
     password:   "{{ pyh_admin_password }}"
     comment:    "{{ vault_pyh_long_admin_name }}"
     shell:      /bin/bash
-    groups:     adm,dialout,sudo,audio,video,input,netdev,i2c,gpio
+    groups:     "{{ pyh_admin_user_groups }}"
   when: ansible_os_family == 'Suse'
 
-- name: Task-02Deb - Add Admin User
+- name: Task-02-Raspbian - Add Admin User
+  ignore_errors:    yes
   user:
     name:       "{{ pyh_admin_user }}"
     password:   "{{ pyh_admin_password }}"
     comment:    "{{ vault_pyh_long_admin_name }}"
     shell:      /bin/bash
-    groups:     adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
-  when: ansible_os_family == 'Debian'
+    groups:     "{{ pyh_admin_user_groups }}"
+  when: ansible_os_family == 'Raspbian'
+
+- name: Task-02-Ubuntu - Add Admin User
+  ignore_errors:    yes
+  user:
+    name:       "{{ pyh_admin_user }}"
+    password:   "{{ pyh_admin_password }}"
+    comment:    "{{ vault_pyh_long_admin_name }}"
+    shell:      /bin/bash
+    groups:     "{{ pyh_admin_user_groups }}"
+  when: ansible_os_family == 'Ubuntu'
 
 - name: Task-03 - Create the sudoers.d file for admin user
   template:

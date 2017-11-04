@@ -1,22 +1,24 @@
 # Name:    PyHouse-ansible/host_vars/pi-11-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-01
-# Updated: 2017-10-29
+# Updated: 2017-11-01
 
 ---
 
 ansible_host:           192.168.9.21
 
 pyh_hostname:           pi-11-ct
-pyh_family:             Pi
 pyh_ethernet_ip:        192.168.9.51
 pyh_wifi_ip:            192.168.9.21
 pyh_roles:              nodered
+
 pyh_extra_apt_packages:
     - sqlite3
+
 pyh_extra_nodered_nodes:
     - node-red-dashboard
     - node-red-contrib-timerswitch
     - node-red-node-sqlite
+    - node-red-contrib-i2c
 
 ### END DBK

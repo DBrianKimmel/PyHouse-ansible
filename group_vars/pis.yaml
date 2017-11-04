@@ -4,6 +4,6 @@
 # Updated: 2017-10-08
 #
 
-pis_admin_groups: adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+pyh_admin_user_groups: adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
 
 ### END DBK

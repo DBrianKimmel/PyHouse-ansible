@@ -8,7 +8,19 @@
 # ----- Define all the testing boxes -----
 
 # Groupname must be a house-name
-[cannontrail]
-pi-12-ct
+[pinkpoppy]
+#[cannontrail]
+
+# Select the computer in the house
+#nuc-01-pp
+#nuc-01-ct
+
+pi-01-pp
+#pi-01-ct
+
+#pi-02-pp
+#pi-02-ct
+
+#pi-12-ct
 
 ### END DBK

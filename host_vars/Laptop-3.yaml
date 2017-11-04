@@ -1,16 +1,16 @@
 # Name:    PyHouse-ansible/host_vars/Laptop-3.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-13
-# Updated: 2017-10-22
+# Updated: 2017-11-01
 
 ---
 
-ansible_host:           192.168.9.140
+ansible_host:           192.168.1.143
+#ansible_host:           192.168.9.140
 
 pyh_hostname:           Laptop-3
-pyh_family:             kubuntu
-pyh_ethernet_ip:        192.168.9.154
-pyh_wifi_ip:            192.168.9.140
+pyh_ethernet_ip:        dhcp
+pyh_wifi_ip:            dhcp
 pyh_roles:              control,ansible
 
 ### END DBK

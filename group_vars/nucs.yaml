@@ -1,0 +1,9 @@
+# Name:    PyHouse-ansible/group_vars/nucs.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-01
+# Updated: 2017-11-01
+#
+
+pyh_admin_user_groups: adm,dialout,sudo,audio,video,plugdev,input,netdev
+
+### END DBK

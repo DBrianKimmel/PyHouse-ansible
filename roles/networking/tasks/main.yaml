@@ -1,42 +1,54 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2017-10-31
+# Updated: 2017-11-01
 
 ---
 
-#- name: Task-01 - include cannontrail.yaml
-  #include_vars:    group_vars/pinkpoppy
-  #include_vars:    group_vars/cannontrail.yaml
-
-- name: Task-01 - Debug
+- name: Task-01-Pi - Install the wpa_supplicant file
   ignore_errors:    yes
-  vars:
-    msg: |
-         AP:{{ access_points }}; .
-         Hostname:{{ inventory_hostname }};
-  debug:
-    msg: "{{ msg.split('\n') }}"
-
-- name: Task-02-Debian - Install the wpa_supplicant file
   template:
-    src:        ./wifi.j2
-    dest:       /etc/wpa_supplicant/wpa_supplicant.conf
-    owner:      root
-    group:      root
-    mode:       0600
-  when:         ansible_distribution == 'Debian'
+    src:            ./wifi.j2
+    dest:           /etc/wpa_supplicant/wpa_supplicant.conf
+    owner:          root
+    group:          root
+    mode:           0600
+  when:
+    - ansible_lsb.id == 'Raspbian'
+    - pyh_wifi_ip != 'no'
 
 # this will set up static addresses on all interfaces except 'lo'
 # It is the correct method for debian Jessie, Stretch and beond.
 # Earlier releases used a different mechanism.
-- name: Task-03-Debian - Install dhcpcd.conf file with interface IP definitions.
+- name: Task-02-Pis - Install dhcpcd.conf file with interface IP definitions.
   template:
     src:        ./dhcpcd_conf.j2
     dest:       /etc/dhcpcd.conf
     owner:      root
     group:      netdev
     mode:       0664
-  when:         ansible_distribution == 'Debian'
+    backup:     true
+  when:         ansible_lsb.id == 'Raspbian'
+
+- name: Task-02-Nucs - Install network/interfaces file with interface IP definitions.
+  template:
+    src:        ./interfaces.j2
+    dest:       /etc/network/interfaces
+    owner:      root
+    group:      netdev
+    mode:       0664
+    backup:     true
+  when:         ansible_lsb.id == 'Ubuntu'
+
+#- name: Task-03 - Add mappings to /etc/dhcpcd.conf
+#  blockinfile:
+#    path: /etc/dhcpcd.conf
+#    block: |
+#      {{ item.ip }} {{ item.name }}
+#    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+#  with_items:
+#    - { name: host1, ip: 10.10.1.10 }
+#    - { name: host2, ip: 10.10.1.11 }
+#    - { name: host3, ip: 10.10.1.12 }
 
 ### END DBK

@@ -7,7 +7,7 @@
 #
 ---
 
-- name: ExtraNodes-01 
+- name: ExtraNodes-01 Add extra npm nodes
   become:           yes
   #become_user:      "{{ pyh_nodered_user }}"
   become_method:    sudo

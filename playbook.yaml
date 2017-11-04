@@ -54,6 +54,8 @@
         - nginx
         - restart_script
 
+
+# Raspbian and Ubuntu are both Debian
     - name: playbook-pre-task-04-Debian - Update packages
       when: ansible_os_family == 'Debian'
       apt: 
@@ -64,11 +66,13 @@
 
     # Update all packages
     - name: playbook-pre-task-04-Suse - Update packages
+      ignore_errors:        yes
       when: ansible_os_family == 'Suse'
       zypper:
-        name: "*"
-        state: latest
-        update_cache: yes
+        name:               "*"
+        state:              latest
+        update_cache:       yes
+
 
     - name: playbook-pre-task-05-Debian - Ensure optional packages via apt
       when: ansible_os_family == 'Debian'
@@ -87,6 +91,7 @@
       tags:
         - munin
         - varnish
+
 
     - name: playbook-pre-task-07-RedHat - Ensure optional packages via yum
       when: ansible_os_family == 'RedHat'
@@ -133,6 +138,8 @@
         - postfix
         - logwatch
         - motd
+
+    - role: packages
 
     - role: timezone
       when: set_timezone|default(True)

@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/default_config/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-10-31
+# Updated: 2017-11-01
 #
 # This is the main playbook default config.
 # Used to configure after one of the setup playbooks has run.
@@ -28,5 +28,8 @@ install_nagios:         no
 
 # Install postfix mail server?
 install_mailserver:     no
+
+pyh_admin_user_groups:  dialout,sudo,audio,video,plugdev,input,netdev
+
 
 ### END DBK

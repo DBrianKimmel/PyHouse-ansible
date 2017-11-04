@@ -1,0 +1,29 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+{% for if_name in ansible_interfaces %}
+{% if if_name != "lo" and not if_name.startswith('sit') %}
+auto {{ if_name }}
+iface {{ if_name }} inet static
+{% if if_name.startswith('e') %}
+    address {{pyh_ethernet_ip}}
+    netmask {{pyh_router_netmask}}
+    gateway {{pyh_router_address}}
+{% endif %}
+{% if if_name.startswith('w') %}
+    address {{pyh_wifi_ip}}
+    netmask {{pyh_router_netmask}}
+    gateway {{pyh_router_address}}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+dns-nameservers {{pyh_router_nameservers}}
+
+### END DBK
