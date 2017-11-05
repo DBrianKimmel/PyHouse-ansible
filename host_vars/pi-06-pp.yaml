@@ -1,0 +1,15 @@
+# Name:    PyHouse-ansible/host_vars/pi-06-pp
+# Author:  D. Brian Kimmel
+# Created: 2017-11-04
+# Updated: 2017-11-04
+
+---
+
+ansible_host:           192.168.1.16
+
+pyh_hostname:           pi-06-ct
+pyh_ethernet_ip:        192.168.1.46
+pyh_wifi_ip:            192.168.1.16
+pyh_roles:              pandora
+
+### END DBK
