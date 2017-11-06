@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/host_vars/pi-04-pp
 # Author:  D. Brian Kimmel
 # Created: 2017-09-28
-# Updated: 2017-11-01
+# Updated: 2017-11-05
 
 ---
 
@@ -11,5 +11,14 @@ pyh_hostname:           pi-04-ct
 pyh_ethernet_ip:        192.168.1.44
 pyh_wifi_ip:            192.168.1.14
 pyh_roles:              nodered
+
+pyh_extra_apt_packages:
+    - sqlite3
+
+pyh_extra_nodered_nodes:
+    - node-red-dashboard
+    - node-red-node-sqlite
+    - node-red-contrib-timerswitch
+    - node-red-contrib-i2c
 
 ### END DBK
