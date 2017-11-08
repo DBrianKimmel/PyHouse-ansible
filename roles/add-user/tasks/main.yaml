@@ -85,7 +85,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0755
 
-- name: Task-07 - Copy Sfmins authorized_keys file to ~/.ssh
+- name: Task-07 - Copy authorized_keys file to ~/.ssh
   copy:
     src:        "~/.ssh/authorized_keys"
     dest:       "/home/{{ pyh_admin_user }}/.ssh"

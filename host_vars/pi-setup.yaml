@@ -3,21 +3,23 @@
 # Created: 2017-10-12
 # Updated: 2017-11-01
 
-# This is the hosts file for setting up a raspberry pi for my use.
+# This is the host_vars file for setting up a raspberry pi for home automation use.
 
-# When each PI boots with ethernet a new ip is set up = put that IP in below.
-# Wifi will not work since it has not been set up to use my access points yet.
+# When each PI boots with ethernet, a new ip is set up = put that IP in below.
+# Wifi will not work since it has not been set up to use the house access points yet.
 # Only the "pi" user exists at first.
 
 ---
 
 # These must be changed
-ansible_host:           192.168.9.132
-pyh_hostname:           pi-03-ct
-pyh_ethernet_ip:        192.168.9.43
-pyh_wifi_ip:            192.168.9.13
-pyh_roles:              pyhouse
+ansible_host:           192.168.1.13
+pyh_hostname:           pi-03-pp
+pyh_ethernet_ip:        192.168.1.43
+pyh_wifi_ip:            192.168.1.13
+pyh_roles:              setup
 
+pyh_router_prefix_len:  24
+vault_pyh_access_points: {Key: PinkPoppy-Guest, value: MarciaBrian}
 # You should not change the following:
 pyh_domain:             ""
 pyh_in_setup:           yes

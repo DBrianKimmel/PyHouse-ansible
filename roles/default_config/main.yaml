@@ -31,5 +31,7 @@ install_mailserver:     no
 
 pyh_admin_user_groups:  dialout,sudo,audio,video,plugdev,input,netdev
 
+admin_email:            d.briankimmel@gmail.com
+
 
 ### END DBK

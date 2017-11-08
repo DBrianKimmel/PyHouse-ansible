@@ -45,14 +45,14 @@
       tags:
         - always
 
-    - name: playbook-pre-task-03 - Fail if no administrative email set
-      fail:
-        msg: "You must set the admin_email variable."
-      when: not admin_email
-      tags:
-        - motd
-        - nginx
-        - restart_script
+#    - name: playbook-pre-task-03 - Fail if no administrative email set
+#      fail:
+#        msg: "You must set the admin_email variable."
+#      when: not admin_email
+#      tags:
+#        - motd
+#        - nginx
+#        - restart_script
 
 
 # Raspbian and Ubuntu are both Debian
