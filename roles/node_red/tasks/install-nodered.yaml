@@ -15,4 +15,12 @@
     global:         yes
     state:          latest
 
+- name: InstallNodeRed-02 - Change ownership
+  file:
+    path:           "/home/{{pyh_nodered_user}}"
+    state:          directory
+    owner:          "{{pyh_nodered_user}}"
+    group:          "{{pyh_nodered_user}}"
+    recurse:        yes
+
 ### END DBK

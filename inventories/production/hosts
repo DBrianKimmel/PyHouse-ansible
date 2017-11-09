@@ -35,11 +35,9 @@ pi-10-pp
 [pis_ct]
 pi-01-ct
 pi-02-ct
-#pi-03-ct
 pi-05-ct
 pi-07-ct
 pi-11-ct
-#pi-12-ct
 
 [pis:children]
 pis_pp
@@ -51,10 +49,6 @@ pis_ct
 [pcduino-ct]
 pcduino-01-ct
 
-#[insteon]
-#hub-01-ct ansible_host=192.168.9.133
-#hub-01-pp ansible_host=192.168.1.133
-
 [alki-pp]
 alki
 
@@ -64,77 +58,6 @@ Laptop-3
 [others:children]
 pcduino-ct
 alki-pp
-laptop-roam
-
-
-
-# --------------------------------------------\
-
-
-# ----- Define all the groups we need to deal with -----
-# Pink Poppy PyHouse Servers
-# All computers using the Pink Poppy WiFi Access Points 
-[pinkpoppy_pyhouse]
-#pi-01-pp
-pi-02-pp
-pi-03-pp
-pi-10-pp
-
-# Caannon Trail PyHouse Servers
-# All computers using the Cannon Trail WiFi Access Points 
-[cannontrail_pyhouse]
-pi-01-ct
-pi-02-ct
-pi-03-ct
-pi-05-ct
-pi-07-ct
-pi-11-ct
-pi-12-ct
-
-
-
-# Node Red Servers
-[cannontrail_nodered]
-pi-11-ct
-pi-02-ct
-
-[pinkpoppy_nodered]
-pi-02-pp
-pi-04-pp
-
-
-# Mqtt Brokers
-[cannontrail_mqtt]
-nuc-01-ct
-
-[pinkpoppy_mqtt]
-nuc-01-pp
-
-
-[pyhouse:children]
-pinkpoppy_pyhouse
-cannontrail_pyhouse
-
-[nodered:children]
-pinkpoppy_nodered
-cannontrail_nodered
-
-[mqtt:children]
-pinkpoppy_mqtt
-cannontrail_mqtt
-
-
-# All of pink poppy
-[pinkpoppy:children]
-pinkpoppy_pyhouse
-pinkpoppy_nodered
-pinkpoppy_mqtt
-
-# All of cannon trail
-[cannontrail:children]
-cannontrail_pyhouse
-cannontrail_nodered
-cannontrail_mqtt
 laptop-roam
 
 ### END DBK
