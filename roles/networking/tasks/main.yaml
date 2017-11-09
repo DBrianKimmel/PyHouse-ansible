@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2017-11-01
+# Updated: 2017-11-06
 
 ---
 
@@ -21,24 +21,26 @@
 # It is the correct method for debian Jessie, Stretch and beond.
 # Earlier releases used a different mechanism.
 - name: Task-02-Pis - Install dhcpcd.conf file with interface IP definitions.
+  ignore_errors:    yes
   template:
-    src:        ./dhcpcd_conf.j2
-    dest:       /etc/dhcpcd.conf
-    owner:      root
-    group:      netdev
-    mode:       0664
-    backup:     true
-  when:         ansible_lsb.id == 'Raspbian'
+    src:            ./dhcpcd_conf.j2
+    dest:           /etc/dhcpcd.conf
+    owner:          root
+    group:          netdev
+    mode:           0664
+    backup:         true
+  when:             ansible_lsb.id == 'Raspbian'
 
 - name: Task-02-Nucs - Install network/interfaces file with interface IP definitions.
+  ignore_errors:    yes
   template:
-    src:        ./interfaces.j2
-    dest:       /etc/network/interfaces
-    owner:      root
-    group:      netdev
-    mode:       0664
-    backup:     true
-  when:         ansible_lsb.id == 'Ubuntu'
+    src:            ./interfaces.j2
+    dest:           /etc/network/interfaces
+    owner:          root
+    group:          netdev
+    mode:           0664
+    backup:         true
+  when:             ansible_lsb.id == 'Ubuntu'
 
 #- name: Task-03 - Add mappings to /etc/dhcpcd.conf
 #  blockinfile:

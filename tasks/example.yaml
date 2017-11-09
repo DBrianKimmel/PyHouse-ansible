@@ -1,8 +1,7 @@
 ---
 # ^^^ YAML documents must begin with the document separator "---"
 #
-#### Example docblock, I like to put a descriptive comment at the top of my 
-#### playbooks.
+#### Example docblock, I like to put a descriptive comment at the top of my playbooks.
 #
 # Overview:    Playbook to bootstrap a new host for configuration management.
 # Applies to:  production
@@ -32,9 +31,8 @@
   hosts: all
   ###########
   # Playbook attribute: hosts
-  # Required: yes
-  # Description:
-  #   The name of a host or group of hosts that this playbook should apply to.
+  # Required:           yes
+  # Description:        The name of a host or group of hosts that this playbook should apply to.
   #
   ## Example values:
   #   hosts: all -- applies to all hosts
@@ -51,7 +49,7 @@
   #   hosts: $groups -- apply to all hosts specified in the variable $groups
   #
   # This is handy for testing playbooks, running the same playbook against a staging environment before running it against production,
-  # occasional maintenance tasks, and other cases where you want to run the playbook against just a few systems rather than a whole group.
+  #  occasional maintenance tasks, and other cases where you want to run the playbook against just a few systems rather than a whole group.
   #
   # If you set hosts as shown above, then you can specify which hosts to apply the playbook to on each run as so:
   #
@@ -63,45 +61,38 @@
   sudo: True
   ###########
   # Playbook attribute: sudo
-  # Default: False
-  # Required: no
-  # Description:
-  #   If True, always use sudo to run this playbook, just like passing the
-  #   --sudo (or -s) flag to ansible or ansible-playbook.
+  # Default:            False
+  # Required:           no
+  # Description:        If True, always use sudo to run this playbook, just like passing the --sudo (or -s) flag to ansible or ansible-playbook.
 
   user: remoteuser
   ###########
-  # Playbook attribute:  user
-  # Default: "root'
-  # Required: no
-  # Description
-  #   Remote user to execute the playbook as
+  # Playbook attribute: user
+  # Default:            "root'
+  # Required:           no
+  # Description:        Remote user to execute the playbook as
 
   ###########
   # Playbook attribute: vars
-  # Default: none
-  # Required: no
-  # Description:
-  #  Set configuration variables passed to templates & included playbooks
-  #  and handlers.  See below for examples.
+  # Default:            none
+  # Required:           no
+  # Description:         Set configuration variables passed to templates & included playbooks and handlers.  See below for examples.
   vars:
     color: brown
 
     web:
-      memcache: 192.168.1.2
-      httpd: apache
+      memcache:     192.168.1.2
+      httpd:        apache
     # Tree-like structures work as expected, but be careful to surround the variable name with ${} when using.
     #
     # For this example, ${web.memcache} and ${web.apache} are both usable variables.
 
     ########
-    # The following works in Ansible 0.5 and later, and will set $config_path
-    # "/etc/ntpd.conf" as expected.
-    #
+    # The following works in Ansible 0.5 and later, and will set $config_path "/etc/ntpd.conf" as expected.
     # In older versions, $config_path will be set to the string "/etc/$config"
     #
-    config: ntpd.conf
-    config_path: /etc/$config
+    config:         ntpd.conf
+    config_path:    /etc/$config
 
     ########
     # Variables can be set conditionally. This is actually a tiny snippet of Python that will get filled in and evaluated during playbook execution.
@@ -110,7 +101,7 @@
     # In this playbook, this will always evaluate to False, because 'color' is set to 'brown' above.
     #
     # When ansible interprets the following, it will first expand $color to 'brown' and then evaluate 'brown' == 'blue' as a Python expression.
-    is_color_blue: "'$color' == 'blue'"
+    is_color_blue:  "'$color' == 'blue'"
 
     #####
     # Builtin Variables
@@ -119,7 +110,7 @@
     # Ansible native, Facter, and Ohai facts can all be used.
     #
     # Run the setup module to see what else you can use:
-    # ansible -m setup -i /path/to/hosts.ini host1
+    #       ansible -m setup -i /path/to/hosts.ini host1
     main_vhost: ${ansible_fqdn}
     public_ip:  ${ansible_eth0.ipv4.address}
 
@@ -129,9 +120,8 @@
 
   ##########
   # Playbook attribute: vars_files
-  # Required: no
-  # Description:
-  #   Specifies a list of YAML files to load variables from.
+  # Required:           no
+  # Description:        Specifies a list of YAML files to load variables from.
   #
   #   Always evaluated after the 'vars' section, no matter which section occurs first in the playbook.
   #   Examples are below.
@@ -167,15 +157,13 @@
     # provide more specific configuration:
     - [ vars/$host.yml ]
 
-    # Hey, but if you're doing host-specific variable files, you might consider setting the variable for a group in your hosts.ini and
-    # adding your host to that group. Just a thought.
+    # Hey, but if you're doing host-specific variable files, you might consider setting the variable for a group in your hosts.ini and adding your host to that group. Just a thought.
 
 
   ##########
   # Playbook attribute: vars_prompt
-  # Required: no
-  # Description:
-  #   A list of variables that must be manually input each time this playbook runs.
+  # Required:           no
+  # Description:        A list of variables that must be manually input each time this playbook runs.
   #   Used for sensitive data and also things like release numbers that vary on each deployment.
   #   Ansible always prompts for this value, even if it's passed in through the inventory or --extra-vars.
   #
@@ -192,14 +180,13 @@
 
   ##########
   # Playbook attribute: tasks
-  # Required: yes
-  # Description:
-  # A list of tasks to perform in this playbook.
+  # Required:           yes
+  # Description:        A list of tasks to perform in this playbook.
   tasks:
     ##########
     # The simplest task
     # Each task must have a name & action.
-    - name: Check that the server's alive
+    - name: Check that the server is alive
       action: ping
 
     ##########
