@@ -11,7 +11,7 @@
 #       ansible-vault encrypt group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
 #       ansible-vault decrypt group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
 #
-# Keep the ~/.vault-pass.text file a secret.
+# Keep the ~/.vault-pass.txt file a secret.
 
 ---
 

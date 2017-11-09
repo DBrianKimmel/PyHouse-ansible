@@ -5,8 +5,8 @@
 #
 # Edit the file !/workspace/PyHouse-ansible/host_vars/pi-setup.yaml and put in the new IP address
 
-INVENTORY="-i inventories/setup-pi/hosts"
-PLAYBOOK="playbook-setup.yaml"
+INVENTORY=" -i inventories/setup-pi/hosts"
+PLAYBOOK=" playbook-setup.yaml"
 PSWD1=" --vault-password-file  ~/.vault-pass.txt"
 PSWD2=" --ask-vault-pass"
 SYNTAX=" --syntax-check"
@@ -14,6 +14,6 @@ TAGS=" --tags=setup-pi"
 
 
 cd ~/workspace/PyHouse-ansible
-ansible-playbook ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
+ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} # ${PSWD1}
 
 ### END DBK

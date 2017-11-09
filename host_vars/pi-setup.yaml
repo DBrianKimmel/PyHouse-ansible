@@ -12,14 +12,14 @@
 ---
 
 # These must be changed
-ansible_host:           192.168.1.13
+ansible_host:           192.168.1.117
 pyh_hostname:           pi-03-pp
-pyh_ethernet_ip:        192.168.1.43
+pyh_ethernet_ip:        192.168.2.13
 pyh_wifi_ip:            192.168.1.13
 pyh_roles:              setup
 
-pyh_router_prefix_len:  24
-vault_pyh_access_points: {Key: PinkPoppy-Guest, value: MarciaBrian}
+pyh_router_prefix_len:  21
+vault_pyh_access_points: {'PinkPoppy-Guest': 'MarciaBrian'}
 # You should not change the following:
 pyh_domain:             ""
 pyh_in_setup:           yes

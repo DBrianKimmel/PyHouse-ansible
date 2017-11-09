@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/setup-pi/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-20
-# Updated: 2017-10-15
+# Updated: 2017-11-09
 #
 # This inventory is for setting up a new raspberry pi.
 #
