@@ -25,7 +25,9 @@ pyh_extra_nodered_nodes:
     - node-red-node-email
     - node-red-node-ping
     - node-red-node-snmp
-    - node-red-node-sqlite
+
+#
+#    - node-red-node-sqlite
 
 # This is a part of the johnny-five system.
 #    - node-red-contrib-gpio

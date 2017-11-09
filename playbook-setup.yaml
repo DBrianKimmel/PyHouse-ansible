@@ -14,7 +14,6 @@
   gather_facts: yes
   vars:
     ansible_user: pi
-    ansible_ssh_private_key_file: "files/keys/id_rsa"
 
   vars_prompt:
     - name: "password"
@@ -62,9 +61,6 @@
       tags: setup-pi
 
     - role: avahi
-      tags: setup-pi
-
-    - role: node_red
       tags: setup-pi
 
 ### END DBK
