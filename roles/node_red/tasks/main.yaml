@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/node_red/tasks/main.yaml - the master playbook
 # Author:  D. Brian Kimmel
 # Created: 2017-10-11
-# Updated: 2017-10-30
+# Updated: 2017-11-10
 #
 # Lite versions of the os do not install node-red.
 # The install scripts and apt both sorta do the wrong versions so do it all manually here.
@@ -61,5 +61,6 @@
 
 - name: Task-11 - Save the flows we have
   include_tasks:    backup-flows.yaml
+  tags:             fetch-files
 
 ### END DBK
