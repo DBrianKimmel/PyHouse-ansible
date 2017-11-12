@@ -2,7 +2,7 @@
 # Name:    PyHouse-ansible/bin/ansible-production
 # Author:  D. Brian Kimmel
 # Created: 2017-11-05
-# Updated: 2017-11-10
+# Updated: 2017-11-12
 #
 # Run ansible to set up a new raspberry pi.
 # Works with raspbian stretch and possibly later.
@@ -12,11 +12,16 @@
 INVENTORY=" -i inventories/production/hosts"
 PLAYBOOK=" playbook.yaml"
 PSWD1=" --vault-password-file ~/.vault-pass.txt"
-PSWD2=" --ask-vault-pass"
-SYNTAX=" --syntax-check"
-#TAGS=" --tags=pyhouse,pandora"
-TAGS=" --tags=fetch-files"
+TAGS=""
+# PSWD2=" --ask-vault-pass"
+# SYNTAX=" --syntax-check"
+# TAGS=" --tags=pyhouse,pandora"
+# TAGS=" --tags=fetch-files"
 
+if [ $# -gt 0 ]; then
+    TAGS=" --tags=$1"
+    echo "Tags = ${TAGS}"
+fi
 
 cd ~/workspace/PyHouse-ansible
 ansible-playbook ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
