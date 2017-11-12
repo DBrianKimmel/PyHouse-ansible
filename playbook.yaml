@@ -24,6 +24,30 @@
 
 ---
 
+# The first play is to install to the localhost
+- hosts:            127.0.0.1
+  connection:       local
+  tasks:
+#  - debug: msg="ran in local ansible machine"
+
+  - name: LocalTask-01
+    copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+    with_items:
+        - { src: 'bin/ansible-production', dest: '~/bin/' }
+        - { src: 'bin/ansible-setup-pi', dest: '~/bin/' }
+        - { src: 'bin/ansible-testing', dest: '~/bin/' }
+        - { src: 'bin/vault-hook', dest: '~/workspace/PyHouse-ansible/.git/hooks/pre-commit' }
+
+  - name: LocalTask-02 - Install local tasks
+    copy:
+      src:      ssh.cfg
+      dest:     ~/.ssh/config
+ 
+
+
+# Thesecond play is to install remote hosts.
 - hosts:            all
   become:           yes
   become_method:    sudo
@@ -46,15 +70,14 @@
       tags:
         - always
 
-    - name: playbook-pre-task-03-A - Install local tasks
-      host:         127.0.0.1
-      copy:         src={{ item.src }} dest={{ item.dest }}
-      with_items:
-        - { src: 'bin/ansible-production', dest: '~/bin/' }
-        - { src: 'bin/ansible-setup-pi', dest: '~/bin/' }
-        - { src: 'bin/ansible-testing', dest: '~/bin/' }
-        - { src: 'bin/vault-hook', dest: '~/workspacs/PyHouse-ansible/.git/hooks/pre-commit' }
- 
+#    - name: playbook-pre-task-03-A - Install local tasks
+#      local_action:     copy: src={{ item.src }} dest={{ item.dest }}
+#          with_items:
+#            - { src: 'bin/ansible-production', dest: '~/bin/' }
+#            - { src: 'bin/ansible-setup-pi', dest: '~/bin/' }
+#            - { src: 'bin/ansible-testing', dest: '~/bin/' }
+#            - { src: 'bin/vault-hook', dest: '~/workspacs/PyHouse-ansible/.git/hooks/pre-commit' }
+
 
 # Raspbian and Ubuntu are both Debian
     - name: playbook-pre-task-04-Debian - Update packages
