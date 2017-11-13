@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/host_vars/pi-02-pp
 # Author:  D. Brian Kimmel
 # Created: 2017-09-26
-# Updated: 2017-11-06
+# Updated: 2017-11-12
 
 ---
 
@@ -26,6 +26,7 @@ pyh_extra_nodered_nodes:
     - node-red-node-ping
     - node-red-node-snmp
 
+
 #
 #    - node-red-node-sqlite
 
@@ -33,3 +34,4 @@ pyh_extra_nodered_nodes:
 #    - node-red-contrib-gpio
 
 ### END DBK
+ 
