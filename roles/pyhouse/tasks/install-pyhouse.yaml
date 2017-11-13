@@ -46,23 +46,24 @@
 
 - name: InstallPyhouse-06-A - Create Directory  ~/bin
   file:
-    name:       "/home/pyhouse/bin"
-    state:      directory
-    owner:      '{{ pyh_pyhouse_user }}'
-    group:      '{{ pyh_pyhouse_user }}'
-    mode:       0755
+    name:               "/home/pyhouse/bin"
+    state:              directory
+    owner:              '{{ pyh_pyhouse_user }}'
+    group:              '{{ pyh_pyhouse_user }}'
+    mode:               0755
 
 - name: InstallPyhouse-06-B - Copy files to ~/bin
   copy:
-    src:        "./bin/"
-    dest:       "/home/pyhouse/bin"
-    owner:      '{{ pyh_pyhouse_user }}'
-    group:      '{{ pyh_pyhouse_user }}'
-    mode:       0755
+    src:                "./bin/"
+    dest:               "/home/pyhouse/bin"
+    owner:              '{{ pyh_pyhouse_user }}'
+    group:              '{{ pyh_pyhouse_user }}'
+    mode:               0755
 
 - name: InstallPyhouse-07 - Clone the PyHouse package
+  become:               yes
   become_user:          '{{ pyh_pyhouse_user }}'
-  ignore_errors:    yes
+  ignore_errors:        yes
   git:
     repo:               https://git@github.com/DBrianKimmel/PyHouse.git
     dest:               /home/pyhouse/workspace/PyHouse

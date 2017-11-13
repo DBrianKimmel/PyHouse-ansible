@@ -1,4 +1,8 @@
 #!/bin/bash
+# Name:    PyHouse-ansible/bin/ansible-setup-pi
+# Author:  D. Brian Kimmel
+# Created: 2017-11-05
+# Updated: 2017-11-13
 #
 # Run ansible to set up a new raspberry pi.
 # Works with raspbian stretch and possibly later.
@@ -7,13 +11,12 @@
 
 INVENTORY=" -i inventories/setup-pi/hosts"
 PLAYBOOK=" playbook-setup.yaml"
-PSWD1=" --vault-password-file  ~/.vault-pass.txt"
-PSWD2=" --ask-vault-pass"
-SYNTAX=" --syntax-check"
+PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=" --tags=setup-pi"
-
+# PSWD2=" --ask-vault-pass"
+# SYNTAX=" --syntax-check"
 
 cd ~/workspace/PyHouse-ansible
-ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} # ${PSWD1}
+ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}
 
 ### END DBK
