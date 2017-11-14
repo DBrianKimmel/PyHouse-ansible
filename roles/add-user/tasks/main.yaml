@@ -14,10 +14,11 @@
 # --- "pi" user
 # Change the pi user's password
 - name: Task-01-Debian - Change "pi" password
+  ignore_errors:    yes
   user:
-    name:       pi
-    password:   "{{ pyh_pi_password }}"
-    comment:    "Default User"
+    name:           pi
+    password:       "{{ pyh_pi_password }}"
+    comment:        "Default User"
   when: ansible_os_family == 'Debian'
 
 
@@ -26,42 +27,44 @@
 - name: Task-02-Suse - Add Admin User
   ignore_errors:    yes
   user:
-    name:       "{{ pyh_admin_user }}"
-    password:   "{{ pyh_admin_password }}"
-    comment:    "{{ vault_pyh_long_admin_name }}"
-    shell:      /bin/bash
-    groups:     "{{ pyh_admin_user_groups }}"
+    name:           "{{ pyh_admin_user }}"
+    password:       "{{ pyh_admin_password }}"
+    comment:        "{{ vault_pyh_long_admin_name }}"
+    shell:          /bin/bash
+    groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_os_family == 'Suse'
 
 - name: Task-02-Raspbian - Add Admin User
   ignore_errors:    yes
   user:
-    name:       "{{ pyh_admin_user }}"
-    password:   "{{ pyh_admin_password }}"
-    comment:    "{{ vault_pyh_long_admin_name }}"
-    shell:      /bin/bash
-    groups:     "{{ pyh_admin_user_groups }}"
+    name:           "{{ pyh_admin_user }}"
+    password:       "{{ pyh_admin_password }}"
+    comment:        "{{ vault_pyh_long_admin_name }}"
+    shell:          /bin/bash
+    groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_os_family == 'Raspbian'
 
 - name: Task-02-Ubuntu - Add Admin User
   ignore_errors:    yes
   user:
-    name:       "{{ pyh_admin_user }}"
-    password:   "{{ pyh_admin_password }}"
-    comment:    "{{ vault_pyh_long_admin_name }}"
-    shell:      /bin/bash
-    groups:     "{{ pyh_admin_user_groups }}"
+    name:           "{{ pyh_admin_user }}"
+    password:       "{{ pyh_admin_password }}"
+    comment:        "{{ vault_pyh_long_admin_name }}"
+    shell:          /bin/bash
+    groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_os_family == 'Ubuntu'
 
 - name: Task-03 - Create the sudoers.d file for admin user
+  ignore_errors:    yes
   template:
-    src:    ./sudoers.j2
-    dest:   "/etc/sudoers.d/{{ pyh_admin_user }}"
-    owner:  root
-    group:  root
-    mode:   0600
+    src:            ./sudoers.j2
+    dest:           "/etc/sudoers.d/{{ pyh_admin_user }}"
+    owner:          root
+    group:          root
+    mode:           0600
 
 - name: Task-04 - Create admin user bin dir
+  ignore_errors:    yes
   file:
     name:       "/home/{{ pyh_admin_user }}/bin"
     state:      directory
@@ -70,6 +73,7 @@
     mode:       0755
 
 - name: Task-05 - Copy admin files to ~/bin
+  ignore_errors:    yes
   copy:
     src:        "./ModelDiscovery.sh"
     dest:       "/home/{{ pyh_admin_user }}/bin"
@@ -78,6 +82,7 @@
     mode:       0755
 
 - name: Task-06 - Create admin user .ssh dir
+  ignore_errors:    yes
   file:
     name:       "/home/{{ pyh_admin_user }}/.ssh"
     state:      directory

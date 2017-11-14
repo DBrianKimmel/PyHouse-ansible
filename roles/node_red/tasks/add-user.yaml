@@ -1,0 +1,44 @@
+# Name:    PyHouse-ansible/roles/node_red/tasks/add-user.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-14
+# Updated: 2017-11-14
+#
+# Adds the node red user to the computer
+
+---
+
+# Create the Node Red user
+- name: AddUser-01 - Add Node Red User
+  user:
+    name:           "{{ pyh_nodered_user }}"
+    password:       "{{ pyh_nodered_password }}"
+    comment:        "{{ pyh_long_nodered_name }}"
+    shell:          /bin/bash
+    groups:         "{{ pyh_nodered_user_groups }}"
+
+- name: AddUser-02 - Create nodered user .ssh dir
+  file:
+    name:           "/home/{{ pyh_nodered_user }}/.ssh"
+    state:          directory
+    owner:          "{{ pyh_nodered_user }}"
+    group:          "{{ pyh_nodered_user }}"
+    mode:           0700
+
+- name: Task-04 - Copy nodered authorized_keys file to ~/.ssh
+  copy:
+    src:            "~/.ssh/authorized_keys"
+    dest:           "/home/{{ pyh_nodered_user }}/.ssh"
+    owner:          "{{ pyh_nodered_user }}"
+    group:          "{{ pyh_nodered_user }}"
+    mode:           0600
+
+- name: Task-05 - Copy id_rsa file to ~/.ssh
+  copy:
+    src:            "~/.ssh/id_rsa"
+    dest:           "/home/{{ pyh_nodered_user }}/.ssh"
+    owner:          "{{ pyh_nodered_user }}"
+    group:          "{{ pyh_nodered_user }}"
+    mode:           0600
+
+
+### EBD DBK

@@ -13,10 +13,9 @@ INVENTORY=" -i inventories/setup-pi/hosts"
 PLAYBOOK=" playbook-setup.yaml"
 PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=" --tags=setup-pi"
-# PSWD2=" --ask-vault-pass"
-# SYNTAX=" --syntax-check"
+PIUSER=" --become-user=pi --ask-become-pass "
 
 cd ~/workspace/PyHouse-ansible
-ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}
+ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} ${PIUSER}
 
 ### END DBK

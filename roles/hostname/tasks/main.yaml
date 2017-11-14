@@ -17,6 +17,7 @@
 ---
 
 - name: Task-01Debian - Ensure dbus installed
+  ignore_errors:    yes
   apt:
     name:       dbus
     state:      installed
@@ -24,11 +25,13 @@
   tags:         hostname
 
 - name: Task-02A - Update the hostname (pt. 1) - hostname cmd
+  ignore_errors:    yes
   hostname:
     name:       "{{pyh_hostname}}"
   tags: hostname
 
 - name: Task-02B - Update the hostname (pt. 2) - (/etc/hostname)
+  ignore_errors:    yes
   copy:
     content:    "{{pyh_hostname}}{{'\n'}}"
     dest:       /etc/hostname
@@ -38,6 +41,7 @@
   tags: hostname
 
 - name: Task-02C - Update the IPv4 hostname (pt. 3) - (/etc/hosts)
+  ignore_errors:    yes
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^127.0.1.1"
@@ -46,6 +50,7 @@
   tags: hostname
 
 - name: Task-02D - Update the IPv6 hostname (pt. 3) - (/etc/hosts)
+  ignore_errors:    yes
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^::1"
