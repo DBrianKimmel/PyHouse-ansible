@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/node_red/tasks/main.yaml - the master playbook
 # Author:  D. Brian Kimmel
 # Created: 2017-10-11
-# Updated: 2017-11-10
+# Updated: 2017-11-14
 #
 # Lite versions of the os do not install node-red.
 # The install scripts and apt both sorta do the wrong versions so do it all manually here.
@@ -15,19 +15,19 @@
 # Create the Node Red user
 
 - name: Task-02 - Add the node red user
-  import_tasks:    add-user.yaml
+  import_tasks:     add-user.yaml
 
 - name: Task-03 - Install extra apt packages for node red
-  import_tasks:    install-extra-packages.yaml
+  import_tasks:     install-extra-packages.yaml
 
 - name: Task-04 - Install Node.js (correct version)
-  import_tasks:    install-nodejs.yaml
+  import_tasks:     install-nodejs.yaml
 
 - name: Task-05 - Install Node-Red (correct version)
-  import_tasks:    install-nodered.yaml
+  import_tasks:     install-nodered.yaml
 
 - name: Task-06 - Install extra node red nodes
-  import_tasks:    install-extra-nodes.yaml
+  import_tasks:     install-extra-nodes.yaml
 
 - name: Task-07 - Setup auto run on reboot
   include_tasks:    install-systemd.yaml

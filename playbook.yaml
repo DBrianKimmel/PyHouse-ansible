@@ -51,9 +51,9 @@
 
 
 
-# The second play is to install remote hosts.
+# The second play is to install remote PI hosts.
 - name: Play-02 - Work on the remote hosts
-  hosts:            all
+  hosts:            pis
   become:           yes
   become_method:    sudo
   gather_facts:     yes
@@ -216,6 +216,40 @@
       when: pyh_roles.find("pandora") != -1
       tags:
         - pandora
+
+
+# The third is to install remote Nuc s.
+- name: Play-03- Work on the remote NUC hosts.
+  hosts:            nucs
+  become:           yes
+  become_method:    sudo
+  gather_facts:     yes
+
+  pre_tasks:
+
+    - name: playbook-pre-task-01 - Fail if Ansible is ancient
+      fail:
+        msg:        "We need Ansible >= 2.4. Please update your installed ansible"
+      when:         ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
+      tags:
+        - always
+
+
+# The third is to install remote Nuc s.
+- name: Play-04 - Work on the remote other hosts.
+  hosts:            others
+  become:           yes
+  become_method:    sudo
+  gather_facts:     yes
+
+  pre_tasks:
+
+    - name: playbook-pre-task-01 - Fail if Ansible is ancient
+      fail:
+        msg:        "We need Ansible >= 2.4. Please update your installed ansible"
+      when:         ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
+      tags:
+        - always
 
 
 ## END DBK
