@@ -1,0 +1,36 @@
+# Name:    PyHouse-ansible/roles/playbook/playbook-install-local.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-18
+# Updated: 2017-11-18
+#
+
+---
+
+# The first play is to install to the localhost
+- name: Play-01 - Local host install commands we are using
+  hosts:            localhost
+  connection:       local
+  gather_facts:     yes
+
+  pre_tasks:
+
+    - name: LocalPreTask-01 - Message
+      debug:
+        msg:        "Play is on the local ansible machine."
+
+    - name: LocalPreTask-02 - Copy some files
+      copy:
+        src:        "{{ item.src }}"
+        dest:       "{{ item.dest }}"
+      with_items:
+        - { src: 'bin/ansible-production', dest: '~/bin/' }
+        - { src: 'bin/ansible-setup-pi', dest: '~/bin/' }
+        - { src: 'bin/ansible-testing', dest: '~/bin/' }
+        - { src: 'bin/vault-hook', dest: '~/workspace/PyHouse-ansible/.git/hooks/pre-commit' }
+
+    - name: LocalPreTask-02 - Install local tasks
+      copy:
+        src:        ssh.cfg
+        dest:       ~/.ssh/config
+
+### END DBK

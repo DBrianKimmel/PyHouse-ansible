@@ -30,11 +30,11 @@
 
   pre_tasks:
 
-    - name: LocalTask-01 - Message
+    - name: LocalPreTask-01 - Message
       debug:
         msg:        "Play is on the local ansible machine."
 
-    - name: LocalTask-02 - Copy some files
+    - name: LocalPreTask-02 - Copy some files
       copy:
         src:        "{{ item.src }}"
         dest:       "{{ item.dest }}"
@@ -44,7 +44,7 @@
         - { src: 'bin/ansible-testing', dest: '~/bin/' }
         - { src: 'bin/vault-hook', dest: '~/workspace/PyHouse-ansible/.git/hooks/pre-commit' }
 
-    - name: LocalTask-02 - Install local tasks
+    - name: LocalPreTask-02 - Install local tasks
       copy:
         src:        ssh.cfg
         dest:       ~/.ssh/config
@@ -204,10 +204,8 @@
     - role: install-pyhouse
       when: pyh_roles.find("pyhouse") != -1
 
-    - role: pandora
+    - role: install-pandora
       when: pyh_roles.find("pandora") != -1
-      tags:
-        - pandora
 
 
 # The third is to install remote Nuc s.

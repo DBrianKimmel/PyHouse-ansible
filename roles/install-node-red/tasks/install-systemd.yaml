@@ -1,15 +1,18 @@
 # Name:    PyHouse-ansible/roles/install-node-red/tasks/install-systemd.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-29
-# Updated: 2017-10-29
-#
+# Updated: 2017-11-18
+
+# This part of the node-red install will set up the computer to automatically start
+# node red every time that the computer starts up.
+
 ---
 
 # this creates a systemd service
 - name: InstallSystemd-01 - Create nodered.service
   template:
-    # in /roles/node-red/templates/
-    src: nodered.service
+    # in /roles/install-node-red/templates/
+    src: nodered-service.j2
     dest: /lib/systemd/system/nodered.service
   when: 'ansible_os_family == "Debian"'
 
