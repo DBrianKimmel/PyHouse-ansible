@@ -1,0 +1,8 @@
+# Name:    PyHouse-ansible/roles/install-pyhouse/tasks/setup-Suse.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-31
+# Updated: 2017-10-31
+
+---
+
+### END DBK

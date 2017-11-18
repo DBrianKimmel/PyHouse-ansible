@@ -1,0 +1,29 @@
+# Name:    PyHouse-ansible/roles/install-pyhouse/tasks/setup-Debian.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-31
+# Updated: 2017-10-31
+#
+# The Pis and Nucs are both Debian
+
+---
+
+# Different Distributions within Debian have different user groups
+- name: SetupDebian-01 - Set up default
+  set_fact:
+    pyh_pyhouse_user_groups: "dialout"
+    cacheable:      yes
+
+- name: SetupDebian-01-Pi - Set up groups for the pyhouse user
+  set_fact:
+    pyh_pyhouse_user_groups: "dialout,audio,video,input"
+    cacheable:      yes
+  when:             ansible_lsb.id == "Raspbian"
+
+- name: SetupDebian-01-Nuc - Set up groups for the pyhouse user
+  set_fact:
+    pyh_pyhouse_user_groups: "dialout,audio,video,input"
+    cacheable:      yes
+  when:             ansible_lsb.id == "Ubuntu"
+
+
+### END DBK

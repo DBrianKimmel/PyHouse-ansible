@@ -1,0 +1,37 @@
+# Name:    PyHouse-ansible/roles/install-node-red/tasks/backup-flows.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-29
+# Updated: 2017-10-29
+#
+---
+
+#
+# For now, we have to name each file as wildcards are not yet supported.
+#
+- name: BackupFlows-01-A-old - Pull back the flows for backup / archive
+  fetch:
+    src:                "/home/pi/.node-red/flows_{{ inventory_hostname }}.json"
+    dest:               host_files/
+    fail_on_missing:    no
+
+- name: BackupFlows-01-B-old - Pull back the flows for backup / archive
+  fetch:
+    src:                "/home/pi/.node-red/flows_{{ inventory_hostname }}_cred.json"
+    dest:               host_files/
+    fail_on_missing:    no
+
+- name: BackupFlows-02-A - Pull back the flows for backup / archive
+  fetch:
+    src:                "/home/{{ pyh_nodered_user }}/.node-red/flows_{{ inventory_hostname }}.json"
+    dest:               host_files/
+    fail_on_missing:    no
+
+- name: BackupFlows-02-B - Pull back the flows for backup / archive
+  fetch:
+    src:                "/home/{{ pyh_nodered_user }}/.node-red/flows_{{ inventory_hostname }}_cred.json"
+    dest:               host_files/
+    fail_on_missing:    no
+
+#- name: BackupFlows-03 - Check flow into a git repository.
+
+### END DBK

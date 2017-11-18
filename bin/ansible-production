@@ -15,7 +15,6 @@ PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=""
 # PSWD2=" --ask-vault-pass"
 # SYNTAX=" --syntax-check"
-# TAGS=" --tags=pyhouse,pandora"
 # TAGS=" --tags=fetch-files"
 
 if [ $# -gt 0 ]; then

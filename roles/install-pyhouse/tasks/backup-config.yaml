@@ -1,0 +1,17 @@
+# Name:    PyHouse-ansible/roles/install-pyhouse/tasks/backup-config.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-31
+# Updated: 2017-10-31
+#
+# This  is to backup
+
+---
+
+- name: BackupConfig-01 - fetch the xml config files
+  fetch:
+    src:                /etc/pyhouse/master.xml
+    dest:               host_files/
+    fail_on_missing:    no
+
+
+### END DBK

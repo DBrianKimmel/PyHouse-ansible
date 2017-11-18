@@ -195,20 +195,14 @@
 #  pyhouse
 #  relay
 
-    - role: node_red
+    - role: install-node-red
       when: pyh_roles.find("nodered") != -1
-      tags:
-        - nodered
-        - fetch-files
 
     - role: install-mqtt
       when: pyh_roles.find("mqtt") != -1
 
-    - role: pyhouse
+    - role: install-pyhouse
       when: pyh_roles.find("pyhouse") != -1
-      tags:
-        - pyhouse
-        - fetch-files
 
     - role: pandora
       when: pyh_roles.find("pandora") != -1
