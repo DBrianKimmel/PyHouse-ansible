@@ -1,0 +1,73 @@
+# Name:    PyHouse-ansible/roles/playbooks/tasks/setup-one-computer.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-17
+# Updated: 2017-11-17
+
+# This playbook is used to set up one computer
+#
+# It goes from installing a fresh version of the particular OS to being a basically functioning unit/
+#
+# It works for:
+#   Raspbian - Stretch Lite
+#   Ubuntu - 16.04 Server
+#
+---
+
+- name: Play-01 - Local host install commands we are using
+  hosts: pi-setup
+  remote_user: pi
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  vars:
+    ansible_user: pi
+
+  vars_prompt:
+    - name: "password"
+      prompt: "Enter new password for user pi"
+      private: yes
+
+
+  pre_tasks:
+
+    - name: playbook-setup-pre-task-01 - Fail if Ansible is ancient
+      fail:
+        msg: "We need Ansible >= 2.4. Please update your installed ansible"
+      when: ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
+      tags:
+        - always
+
+    - name: playbook-setup-pre-task-02- Include vars from local-configure.yaml if found
+      include_vars: "{{ item }}"
+      with_first_found:
+       - local-configure.yaml
+       - null.yaml
+      tags:
+        - always
+
+    - name: playbook-setup-pre-task-03 - Working on raspi
+      debug: msg="Host:{{ pyh_hostname }}; WiFi:{{ pyh_wifi_ip }}; Ethernet:{{ pyh_ethernet_ip }}; Access:{{ ansible_host }}"
+      tags:
+        - always
+
+
+# ========================================================================
+
+  roles:
+
+    - role: networking
+      when: install_networking|default(True)
+      tags: 
+        - setup-network
+        - setup-pi
+
+    - role: hostname
+      tags: setup-pi
+
+    - role: add-user
+      tags: setup-pi
+
+    - role: avahi
+      tags: setup-pi
+
+### END DBK

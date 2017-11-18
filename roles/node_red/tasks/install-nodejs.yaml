@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/node_red/tasks/install-nodejs.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-29
-# Updated: 2017-10-29
+# Updated: 2017-11-15
 #
 ---
 
@@ -16,10 +16,11 @@
     owner:      "{{ nodejs_install_npm_user }}"
     group:      "{{ nodejs_install_npm_user }}"
     state:      directory
-    
-- name: InstallNodeJs-02-A - Create npm global directory
+
+# The prefix is set in:  PyHouse-ansible/roles/node_red/defaults/main.yaml
+- name: InstallNodeJs-02-A - List npm settings
   debug:
-    msg:        "{{ npm_config_prefix }}  {{ nodejs_install_npm_user }}  {{ nodejs_npm_global_packages }}"
+    msg:        "Prefix:{{ npm_config_prefix }};  User:{{ nodejs_install_npm_user }};  Global-Packages:{{ nodejs_npm_global_packages }}"
 
 - name: InstallNodeJs-03 - Add npm_config_prefix bin directory to global $PATH.
   template:

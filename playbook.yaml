@@ -52,7 +52,7 @@
 
 
 # The second play is to install remote PI hosts.
-- name: Play-02 - Work on the remote hosts
+- name: Play-02 - Work on the remote Pi hosts
   hosts:            pis
   become:           yes
   become_method:    sudo
@@ -187,7 +187,7 @@
 
 #  ansible
 #  control
-#  mqtt
+#  install-mqtt
 #  nodered
 #  octoprint
 #  pandora
@@ -201,10 +201,8 @@
         - nodered
         - fetch-files
 
-    - role: mqtt
+    - role: install-mqtt
       when: pyh_roles.find("mqtt") != -1
-      tags:
-        - mqtt
 
     - role: pyhouse
       when: pyh_roles.find("pyhouse") != -1
