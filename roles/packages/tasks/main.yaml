@@ -5,10 +5,4 @@
 
 ---
 
-#- name: Task-01 - Set up the proper OS distribution
-#  include_tasks:    "setup-{{ansible_os_family}}.yaml"
-
-#- name: Task-06 - Install extra apt packages for node red
-#  import_tasks:    install-extra-packages.yaml
-
 ### END DBK

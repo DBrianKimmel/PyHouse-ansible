@@ -12,7 +12,7 @@
 ansible_host:           192.168.1.20
 
 pyh_hostname:           pi-10-pp
-pyh_ethernet_ip:        192.168.1.50
+pyh_ethernet_ip:        192.168.2.20
 pyh_wifi_ip:            192.168.1.20
 pyh_roles:              pyhouse
 

@@ -3,15 +3,15 @@
 # Created: 2017-11-08
 # Updated: 2017-11-08
 #
-# This computer is for
+# This computer is for pandora
 #
 
 ---
 
 ansible_host:           192.168.1.16
 
-pyh_hostname:           pi-06-ct
-pyh_ethernet_ip:        192.168.1.46
+pyh_hostname:           pi-06-pp
+pyh_ethernet_ip:        192.168.2.16
 pyh_wifi_ip:            192.168.1.16
 pyh_roles:              pandora
 

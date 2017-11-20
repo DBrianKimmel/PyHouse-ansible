@@ -3,6 +3,8 @@
 # Created: 2017-09-28
 # Updated: 2017-11-01
 
+# This is a very old Pi.
+# It provides backup and testing for PyHouse
 ---
 
 ansible_host:           192.168.1.13

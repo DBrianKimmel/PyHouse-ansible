@@ -1,14 +1,19 @@
 # Name:    PyHouse-ansible/host_vars/pi-01-pp.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-26
-# Updated: 2017-11-01
+# Updated: 2017-11-18
+
+# This Pi is connected to an Insteon PLM and was the main lighting controller for a long time.
+# Now we also have Pi-10-pp saaisting with the connectivity.
+
+# Model 2-B     1024M ram   Jessie      armv7l
 
 ---
 
 ansible_host:           192.168.1.11
 
 pyh_hostname:           pi-01-pp
-pyh_ethernet_ip:        192.168.1.41
+pyh_ethernet_ip:        192.168.2.11
 pyh_wifi_ip:            192.168.1.11
 pyh_roles:              pyhouse
 

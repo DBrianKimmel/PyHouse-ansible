@@ -16,7 +16,7 @@ ansible_host:           192.168.1.10
 
 pyh_hostname:           nuc-01-pp
 pyh_ethernet_ip:        192.168.1.10
-pyh_wifi_ip:            192.168.1.40
+pyh_wifi_ip:            192.168.2.10
 pyh_roles:              mqtt
 
 ### END DBK

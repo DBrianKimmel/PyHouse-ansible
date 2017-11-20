@@ -13,7 +13,7 @@
 
 # Set up all the network interfaces on this server.
   name: task-01 - Imports
-  include: roles/setup-raspi/tasks/add-users.yaml
+  include_tasks: roles/setup-raspi/tasks/add-users.yaml
 
   name: task-02 - expand partition 3 (root) to full sd card
   parted:

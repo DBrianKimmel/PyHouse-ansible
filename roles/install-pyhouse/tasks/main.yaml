@@ -8,14 +8,16 @@
 
 ---
 
+# All includes are dynamic
+
 - name: Task-01 - Set up the proper OS distribution
   include_tasks:    "setup-{{ansible_os_family}}.yaml"
 
 - name: Task-02 - Install extra apt packages for pyhouse prerequsite
-  import_tasks:    install-extra-packages.yaml
+  include_tasks:    install-extra-packages.yaml
 
 - name: Task-03 - Install PyHouse
-  import_tasks:    install-pyhouse.yaml
+  include_tasks:    install-pyhouse.yaml
 
 - name: Task-10 - Setup auto run on reboot
   include_tasks:    autostart.yaml

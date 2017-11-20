@@ -1,17 +1,17 @@
 # Name:    PyHouse-ansible/roles/install-pyhouse/tasks/install-pyhouse.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-31
-# Updated: 2017-10-31
+# Updated: 2017-11-19
 
 ---
 
 - name: InstallPyhouse-01 - Create PyHouse user
   user:
-    name:       "{{ pyh_pyhouse_user }}"
-    password:   "{{ pyh_pyhouse_password }}"
-    shell:      /bin/bash
-    comment:    "PyHouse User"
-    groups:     "{{ pyh_pyhouse_user_groups }}"
+    name:               "{{ pyh_pyhouse_user }}"
+    password:           "{{ pyh_pyhouse_password }}"
+    shell:              /bin/bash
+    comment:            "PyHouse User"
+    groups:             "{{ pyh_pyhouse_user_groups }}"
 
 - name: InstallPyhouse-02 - Be sure git is installed so we can fetch the reposotory
   apt:
@@ -22,27 +22,27 @@
 
 - name: InstallPyhouse-03 - Create Directory /etc/pyhouse
   file:
-    name:       "/etc/pyhouse"
-    state:      directory
-    owner:      '{{ pyh_pyhouse_user }}'
-    group:      '{{ pyh_pyhouse_user }}'
-    mode:       0755
+    name:               "/etc/pyhouse"
+    state:              directory
+    owner:              '{{ pyh_pyhouse_user }}'
+    group:              '{{ pyh_pyhouse_user }}'
+    mode:               0755
 
 - name: InstallPyhouse-04 - Create Directory /var/log/pyhouse
   file:
-    name:       "/var/log/pyhouse"
-    state:      directory
-    owner:      '{{ pyh_pyhouse_user }}'
-    group:      '{{ pyh_pyhouse_user }}'
-    mode:       0755
+    name:               "/var/log/pyhouse"
+    state:              directory
+    owner:              '{{ pyh_pyhouse_user }}'
+    group:              '{{ pyh_pyhouse_user }}'
+    mode:               0755
 
 - name: InstallPyhouse-05 - Create Directory ~/workspace
   file:
-    name:       "/home/pyhouse/workspace"
-    state:      directory
-    owner:      '{{ pyh_pyhouse_user }}'
-    group:      '{{ pyh_pyhouse_user }}'
-    mode:       0755
+    name:               "/home/pyhouse/workspace"
+    state:              directory
+    owner:              '{{ pyh_pyhouse_user }}'
+    group:              '{{ pyh_pyhouse_user }}'
+    mode:               0755
 
 - name: InstallPyhouse-06-A - Create Directory  ~/bin
   file:

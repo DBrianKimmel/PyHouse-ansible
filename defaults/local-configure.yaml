@@ -1,8 +1,10 @@
 # Name:    PyHouse-ansible/local-configure.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-10
-# Updated: 2017-11-10
+# Updated: 2017-11-20
 #
 ---
+
+pyh_backup_dir:     ~/backup/
 
 ### END DBK

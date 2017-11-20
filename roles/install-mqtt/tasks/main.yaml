@@ -9,8 +9,8 @@
 
 - name: Task-01 - install mqtt broker
   apt:
-    name: mosquitto
-    update_cache: yes
-    cache_valid_time: 3600
+    name:               mosquitto
+    update_cache:       yes
+    cache_valid_time:   3600
 
 ### END DBK

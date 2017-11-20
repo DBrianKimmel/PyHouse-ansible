@@ -1,0 +1,18 @@
+# Name:    PyHouse-ansible/site.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-20
+# Updated: 2017-11-20
+
+---
+
+# This play is to install remote PI hosts.
+
+- name: Play-01 - Work on the remote Pi hosts
+  hosts:            all
+  become:           yes
+  become_method:    sudo
+  gather_facts:     yes
+
+
+
+### END DBK

@@ -1,7 +1,10 @@
 # Name:    PyHouse-ansible/host_vars/pi-04-pp
 # Author:  D. Brian Kimmel
 # Created: 2017-09-28
-# Updated: 2017-11-14
+# Updated: 2017-11-18
+
+# Model B+     512M ram   Jessie      armv6l
+
 
 # This computer is located in the garage of Pink Poppy.
 # It controls:
@@ -15,7 +18,7 @@
 
 ansible_host:           192.168.1.14
 
-pyh_hostname:           pi-04-ct
+pyh_hostname:           pi-04-pp
 pyh_ethernet_ip:        192.168.2.14
 pyh_wifi_ip:            192.168.1.14
 pyh_roles:              nodered
@@ -25,6 +28,7 @@ pyh_extra_apt_packages:
 
 pyh_extra_nodered_nodes:
     - i2c
+    - i2c-bus
     - node-red-dashboard
     - node-red-node-sqlite
     - node-red-contrib-i2c
