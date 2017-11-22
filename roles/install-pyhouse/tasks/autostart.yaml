@@ -17,7 +17,7 @@
 
 - name: AutoStart-02 - append to .bashrc
   blockinfile:
-    path: /home/pyhouse/.bashrc
+    path:               /home/pyhouse/.bashrc
     block: |
       ### AutoLogin PyHouse ###
       #

@@ -1,14 +1,29 @@
-# Name:    PyHouse-ansible/site.yaml
+# Name:    PyHouse-ansible/playbook.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-19
-# Updated: 2017-11-19
+# Updated: 2017-11-21
 
+# Valid Tags:
+#   aaa
+#   bbb
 ---
 
+- name: Playbook (Master)
+  import_playbook:  playbooks/local-install-tools.yaml
+  tags:
+    - always
+
 - import_playbook:  playbooks/gather-info.yaml
-- import_playbook:  playbooks/localhost-setup.yaml
-- import_playbook:  playbooks/localhost-setup.yaml
+  tags:
+    - always
+
 - import_playbook:  playbooks/fetch-config-files.yaml
-- import_playbook:  playbooks/playbook.yaml
+  tags:
+    - always
+
+- import_playbook:  playbooks/production-pis.yaml
+  tags:
+    - always
+
 
 ### END DBK

@@ -1,7 +1,7 @@
-# Name:    PyHouse-ansible/playbook.yaml - the master playbook
+# Name:    PyHouse-ansible/playbooks/initialize-one-pi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-11-13
+# Updated: 2017-11-21
 #
 # This is the main raspberry pi initial setup playbook.
 

@@ -1,22 +1,33 @@
-# Name:    PyHouse-ansible/site.yaml
+# Name:    PyHouse-ansible/playbooks/fetch-config-files.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-20
 # Updated: 2017-11-20
 
 ---
 
-# This play is to install remote PI hosts.
-- name: Play-01 - Work on the remote Pi hosts
+# This play is to 
+- name: Fetch Config Files
   hosts:                all
   become:               yes
   become_method:        sudo
   gather_facts:         yes
 
   pre_tasks:
-    - name: Fetch-01 - Create the backup directory
-      file:
-        path:           "{{ pyh_backup_dir }}"
-        state:          directory
+
+    - name: FetchConfig-01- Include vars from local-configure.yaml if found
+      include_vars: "{{ item }}"
+      with_first_found:
+       - '../defaults/local-configure.yaml'
+       - ../defaults/null.yaml
+      tags:
+        - always
+
+    - name: BackupFlows-01-A-old - Pull back the flows for backup / archive
+      fetch:
+        src:                "/home/pi/.node-red/flows_*.json"
+        dest:               '~/backup/'
+        fail_on_missing:    no
+
 
 
 ### END DBK

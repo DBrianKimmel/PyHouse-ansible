@@ -18,9 +18,12 @@ TAGS=""
 if [ $# -gt 0 ]; then
     TAGS=" --tags=$1"
     echo "Tags = ${TAGS}"
+else
+    echo "No Tags"
 fi
 
 cd ~/workspace/PyHouse-ansible
 ansible-playbook ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
+cd -
 
 ### END DBK

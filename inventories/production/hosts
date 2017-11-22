@@ -12,22 +12,23 @@ localhost ansible_connection=local
 # ----- Define all the Raspberry Pis -----
 # Pink Poppy Raspberry Pis
 [pis_pp]
-pi-01-pp
-pi-02-pp
-pi-03-pp
-pi-04-pp
-pi-05-pp
-pi-06-pp
-pi-08-pp
-pi-10-pp
+pi-01-pp.local
+pi-02-pp.local
+pi-03-pp.local
+pi-04-pp.local
+pi-05-pp.local
+pi-06-pp.local
+pi-08-pp.local
+pi-10-pp.local
+pi-11-pp.local
 
 # Cannon Trail Raspberry Pis
 [pis_ct]
-pi-01-ct
-pi-02-ct
-pi-05-ct
-pi-07-ct
-pi-11-ct
+pi-01-ct.local
+pi-02-ct.local
+pi-05-ct.local
+pi-07-ct.local
+pi-11-ct.local
 
 # All Raspberry Pis
 [pis:children]
@@ -39,11 +40,11 @@ pis_ct
 # ----- Define all the NUC boxes -----
 # Pink Poppy Nucs (Jump Box)
 [nucs_pp]
-nuc-01-pp
+nuc-01-pp.local
 
 # Cannon Trail Nucs (Jump Box)
 [nucs_ct]
-nuc-01-ct
+nuc-01-ct.local
 
 # All Nucs
 [nucs:children]
@@ -54,13 +55,13 @@ nucs_ct
 
 # ----- Define all the other computers -----
 [pcduino-ct]
-pcduino-01-ct
+pcduino-01-ct.local
 
 [alki-pp]
-alki
+alki.local
 
 [laptop-roam]
-Laptop-3
+Laptop-3.local
 
 [others:children]
 pcduino-ct

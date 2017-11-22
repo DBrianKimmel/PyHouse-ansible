@@ -31,7 +31,7 @@
   file:
     state:   directory
     recurse: yes
-    path:    /etc/ansible/facts.d
+    path:    "/etc/ansible/facts.d"
 
 - name: task-03 - Install all required common packages
   apt:

@@ -12,10 +12,10 @@
 ---
 
 # These must be changed
-ansible_host:           192.168.1.13
-pyh_hostname:           pi-03-pp
-pyh_ethernet_ip:        192.168.2.13
-pyh_wifi_ip:            192.168.1.13
+ansible_host:           192.168.1.134
+pyh_hostname:           pi-11-pp
+pyh_ethernet_ip:        192.168.2.21
+pyh_wifi_ip:            192.168.1.21
 pyh_roles:              setup
 
 pyh_router_address:     192.168.1.1
