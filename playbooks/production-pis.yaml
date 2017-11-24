@@ -23,7 +23,7 @@
 ---
 
 # The second play is to install remote PI hosts.
-- name: Play-02 - Work on the remote Pi hosts
+- name: Production Pis
   hosts:            pis
   become:           yes
   become_method:    sudo

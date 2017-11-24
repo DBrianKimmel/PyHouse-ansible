@@ -6,7 +6,7 @@
 ---
 
 # The first play is to install to the localhost
-- name: Local Host Install Tools - Commands we are using.
+- name: Local Install Tools - Commands we are using.
   hosts:            localhost
   connection:       local
   gather_facts:     yes
@@ -48,7 +48,18 @@
       tags:
         - always
 
-    - name: LocalPreTask-05 - Create the backup directory
+    - name: LocalPreTask-05 - Install ansible config file
+      become:       yes
+      become_user:  root
+      copy:
+        src:        "../ansible.cfg"
+        dest:       "/etc/ansible/"
+      with_items:
+        - { src:    '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
+      tags:
+        - always
+
+    - name: LocalPreTask-06 - Create the backup directory
       file:
         path:           "~/backup/"
         state:          directory

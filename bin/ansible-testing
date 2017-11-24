@@ -3,7 +3,7 @@
 ## Name:   PyHouse-ansible/bin/ansible-testing
 # Author:  D. Brian Kimmel
 # Created: 2017-10-18
-# Updated: 2017-11-19
+# Updated: 2017-11-22
 
 # Run ansible to set up a new raspberry pi.
 # Works with raspbian stretch and possibly later.
@@ -12,6 +12,8 @@
 
 INVENTORY=" -i inventories/testing/hosts"
 PLAYBOOK=" playbook.yaml"
+VERBOSE=" -vvvvv "
+VERBOSE=" "
 PSWD1=" --vault-password-file  ~/.vault-pass.txt"
 PSWD2=" --ask-vault-pass"
 SYNTAX=" --syntax-check"
@@ -19,6 +21,6 @@ TAGS=" --tags=setup-pi"
 
 
 cd ~/workspace/PyHouse-ansible
-ansible-playbook ${INVENTORY} ${PLAYBOOK} ${PSWD1} # ${TAGS}
+ansible-playbook ${VERBOSE} ${INVENTORY} ${PLAYBOOK} ${PSWD1} # ${TAGS}
 
 ### END DBK

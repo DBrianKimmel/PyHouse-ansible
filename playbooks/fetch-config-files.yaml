@@ -24,10 +24,28 @@
 
     - name: BackupFlows-01-A-old - Pull back the flows for backup / archive
       fetch:
-        src:                "/home/pi/.node-red/flows_*.json"
-        dest:               '~/backup/'
+        #src:                "/home/pi/.node-red/flows_*.json"
+        src:                "/home/pi/.node-red/flows_{{ inventory_hostname }}.json"
+        dest:               '{{ pyh_backup_dir }}'
         fail_on_missing:    no
 
+    - name: BackupFlows-01-B-old - Pull back the flows for backup / archive
+      fetch:
+        src:                "/home/pi/.node-red/flows_{{ inventory_hostname }}_cred.json"
+        dest:               '{{ pyh_backup_dir }}'
+        fail_on_missing:    no
+
+    - name: BackupFlows-02-A - Pull back the flows for backup / archive
+      fetch:
+        src:                "/home/{{ pyh_nodered_user }}/.node-red/flows_{{ inventory_hostname }}.json"
+        dest:               '{{ pyh_backup_dir }}'
+        fail_on_missing:    no
+
+    - name: BackupFlows-02-B - Pull back the flows for backup / archive
+      fetch:
+        src:                "/home/{{ pyh_nodered_user }}/.node-red/flows_{{ inventory_hostname }}_cred.json"
+        dest:               '{{ pyh_backup_dir }}'
+        fail_on_missing:    no
 
 
 ### END DBK

@@ -1,28 +1,28 @@
 # Name:    PyHouse-ansible/site.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-20
-# Updated: 2017-11-21
+# Updated: 2017-11-22
 
 ---
 
 # This play is to install remote PI hosts.
 
 - name: Gather Info - Pis
-  hosts:            pis
-  become:           yes
-  become_method:    sudo
-  gather_facts:     yes
+  hosts:                pis
+  become:               yes
+  become_method:        sudo
+  gather_facts:         yes
 
 - name: Gather Info - Nucs
-  hosts:            nucs
-  become:           yes
-  become_method:    sudo
-  gather_facts:     yes
+  hosts:                nucs
+  become:               yes
+  become_method:        sudo
+  gather_facts:         yes
 
 - name: Gather Info - Others
-  hosts:            others
-  become:           yes
-  become_method:    sudo
-  gather_facts:     yes
+  hosts:                others
+  become:               yes
+  become_method:        sudo
+  gather_facts:         yes
 
 ### END DBK
