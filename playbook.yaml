@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbook.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-19
-# Updated: 2017-11-21
+# Updated: 2017-11-25
 
 # Valid Tags:
 #   aaa
@@ -15,15 +15,15 @@
 
 - import_playbook:  playbooks/gather-info.yaml
   tags:
-    - always
+    - production
 
 - import_playbook:  playbooks/fetch-config-files.yaml
   tags:
-    - always
+    - production
 
 - import_playbook:  playbooks/production-pis.yaml
   tags:
-    - always
+    - production
 
 
 ### END DBK

@@ -16,10 +16,10 @@ PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=""
 
 if [ $# -gt 0 ]; then
-    TAGS=" --tags=$1"
+    TAGS+=" --tags=production,$1"
     echo "Tags = ${TAGS}"
 else
-    echo "No Tags"
+    echo "No Tags - only production"
 fi
 
 cd ~/workspace/PyHouse-ansible

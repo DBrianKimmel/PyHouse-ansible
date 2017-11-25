@@ -6,7 +6,7 @@
 ---
 
 # The first play is to install to the localhost
-- name: Local Host Install Tools - Commands we are using.
+- name: Play Local-Install-Tools - On localhost, install the commands we are using.
   hosts:            localhost
   connection:       local
   gather_facts:     yes

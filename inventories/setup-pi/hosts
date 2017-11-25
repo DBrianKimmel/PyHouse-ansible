@@ -11,12 +11,11 @@
 #
 # Create a host_vars file with the proper information
 
-
-
-[setup-pi]
+[pis]
 pi-setup
 
-[raspi]
-pi-setup
+[nucs]
+
+[others]
 
 ### END DBK
