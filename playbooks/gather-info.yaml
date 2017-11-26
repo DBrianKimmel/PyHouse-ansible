@@ -11,7 +11,7 @@
   become:           yes
   become_method:    sudo
   gather_facts:     no
-
+  
 - name: Play Gather-Info - Gather Info - Nucs
   hosts:            nucs
   ignore_errors:    yes
