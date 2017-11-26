@@ -16,6 +16,7 @@ TAGS=" --tags=setup-pi"
 PIUSER=" --become-user=pi --ask-become-pass "
 
 cd ~/workspace/PyHouse-ansible
-ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} ${PIUSER}
+echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} ${PIUSER}"
+ansible-playbook -vvvv ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} ${PIUSER}
 
 ### END DBK

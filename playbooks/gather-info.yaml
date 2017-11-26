@@ -6,21 +6,24 @@
 ---
 
 - name: Play Gather-Info - Get facts from all the PIs
-  hosts:              pis
-  become:             yes
-  become_method:      sudo
-  gather_facts:       yes
+  hosts:            pis
+  ignore_errors:    yes
+  become:           yes
+  become_method:    sudo
+  gather_facts:     no
 
 - name: Play Gather-Info - Gather Info - Nucs
-  hosts:              nucs
-  become:             yes
-  become_method:      sudo
-  gather_facts:       yes
+  hosts:            nucs
+  ignore_errors:    yes
+  become:           yes
+  become_method:    sudo
+  gather_facts:     yes
 
 - name: Play Gather-Info - Gather Info - Others
-  hosts:              others
-  become:             yes
-  become_method:      sudo
-  gather_facts:       yes
+  hosts:            others
+  ignore_errors:    yes
+  become:           yes
+  become_method:    sudo
+  gather_facts:     yes
 
 ### END DBK
