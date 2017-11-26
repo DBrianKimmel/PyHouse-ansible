@@ -27,7 +27,7 @@
   hosts:            pis
   become:           yes
   become_method:    sudo
-  gather_facts:     yes
+  gather_facts:     no
 
   pre_tasks:
 

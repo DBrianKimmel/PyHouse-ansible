@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbooks/fetch-config-files.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-20
-# Updated: 2017-11-20
+# Updated: 2017-11-26
 
 ---
 
@@ -10,7 +10,7 @@
   hosts:                all
   become:               yes
   become_method:        sudo
-  gather_facts:         yes
+  gather_facts:         no
 
   pre_tasks:
 
