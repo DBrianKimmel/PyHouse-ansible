@@ -13,7 +13,7 @@
 #
 ---
 
-- name: Play-01 - Local host install commands we are using
+- name: Play - development-setup-one-computer - xxx
   hosts: pi-setup
   remote_user: pi
   become: yes
@@ -46,7 +46,8 @@
         - always
 
     - name: playbook-setup-pre-task-03 - Working on raspi
-      debug: msg="Host:{{ pyh_hostname }}; WiFi:{{ pyh_wifi_ip }}; Ethernet:{{ pyh_ethernet_ip }}; Access:{{ ansible_host }}"
+      debug:
+        msg: "Host:{{ pyh_hostname }}; WiFi:{{ pyh_wifi_ip }}; Ethernet:{{ pyh_ethernet_ip }}; Access:{{ ansible_host }}"
       tags:
         - always
 
@@ -55,11 +56,11 @@
 
   roles:
 
-    - role: networking
-      when: install_networking|default(True)
-      tags: 
-        - setup-network
-        - setup-pi
+#    - role: networking
+#      when: install_networking|default(True)
+#      tags: 
+#        - setup-network
+#        - setup-pi
 
     - role: hostname
       tags: setup-pi

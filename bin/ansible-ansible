@@ -5,20 +5,19 @@
 # Created: 2017-11-05
 # Updated: 2017-11-19
 #
-# Deployes the full production setup.
-# Edit the file !/workspace/PyHouse-ansible/host_vars/pi-setup.yaml and put in the new IP address
+# Deployes ansible commands on the local ansible workstation.
 
-INVENTORY=" -i inventories/production/hosts"
+INVENTORY=" -i inventories/local/hosts"
 PLAYBOOK=" playbook.yaml"
 PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=""
 
 if [ $# -gt 0 ]; then
-    TAGS+=" --tags=setup_production,$1 "
+    TAGS+=" --tags=setup_ansible,$1 "
     echo "Tags = ${TAGS}"
 else
-    TAGS+=" --tags=setup_production "
-    echo "No Tags - only setup_production "
+	TAGS+=" --tags=setup_ansible "
+    echo "No Tags - only setup_ansible "
 fi
 
 cd ~/workspace/PyHouse-ansible

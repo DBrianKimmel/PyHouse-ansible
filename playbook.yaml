@@ -3,26 +3,63 @@
 # Created: 2017-11-19
 # Updated: 2017-11-25
 
+
+# export ANSIBLE_STRATEGY=debug
+
+
+
+# This playbook is a dispatcher.
+# Loads other playbooks when calling tags are defined.
+
 # Valid Tags:
 #   aaa
 #   bbb
 ---
 
 - name: Playbook (Master)
-  import_playbook:  playbooks/local-install-tools.yaml
-  tags:
-    - always
+  strategy:         debug
+  hosts:            all
+  gather_facts:     no
 
-- import_playbook:  playbooks/gather-info.yaml
-  tags:
-    - production
+  tasks:
 
-- import_playbook:  playbooks/fetch-config-files.yaml
-  tags:
-    - production
+# Production
+  - set_fact: tag_production = true
+    tags: setup_production
 
-- import_playbook:  playbooks/production-pis.yaml
-  tags:
-    - production
+# Development
+  - set_fact: tag_development = True
+    tags: setup_development
 
+# Set up a new Raspberry Pi
+  - set_fact: tag_new_pi = True
+    tags: setup_one_pi
+
+# Install ansible on the admin machine.
+  - set_fact: tag_ansible = true
+    tags: setup_ansible
+
+
+
+# Now get the proper playbook(s)
+- import_playbook: "./playbooks/production-pis.yaml"
+  when:
+  - tag_production is defined
+
+- import_playbook: "./playbooks/production-nucs.yaml"
+  when:
+  - tag_production is defined
+
+- import_playbook: "./playbooks/production-others.yaml"
+  when:
+  - tag_production is defined
+
+#- import_playbook: "./playbooks/development-setup-one-computer.yaml"
+#  when:
+#  - tag_new_pi is defined
+
+- import_playbook: "./playbooks/local-install-tools.yaml"
+  when:
+  - tag_ansible is defined
+  
 ### END DBK

@@ -9,7 +9,6 @@
 #   hostname
 #
 # Vars:
-#   hostname_avahi
 #   inventory_hostname
 #   inventory_hostname_short
 #
@@ -57,11 +56,5 @@
     line:       "::1{{'\t\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost ip6-localhost ip6-loopback"
     state:      present
   tags: hostname
-
-#- name: Task-06 - Install MDNS Components
-#  apt:
-#    pkg:        avahi-daemon,libnss-mdns
-#    state:      latest
-#  when: "'{{ansible_os_family}}' == 'Debian' and '{{hostname_avahi}}'"
 
   ### END DBK
