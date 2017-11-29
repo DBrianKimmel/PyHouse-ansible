@@ -1,4 +1,4 @@
-# Name:    PyHouse-ansible/roles/mqtt/tasks/main.yaml
+# Name:    PyHouse-ansible/roles/install-mqtt/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-04
 # Updated: 2017-10-25
@@ -12,5 +12,29 @@
     name:               mosquitto
     update_cache:       yes
     cache_valid_time:   3600
+
+- name: Task-02 - install config file
+  copy:
+    src:        ./pyhouse.conf
+    dest:       /etc/mosquitto/conf.d/pyhouse.conf
+    owner:      root
+    group:      root
+    mode:       0644
+
+- name: Task-03 - Make TLS dirs
+  file:
+    name:       "/etc/mosquitto/certs"
+    state:      directory
+    owner:      root
+    group:      root
+    mode:       0755
+
+- name: Task-04 - Make TLS dirs
+  file:
+    name:       "/etc/mosquitto/ca_certificates"
+    state:      directory
+    owner:      root
+    group:      root
+    mode:       0755
 
 ### END DBK

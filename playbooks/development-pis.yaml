@@ -1,0 +1,25 @@
+# Name:    PyHouse-ansible/site.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-20
+# Updated: 2017-11-25
+
+---
+
+- name: Play - Development-Pis - xxx
+  hosts:                all
+  strategy:             linear
+  become:               yes
+  become_method:        sudo
+  gather_facts:         no
+
+  pre_tasks:
+
+    - name: Development-Pis-01- Include vars from local-configure.yaml if found
+      include_vars: "{{ item }}"
+      with_first_found:
+       - '../defaults/local-configure.yaml'
+       - ../defaults/null.yaml
+      tags:
+        - always
+
+### END DBK
