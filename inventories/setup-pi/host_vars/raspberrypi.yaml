@@ -1,6 +1,6 @@
-# Name:    PyHouse-ansible/host_vars/pi-setup.yaml
+# Name:    PyHouse-ansible/inventories/raspberrypi/host_vars/pi-setup.yaml
 # Author:  D. Brian Kimmel
-# Created: 2017-10-12
+# Created: 2017-11-30
 # Updated: 2017-11-25
 
 # This is the host_vars file for setting up a raspberry pi for home automation use.
@@ -25,7 +25,8 @@ vault_pyh_access_points: {'PinkPoppy-Guest': 'MarciaBrian'}
 # You should not change the following:
 pyh_domain:             ""
 pyh_in_setup:           yes
+
 ansible_user:           pi
 ansible_ssh_pass:       raspberry
-
+ansibkle_scpP_if_ssh:   y
 ### END DBK

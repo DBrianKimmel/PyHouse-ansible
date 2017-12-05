@@ -23,6 +23,13 @@
   hosts:            all
   gather_facts:     no
 
+  pre_tasks:
+
+  - name: Start - Tags
+    debug:
+      msg:    "Tags are ansible_tags"
+
+
   tasks:
 
 # Production
@@ -67,8 +74,9 @@
 # Now get the proper new server setup playbook(s)
 
 - import_playbook: "./playbooks/new-pi.yaml"
-  when:
-  - tag_new_pi is defined
+#  when:
+#  - tag_new_pi is defined
+
 
 
 # Now get the proper localhost playbook(s)

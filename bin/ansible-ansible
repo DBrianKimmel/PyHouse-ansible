@@ -8,7 +8,7 @@
 # Deployes ansible commands on the local ansible workstation.
 
 INVENTORY=" -i inventories/local/hosts"
-PLAYBOOK=" playbook.yaml"
+PLAYBOOK=" playbooks/local-install-tools.yaml"
 PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=""
 

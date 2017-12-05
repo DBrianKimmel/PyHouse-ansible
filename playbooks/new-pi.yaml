@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbooks/development-setup-one-computer.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-17
-# Updated: 2017-11-21
+# Updated: 2017-12-02
 
 # This playbook is used to set up one computer
 #
@@ -9,28 +9,12 @@
 #
 # It works for:
 #   Raspbian - Stretch Lite
-#   Ubuntu - 16.04 Server
 #
 ---
 
 - name: Play - New-Pi - Set up a fresh Pi 
-  hosts: pi-setup
+  hosts: raspberrypi
   strategy: debug
-
-  remote_user: pi
-  #become: yes
-  #become_method: sudo
-  #gather_facts: yes
-
-  vars:
-    ansible_user: pi
-
-
-  vars_prompt:
-    - name: "password"
-      prompt: "Enter new password for user pi"
-      private: yes
-
 
   pre_tasks:
 

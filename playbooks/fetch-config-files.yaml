@@ -8,6 +8,7 @@
 # This play is to 
 - name: Fetch Config Files
   hosts:                all
+  strategy:             linear
   become:               yes
   become_method:        sudo
   gather_facts:         no

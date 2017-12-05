@@ -12,7 +12,12 @@
 # Create a host_vars file with the proper information
 
 [pis]
-pi-setup
+raspberrypi
+
+[pis:vars]
+ansible_user=pi
+ansible_ssh_pass=raspberry
+
 
 [nucs]
 
