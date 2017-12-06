@@ -45,21 +45,27 @@
 
 # ========================================================================
 
-#  roles:
+  roles:
 
-#    - role: networking
+    - role: ../roles/add-user
+      tags:
+        - setup-pi
+        - always
+
+    - role: ../roles/networking
 #      when: install_networking|default(True)
-#      tags: 
+      tags: 
 #        - setup-network
 #        - setup-pi
+        - always
 
-#    - role: hostname
-#      tags: setup-pi
+    - role: ../roles/hostname
+      tags:
+        - always
 
-#    - role: add-user
-#      tags: setup-pi
-
-#    - role: avahi
-#      tags: setup-pi
+    - role: ../roles/avahi
+      tags:
+        - setup-pi
+        - always
 
 ### END DBK
