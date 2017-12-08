@@ -1,12 +1,14 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2017-11-06
+# Updated: 2017-12-06
 
 ---
 
 - name: Task-01-Pi - Install the wpa_supplicant file
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   template:
     src:            ./wifi.j2
     dest:           /etc/wpa_supplicant/wpa_supplicant.conf
@@ -22,6 +24,8 @@
 # Earlier releases used a different mechanism.
 - name: Task-02-Pis - Install dhcpcd.conf file with interface IP definitions.
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   template:
     src:            ./dhcpcd_conf.j2
     dest:           /etc/dhcpcd.conf
@@ -33,6 +37,8 @@
 
 - name: Task-02-Nucs - Install network/interfaces file with interface IP definitions.
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   template:
     src:            ./interfaces.j2
     dest:           /etc/network/interfaces

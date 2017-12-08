@@ -7,23 +7,23 @@
 
 # The first play is to install to the localhost
 - name: Play - Local-Install-Tools - On localhost, install the commands we need.
-  hosts:            localhost
-  strategy:         linear
-  connection:       local
-  gather_facts:     yes
+  hosts:                localhost
+  strategy:             linear
+  connection:           local
+  gather_facts:         yes
 
   pre_tasks:
 
     - name: LocalPreTask-01 - Message
       debug:
-        msg:        "Play is on the local ansible machine."
+        msg:            "Play is on the local ansible machine."
       tags:
         - always
 
     - name: LocalPreTask-02 - Copy bin files
       copy:
-        src:        "{{ item.src }}"
-        dest:       "{{ item.dest }}"
+        src:            "{{ item.src }}"
+        dest:           "{{ item.dest }}"
       with_items:
         - { src: '../bin/ansible-production',  dest: '~/bin/' }
         - { src: '../bin/ansible-development', dest: '~/bin/' }
@@ -34,8 +34,8 @@
 
     - name: LocalPreTask-03 - Copy .git files
       copy:
-        src:        "{{ item.src }}"
-        dest:       "{{ item.dest }}"
+        src:            "{{ item.src }}"
+        dest:           "{{ item.dest }}"
       with_items:
         - { src: '../bin/vault-hook', dest: '~/workspace/PyHouse-ansible/.git/hooks/pre-commit' }
       tags:
@@ -43,19 +43,19 @@
 
     - name: LocalPreTask-04 - Install ssh config file
       copy:
-        src:        "{{ item.src }}"
-        dest:       "{{ item.dest }}"
+        src:            "{{ item.src }}"
+        dest:           "{{ item.dest }}"
       with_items:
-        - { src:    '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
+        - { src:        '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
       tags:
         - always
 
     - name: LocalPreTask-05 - Install ansible config file
-      become:       yes
-      become_user:  root
+      become:           yes
+      become_user:      root
       copy:
-        src:        "../ansible.cfg"
-        dest:       "/etc/ansible/"
+        src:            "../ansible.cfg"
+        dest:           "/etc/ansible/"
       tags:
         - always
 

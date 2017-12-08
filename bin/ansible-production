@@ -9,7 +9,7 @@
 # Edit the file !/workspace/PyHouse-ansible/host_vars/pi-setup.yaml and put in the new IP address
 
 INVENTORY=" -i inventories/production/hosts"
-PLAYBOOK=" playbook.yaml"
+PLAYBOOK=" playbooks/production-pis.yaml"
 PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=""
 

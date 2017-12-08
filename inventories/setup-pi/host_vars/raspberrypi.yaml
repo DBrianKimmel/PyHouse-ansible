@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/raspberrypi/host_vars/pi-setup.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-30
-# Updated: 2017-11-25
+# Updated: 2017-12-06
 
 # This is the host_vars file for setting up a raspberry pi for home automation use.
 
@@ -18,9 +18,11 @@ pyh_ethernet_ip:        192.168.2.21
 pyh_wifi_ip:            192.168.1.21
 pyh_roles:              setup
 
-pyh_router_address:     192.168.1.1
-pyh_router_prefix_len:  20
-vault_pyh_access_points: {'PinkPoppy-Guest': 'MarciaBrian'}
+pyh_router_address:         192.168.1.1
+pyh_router_prefix_len:      20
+vault_pyh_access_points:    {'PinkPoppy-Guest': 'MarciaBrian'}
+pyh_admin_user_groups:      adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+pyh_router_nameservers:     "192.168.1.1 8.8.8.8"
 
 # You should not change the following:
 pyh_domain:             ""
@@ -28,5 +30,5 @@ pyh_in_setup:           yes
 
 ansible_user:           pi
 ansible_ssh_pass:       raspberry
-ansibkle_scpP_if_ssh:   y
+
 ### END DBK

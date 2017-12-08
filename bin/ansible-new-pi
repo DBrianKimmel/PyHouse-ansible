@@ -18,6 +18,6 @@ ASKPASS=" --ask-pass "
 
 cd ~/workspace/PyHouse-ansible
 echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} ${PIUSER}"
-ansible-playbook -vv ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} # ${PIUSER} # ${ASKPASS} 
+ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} # ${PIUSER} # ${ASKPASS} 
 
 ### END DBK

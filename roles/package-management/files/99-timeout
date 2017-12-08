@@ -1,0 +1,8 @@
+# Name: 99-timeout
+#
+# Apt config to avoid lenghty timeouts when a site cannot be reached.
+#
+Acquire::http::Timeout "10";
+Acquire::ftp::Timeout "10";
+#
+### END DBK

@@ -28,7 +28,7 @@
   strategy:         debug
   become:           yes
   become_method:    sudo
-  gather_facts:     no
+  gather_facts:     yes
 
   pre_tasks:
 
@@ -40,7 +40,7 @@
         - always
 
     # Dynamic include
-    - name: ProductionPis-PreTask-02 - Include vars from local-configure.yaml if found
+    - name: ProductionPis-PreTask-02 - Dynamic Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
       with_first_found:
         - files:
@@ -51,103 +51,80 @@
       tags:
         - always
 
-#    - name: ProductionPis-PreTask-03-A - Install local tasks
-#      local_action:     copy: src={{ item.src }} dest={{ item.dest }}
-#          with_items:
-#            - { src: 'bin/ansible-production', dest: '~/bin/' }
-#            - { src: 'bin/ansible-setup-pi', dest: '~/bin/' }
-#            - { src: 'bin/ansible-development', dest: '~/bin/' }
-#            - { src: 'bin/vault-hook', dest: '~/workspacs/PyHouse-ansible/.git/hooks/pre-commit' }
+
+#    # Update all packages
+#    - name: ProductionPis-PreTask-04-Suse - Update packages
+#      ignore_errors:        yes
+#      when: ansible_os_family == 'Suse'
+#      zypper:
+#        name:               "*"
+#        state:              latest
+#        update_cache:       yes
 
 
-# Raspbian and Ubuntu are both Debian
-    - name: ProductionPis-PreTask-04-Debian - Update packages
-      when: ansible_os_family == 'Debian'
-      apt: 
-        upgrade: dist
-        update_cache: yes
-      tags:
-        - update_packages
+#    - name: ProductionPis-PreTask-05-Debian - Ensure optional packages via apt
+#      when: ansible_os_family == 'Debian'
+#      apt:
+#        pkg: "{{ item }}"
+#        state: present
+#      with_items: "{{ additional_packages|default([]) }}"
 
-    # Update all packages
-    - name: ProductionPis-PreTask-04-Suse - Update packages
-      ignore_errors:        yes
-      when: ansible_os_family == 'Suse'
-      zypper:
-        name:               "*"
-        state:              latest
-        update_cache:       yes
-
-
-    - name: ProductionPis-PreTask-05-Debian - Ensure optional packages via apt
-      when: ansible_os_family == 'Debian'
-      apt:
-        pkg: "{{ item }}"
-        state: present
-      with_items: "{{ additional_packages|default([]) }}"
-
-    - name: ProductionPis-PreTask-06-CentOS - Enable aditional repos for CentOS
-      yum:
-        pkg: "{{ item }}"
-        state: present
-      when: ansible_distribution == 'CentOS'
-      with_items:
-        - epel-release
-      tags:
-        - munin
-        - varnish
+#    - name: ProductionPis-PreTask-06-CentOS - Enable aditional repos for CentOS
+#      yum:
+#        pkg: "{{ item }}"
+#        state: present
+#      when: ansible_distribution == 'CentOS'
+#      with_items:
+#        - epel-release
+#      tags:
+#        - munin
+#        - varnish
 
 
-    - name: ProductionPis-PreTask-07-RedHat - Ensure optional packages via yum
-      when: ansible_os_family == 'RedHat'
-      yum:
-        name: "{{ item }}:"
-        state: present
-        update_cache: yes
-      with_items: "{{ additional_packages|default([]) }}"
+#    - name: ProductionPis-PreTask-07-RedHat - Ensure optional packages via yum
+#      when: ansible_os_family == 'RedHat'
+#      yum:
+#        name: "{{ item }}:"
+#        state: present
+#        update_cache: yes
+#      with_items: "{{ additional_packages|default([]) }}"
 
-    - name: ProductionPis-PreTask-08-RedHat  - Ensure selinux packages via yum
-      when: ansible_os_family == 'RedHat' and ansible_selinux
-      yum:
-        name: "{{ item }}"
-        state: present
-        update_cache: yes
-      with_items:
-        - libsemanage-python
-      tags:
-        - nginx
-        - haproxy
+#    - name: ProductionPis-PreTask-08-RedHat  - Ensure selinux packages via yum
+#      when: ansible_os_family == 'RedHat' and ansible_selinux
+#      yum:
+#        name: "{{ item }}"
+#        state: present
+#        update_cache: yes
+#      with_items:
+#        - libsemanage-python
+#      tags:
+#        - nginx
+#        - haproxy
 
 # ========================================================================
 
   roles:
 
+    - role: roles/package-management
+      tags:
+        - always
+
     - role: roles/networking
       when: install_networking|default(True)
       tags: 
-        - setup-network
-        - setup-pi
+        - always
 
     - role: roles/hostname
       tags:
-        - setup-pi
+        - always
 
     - role: roles/add-user
       tags:
-        - setup-pi
+        - always
 
     - role: roles/avahi
       tags:
-        - setup-pi
-
-    - role: roles/default_config
-      tags:
-        - restart_script
-        - postfix
-        - logwatch
-        - motd
-
-    - role: roles/packages
+        - always
 
     - role: roles/timezone
       when: set_timezone|default(True)
@@ -171,16 +148,24 @@
 #  pyhouse
 #  relay
 
-    - role: roles/install-node-red
-      when: pyh_roles.find("nodered") != -1
-
     - role: roles/install-mqtt
       when: pyh_roles.find("mqtt") != -1
+      tags:
+        - always
 
     - role: roles/install-pyhouse
       when: pyh_roles.find("pyhouse") != -1
+      tags:
+        - always
 
     - role: roles/install-pandora
       when: pyh_roles.find("pandora") != -1
+      tags:
+        - always
+
+    - role: roles/install-node-red
+      when: pyh_roles.find("nodered") != -1
+      tags:
+        - always
 
 ### END DBK

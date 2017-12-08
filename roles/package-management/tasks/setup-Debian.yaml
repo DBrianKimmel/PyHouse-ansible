@@ -1,0 +1,30 @@
+# Name:    PyHouse-ansible/roles/package-management/tasks/setup-Debian.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-12-06
+# Updated: 2017-12-07
+#
+# Raspbian and Ubuntu use the Debian package management system.
+
+---
+
+- name: Task-01 - Install the apt timeoutfile
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  copy:
+    src:        "99-timeout"
+    dest:       "/etc/apt/apt.conf.d/99-timeout"
+    owner:      "root"
+    group:      "root"
+    mode:       0755
+  when:         ansible_os_family == 'Debian'
+
+- name: Task-02- - Update Packages
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  apt:
+    upgrade: dist
+    update_cache: yes
+
+### END DBK

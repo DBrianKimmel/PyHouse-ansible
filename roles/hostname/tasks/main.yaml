@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/hostname/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-14
-# Updated: 2017-10-25
+# Updated: 2017-12-06
 #
 # Set up the computer's hostname
 #
@@ -15,8 +15,10 @@
 
 ---
 
-- name: Task-01Debian - Ensure dbus installed
+- name: Task-01Debian - APT - Ensure dbus installed
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   apt:
     name:       dbus
     state:      installed
@@ -25,12 +27,16 @@
 
 - name: Task-02A - Update the hostname (pt. 1) - hostname cmd
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   hostname:
     name:       "{{pyh_hostname}}"
   tags: hostname
 
 - name: Task-02B - Update the hostname (pt. 2) - (/etc/hostname)
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   copy:
     content:    "{{pyh_hostname}}{{'\n'}}"
     dest:       /etc/hostname
@@ -41,6 +47,8 @@
 
 - name: Task-02C - Update the IPv4 hostname (pt. 3) - (/etc/hosts)
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^127.0.1.1"
@@ -50,6 +58,8 @@
 
 - name: Task-02D - Update the IPv6 hostname (pt. 3) - (/etc/hosts)
   ignore_errors:    yes
+  become_user:      root
+  become:           yes
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^::1"
