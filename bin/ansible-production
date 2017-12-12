@@ -3,26 +3,25 @@
 # Name:    PyHouse-ansible/bin/ansible-production
 # Author:  D. Brian Kimmel
 # Created: 2017-11-05
-# Updated: 2017-11-19
+# Updated: 2017-11-12
 #
-# Deployes the full production setup.
-# Edit the file !/workspace/PyHouse-ansible/host_vars/pi-setup.yaml and put in the new IP address
+# Deploys the full production setup.
 
-INVENTORY=" -i inventories/production/hosts"
-PLAYBOOK=" playbooks/production-pis.yaml"
-PSWD1=" --vault-password-file ~/.vault-pass.txt"
+INVENTORY=" -i inventories/production/hosts "
+PLAYBOOK="  playbook.yaml "
+PSWD1="     --vault-password-file  ~/.vault-pass.txt "
 TAGS=""
 
 if [ $# -gt 0 ]; then
     TAGS+=" --tags=setup_production,$1 "
-    echo "Tags = ${TAGS}"
+    echo "Tags = ${TAGS} "
 else
-    TAGS+=" --tags=setup_production "
+    TAGS+=" --tags=tag_production "
     echo "No Tags - only setup_production "
 fi
 
 cd ~/workspace/PyHouse-ansible
-ansible-playbook ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
+ansible-playbook  -vvv  ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
 cd -
 
 ### END DBK

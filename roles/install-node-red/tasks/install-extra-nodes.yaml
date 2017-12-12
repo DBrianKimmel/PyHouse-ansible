@@ -1,7 +1,9 @@
 # Name:    PyHouse-ansible/roles/install-node-red/tasks/install-extra-nodes.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-29
-# Updated: 2017-10-30
+# Updated: 2017-12-12
+#
+# This will install extra nodes used by node red.
 #
 # The extra node  names are stored in "pyh_extra_nodes" in each host_vars file that installs node-red.
 #
@@ -9,7 +11,7 @@
 
 - name: ExtraNodes-01 Add extra npm nodes
   become:           yes
-  #become_user:      "{{ pyh_nodered_user }}"
+  become_user:      "{{ pyh_nodered_user }}"
   become_method:    sudo
   ignore_errors:    yes
   npm:

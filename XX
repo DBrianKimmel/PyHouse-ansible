@@ -1,0 +1,42 @@
+
+{  "response": {  "version":"0.1"
+ "termsofService":"http://www.wunderground.com/weather/api/d/terms.html"
+ "features": {  "conditions": 1  
+ "astronomy": 1  
+ "almanac": 1  }	}  
+"current_observation": {		"image": {		"url":"http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+	"title":"Weather Underground"
+	"link":"http://www.wunderground.com"		}
+	"display_location": {		"full":"Beverly Hills
+FL"
+	"city":"Beverly Hills"
+	"state":"FL"
+	"state_name":"Florida"
+	"country":"US"
+	"country_iso3166":"US"
+	"zip":"34465"
+	"magic":"1"
+	"wmo":"99999"
+	"latitude":"28.92000008"
+	"longitude":"-82.47000122"
+	"elevation":"29.9"		}
+	"observation_location": {		"full":"Beverly Hills
+Beverly Hills
+Florida"
+	"city":"Beverly Hills
+Beverly Hills"
+	"state":"Florida"
+	"country":"US"
+	"country_iso3166":"US"
+	"latitude":"28.910532"
+	"longitude":"-82.465363"
+	"elevation":"105 ft"		}
+	"estimated": {		}
+	"station_id":"KFLBEVER13"
+	"observ...
+
+
+
+
+
+

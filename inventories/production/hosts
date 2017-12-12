@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2017-11-21
+# Updated: 2017-12-08
 
 
 localhost ansible_connection=local
@@ -25,11 +25,11 @@ pi-11-pp
 
 # Cannon Trail Raspberry Pis
 [pis_ct]
-pi-01-ct
-pi-02-ct.local
-pi-05-ct.local
-pi-07-ct.local
-pi-11-ct.local
+#pi-01-ct
+pi-02-ct
+#pi-05-ct
+#pi-07-ct
+#pi-11-ct
 
 # All Raspberry Pis
 [pis:children]
@@ -41,11 +41,11 @@ pis_ct
 # ----- Define all the NUC boxes -----
 # Pink Poppy Nucs (Jump Box)
 [nucs_pp]
-nuc-01-pp.local
+nuc-01-pp
 
 # Cannon Trail Nucs (Jump Box)
 [nucs_ct]
-nuc-01-ct.local
+nuc-01-ct
 
 # All Nucs
 [nucs:children]
@@ -56,13 +56,13 @@ nucs_ct
 
 # ----- Define all the other computers -----
 [pcduino-ct]
-pcduino-01-ct.local
+pcduino-01-ct
 
 [alki-pp]
-alki.local
+alki
 
 [laptop-roam]
-Laptop-3.local
+Laptop-3
 
 [others:children]
 pcduino-ct

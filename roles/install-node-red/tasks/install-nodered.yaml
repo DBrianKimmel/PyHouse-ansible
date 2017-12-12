@@ -1,14 +1,16 @@
 # Name:    PyHouse-ansible/roles/install-node-red/tasks/install-nodered.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-29
-# Updated: 2017-11-13
+# Updated: 2017-12-08
 #
 ---
 
 - name: InstallNodeRed-01 - Node
   become:           yes
-  become_user:      "{{pyh_nodered_user}}"
+  become_user:      root
+  #become_user:      "{{pyh_nodered_user}}"
   become_method:    sudo
+  ignore_errors:    yes
   npm:
     name:           node-red
     path:           "/home/{{pyh_nodered_user}}/.node-red/"

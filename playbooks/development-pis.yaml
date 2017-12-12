@@ -7,7 +7,7 @@
 
 - name: Play - Development-Pis - xxx
   hosts:                all
-  strategy:             linear
+  strategy:             debug
   become:               yes
   become_method:        sudo
   gather_facts:         no

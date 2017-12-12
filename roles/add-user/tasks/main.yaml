@@ -1,7 +1,10 @@
 # Name:    PyHouse-ansible/roles/add-user/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2017-12-06
+# Updated: 2017-12-11
+#
+# This role adds the admin user to the node.
+# This user is in the vault of production and setup-pi under group_vars/all.
 #
 
 ---
@@ -91,7 +94,18 @@
     group:          root
     mode:           0600
 
-- name: Task-04 - Create bin dir for admin user
+- name: Task-04 - Be sure admin user home dir ownership is OK
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  file:
+    name:       "/home/{{ pyh_admin_user }}/"
+    state:      directory
+    owner:      "{{ pyh_admin_user }}"
+    group:      "{{ pyh_admin_user }}"
+    mode:       0755
+
+- name: Task-05 - Create bin dir for admin user
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -102,7 +116,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0755
 
-- name: Task-05 - Copy admin files to ~/bin
+- name: Task-06 - Copy admin files to ~/bin
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -113,7 +127,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0755
 
-- name: Task-06 - Create admin user .ssh dir
+- name: Task-07 - Create admin user .ssh dir
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -124,7 +138,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0700
 
-- name: Task-07 - Copy authorized_keys file to ~/.ssh
+- name: Task-08 - Copy authorized_keys file to ~/.ssh
   become_user:      root
   become:           yes
   copy:
@@ -134,7 +148,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0600
 
-- name: Task-08 - Copy id_rsa file to ~/.ssh
+- name: Task-09 - Copy id_rsa file to ~/.ssh
   become_user:      root
   become:           yes
   copy:

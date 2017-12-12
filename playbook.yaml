@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbook.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-19
-# Updated: 2017-11-25
+# Updated: 2017-12-12
 
 
 # export ANSIBLE_STRATEGY=debug
@@ -21,7 +21,7 @@
 - name: Playbook (Master)
   strategy:         debug
   hosts:            all
-  gather_facts:     no
+  gather_facts:     yes
 
   pre_tasks:
 
@@ -51,29 +51,29 @@
 
 
 # Now get the proper Produxtion playbook(s)
-- import_playbook: "./playbooks/production-pis.yaml"
-  when:
-  - tag_production is defined
+#- import_playbook: "./playbooks/production-pis.yaml"
+#  when:
+#  - tag_production is defined
 
-- import_playbook: "./playbooks/production-nucs.yaml"
-  when:
-  - tag_production is defined
+#- import_playbook: "./playbooks/production-nucs.yaml"
+#  when:
+#  - tag_production is defined
 
-- import_playbook: "./playbooks/production-others.yaml"
-  when:
-  - tag_production is defined
+#- import_playbook: "./playbooks/production-others.yaml"
+#  when:
+#  - tag_production is defined
 
 
 # Now get the proper Development playbook(s)
 
 - import_playbook: "./playbooks/development-pis.yaml"
-  when:
-  - tag_production is defined
+#  when:
+#  - tag_production is defined
 
 
 # Now get the proper new server setup playbook(s)
 
-- import_playbook: "./playbooks/new-pi.yaml"
+#- import_playbook: "./playbooks/new-pi.yaml"
 #  when:
 #  - tag_new_pi is defined
 
@@ -81,14 +81,14 @@
 
 # Now get the proper localhost playbook(s)
 
-- import_playbook: "./playbooks/fetch-config-files.yaml"
-  when:
-  - tag_production is defined
-  - tag_ansible is defined
+#- import_playbook: "./playbooks/fetch-config-files.yaml"
+#  when:
+#  - tag_production is defined
+#  - tag_ansible is defined
 
-- import_playbook: "./playbooks/local-install-tools.yaml"
-  when:
-  - tag_ansible is defined
+#- import_playbook: "./playbooks/local-install-tools.yaml"
+#  when:
+#  - tag_ansible is defined
 
 
 ### END DBK
