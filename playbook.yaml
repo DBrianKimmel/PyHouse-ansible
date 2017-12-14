@@ -19,7 +19,7 @@
 ---
 
 - name: Playbook (Master)
-  strategy:         debug
+  strategy:         linear
   hosts:            all
   gather_facts:     yes
 
@@ -51,7 +51,7 @@
 
 
 # Now get the proper Produxtion playbook(s)
-#- import_playbook: "./playbooks/production-pis.yaml"
+- import_playbook: "./playbooks/production-pis.yaml"
 #  when:
 #  - tag_production is defined
 
@@ -81,12 +81,12 @@
 
 # Now get the proper localhost playbook(s)
 
-#- import_playbook: "./playbooks/fetch-config-files.yaml"
+- import_playbook: "./playbooks/fetch-config-files.yaml"
 #  when:
 #  - tag_production is defined
 #  - tag_ansible is defined
 
-#- import_playbook: "./playbooks/local-install-tools.yaml"
+- import_playbook: "./playbooks/local-install-tools.yaml"
 #  when:
 #  - tag_ansible is defined
 

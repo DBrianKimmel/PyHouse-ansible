@@ -10,7 +10,7 @@
 
 ---
 
-ansible_host:           192.168.2.15
+ansible_host:           192.168.1.15
 
 pyh_hostname:           pi-05-pp
 pyh_ethernet_ip:        192.168.2.15
@@ -20,6 +20,7 @@ pyh_roles:              nodered
 pyh_extra_apt_packages:
     - python3
     - sqlite3
+    - i2c-tools
 
 pyh_extra_nodered_nodes:
     - i2c

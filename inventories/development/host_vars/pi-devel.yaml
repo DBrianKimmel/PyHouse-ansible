@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/development/host_vars/pi-05-pp.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-12-12
-# Updated: 2017-12-12
+# Updated: 2017-12-14
 #
 # This computer is for developing node red I2C flows.
 #
@@ -10,7 +10,7 @@
 
 ---
 
-ansible_host:           192.168.2.15
+ansible_host:           192.168.1.15
 
 pyh_hostname:           pi-05-pp
 pyh_ethernet_ip:        192.168.2.15
@@ -20,6 +20,7 @@ pyh_roles:              nodered
 pyh_extra_apt_packages:
     - python3
     - sqlite3
+    - i2c-tools
 
 pyh_extra_nodered_nodes:
     - i2c

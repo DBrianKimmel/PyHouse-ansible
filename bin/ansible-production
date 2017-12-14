@@ -21,7 +21,7 @@ else
 fi
 
 cd ~/workspace/PyHouse-ansible
-ansible-playbook  -vvv  ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
+ansible-playbook  -vv  ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
 cd -
 
 ### END DBK
