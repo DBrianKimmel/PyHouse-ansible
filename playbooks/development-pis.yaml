@@ -1,16 +1,16 @@
 # Name:    PyHouse-ansible/site.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-20
-# Updated: 2017-11-25
+# Updated: 2017-12-16
 
 ---
 
-- name: Play - Development-Pis - xxx
+- name: Development-Pis - Perform config for development machine - test it out.
   hosts:                all
   strategy:             debug
   become:               yes
   become_method:        sudo
-  gather_facts:         no
+#  gather_facts:         no
 
   pre_tasks:
 
@@ -21,5 +21,33 @@
        - ../defaults/null.yaml
       tags:
         - always
+
+
+  roles:
+
+    - role: roles/package-management
+      tags:
+        - always
+
+    - role: roles/install-mqtt
+      when: pyh_roles.find("mqtt") != -1
+      tags:
+        - always
+
+    - role: roles/install-pyhouse
+      when: pyh_roles.find("pyhouse") != -1
+      tags:
+        - always
+
+    - role: roles/install-pandora
+      when: pyh_roles.find("pandora") != -1
+      tags:
+        - always
+
+    - role: roles/install-node-red
+      when: pyh_roles.find("nodered") != -1
+      tags:
+        - always
+
 
 ### END DBK

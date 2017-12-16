@@ -1,10 +1,38 @@
 # Name:    PyHouse-ansible/inventories/group_vars/all/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-22
-# Updated: 2017-12-14
+# Updated: 2017-12-16
+
+# The vault variables are stored in group_vars/all/vault.yaml
+# Keep the ~/.vault-pass.txt file a secret.
+#
+# To encrypt / decript do one of the following:
+#       ansible-vault encrypt group_vars/all/vault.yaml --vault-password-file ~/.vault-pass.txt
+#       ansible-vault decrypt group_vars/all/vault.yaml --vault-password-file ~/.vault-pass.txt
+#
 
 ---
 
 #- import_vars:  '../group_vars/all/main.yaml'
+
+pyh_domain:             ""
+
+pyh_admin_user:         "{{ vault_pyh_admin_user }}"
+pyh_admin_password:     "{{ vault_pyh_admin_password }}"
+pyh_long_admin_name:    "{{ vault_pyh_long_admin_name }}"
+
+pyh_pi_user:            "{{ vault_pyh_pi_user }}"
+pyh_pi_password:        "{{ vault_pyh_pi_password }}"
+pyh_long_pi_name:       "{{ vault_pyh_pi_admin_name }}" 
+
+pyh_nodered_user:       "{{ vault_pyh_nodered_user }}"
+pyh_nodered_password:   "{{ vault_pyh_nodered_password }}"
+pyh_long_nodered_name:  "{{ vault_pyh_long_nodered_name }}"
+
+pyh_pyhouse_user:       "{{ vault_pyh_pyhouse_user }}"
+pyh_pyhouse_password:   "{{ vault_pyh_pyhouse_password }}"
+pyh_long_pyhouse_name:  "{{ vault_pyh_long_pyhouse_name }}"
+
+### END DBK
 
 ### END DBK
