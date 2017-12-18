@@ -1,8 +1,8 @@
 
 
 
-failed: [pi-04-pp] (item=i2c-bus) => {"changed": false
-"cmd": "/usr/local/bin/npm install i2c-bus"
+failed: [pi-devel] (item=i2c-bus) => {"changed": false
+"cmd": "/usr/bin/npm install i2c-bus"
 "item": "i2c-bus"
 "msg": ""
 "rc": 1
@@ -38,6 +38,8 @@ node-red-project@0.0.1 /home/nodered/.node-red
 "node-red-project@0.0.1 /home/nodered/.node-red"
 "└── (empty)"
 ""]}
+
+
 
 
 
