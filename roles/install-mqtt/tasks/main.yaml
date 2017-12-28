@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install-mqtt/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-04
-# Updated: 2017-10-25
+# Updated: 2017-12-26
 
 # Install MQTT broker on a computer
 
@@ -21,7 +21,23 @@
     group:      root
     mode:       0644
 
-- name: Task-03 - Make TLS dirs
+- name: Task-03 - install mosquitto.service file
+  copy:
+    src:        ./mosquitto.service
+    dest:       /etc/systemd/system/mosquitto.service
+    owner:      root
+    group:      root
+    mode:       0644
+
+- name: Task-04 - install mosquitto.passwd file
+  copy:
+    src:        ./mosquitto.passwd
+    dest:       /etc/mosquitto/passwd
+    owner:      root
+    group:      root
+    mode:       0644
+
+- name: Task-05 - Make TLS dirs
   file:
     name:       "/etc/mosquitto/certs"
     state:      directory
@@ -29,12 +45,28 @@
     group:      root
     mode:       0755
 
-- name: Task-04 - Make TLS dirs
+- name: Task-06 - Make TLS dirs
   file:
     name:       "/etc/mosquitto/ca_certificates"
     state:      directory
     owner:      root
     group:      root
     mode:       0755
+
+- name: Task-07 -Enable service to run on reboot
+  systemd:
+    name:           mosquitto
+    daemon_reload:  yes
+    state:          restarted
+
+- name: Task-08 -Enable service to run on reboot
+  systemd:
+    name:           mosquitto
+    state:          reloaded
+
+- name: Task-09 -Enable service to run on reboot
+  systemd:
+    name:           mosquitto
+    enabled:        yes
 
 ### END DBK
