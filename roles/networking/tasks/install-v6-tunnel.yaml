@@ -1,0 +1,37 @@
+# Name:     PyHouse-ansible/roles/networking/tasks/install-v6-tunnel.yaml
+# Author:   D Brian Kimmel
+# Created:  2018-03-04
+# Updated:  2018-03-04
+#
+
+---
+
+# this creates a systemd service
+- name: InstallSystemd-01 - Create he-ipv6.service
+  template:
+    # in /roles/networking/templates/
+    src: he-service.j2
+    dest: /etc/systemd/system/he-ipv6.service
+  when: 'ansible_os_family == "Debian"'
+
+- name: InstallSystemd-02 - Enable & start Node-RED
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: he-ipv6
+  when: 'ansible_os_family == "Debian"'
+
+#  notify:
+    # this calls a handler in /roles/web/handlers/main.yml, the contents of which are:
+    # ---
+    # - name: restart nginx
+    #   service:
+    #     name: nginx
+    #     enabled: yes
+    #     state: restarted
+    #     become: yes
+
+    #- restart nginx
+
+### END DBK

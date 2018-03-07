@@ -11,6 +11,6 @@ set_timezone:       False
 pyh_hostname:       piduino-01
 pyh_ethernet_ip:    192.168.8.81
 pyh_wifi_ip:        no
-pyh_roles:          no
+pyh_roles:          none
 
 ### END DBK

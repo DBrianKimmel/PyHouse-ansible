@@ -102,6 +102,18 @@
 #        - haproxy
 
 # ========================================================================
+# ==== pyh_roles dispatch
+
+#  ansible
+#  control
+#  install-mqtt
+#  install-pandora
+#  install-pyhouse
+#  install-node-red
+#  octoprint
+#  package-management
+#  postgresql
+#  relay
 
   roles:
 
@@ -135,18 +147,6 @@
       when: install_motd|default(True)
       tags:
         - motd
-
-# ==== pyh_roles dispatch
-
-#  ansible
-#  control
-#  install-mqtt
-#  nodered
-#  octoprint
-#  pandora
-#  postgresql
-#  pyhouse
-#  relay
 
     - role: roles/install-mqtt
       when: pyh_roles.find("mqtt") != -1

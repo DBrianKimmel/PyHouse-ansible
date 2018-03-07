@@ -23,6 +23,20 @@
         - always
 
 
+# ========================================================================
+# ==== pyh_roles dispatch
+
+#  ansible
+#  control
+#  install-mqtt
+#  install-pandora
+#  install-pyhouse
+#  install-node-red
+#  octoprint
+#  package-management
+#  postgresql
+#  relay
+
   roles:
 
     - role: roles/package-management

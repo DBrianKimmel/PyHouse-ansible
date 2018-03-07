@@ -1,0 +1,24 @@
+# Name:     PyHouse-ansible/roles/networking/templates/he-service.j2
+# Author: 	D Brian Kimmel
+# Created:	2018-03-04
+# Updated:  2018-03-04
+#
+
+Description=he.net IPv6 tunnel
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/ip    tunnel  add   he-ipv6  mode sit  remote 209.51.161.58  local 192.168.1.54  ttl 255
+ExecStart=/bin/ip    link    set   he-ipv6 up  mtu 1480
+ExecStart=/bin/ip    addr    add   2001:470:4:417::2/64    dev he-ipv6
+ExecStart=/bin/ip -6 route   add   ::/0  dev he-ipv6
+ExecStop=/bin/ip -6  route   del   ::/0   dev he-ipv6
+ExecStop=/bin/ip     link    set   he-ipv6  down
+ExecStop=/bin/ip     tunnel  del   he-ipv6
+
+[Install]
+WantedBy=multi-user.target
+
+### END DBK
