@@ -14,7 +14,7 @@
     dest: /etc/systemd/system/he-ipv6.service
   when: 'ansible_os_family == "Debian"'
 
-- name: InstallSystemd-02 - Enable & start Node-RED
+- name: InstallSystemd-02 - Enable & start ipv6 tunnel
   systemd:
     daemon_reload: yes
     enabled: yes

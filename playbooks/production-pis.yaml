@@ -164,7 +164,7 @@
         - always
 
     - role: roles/install-node-red
-      when: pyh_roles.find("nodered") != -1
+      when: pyh_roles.find("node-red") != -1
       tags:
         - always
 

@@ -10,7 +10,7 @@ ansible_host:           192.168.9.21
 pyh_hostname:           pi-11-ct
 pyh_ethernet_ip:        192.168.9.51
 pyh_wifi_ip:            192.168.9.21
-pyh_roles:              nodered
+pyh_roles:              node-red
 
 pyh_extra_apt_packages:
     - sqlite3

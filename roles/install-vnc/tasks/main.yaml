@@ -7,7 +7,7 @@
 
 ---
 
-- name: Task-01 - install mqtt broker
+- name: Task-01 - install VNC server
   apt:
     name:               tightvncserver
     update_cache:       yes

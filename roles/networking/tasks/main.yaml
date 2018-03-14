@@ -20,7 +20,7 @@
     - pyh_wifi_ip != 'no'
 
 # this will set up static addresses on all interfaces except 'lo'
-# It is the correct method for debian Jessie, Stretch and beond.
+# It is the correct method for debian Jessie, Stretch and beyond.
 # Earlier releases used a different mechanism.
 - name: Task-02-Pis - Install dhcpcd.conf file with interface IP definitions.
   ignore_errors:    yes
