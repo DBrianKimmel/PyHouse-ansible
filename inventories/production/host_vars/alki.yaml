@@ -11,7 +11,7 @@ ansible_port:           2254
 pyh_hostname:           Alki
 pyh_ethernet_ip:        192.168.1.54
 pyh_wifi_ip:            no
-pyh_roles:              control,ansible
+pyh_roles:              control,ansible,pyhouse
 
 pyh_admin_user_groups: dialout,sudo,audio,video,plugdev,input
 

@@ -1,0 +1,23 @@
+# Name:    PyHouse-ansible/inventories/development/host_vars/alki-devel.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-03-15
+# Updated: 2018-03-15
+#
+
+---
+
+ansible_host:           192.168.1.54
+
+pyh_hostname:           Alki
+pyh_ethernet_ip:        192.168.1.54
+pyh_wifi_ip:            192.168.2.54
+pyh_roles:              mqtt
+
+pyh_extra_apt_packages:
+    - python3
+    - sqlite3
+
+pyh_extra_nodered_nodes:
+    - nill
+
+### END DBK

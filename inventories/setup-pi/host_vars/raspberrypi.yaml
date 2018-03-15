@@ -12,10 +12,10 @@
 ---
 
 # These must be changed
-ansible_host:           192.168.1.105
-pyh_hostname:           pi-05-pp
-pyh_ethernet_ip:        192.168.2.15
-pyh_wifi_ip:            192.168.1.15
+ansible_host:           192.168.1.13
+pyh_hostname:           pi-03-pp
+pyh_ethernet_ip:        192.168.2.13
+pyh_wifi_ip:            192.168.1.13
 pyh_roles:              setup
 
 # These are only for setup - normally they are in a group_vars file for the house we are using

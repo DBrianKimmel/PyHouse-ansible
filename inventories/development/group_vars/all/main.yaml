@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/group_vars/all/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-22
-# Updated: 2017-12-16
+# Updated: 2018-03-15
 
 # The vault variables are stored in group_vars/all/vault.yaml
 # Keep the ~/.vault-pass.txt file a secret.
@@ -32,7 +32,5 @@ pyh_long_nodered_name:  "{{ vault_pyh_long_nodered_name }}"
 pyh_pyhouse_user:       "{{ vault_pyh_pyhouse_user }}"
 pyh_pyhouse_password:   "{{ vault_pyh_pyhouse_password }}"
 pyh_long_pyhouse_name:  "{{ vault_pyh_long_pyhouse_name }}"
-
-### END DBK
 
 ### END DBK

@@ -47,6 +47,10 @@
 
   roles:
 
+    - role: roles/package-management
+      tags:
+        - always
+
     - role: ../roles/add-user
       tags:
         - setup-pi

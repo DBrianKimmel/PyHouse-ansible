@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 #
+# Name:    PyHouse-ansible/bin/vault-hook
+# Author:  D. Brian Kimmel
+# Created: 2017-11-05
+# Updated: 2018-03-12
+#
+
 # Called by "git commit" with no arguments.  The hook should
 # exit with non-zero status after issuing an appropriate message if
 # it wants to stop the commit.

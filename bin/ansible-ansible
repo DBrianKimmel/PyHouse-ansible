@@ -7,6 +7,10 @@
 #
 # Deployes ansible commands on the local ansible workstation.
 
+# Put this where it can just be called
+cp ~/workspace/PyHouse-ansible/bin/ansible*  ~/bin/
+
+
 INVENTORY=" -i inventories/local/hosts"
 PLAYBOOK=" playbooks/local-install-tools.yaml"
 PSWD1=" --vault-password-file ~/.vault-pass.txt"
