@@ -1,0 +1,43 @@
+# Name:    PyHouse-ansible/roles/install-node-red/tasks/install-configuration.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-03-21
+# Updated: 2018-03-21
+#
+---
+
+- name: Task-01 - Edit settings.js
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  copy:
+    src:        "../files/settings.js"
+    dest:       "/home/{{ pyh_admin_user }}/bin"
+    owner:      "{{ pyh_admin_user }}"
+    group:      "{{ pyh_admin_user }}"
+    mode:       0755
+
+#- name: BackupFlows-03 - Check flow into a git repository.
+
+- name: Task-02 - Copy localSettings.js
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  copy:
+    src:        "../files/localSettings.js"
+    dest:       "/home/{{ pyh_nodered_user }}/.node-red/"
+    owner:      "{{ pyh_nodered_user }}"
+    group:      "{{ pyh_nodered_user }}"
+    mode:       0755
+
+- name: Task-02C - Update the IPv4 hostname (pt. 3) - (/etc/hosts)
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  lineinfile:
+    dest:       /etc/hosts
+    regexp:     "^127.0.1.1"
+    line:       "127.0.1.1{{'\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost"
+    state:      present
+  tags: hostname
+
+### END DBK

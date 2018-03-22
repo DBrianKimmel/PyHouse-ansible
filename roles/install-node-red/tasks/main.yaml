@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install-node-red/tasks/main.yaml - the master playbook
 # Author:  D. Brian Kimmel
 # Created: 2017-10-11
-# Updated: 2017-11-18
+# Updated: 2018-03-21
 #
 # Lite versions of the os do not install node-red.
 # The install scripts and apt both sorta do the wrong versions so do it all manually here.
@@ -38,9 +38,18 @@
 - name: Task-07 - Setup auto run on reboot
   include_tasks:    install-systemd.yaml
 
+# Node red needs to run whenever we start up this computer - make it so.
+- name: Task-08 - Setup configuration
+  include_tasks:    install-configuration.yaml
+
 # As a precaution, we will copy all the flows back to the ansible host for safekeeping.
-- name: Task-08 - Save the flows we have
+- name: Task-09 - Save the flows we have
   include_tasks:    backup-flows.yaml
+  tags:             fetch-files
+
+# As a precaution, we will copy all the configuration back to the ansible host for safekeeping.
+- name: Task-10 - Save the config we have
+  include_tasks:    backup-configuration.yaml
   tags:             fetch-files
 
 ### END DBK
