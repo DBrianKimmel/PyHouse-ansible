@@ -1,9 +1,9 @@
 # Name:    PyHouse-ansible/playbooks/fetch-config-files.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-20
-# Updated: 2017-12-16
+# Updated: 2018-04-09
 
-# Files are placed in the backup directory whic is usually ~/backups
+# Files are placed in the backup directory which is usually ~/backups
 
 ---
 
@@ -27,7 +27,6 @@
 
     - name: BackupFlows-01-A-old - Pull back the flows for backup / archive
       fetch:
-        #src:                "/home/pi/.node-red/flows_*.json"
         src:                "/home/pi/.node-red/flows_{{ inventory_hostname }}.json"
         dest:               '{{ pyh_backup_dir }}'
         fail_on_missing:    no

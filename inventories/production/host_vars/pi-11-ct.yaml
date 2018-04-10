@@ -1,14 +1,14 @@
-# Name:    PyHouse-ansible/host_vars/pi-11-ct.yaml
+# Name:    PyHouse-ansible/inventories/production/host_vars/pi-11-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-01
-# Updated: 2017-12-14
+# Updated: 2018-04-07
 
 ---
 
 ansible_host:           192.168.9.21
 
 pyh_hostname:           pi-11-ct
-pyh_ethernet_ip:        192.168.9.51
+pyh_ethernet_ip:        192.168.10.21
 pyh_wifi_ip:            192.168.9.21
 pyh_roles:              node-red
 

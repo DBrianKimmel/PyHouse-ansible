@@ -50,7 +50,7 @@
 
 
 
-# Now get the proper Produxtion playbook(s)
+# Now get the proper Production playbook(s)
 - import_playbook: "./playbooks/production-pis.yaml"
 #  when:
 #  - tag_production is defined

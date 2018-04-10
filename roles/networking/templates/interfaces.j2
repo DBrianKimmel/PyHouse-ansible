@@ -1,5 +1,12 @@
+# Name:    PyHouse-ansible/roles/networking/templates/interfaces.j2
+# Author:  D. Brian Kimmel
+# Created: 2017-10-15
+# Updated: 2018-04-06
+
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
+#
+# Used by Ubuntu (on Nucs)
 
 source /etc/network/interfaces.d/*
 
@@ -9,6 +16,7 @@ iface lo inet loopback
 
 {% for if_name in ansible_interfaces %}
 {% if if_name != "lo" and not if_name.startswith('sit') %}
+#
 auto {{ if_name }}
 iface {{ if_name }} inet static
 {% if if_name.startswith('e') %}

@@ -1,9 +1,9 @@
 # Name:    PyHouse-ansible/playbooks/production-pis.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-11-19
+# Updated: 2018-04-08
 #
-# This is the main playbook.
+# This is the main production playbook.
 
 # Tags:
 #   motd                    - Change motd to ansible configged
@@ -25,7 +25,7 @@
 # The second play is to install remote PI hosts.
 - name: Play - Production-Pis - Install
   hosts:            pis
-  strategy:         debug
+  strategy:         linear
   become:           yes
   become_method:    sudo
   gather_facts:     yes

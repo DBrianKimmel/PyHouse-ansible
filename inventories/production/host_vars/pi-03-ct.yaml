@@ -1,14 +1,14 @@
-# Name:    PyHouse-ansible/host_vars/pi-03-ct.yaml
+# Name:    PyHouse-ansible/inventories/production/host_vars/pi-03-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-01
-# Updated: 2017-11-01
+# Updated: 2018-04-07
 
 ---
 
 ansible_host:           192.168.9.13
 
 pyh_hostname:           pi-03-ct
-pyh_ethernet_ip:        192.168.9.43
+pyh_ethernet_ip:        192.168.10.13
 pyh_wifi_ip:            192.168.9.13
 pyh_roles:              pyhouse
 
