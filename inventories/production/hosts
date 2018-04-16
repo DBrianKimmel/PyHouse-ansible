@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2018-04-07
+# Updated: 2018-04-12
 
 
 localhost ansible_connection=local
@@ -15,10 +15,10 @@ localhost ansible_connection=local
 [pis_pp]
 pi-01-pp
 pi-02-pp
-pi-03-pp
+#pi-03-pp
 pi-04-pp
 pi-05-pp
-pi-06-pp
+#pi-06-pp
 pi-08-pp
 pi-10-pp
 pi-11-pp
@@ -54,10 +54,9 @@ nucs_pp
 nucs_ct
 
 
-
 # ----- Define all the other computers -----
 [pcduino-ct]
-pcduino-01-ct
+#pcduino-01-ct
 
 [alki-pp]
 alki
@@ -66,7 +65,7 @@ alki
 Laptop-3
 
 [others:children]
-pcduino-ct
+#pcduino-ct
 alki-pp
 laptop-roam
 
@@ -82,6 +81,6 @@ alki-pp
 [cannontrail:children]
 pis_ct
 nucs_ct
-pcduino-ct
+#                                                                                                                                                                                                        pcduino-ct
 
 ### END DBK

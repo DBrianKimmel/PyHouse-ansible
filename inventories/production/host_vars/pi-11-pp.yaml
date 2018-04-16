@@ -7,7 +7,7 @@
 
 ---
 
-ansible_host:           192.168.2.21
+ansible_host:           192.168.1.21
 
 pyh_hostname:           pi-11-pp
 pyh_ethernet_ip:        192.168.2.21
