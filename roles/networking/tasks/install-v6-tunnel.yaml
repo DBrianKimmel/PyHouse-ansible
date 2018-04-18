@@ -6,7 +6,10 @@
 
 ---
 
-# this creates a systemd service
+# this creates a systemd service for raspi
+# Template File:    PyHouse-ansible/roles/networking/templates/he-service.j2
+# Gets variables from:
+#       i
 - name: InstallSystemd-01 - Create he-ipv6.service
   template:
     # in /roles/networking/templates/
@@ -23,7 +26,7 @@
   when: 'ansible_os_family == "Debian"'
 
 #  notify:
-    # this calls a handler in /roles/web/handlers/main.yml, the contents of which are:
+    # this calls a handler in /roles/networking/handlers/main.yml, the contents of which are:
     # ---
     # - name: restart nginx
     #   service:

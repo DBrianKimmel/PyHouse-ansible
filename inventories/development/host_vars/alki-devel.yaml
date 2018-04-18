@@ -6,12 +6,12 @@
 
 ---
 
-ansible_host:           192.168.1.54
+ansible_host:               192.168.1.54
 
-pyh_hostname:           Alki
-pyh_ethernet_ip:        192.168.1.54
-pyh_wifi_ip:            192.168.2.54
-pyh_roles:              mqtt
+pyh_hostname:               Alki
+pyh_ipv4_ethernet_addr:     192.168.1.54
+pyh_ipv4_wifi_addr:         192.168.2.54
+pyh_roles:                  mqtt
 
 pyh_extra_apt_packages:
     - python3

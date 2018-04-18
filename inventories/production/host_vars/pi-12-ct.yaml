@@ -5,13 +5,15 @@
 
 ---
 
-ansible_host:           192.168.9.22
+ansible_host:               192.168.9.22
 
 
-pyh_hostname:           pi-12-ct
-pyh_ethernet_ip:        192.168.9.52
-pyh_wifi_ip:            192.168.9.22
-pyh_roles:              pandora,pyhouse
+pyh_hostname:               pi-12-ct
+pyh_ipv4_ethernet_addr:     192.168.9.52
+pyh_ipv4_wifi_addr:         192.168.9.22
+pyh_ipv6_ethernet_addr:     :10:22
+pyh_ipv6_wifi_addr:         :9:22
+pyh_roles:                  pandora,pyhouse
 
 pyh_extra_apt_packages:
     - sqlite3

@@ -13,10 +13,11 @@
 ansible_host:               192.168.1.15
 
 pyh_hostname:               pi-05-pp
-pyh_ethernet_ip:            192.168.2.15
-pyh_wifi_ip:                192.168.1.15
+pyh_ipv4_ethernet_addr:     192.168.2.15
+pyh_ipv4_wifi_addr:         192.168.1.15
+pyh_ipv6_ethernet_addr:     :2:15
+pyh_ipv6_wifi_addr:         :1:15
 pyh_roles:                  node-red
-pyh_ipv6_eth_suffix:        :1:17
 
 pyh_extra_apt_packages:
     - python3

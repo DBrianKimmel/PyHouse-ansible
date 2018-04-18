@@ -38,7 +38,7 @@
 
     - name: New-Pi-pre-task-03 - Working on raspi
       debug:
-        msg: "Host:{{ pyh_hostname }}; WiFi:{{ pyh_wifi_ip }}; Ethernet:{{ pyh_ethernet_ip }}; Access:{{ ansible_host }}"
+        msg: "Host:{{ pyh_hostname }}; WiFi:{{ pyh_ipv4_wifi_addr }}; Ethernet:{{ pyh_ipv4_ethernet_addr }}; Access:{{ ansible_host }}"
       tags:
         - always
 

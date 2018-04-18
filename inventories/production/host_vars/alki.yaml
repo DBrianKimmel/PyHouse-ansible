@@ -5,14 +5,14 @@
 
 ---
 
-ansible_host:           pinkpoppy.asuscomm.com
-ansible_port:           2254
+ansible_host:               pinkpoppy.asuscomm.com
+ansible_port:               2254
 
-pyh_hostname:           Alki
-pyh_ethernet_ip:        192.168.1.54
-pyh_wifi_ip:            no
-pyh_roles:              control,ansible,pyhouse
+pyh_hostname:               Alki
+pyh_ipv4_ethernet_addr:     192.168.1.54
+pyh_ipv4_wifi_addr:         no
+pyh_roles:                  control,ansible,pyhouse,ipv6tunnel
 
-pyh_admin_user_groups: dialout,sudo,audio,video,plugdev,input
+pyh_admin_user_groups:      dialout,sudo,audio,video,plugdev,input
 
 ### END DBK

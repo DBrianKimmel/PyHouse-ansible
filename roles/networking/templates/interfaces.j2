@@ -2,11 +2,11 @@
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
 # Updated: 2018-04-06
-
-# This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
 #
-# Used by Ubuntu (on Nucs)
+# This file describes the network interfaces available on your system and how to activate them.
+#
+# Used by:
+#		Ubuntu (on Nucs)
 
 source /etc/network/interfaces.d/*
 
@@ -20,15 +20,15 @@ iface lo inet loopback
 auto {{ if_name }}
 iface {{ if_name }} inet static
 {% if if_name.startswith('e') %}
-    ipaddress {{pyh_ethernet_ip}}
-    ip6address {{pyh_ipv6_prefix}}{{pyh_ipv6_eth_suffix}}{{pyh_ipv6_netmask}}
-    netmask {{pyh_router_netmask}}
-    gateway {{pyh_router_address}}
+    ipaddress {{pyh_ipv4_ethernet_addr}}
+    ip6address {{pyh_ipv6_network_prefix}}{{pyh_ipv6_eth_suffix}}{{pyh_ipv6_network_prefix_len}}
+    netmask {{pyh_ipv4_router_netmask}}
+    gateway {{pyh_ipv4_router_addr}}
 {% endif %}
 {% if if_name.startswith('w') %}
-    address {{pyh_wifi_ip}}
-    netmask {{pyh_router_netmask}}
-    gateway {{pyh_router_address}}
+    address {{pyh_ipv4_wifi_addr}}
+    netmask {{pyh_ipv4_router_netmask}}
+    gateway {{pyh_ipv4_router_addr}}
 {% endif %}
 {% endif %}
 {% endfor %}

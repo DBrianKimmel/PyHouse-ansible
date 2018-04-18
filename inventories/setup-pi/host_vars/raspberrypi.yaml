@@ -15,13 +15,13 @@
 ansible_host:           192.168.9.216
 
 pyh_hostname:           pi-03-ct
-pyh_ethernet_ip:        192.168.10.13
-pyh_wifi_ip:            192.168.9.13
+pyh_ipv4_ethernet_addr:        192.168.10.13
+pyh_ipv4_wifi_addr:            192.168.9.13
 pyh_roles:              setup
 
 # These are only for setup - normally they are in a group_vars file for the house we are using
-pyh_router_address:         192.168.9.1
-pyh_router_prefix_len:      20
+pyh_ipv4_router_addr:         192.168.9.1
+pyh_ipv4_router_prefix_len:      20
 vault_pyh_access_points:    {'CannonTrail-Guest': 'MarciaBrian'}
 pyh_router_nameservers:     "192.168.9.1 8.8.8.8"
 

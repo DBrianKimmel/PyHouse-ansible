@@ -1,14 +1,14 @@
 # Name:    PyHouse-ansible/inventories/development/group_vars/all/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-22
-# Updated: 2018-03-15
+# Updated: 2018-04-18
 
 # The vault variables are stored in group_vars/all/vault.yaml
 # Keep the ~/.vault-pass.txt file a secret.
 #
 # To encrypt / decript do one of the following:
-#       ansible-vault encrypt group_vars/all/vault.yaml --vault-password-file ~/.vault-pass.txt
-#       ansible-vault decrypt group_vars/all/vault.yaml --vault-password-file ~/.vault-pass.txt
+#       ansible-vault encrypt inventories/development/group_vars/all/vault.yaml --vault-password-file ~/.vault-pass.txt
+#       ansible-vault decrypt inventories/development/group_vars/all/vault.yaml --vault-password-file ~/.vault-pass.txt
 
 ---
 
@@ -28,12 +28,15 @@ pyh_pyhouse_user:       "{{ vault_pyh_pyhouse_user }}"
 pyh_pyhouse_password:   "{{ vault_pyh_pyhouse_password }}"
 pyh_long_pyhouse_name:  "{{ vault_pyh_long_pyhouse_name }}"
 
-# Used by role networking
-pyh_access_points:      {'PinkPoppy-1': 'Koepfinger-59'}
-pyh_router_address:     192.168.1.1
-pyh_router_prefix_len:  20
-pyh_router_netmask:     255.255.240.0
-pyh_router_nameservers: "192.168.1.1 8.8.8.8"
-pyh_domain:             ""
+# Used by role 'networking'
+#pyh_access_points:              vault_pyh_access_points
+pyh_access_points:             "{{ vault_pyh_access_points }}"
+pyh_ipv4_router_addr:           192.168.1.1
+pyh_ipv4_router_prefix_len:     20
+pyh_ipv4_router_netmask:        255.255.240.0
+pyh_ipv6_network_prefix:        "2001:470:5:417:"
+pyh_ipv6_network_prefix_len:    /64
+pyh_router_nameservers:         "192.168.1.1 8.8.8.8"
+pyh_domain:                     ""
 
 ### END DBK
