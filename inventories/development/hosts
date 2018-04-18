@@ -11,11 +11,12 @@
 # nuc-devel
 
 [pis]
-# pi-devel
+pi-devel
+
 
 [others]
 # other-devel
-alki-devel
+#alki-devel
 
 
 # Groupname must be a house-name

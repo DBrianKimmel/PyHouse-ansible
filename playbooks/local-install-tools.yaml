@@ -20,14 +20,15 @@
 
     - name: LocalPreTask-01-B - Debug Message
       debug:
-        msg:            "Play is on the local ansible machine.  {{ ansible_local }}"
+        msg:            "Play is on the local ansible admin machine.  {{ ansible_local }}"
       tags:
         - always
 
-    - name: LocalPreTask-02 - Copy bin files
+    - name: LocalPreTask-02 - Copy bin files for ansible commands
       copy:
         src:            "{{ item.src }}"
         dest:           "{{ item.dest }}"
+        mode:           a+x
       with_items:
         - { src: '../bin/ansible-production',  dest: '~/bin/' }
         - { src: '../bin/ansible-development', dest: '~/bin/' }
@@ -40,6 +41,7 @@
       copy:
         src:            "{{ item.src }}"
         dest:           "{{ item.dest }}"
+        mode:           a+x
       with_items:
         - { src: '../bin/vault-hook', dest: '~/workspace/PyHouse-ansible/.git/hooks/pre-commit' }
       tags:

@@ -53,16 +53,16 @@
     group:      root
     mode:       0755
 
-- name: Task-07 -Enable service to run on reboot
+- name: Task-07 -Reload and restart systemd
   systemd:
     name:           mosquitto
     daemon_reload:  yes
     state:          restarted
 
-- name: Task-08 -Enable service to run on reboot
-  systemd:
-    name:           mosquitto
-    state:          reloaded
+#- name: Task-08 -Enable service to run on reboot
+#  systemd:
+#    name:           mosquitto
+#    state:          reloaded
 
 - name: Task-09 -Enable service to run on reboot
   systemd:

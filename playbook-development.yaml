@@ -1,10 +1,13 @@
 # Name:    PyHouse-ansible/playbook-development.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-12-15
-# Updated: 2017-12-16
+# Updated: 2018-04-17
 #
+# This is the top level playbook for development computers.
+# It is involed by the ansible-production command
 # This playbook is a dispatcher.
 #
+# Loads other playbooks when calling tags are defined.
 #
 # Valid Tags:
 #   setup_development

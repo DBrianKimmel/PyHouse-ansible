@@ -1,31 +1,26 @@
 # Name:    PyHouse-ansible/playbook.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-19
-# Updated: 2018-04-12
+# Updated: 2018-04-17
 #
-# This is the top level playbook.
+# This is the top level playbook for production computers.
 # It is involed by the ansible-production command
-#
-#
-# export ANSIBLE_STRATEGY=debug
-
-
-
 # This playbook is a dispatcher.
+#
 # Loads other playbooks when calling tags are defined.
-
+#
 # Valid Tags:
 #   setup_production
 #   setup_development
 #   setup-one-pi
 #   setup_ansible
+
 ---
 
 - name: Playbook (Master)
   strategy:         linear
   hosts:            all
   gather_facts:     yes
-
 
   pre_tasks:
 

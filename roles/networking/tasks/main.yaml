@@ -5,7 +5,7 @@
 
 ---
 
-- name: Task-01-Pi - Install the wpa_supplicant file
+- name: Task-01-Pi - Install the wifi.j2 file into /etc/wpa_supplicant/wpa_supplicant.conf
   ignore_errors:    yes
   become_user:      root
   become:           yes
