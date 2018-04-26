@@ -10,45 +10,45 @@
 ---
 
 # Setup the OS distribution on which we will be installing.
-- name: Task-01 - Set up the proper OS distribution.
+- name: Main Task-01 - Set up the proper OS distribution.
   include_tasks:    "setup-{{ansible_os_family}}.yaml"
 
 # Create the Node Red user
-- name: Task-02 - Add/Create the node red user.
+- name: Main Task-02 - Add/Create the node red user.
   include_tasks:     add-user.yaml
 
 # Install extra things we need before installing node-red.
 # Somtimes extra libraries are needed so we can compile and install the various extra nodes.
-- name: Task-03 - Install extra apt packages for node red
+- name: Main Task-03 - Install extra apt packages for node red
   include_tasks:     install-extra-packages.yaml
 
 # Now we can install nodejs upon which node red relies.
-- name: Task-04 - Install Node.js (correct version)
+- name: Main Task-04 - Install Node.js (correct version)
   include_tasks:     install-nodejs.yaml
 
 # Finally we can install node-red.
-- name: Task-05 - Install Node-Red (correct version)
+- name: Main Task-05 - Install Node-Red (correct version)
   include_tasks:     install-nodered.yaml
 
 # Depending on the flows for this machine, we may need extra node-red nodes.
-- name: Task-06 - Install extra node red nodes
+- name: Main Task-06 - Install extra node red nodes
   include_tasks:     install-extra-nodes.yaml
 
 # Node red needs to run whenever we start up this computer - make it so.
-- name: Task-07 - Setup auto run on reboot
+- name: Main Task-07 - Setup auto run on reboot
   include_tasks:    install-systemd.yaml
 
 # Node red needs to run whenever we start up this computer - make it so.
-- name: Task-08 - Setup configuration
+- name: Main Task-08 - Setup configuration
   include_tasks:    install-configuration.yaml
 
 # As a precaution, we will copy all the flows back to the ansible host for safekeeping.
-- name: Task-09 - Save the flows we have
+- name: Main Task-09 - Save the flows we have
   include_tasks:    backup-flows.yaml
   tags:             fetch-files
 
 # As a precaution, we will copy all the configuration back to the ansible host for safekeeping.
-- name: Task-10 - Save the config we have
+- name: Main Task-10 - Save the config we have
   include_tasks:    backup-configuration.yaml
   tags:             fetch-files
 

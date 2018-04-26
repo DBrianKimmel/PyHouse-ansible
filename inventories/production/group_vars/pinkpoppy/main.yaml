@@ -15,15 +15,20 @@
 
 ---
 
-pyh_domain:                     ""
+
+pyh_house_name:                 vault_pyh_house_name
+pyh_house_latitude:             vault_pyh_house_latitude
+pyh_house_longitude:            vault_pyh_house_longitude
+pyh_house_elevation:            vault_pyh_house_elevation
 
 # Used by role networking
 pyh_access_points:              vault_pyh_access_points
-pyh_ipv4_router_addr:           192.168.1.1
-pyh_ipv4_router_netmask:        255.255.240.0
-pyh_ipv4_router_prefix_len:     20
-pyh_router_nameservers:         "192.168.1.1 8.8.8.8"
-pyh_ipv6_network_prefix:        2001:470:5:417:
+pyh_ipv4_router_addr:           vault_pyh_ipv4_router_addr
+pyh_ipv4_router_netmask:        vault_pyh_ipv4_router_netmask
+pyh_ipv4_router_prefix_len:     vault_pyh_ipv4_router_prefix_len
+pyh_router_nameservers:         vault_pyh_router_nameservers
+pyh_ipv6_network_prefix:        vault_pyh_ipv6_network_prefix
 pyh_ipv6_network_prefix_len:    /64
+pyh_domain:                     vault_pyh_domain
 
 ### END DBK

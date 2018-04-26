@@ -8,24 +8,27 @@
 # The vault variables are stored in group_vars/cannontrail/vault.yaml
 #
 # To encrypt / decript do one of the following:
-#       ansible-vault encrypt group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
-#       ansible-vault decrypt group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
+#       ansible-vault encrypt inventories/production/group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
+#       ansible-vault decrypt inventories/production/group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
 #
 # Keep the ~/.vault-pass.txt file a secret.
 
 ---
 
-pyh_access_points:      vault_pyh_access_points
+pyh_house_name:                 vault_pyh_house_name
+pyh_house_latitude:             vault_pyh_house_latitude
+pyh_house_longitude:            vault_pyh_house_longitude
+pyh_house_elevation:            vault_pyh_house_elevation
 
-pyh_ipv4_router_addr:     192.168.9.1
-pyh_ipv4_router_netmask:     255.255.240.0
-pyh_ipv4_router_prefix_len:  20
-pyh_router_nameservers: "192.168.9.1 8.8.8.8"
-pyh_domain:             ""
+ppyh_domain:                    ""
 
-pyh_house_name:         cannontrail
-pyh_house_latitude:     33.00000000
-pyh_house_longitude:    -85.11111111
-pyh_house_elevation:    777.00
+# Used by role networking
+pyh_access_points:              vault_pyh_access_points
+pyh_ipv4_router_addr:           vault_pyh_ipv4_router_addr
+pyh_ipv4_router_netmask:        vault_pyh_ipv4_router_netmask
+pyh_ipv4_router_prefix_len:     vault_pyh_ipv4_router_prefix_len
+pyh_router_nameservers:         vault_pyh_router_nameservers
+pyh_ipv6_network_prefix:        vault_pyh_ipv6_network_prefix
+pyh_ipv6_network_prefix_len:    /64
 
 ### END DBK

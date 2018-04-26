@@ -2,7 +2,7 @@
 # Name:     PyHouse-ansible/bin/ansible-new-pi
 # Author:   D. Brian Kimmel
 # Created:  2017-11-28
-# Updated:  2017-12-02
+# Updated:  2018-04-22
 #
 # Run ansible to set up a new raspberry pi.
 # Works with raspbian stretch and possibly later.
@@ -10,9 +10,9 @@
 # Edit the file !/workspace/PyHouse-ansible/host_vars/pi-setup.yaml and put in the new IP address
 
 INVENTORY=" -i inventories/setup-pi/hosts "
-PLAYBOOK=" playbooks/new-pi.yaml "
+PLAYBOOK=" playbook-new-pi.yaml "
 PSWD1=" --vault-password-file ~/.vault-pass.txt "
-TAGS=" --tags=setup_new_pi "
+TAGS=" --tags=tag_new_pi "
 PIUSER=" --become-user=pi --ask-become-pass "
 ASKPASS=" --ask-pass "
 

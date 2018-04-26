@@ -12,6 +12,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * Name:    PyHouse-ansible/roles/install-node-red/files/settings.js
+ * Author:  D. Brian Kimmel
+ * Created: 2018-04-24
+ * Updated: 2018-04-24
+
+
  **/
 
 // The `https` setting requires the `fs` module. Uncomment the following to make it available:
@@ -32,8 +39,8 @@ module.exports = {
     uiPort: process.env.PORT || 1880,
 
     // By default, the Node-RED UI accepts connections on all IPv4 interfaces.
-    // The following property can be used to listen on a specific interface. For
-    // example, the following would only allow connections from the local machine.
+    // The following property can be used to listen on a specific interface.
+    // For example, the following would only allow connections from the local machine.
     //uiHost: "127.0.0.1",
 
     // Retry time in milliseconds for MQTT connections
@@ -49,15 +56,13 @@ module.exports = {
     //  defaults to no timeout
     //socketTimeout: 120000,
 
-    // Timeout in milliseconds for HTTP request connections
-    //  defaults to 120 seconds
+    // Timeout in milliseconds for HTTP request connections defaults to 120 seconds
     //httpRequestTimeout: 120000,
 
     // The maximum length, in characters, of any message sent to the debug sidebar tab
-    debugMaxLength: 1000,
+    debugMaxLength: 2000,
 
-    // To disable the option for using local files for storing keys and certificates in the TLS configuration
-    //  node, set this to true
+    // To disable the option for using local files for storing keys and certificates in the TLS configuration node, set this to true
     //tlsConfigDisableLocalFiles: true,
 
     // Colourise the console output of the debug node
@@ -66,20 +71,18 @@ module.exports = {
     // The file containing the flows. If not set, it defaults to flows_<hostname>.json
     //flowFile: 'flows.json',
 
-    // To enabled pretty-printing of the flow within the flow file, set the following
-    //  property to true:
+    // To enabled pretty-printing of the flow within the flow file, set the following property to true:
     //flowFilePretty: true,
 
-    // By default, credentials are encrypted in storage using a generated key. To
-    // specify your own secret, set the following property.
+    // By default, credentials are encrypted in storage using a generated key.
+    // To specify your own secret, set the following property.
     // If you want to disable encryption of credentials, set this property to false.
     // Note: once you set this property, do not change it - doing so will prevent
-    // node-red from being able to decrypt your existing credentials and they will be
-    // lost.
+    // node-red from being able to decrypt your existing credentials and they will be lost.
     //credentialSecret: "a-secret-key",
 
-    // By default, all user data is stored in the Node-RED install directory. To
-    // use a different location, the following property can be used
+    // By default, all user data is stored in the Node-RED install directory.
+    // To use a different location, the following property can be used
     //userDir: '/home/nol/.node-red/',
 
     // Node-RED scans the `nodes` directory in the install directory to find nodes.
@@ -102,8 +105,7 @@ module.exports = {
     //httpRoot: '/red',
 
     // When httpAdminRoot is used to move the UI to a different root path, the
-    // following property can be used to identify a directory of static content
-    // that should be served at http://localhost:1880/.
+    // following property can be used to identify a directory of static content that should be served at http://localhost:1880/.
     //httpStatic: '/home/nol/node-red-static/',
 
     // The maximum size of HTTP request that will be accepted by the runtime api.
@@ -135,27 +137,22 @@ module.exports = {
     //httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
 
     // The following property can be used to enable HTTPS
-    // See http://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
-    // for details on its contents.
-    // See the comment at the top of this file on how to load the `fs` module used by
-    // this setting.
+    // See http://nodejs.org/api/https.html#https_https_createserver_options_requestlistener for details on its contents.
+    // See the comment at the top of this file on how to load the `fs` module used by this setting.
     //
     //https: {
     //    key: fs.readFileSync('privatekey.pem'),
     //    cert: fs.readFileSync('certificate.pem')
     //},
 
-    // The following property can be used to cause insecure HTTP connections to
-    // be redirected to HTTPS.
+    // The following property can be used to cause insecure HTTP connections to be redirected to HTTPS.
     //requireHttps: true
 
     // The following property can be used to disable the editor. The admin API
-    // is not affected by this option. To disable both the editor and the admin
-    // API, use either the httpRoot or httpAdminRoot properties
+    // is not affected by this option. To disable both the editor and the admin API, use either the httpRoot or httpAdminRoot properties
     //disableEditor: false,
 
-    // The following property can be used to configure cross-origin resource sharing
-    // in the HTTP nodes.
+    // The following property can be used to configure cross-origin resource sharing in the HTTP nodes.
     // See https://github.com/troygoode/node-cors#configuration-options for
     // details on its contents. The following is a basic permissive set of options:
     //httpNodeCors: {
