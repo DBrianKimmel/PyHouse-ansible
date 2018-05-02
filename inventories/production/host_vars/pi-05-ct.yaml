@@ -8,6 +8,10 @@
 # Raspberry Pi Model: 3B; Embest, China  RAM: 1024
 #
 
+
+
+
+
 ---
 
 ansible_host:               192.168.9.15

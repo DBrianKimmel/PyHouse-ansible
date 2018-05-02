@@ -10,6 +10,7 @@ localhost ansible_connection=local
 
 
 
+#=========================================
 # ----- Define all the Raspberry Pis -----
 # Pink Poppy Raspberry Pis
 [pis_pp]
@@ -31,6 +32,7 @@ pi-03-ct
 pi-05-ct
 pi-07-ct
 pi-11-ct
+#pi-12-ct
 
 # All Raspberry Pis
 [pis:children]
@@ -39,6 +41,7 @@ pis_ct
 
 
 
+#=========================================
 # ----- Define all the NUC boxes -----
 # Pink Poppy Nucs (Jump Box)
 [nucs_pp]
@@ -54,6 +57,8 @@ nucs_pp
 nucs_ct
 
 
+
+#=========================================
 # ----- Define all the other computers -----
 [pcduino-ct]
 #pcduino-01-ct
@@ -70,6 +75,8 @@ alki-pp
 laptop-roam
 
 
+
+#=========================================
 # -------------- House Groups ------------------
 # Pink Poppy Group
 [pinkpoppy:children]
@@ -81,6 +88,5 @@ alki-pp
 [cannontrail:children]
 pis_ct
 nucs_ct
-#                                                                                                                                                                                                        pcduino-ct
 
 ### END DBK

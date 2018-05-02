@@ -5,6 +5,13 @@
 #
 # The Nuc that is in the living room at CT
 
+
+
+
+
+
+
+
 ---
 
 ansible_host:               192.168.9.10
