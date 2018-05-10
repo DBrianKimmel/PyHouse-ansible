@@ -23,7 +23,7 @@ pyh_ipv4_router_addr:           192.168.1.1
 pyh_ipv4_router_netmask:        255.255.240.0
 pyh_ipv4_router_prefix_len:     20
 pyh_router_nameservers:         "192.168.1.1 8.8.8.8"
-pyh_ipv6_network_prefix:        2001:470:5:417:
+pyh_ipv6_network_prefix:        "2001:470:5:417:"
 pyh_ipv6_network_prefix_len:    /64
 
 ### END DBK

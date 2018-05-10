@@ -33,6 +33,7 @@ pi-05-ct
 pi-07-ct
 pi-11-ct
 #pi-12-ct
+pi-13-ct
 
 # All Raspberry Pis
 [pis:children]
