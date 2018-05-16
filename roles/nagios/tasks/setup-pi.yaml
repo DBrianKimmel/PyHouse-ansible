@@ -1,0 +1,10 @@
+# Name:    PyHouse-ansible/roles/nagios/tasks/setup-pi.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-05-08
+# Updated: 2018-05-08
+#
+
+---
+
+
+### END DBK

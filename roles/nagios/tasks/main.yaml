@@ -4,4 +4,12 @@
 # Updated: 2017-11-09
 #
 
+---
+
+# All includes are dynamic
+
+- name: Task-01 - Set up the proper OS distribution
+  include_tasks:    "setup-pi.yaml"
+
+
 ### END DBK
