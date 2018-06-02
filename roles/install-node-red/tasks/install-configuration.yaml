@@ -1,13 +1,14 @@
 # Name:    PyHouse-ansible/roles/install-node-red/tasks/install-configuration.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-03-21
-# Updated: 2018-04-24
+# Updated: 2018-05-11
 #
 ---
 
 - name: install-configuration-01 - Msg
   debug:
     msg:
+      - "Installing Node-Red Configuration files"
       - "Admin User: {{pyh_admin_user}}"
       - "NodeRed User: {{pyh_nodered_user}}"
   tags: always
@@ -31,12 +32,10 @@
   ignore_errors:    yes
   become_user:      root
   become:           yes
-  copy:
-    src:        "../files/localSettings.js"
+  template:
+    # in /roles/install-node-red/templates/
+    src:        "../templates/localSettings.j2"
     dest:       "/home/{{ pyh_nodered_user }}/.node-red/"
-    owner:      "{{ pyh_nodered_user }}"
-    group:      "{{ pyh_nodered_user }}"
-    mode:       0755
   tags: always
 
 ### END DBK
