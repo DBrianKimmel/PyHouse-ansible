@@ -9,7 +9,7 @@
 # this creates a systemd service for raspi
 # Template File:    PyHouse-ansible/roles/networking/templates/he-service.j2
 # Gets variables from:
-#       i
+#       ixxx
 - name: InstallSystemd-01 - Create he-ipv6.service
   template:
     # in /roles/networking/templates/

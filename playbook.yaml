@@ -18,16 +18,18 @@
 ---
 
 - name: Playbook (Master)
-  strategy:         linear
   hosts:            all
+  strategy:         linear
   gather_facts:     yes
+  remote_user:      root
+  become:           yes
+  become_method:    sudo
 
   pre_tasks:
 
-  - name: Start - Tags
+  - name: Start - Tags 1
     debug:
       msg:    "Tags are ansible_tags"
-
 
   tasks:
 
@@ -38,6 +40,11 @@
       flag_new_pi = False
     vars:
       flag_ansible: "False"
+
+  - name: Start - Tags 2
+    debug:
+      msg:    "Tags are ansible_tags"
+
 
 # Production
   - name: Production - Update the production computers,
@@ -59,27 +66,26 @@
     set_fact: flag_ansible "True"
     tags: setup_ansible
 
-  - name: Debug
+  - name: Debug 1
     debug: msg="Flag Settings {{ ansible_local }}"
 
 
 # Now define the plays
 
 # Update the tools
-- import_playbook: "./playbooks/local-install-tools.yaml"
-#  when: flag_ansible == "True"
-
+#- import_playbook: "./playbooks/local-install-tools.yaml"
+#  when: ansible_local.flag_ansible == "True"
 
 # Now get the proper Production playbook(s)
-- import_playbook: "./playbooks/production-pis.yaml"
+#- import_playbook: "./playbooks/production-pis.yaml"
 #  when:
 #  - tag_production is defined
 
-- import_playbook: "./playbooks/production-nucs.yaml"
+#- import_playbook: "./playbooks/production-nucs.yaml"
 #  when:
 #  - tag_production is defined
 
-- import_playbook: "./playbooks/production-others.yaml"
+#- import_playbook: "./playbooks/production-others.yaml"
 #  when:
 #  - tag_production is defined
 
@@ -91,11 +97,12 @@
 
 
 # Now get the proper new server setup playbook(s)
-#- import_playbook: "./playbooks/new-pi.yaml"
-#  when:
-#  - flag_new_pi is defined
+- import_playbook: "./playbook-development.yaml"
+  tags:     tag_development
 
-
+# Now get the proper new server setup playbook(s)
+- import_playbook: "./playbooks/new-pi.yaml"
+  tags:     tag_new_pi
 
 # Now get the proper localhost playbook(s)
 - import_playbook: "./playbooks/fetch-config-files.yaml"

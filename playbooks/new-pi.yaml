@@ -1,9 +1,9 @@
-# Name:    PyHouse-ansible/playbooks/development-setup-one-computer.yaml
+# Name:    PyHouse-ansible/playbooks/new-pi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-17
 # Updated: 2017-12-06
 
-# This playbook is used to set up one computer
+# This playbook is used to set up one raspberry pi computer
 #
 # It goes from installing a fresh version of the particular OS to being a basically functioning unit/
 #
@@ -13,8 +13,11 @@
 ---
 
 - name: Play - New-Pi - Set up a fresh Pi 
-  hosts: raspberrypi
-  strategy: debug
+  hosts:            raspberrypi
+  strategy:         debug
+  remote_user:      root
+  become:           yes
+  become_method:    sudo
 
   pre_tasks:
 
@@ -47,10 +50,6 @@
 
   roles:
 
-    - role: roles/package-management
-      tags:
-        - always
-
     - role: ../roles/add-user
       tags:
         - setup-pi
@@ -70,6 +69,10 @@
     - role: ../roles/avahi
       tags:
         - setup-pi
+        - always
+
+    - role: roles/package-management
+      tags:
         - always
 
 ### END DBK

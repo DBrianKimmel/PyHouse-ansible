@@ -1,20 +1,30 @@
 # Name:    PyHouse-ansible/playbooks/development-pis.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-20
-# Updated: 2018-04-17
+# Updated: 2018-04-24
 
 ---
 
-- name: Development-Pis - Perform config for development machine - test it out.
+- name: Development-Pis.yaml - First.
   hosts:                all
   strategy:             linear
   become:               yes
   become_method:        sudo
-  gather_facts:         no
 
   pre_tasks:
 
-    - name: Development-Pis-01- Include vars from local-configure.yaml if found
+    - name: Development-Pis-01- Starting...
+      debug:
+        msg:
+          - "User: {{pyh_admin_user}}"
+          - "Pass: {{vault_pyh_admin_password}}"
+          - "Dist: {{ansible_os_family}}"
+          - "Host: {{pyh_hostname}}"
+          - "Role: {{pyh_roles}}"
+      tags:
+        - always
+
+    - name: Development-Pis-02- Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
       with_first_found:
        - '../defaults/local-configure.yaml'
@@ -40,33 +50,20 @@
 
   roles:
 
-    - role: roles/networking
-      tags:
-        - always
-
-#    - role: roles/package-management
-#      tags:
-#        - always
-
     - role: roles/install-mqtt
       when: pyh_roles.find("mqtt") != -1
-      tags:
-        - always
+      tags: always
 
     - role: roles/install-pyhouse
       when: pyh_roles.find("pyhouse") != -1
-      tags:
-        - always
+      tags: always
 
     - role: roles/install-pandora
       when: pyh_roles.find("pandora") != -1
-      tags:
-        - always
+      tags: always
 
     - role: roles/install-node-red
       when: pyh_roles.find("node-red") != -1
-      tags:
-        - always
-
+      tags: always
 
 ### END DBK

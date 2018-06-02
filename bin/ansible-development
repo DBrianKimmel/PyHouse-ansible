@@ -13,7 +13,7 @@ PSWD1="     --vault-password-file  ~/.vault-pass.txt "
 TAGS=""
 
 if [ $# -gt 0 ]; then
-    TAGS+=" --tags=setup_development,$1 "
+    TAGS+=" --tags=tag_development,$1 "
     echo "Tags = ${TAGS} "
 else
     TAGS+=" --tags=tag_development "

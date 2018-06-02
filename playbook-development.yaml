@@ -19,16 +19,17 @@
   hosts:            all
   gather_facts:     yes
 
-  tasks:
+  pre_tasks:
 
   - name:           Task-01
     debug:
-      msg: "Developing for {{ pyh_hostname }}"
+      msg: "Installing Development for {{ pyh_hostname }} - {{ pyh_roles }}"
+    tags: always
 
 # Development
 
 - import_playbook: "./playbooks/development-pis.yaml"
 
-- import_playbook: "./playbooks/fetch-config-files.yaml"
+#- import_playbook: "./playbooks/fetch-config-files.yaml"
 
 ### END DBK

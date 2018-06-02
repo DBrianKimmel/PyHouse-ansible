@@ -1,0 +1,8 @@
+# Name:    PyHouse-ansible/roles/networking/tasks/install-ethernet.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-04-22
+# Updated: 2018-04-22
+
+---
+
+### END DBK

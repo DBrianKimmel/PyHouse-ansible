@@ -7,14 +7,14 @@
 
 - name: Task-01-Pi - Install the wifi.j2 file into /etc/wpa_supplicant/wpa_supplicant.conf
   ignore_errors:    yes
-  become_user:      root
-  become:           yes
   template:
     src:            ./wifi.j2
     dest:           /etc/wpa_supplicant/wpa_supplicant.conf
     owner:          root
     group:          root
     mode:           0600
+#  notify:
+#    restart 
   when:
     - ansible_lsb.id == 'Raspbian'
     - pyh_ipv4_wifi_addr != 'no'
@@ -48,7 +48,7 @@
     backup:         true
   when:             ansible_lsb.id == 'Ubuntu'
 
-- name: Task-04 - Install IPv6 Tunnel tp Hurricane electric
+- name: Task-03 - Install IPv6 Tunnel tp Hurricane electric
   include_tasks:    install-v6-tunnel
   when:         pyh_roles.find("ipv6tunnel") != -1
 
