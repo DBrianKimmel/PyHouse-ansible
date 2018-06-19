@@ -19,7 +19,7 @@
 
 ---
 
-- name: Playbook (Master)
+- name:             Playbook-Production
   hosts:            all
   strategy:         linear
   gather_facts:     yes

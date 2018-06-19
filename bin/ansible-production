@@ -25,6 +25,7 @@ else
 fi
 
 cd ~/workspace/PyHouse-ansible
+echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
 ansible-playbook  -vv  ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
 cd -
 

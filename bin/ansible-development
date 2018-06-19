@@ -7,6 +7,10 @@
 #
 # Deploys the development setup.
 
+
+
+
+
 INVENTORY=" -i inventories/development/hosts "
 PLAYBOOK="  playbook-development.yaml "
 PSWD1="     --vault-password-file  ~/.vault-pass.txt "
@@ -21,6 +25,7 @@ else
 fi
 
 cd ~/workspace/PyHouse-ansible
+echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
 ansible-playbook  -vv  ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
 cd -
 

@@ -20,7 +20,7 @@ pyh_house_latitude:             vault_pyh_house_latitude
 pyh_house_longitude:            vault_pyh_house_longitude
 pyh_house_elevation:            vault_pyh_house_elevation
 
-ppyh_domain:                    ""
+pyh_domain:                    ""
 
 # Used by role networking
 pyh_access_points:              vault_pyh_access_points
