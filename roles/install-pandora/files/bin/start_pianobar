@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# name:      PyHouse-ansible/roles/install-pandora/files/bin/start_pianobar
+# author:    D. Brian Kimmel
+# contact:   D.BrianKimmel@gmail.com
+# copyright: (c) 2018-2018 by D. Brian Kimmel
+# license:   MIT License
+# Created:   2018-06-20
+# Updated:   2018-06-20
+# Summary:   This starts Pianobar
+
+cd /home/briank/Patiobar
+
+# Kill any old Patiobar processes running
+/home/briank/bin/stop_pianobar 1> /dev/null
+screen -S pianobar -d -m bash -c 'pianobar'
+
+# The "patiobar" in the end is not needed and is used as an identifier so we can kill it when stopping.
+# Otherwise, we might kill other "node index.js" processes.
+node index.js patiobar > /dev/null 2>&1 &
+
+echo "Go to http://$(hostname):3000/ to launch the Web interface."
+
+### END DBK

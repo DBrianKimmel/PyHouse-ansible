@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbooks/initialize-one-pi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2017-11-21
+# Updated: 2018-06-26
 #
 # This is the main raspberry pi initial setup playbook.
 
@@ -57,7 +57,7 @@
     - role: hostname
       tags: setup-pi
 
-    - role: add-user
+    - role: add-admin-user
       tags: setup-pi
 
     - role: avahi

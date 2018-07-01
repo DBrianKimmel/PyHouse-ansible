@@ -60,7 +60,15 @@
     group:              '{{ pyh_pyhouse_user }}'
     mode:               0755
 
-- name: InstallPyhouse-07 - Clone the PyHouse package
+- name: InstallPyhouse-07 - Fix any bad owners
+  file:
+    dest:               "/home/pyhouse/workspace"
+    owner:              '{{ pyh_pyhouse_user }}'
+    group:              '{{ pyh_pyhouse_user }}'
+    mode:               0755
+    recurse:            yes
+
+- name: InstallPyhouse-08 - Clone the PyHouse package
   become:               yes
   become_user:          '{{ pyh_pyhouse_user }}'
   ignore_errors:        yes

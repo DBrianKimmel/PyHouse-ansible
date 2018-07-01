@@ -6,21 +6,30 @@
 # This is the top level playbook for production computers.
 # This playbook is a dispatcher.
 
+
+
+
+
+
+
+
+
+
+
+
 ---
 
-- name: Playbook (Production)
-  hosts:            all
+- name:             Playbook-Production
   strategy:         linear
+  hosts:            all
   gather_facts:     yes
 
-# Install ansible on the admin machine.
-  - name: Admin - Set up ansible on the ansible admin computers.
-    set_fact: flag_ansible "True"
-    tags: setup_ansible
+  pre_tasks:
 
-  - name: Debug
-    debug: msg="Flag Settings {{ ansible_local }}"
-
+  - name:           Play-Production - PreTask-01 - List the pyh_role for each host
+    debug:
+      msg: "Installing Production for {{ pyh_hostname }} - {{ pyh_roles }}"
+    tags: always
 
 # Now define the plays
 

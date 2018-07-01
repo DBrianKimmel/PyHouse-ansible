@@ -12,7 +12,7 @@
 #		backup
 
 INVENTORY=" -i inventories/production/hosts "
-PLAYBOOK="  playbook.yaml "
+PLAYBOOK="  playbook-production.yaml "
 PSWD1="     --vault-password-file  ~/.vault-pass.txt "
 TAGS=""
 

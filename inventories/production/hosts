@@ -28,14 +28,14 @@ pi-11-pp
 [pis_ct]
 pi-01-ct
 pi-02-ct
-pi-03-ct
+#pi-03-ct
 pi-04-ct
 pi-05-ct
 pi-06-ct
 pi-07-ct
 pi-11-ct
 #pi-12-ct
-pi-13-ct
+#pi-13-ct
 
 # All Raspberry Pis
 [pis:children]
@@ -70,7 +70,8 @@ nucs_ct
 alki
 
 [laptop-roam]
-Laptop-3
+Laptop-3-ct
+Laptop-3-pp
 
 [others:children]
 #pcduino-ct

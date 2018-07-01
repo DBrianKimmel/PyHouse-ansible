@@ -26,7 +26,7 @@
 
   pre_tasks:
 
-  - name:           Task-01
+  - name:           Play-Devel - PreTask-01 - List the pyh_role for each host
     debug:
       msg: "Installing Development for {{ pyh_hostname }} - {{ pyh_roles }}"
     tags: always

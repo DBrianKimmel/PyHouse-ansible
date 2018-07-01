@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-    "house_name"       : "{{pyh_housename}}",
+    "house_name"       : "{{pyh_house_name}}",
     "node_name"        : "{{pyh_hostname}}",
     "public_ipv4"      : "1.2.3.4",
     "connection_lost"  : "Unknown",

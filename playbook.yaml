@@ -23,7 +23,6 @@
   hosts:            all
   strategy:         linear
   gather_facts:     yes
-  remote_user:      root
   become:           yes
   become_method:    sudo
 
@@ -98,13 +97,18 @@
 #  - tag_production is defined
 
 
-# Now get the proper new server setup playbook(s)
-- import_playbook: "./playbook-development.yaml"
-  tags:     tag_development
+- import_playbook: "./playbooks/development-pis.yaml"
+#  when:
+#  - tag_production is defined
+
 
 # Now get the proper new server setup playbook(s)
-- import_playbook: "./playbooks/new-pi.yaml"
-  tags:     tag_new_pi
+#- import_playbook: "./playbook-development.yaml"
+#  tags:     tag_development
+
+# Now get the proper new server setup playbook(s)
+#- import_playbook: "./playbooks/new-pi.yaml"
+#  tags:     tag_new_pi
 
 # Now get the proper localhost playbook(s)
 - import_playbook: "./playbooks/fetch-config-files.yaml"

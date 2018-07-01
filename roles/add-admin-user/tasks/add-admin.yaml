@@ -1,53 +1,15 @@
-# Name:    PyHouse-ansible/roles/add-user/tasks/main.yaml
+# Name:    PyHouse-ansible/roles/add-admin-user/tasks/add-admin.yaml
 # Author:  D. Brian Kimmel
-# Created: 2017-10-15
-# Updated: 2017-12-11
+# Created: 2018-06-26
+# Updated: 2018-06-26
 #
-# This role adds the admin user to the node.
-# This user is in the vault of production and setup-pi under group_vars/all.
+# This role adds an admin user account.
 #
 
 ---
 
-- name: Task-01 - Create pi .ssh dir
-  ignore_errors:    yes
-  file:
-    name:       "/home/pi/.ssh"
-    state:      directory
-    owner:      "pi"
-    group:      "pi"
-    mode:       0700
-
-- name: Task-01 - Copy authorized_keys file to ~/.ssh
-  copy:
-    src:        "~/.ssh/authorized_keys"
-    dest:       "/home/pi/.ssh"
-    owner:      "pi"
-    group:      "pi"
-    mode:       0600
-
-# --- "pi" user
-# Change the pi user's password
-- name: Task-01-Debian - Change "pi" password
-  ignore_errors:    yes
-  become_user:      root
-  become:           yes
-  user:
-    name:           pi
-    password:       "{{ pyh_pi_password }}"
-    comment:        "Default User"
-  when: ansible_os_family == 'Debian'
-
-
-- name: Task-dd - Info
-  debug:
-    msg: " User:{{ pyh_admin_user }};  Pass:{{ vault_pyh_admin_password }};  Dist:{{ansible_os_family}}; "
-
-
-
-# --- "Admin" user
 # Create the admin user
-- name: Task-02-Suse - Add Admin User
+- name: Task-01-Suse - Add Admin User
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -59,7 +21,7 @@
     groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_lsb.id == 'Suse'
 
-- name: Task-02-Raspbian - Add Admin User
+- name: Task-01-Raspbian - Add Admin User
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -71,7 +33,7 @@
     groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_lsb.id == 'Raspbian'
 
-- name: Task-02-Ubuntu - Add Admin User
+- name: Task-01-Ubuntu - Add Admin User
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -83,7 +45,8 @@
     groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_lsb.id == 'Ubuntu'
 
-- name: Task-03 - Create the sudoers.d file for admin user
+
+- name: Task-02 - Create the sudoers.d file for admin user
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -94,7 +57,7 @@
     group:          root
     mode:           0600
 
-- name: Task-04 - Be sure admin user home dir ownership is OK
+- name: Task-03 - Be sure admin user home dir ownership is OK
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -105,7 +68,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0755
 
-- name: Task-05 - Create bin dir for admin user
+- name: Task-04 - Create bin dir for admin user
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -116,7 +79,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0755
 
-- name: Task-06 - Copy admin files to ~/bin
+- name: Task-05 - Copy admin files to ~/bin
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -127,7 +90,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0755
 
-- name: Task-07 - Create admin user .ssh dir
+- name: Task-06 - Create admin user .ssh dir
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -138,7 +101,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0700
 
-- name: Task-08 - Copy authorized_keys file to ~/.ssh
+- name: Task-07 - Copy authorized_keys file to ~/.ssh
   become_user:      root
   become:           yes
   copy:
@@ -148,7 +111,7 @@
     group:      "{{ pyh_admin_user }}"
     mode:       0600
 
-- name: Task-09 - Copy id_rsa file to ~/.ssh
+- name: Task-08 - Copy id_rsa file to ~/.ssh
   become_user:      root
   become:           yes
   copy:

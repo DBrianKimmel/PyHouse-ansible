@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2018-04-18
+# Updated: 2018-06-24
 
 ---
 
@@ -13,8 +13,6 @@
     owner:          root
     group:          root
     mode:           0600
-#  notify:
-#    restart 
   when:
     - ansible_lsb.id == 'Raspbian'
     - pyh_ipv4_wifi_addr != 'no'
@@ -50,17 +48,12 @@
 
 - name: Task-03 - Install IPv6 Tunnel tp Hurricane electric
   include_tasks:    install-v6-tunnel
-  when:         pyh_roles.find("ipv6tunnel") != -1
+  when:             pyh_roles.find("ipv6tunnel") != -1
 
-#- name: Task-99 - Add mappings to /etc/dhcpcd.conf
-#  blockinfile:
-#    path: /etc/dhcpcd.conf
-#    block: |
-#      {{ item.ip }} {{ item.name }}
-#    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
-#  with_items:
-#    - { name: host1, ip: 10.10.1.10 }
-#    - { name: host2, ip: 10.10.1.11 }
-#    - { name: host3, ip: 10.10.1.12 }
+- name: Task-04-Pi - Add ntpdate to raspbian
+  apt: 
+    name:           ntpdate
+    state:          present
+  when:             ansible_lsb.id == 'Raspbian'
 
 ### END DBK

@@ -3,6 +3,20 @@
 # Created: 2017-11-20
 # Updated: 2018-04-24
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 - name: Development-Pis.yaml - First.
@@ -10,25 +24,37 @@
   strategy:             linear
   become:               yes
   become_method:        sudo
+  gather_facts:     yes
+
+
 
   pre_tasks:
 
-    - name: Development-Pis-01- Starting...
+    - name: DevelopmentPis-PreTask-00- Starting, Display some vars...
       debug:
         msg:
           - "User: {{pyh_admin_user}}"
-          - "Pass: {{vault_pyh_admin_password}}"
           - "Dist: {{ansible_os_family}}"
           - "Host: {{pyh_hostname}}"
           - "Role: {{pyh_roles}}"
       tags:
         - always
 
-    - name: Development-Pis-02- Include vars from local-configure.yaml if found
+    - name: DevelopmentPis-PreTask-01 - Fail if Ansible is ancient
+      fail:
+        msg:        "We need Ansible >= 2.4. Please update your installed ansible"
+      when:         ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
+      tags:
+        - always
+
+    - name: DevelopmentPis-PreTask-02 - Dynamic Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
       with_first_found:
-       - '../defaults/local-configure.yaml'
-       - ../defaults/null.yaml
+        - files:
+            - "local-configure.yaml"
+            - "null.yaml"
+          paths:
+            - "../defaults/"
       tags:
         - always
 
@@ -36,22 +62,17 @@
 # ========================================================================
 # ==== pyh_roles dispatch
 
-#   ansible
-#   control
-#   install-mqtt
-#   install-pandora
-#   install-pyhouse
-#   install-node-red
-#   networking
-#   octoprint
-#   package-management
-#   postgresql
-#   relay
-
   roles:
+
+    - role: roles/install-basic-system
+      tags: always
 
     - role: roles/install-mqtt
       when: pyh_roles.find("mqtt") != -1
+      tags: always
+
+    - role: roles/install-octoprint
+      when: pyh_roles.find("octoprint") != -1
       tags: always
 
     - role: roles/install-pyhouse

@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbooks/new-pi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-17
-# Updated: 2017-12-06
+# Updated: 2018-06-26
 
 # This playbook is used to set up one raspberry pi computer
 #
@@ -50,7 +50,7 @@
 
   roles:
 
-    - role: ../roles/add-user
+    - role: ../roles/add-admin-user
       tags:
         - setup-pi
         - always

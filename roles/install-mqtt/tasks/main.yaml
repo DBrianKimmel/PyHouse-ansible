@@ -7,13 +7,13 @@
 
 ---
 
-- name: Task-01 - install mqtt broker
+- name: Task-01 - Apt install mqtt broker
   apt:
     name:               mosquitto
     update_cache:       yes
     cache_valid_time:   3600
 
-- name: Task-02 - install config file
+- name: Task-02 - install pyhouse.conf config file
   copy:
     src:        ./pyhouse.conf
     dest:       /etc/mosquitto/conf.d/pyhouse.conf
@@ -37,7 +37,7 @@
     group:      root
     mode:       0644
 
-- name: Task-05 - Make TLS dirs
+- name: Task-05 - Make MQTT TLS certs dir
   file:
     name:       "/etc/mosquitto/certs"
     state:      directory
@@ -45,7 +45,7 @@
     group:      root
     mode:       0755
 
-- name: Task-06 - Make TLS dirs
+- name: Task-06 - Make MQTT TLS ca_certificates dir
   file:
     name:       "/etc/mosquitto/ca_certificates"
     state:      directory

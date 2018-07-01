@@ -5,7 +5,7 @@
 #
 ---
 
-- name: InstallNodeRed-01 - Node
+- name: InstallNodeRed-01 - Npm install "node-red"
   become:           yes
   become_user:      root
   #become_user:      "{{pyh_nodered_user}}"

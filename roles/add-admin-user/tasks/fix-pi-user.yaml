@@ -1,14 +1,20 @@
-# Name:    PyHouse-ansible/roles/add-user/tasks/fix-pi-user.yaml
+# Name:    PyHouse-ansible/roles/add-admin-user/tasks/fix-pi-user.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-04-17
-# Updated: 2018-04-17
+# Updated: 2018-06-26
 #
 # This role adds Fixes the pi user from the distribution defaults.
 #
 
 ---
 
-- name: Task-01 - Create pi .ssh dir
+- name: Task-01 - Info
+  debug:
+    msg:
+      - "User:      {{ pyh_admin_user }}"
+      - "Dist:      {{ ansible_os_family }}"
+
+- name: Task-02 - Create pi .ssh dir
   ignore_errors:    yes
   file:
     name:       "/home/pi/.ssh"
@@ -17,7 +23,7 @@
     group:      "pi"
     mode:       0700
 
-- name: Task-01 - Copy authorized_keys file to ~/.ssh
+- name: Task-03 - Copy authorized_keys file to ~/.ssh
   copy:
     src:        "~/.ssh/authorized_keys"
     dest:       "/home/pi/.ssh"
@@ -27,7 +33,7 @@
 
 # --- "pi" user
 # Change the pi user's password
-- name: Task-01-Debian - Change "pi" password
+- name: Task-04-Debian - Change "pi" password
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -37,9 +43,5 @@
     comment:        "Default User"
   when: ansible_os_family == 'Debian'
 
-
-- name: Task-dd - Info
-  debug:
-    msg: " User:{{ pyh_admin_user }};  Pass:{{ vault_pyh_admin_password }};  Dist:{{ansible_os_family}}; "
 
 ### END DBK

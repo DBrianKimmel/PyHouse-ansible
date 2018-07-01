@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbooks/production-pis.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2018-04-12
+# Updated: 2018-06-26
 #
 # This is the main production playbook.
 
@@ -11,18 +11,14 @@
 #   setup-pi                - Initial setup of new image SDcard Pi
 #   fetch-files             - Pull back selected config files
 
-# Vars:
-#   install_fail2ban        -
-#   install_loadbalancer    -
-#   install_logwatch        -
-#   install_motd            -
-#   install_proxycache      -
-#   install_webserver       -
-#   set_timezone            -
+
+
+
+
+
 
 ---
 
-# The second play is to install remote PI hosts.
 - name: Play - Production-Pis - Install
   hosts:            pis
   strategy:         linear
@@ -30,7 +26,18 @@
   become_method:    sudo
   gather_facts:     yes
 
+
   pre_tasks:
+
+    - name: ProductionPis-PreTask-00 - Starting, Display some vars...
+      debug:
+        msg:
+          - "User: {{pyh_admin_user}}"
+          - "Dist: {{ansible_os_family}}"
+          - "Host: {{pyh_hostname}}"
+          - "Role: {{pyh_roles}}"
+      tags:
+        - always
 
     - name: ProductionPis-PreTask-01 - Fail if Ansible is ancient
       fail:
@@ -51,55 +58,6 @@
       tags:
         - always
 
-
-#    # Update all packages
-#    - name: ProductionPis-PreTask-04-Suse - Update packages
-#      ignore_errors:        yes
-#      when: ansible_os_family == 'Suse'
-#      zypper:
-#        name:               "*"
-#        state:              latest
-#        update_cache:       yes
-
-
-#    - name: ProductionPis-PreTask-05-Debian - Ensure optional packages via apt
-#      when: ansible_os_family == 'Debian'
-#      apt:
-#        pkg: "{{ item }}"
-#        state: present
-#      with_items: "{{ additional_packages|default([]) }}"
-
-#    - name: ProductionPis-PreTask-06-CentOS - Enable aditional repos for CentOS
-#      yum:
-#        pkg: "{{ item }}"
-#        state: present
-#      when: ansible_distribution == 'CentOS'
-#      with_items:
-#        - epel-release
-#      tags:
-#        - munin
-#        - varnish
-
-
-#    - name: ProductionPis-PreTask-07-RedHat - Ensure optional packages via yum
-#      when: ansible_os_family == 'RedHat'
-#      yum:
-#        name: "{{ item }}:"
-#        state: present
-#        update_cache: yes
-#      with_items: "{{ additional_packages|default([]) }}"
-
-#    - name: ProductionPis-PreTask-08-RedHat  - Ensure selinux packages via yum
-#      when: ansible_os_family == 'RedHat' and ansible_selinux
-#      yum:
-#        name: "{{ item }}"
-#        state: present
-#        update_cache: yes
-#      with_items:
-#        - libsemanage-python
-#      tags:
-#        - nginx
-#        - haproxy
 
 # ========================================================================
 # ==== pyh_roles dispatch
@@ -130,7 +88,7 @@
       tags:
         - always
 
-    - role: roles/add-user
+    - role: roles/add-admin-user
       tags:
         - always
 
@@ -148,24 +106,29 @@
       tags:
         - motd
 
+
+
+    - role: roles/install-basic-system
+      tags: always
+
     - role: roles/install-mqtt
       when: pyh_roles.find("mqtt") != -1
-      tags:
-        - always
+      tags: always
+
+    - role: roles/install-octoprint
+      when: pyh_roles.find("octoprint") != -1
+      tags: always
 
     - role: roles/install-pyhouse
       when: pyh_roles.find("pyhouse") != -1
-      tags:
-        - always
+      tags: always
 
     - role: roles/install-pandora
       when: pyh_roles.find("pandora") != -1
-      tags:
-        - always
+      tags: always
 
     - role: roles/install-node-red
       when: pyh_roles.find("node-red") != -1
-      tags:
-        - always
+      tags: always
 
 ### END DBK
