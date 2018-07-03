@@ -1,17 +1,17 @@
 # Name:    PyHouse-ansible/roles/install-basic-system/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-27
-# Updated: 2018-06-27
+# Updated: 2018-07-02
 #
 # This role will do the basics on each computer.
 #
 # Set up ntp
-# set timezone ot EST
+# set timezone to EST
 # Add admin user
-# Set up reboot schedule
 # Set up software update schedule
 # MOTD
-# Avahi
+# SSH and VNC access
+
 
 
 
@@ -32,6 +32,12 @@
     name:               "{{ item }}"
     state:              latest
   with_items:           "{{pyh_extra_apt_packages}}"
+
+- name: Main-Task-02 - Set ip autoreboot
+  include_tasks:        auto-reboot.yaml
+
+- name: Main-Task-03 - Set avahi
+  include_tasks:        setup-avahi.yaml
 
 
 ### END DBK

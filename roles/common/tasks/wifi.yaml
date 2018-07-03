@@ -7,8 +7,6 @@
 
 ---
 
-#- name: wifi-task-01A - Imports
-#  include: roles/common/tasks/avahi.yaml
 
 #- name: wifi-task-01B- Imports
 #  include: roles/common/tasks/pkg_mgr.yaml

@@ -92,10 +92,6 @@
       tags:
         - always
 
-    - role: roles/avahi
-      tags:
-        - always
-
     - role: roles/timezone
       when: set_timezone|default(True)
       tags:

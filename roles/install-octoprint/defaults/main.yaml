@@ -1,0 +1,43 @@
+# Name:    PyHouse-ansible/roles/install-octoprint/defaults/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-07-01
+# Updated: 2018-07-01
+#
+# This role will install  * * * O C T O P R I N T * * *  on a raspberry pi computer.
+#
+# 
+#
+---
+
+pyh_user_name:              octo
+pyh_user_comment:           "The OctoPrint User"
+pyh_user_groups:            "dialout,audio,video"
+pyh_octoprint_dir:          OctoPrint
+pyh_octoprint_path:         '/home/{{ pyh_user_name }}/{{ pyh_octoprint_dir }}/'
+
+virtualenv_user:            '{{ pyh_user_name }}'
+virtualenv_path:            '/home/{{ pyh_user_name }}/{{ pyh_octoprint_dir }}/venv'
+
+virtualenv_default_os_packages:
+  apt:
+    - python-dev
+    - python-virtualenv
+  yum:
+    - python-devel
+    - python-virtualenv
+
+virtualenv_os_packages: {}
+
+virtualenv_easy_install_packages: []
+
+virtualenv_global_packages: []
+
+virtualenv_pre_packages: []
+
+virtualenv_requirements: []
+
+virtualenv_post_packages: []
+
+virtualenv_recreate: false
+
+### END DBK

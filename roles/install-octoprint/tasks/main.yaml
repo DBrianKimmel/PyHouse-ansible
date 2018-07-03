@@ -6,16 +6,8 @@
 # This role will install  * * * O C T O P R I N T * * *  on a raspberry pi computer.
 #
 # Be sure to edit group_vars/octoprint.yaml
-
-
-
-
-
-
-
-
-
-
+#
+# See: github.com/cchurch/ansible-role-virtualenv
 
 ---
 
@@ -28,45 +20,151 @@
       - "Lsb:           {{ ansible_lsb }}"
 
 
-- name: Task-01 - fetch the pyhouse group vars
+- name: Task-01 - determine current user
+  command:              whoami
+  register:             _virtualenv_whoami_result
+  changed_when:         false
+
+- name: Task-02 - initialize default variables
+  set_fact:
+    _virtualenv_path:           '{{ virtualenv_path | mandatory }}'
+    _virtualenv_user:           '{{ virtualenv_user | default(ansible_user|default(""),true) | default(ansible_ssh_user|default(""),true) }}'
+    _virtualenv_becoming:       '{{ ((_virtualenv_whoami_result.stdout != ansible_user|default("") and _virtualenv_whoami_result.stdout != ansible_ssh_user|default("")) or _virtualenv_whoami_result.stdout == "root")|bool}}'
+    _virtualenv_actual_user:    '{{ _virtualenv_whoami_result.stdout }}'
+
+- name: Task-03 - fetch the pyhouse group vars
   include_vars:         octoprint.yaml
 
-- name: Task-02 - Add User "octo"
+- name: Task-04 - Add User "octo"
   include_tasks:         "../roles/common/tasks/add-user.yaml p_user={{ pyh_user_name }} p_comment={{ pyh_user_comment}} p_groups={{ pyh_user_groups }}"
 
-- name: Task-03 - Install apt packages
+- name: Task-05 - Install apt packages
   include_tasks:         ../roles/install-octoprint/tasks/install-extra-packages.yaml 
 
 #mkdir OctoPrint && cd OctoPrint
-- name: Task-04 - Create OctoPrint dir
+- name: Task-06 - Create OctoPrint dir
   ignore_errors:        yes
   become_user:          root
   become:               yes
   file:
-    name:               "/home/{{ pyh_user_name }}/{{ pyh_octoprint_dir }}"
+    name:               "{{ pyh_octoprint_path }}"
     state:              directory
     owner:              "{{ pyh_user_name }}"
     group:              "{{ pyh_user_name }}"
     mode:               0755
 
-- name: Task-05 - Create virtualenv
+- name: Task-07 - Create virtualenv
   sudo:                 true
   sudo_user:            "{{ pyh_user_name }}"
-  command:              "virtualenv /home/{{ pyh_user_name }}/{{ pyh_octoprint_dir}}"
+  command:              "virtualenv  {{ pyh_octoprint_path }}"
 
-- name: Task-06 - Activate virtualenv
-  sudo:                 yes
-  sudo_user:            "{{ pyh_user_name }}"
-  # command:              "/home/{{ pyh_user_name }}/{{ pyh_octoprint_dir }}/bin/source /home/{{ pyh_user_name }}/{{ pyh_octoprint_dir }}/bin/activate"
-  pip: 
-    requirements:       /my_app/requirements.txt
-    virtualenv:         /user/home/venvs/myenv
-    virtualenv_python:  python2.7
+#- name: Task-08 - Activate virtualenv
+#  sudo:                 yes
+#  sudo_user:            "{{ pyh_user_name }}"
+#  # command:              "/home/{{ pyh_user_name }}/{{ pyh_octoprint_dir }}/bin/source /home/{{ pyh_user_name }}/{{ pyh_octoprint_dir }}/bin/activate"
+#  pip: 
+#    requirements:       /my_app/requirements.txt
+#    virtualenv:         '{{ pyh_octoprint_path}}venv/'
+#    virtualenv_python:  python2.7
 
 
 #virtualenv venv
 #source venv/bin/activate
 #pip install pip --upgrade
 #pip install https://get.octoprint.org/latest
+
+
+
+
+
+
+
+
+#- name: install default os packages to create virtualenv
+#  action:
+#    module: '{{ansible_pkg_mgr}}'
+#    name: '{{item.name|default(item,true)}}'
+#    state: '{{item.state|default("present",true)}}'
+#  with_items: '{{virtualenv_default_os_packages[ansible_pkg_mgr|default(none,true)]|default([])}}'
+#  when: _virtualenv_becoming
+
+- name: Task-08 - install additional os packages to support virtualenv
+  action:
+    module: '{{ansible_pkg_mgr}}'
+    name: '{{item.name|default(item,true)}}'
+    state: '{{item.state|default("present",true)}}'
+  with_items: '{{virtualenv_os_packages[ansible_pkg_mgr|default(none,true)]|default([])}}'
+  when: _virtualenv_becoming
+
+- name: Task-09 - install global python packages with easy_install
+  easy_install:
+    executable: '{{virtualenv_easy_install_executable|default(omit)}}'
+    name: '{{item.name|default(item,true)}}'
+    state: '{{item.state|default("present",true)}}'
+  with_items: '{{virtualenv_easy_install_packages}}'
+  when: _virtualenv_becoming
+
+- name: Task-10 - install global python packages with pip
+  pip:
+    executable: '{{ virtualenv_pip_executable | default(omit) }}'
+    name: '{{ item.name | default(item,true) }}'
+    version: '{{item.version|default(omit,true)}}'
+    state: '{{item.state|default("present",true)}}'
+  with_items: '{{ virtualenv_global_packages }}'
+  when: _virtualenv_becoming
+
+- name: Task-11 - run update tasks with become
+  include: update.yaml
+  when: _virtualenv_user != _virtualenv_actual_user
+  become: yes
+  become_user: '{{ _virtualenv_user }}'
+
+- name: Task-12 - run included tasks without become
+  include: update.yaml
+  when: _virtualenv_user == _virtualenv_actual_user
+
+
+- name: Task-13 - install default os packages to create virtualenv
+  action:
+    module: '{{ ansible_pkg_mgr }}'
+    name: '{{ item.name|default(item,true) }}'
+    state: '{{ item.state|default("present",true) }}'
+  with_items: '{{ virtualenv_default_os_packages[ansible_pkg_mgr|default(none,true)]|default([]) }}'
+  when: _virtualenv_becoming
+
+- name: Task-14 - install additional os packages to support virtualenv
+  action:
+    module: '{{ansible_pkg_mgr}}'
+    name: '{{item.name|default(item,true)}}'
+    state: '{{item.state|default("present",true)}}'
+  with_items: '{{virtualenv_os_packages[ansible_pkg_mgr|default(none,true)]|default([])}}'
+  when: _virtualenv_becoming
+
+- name: install global python packages with easy_install
+  easy_install:
+    executable: '{{virtualenv_easy_install_executable|default(omit)}}'
+    name: '{{item.name|default(item,true)}}'
+    state: '{{item.state|default("present",true)}}'
+  with_items: '{{virtualenv_easy_install_packages}}'
+  when: _virtualenv_becoming
+
+- name: install global python packages with pip
+  pip:
+    executable: '{{virtualenv_pip_executable|default(omit)}}'
+    name: '{{item.name|default(item,true)}}'
+    version: '{{item.version|default(omit,true)}}'
+    state: '{{item.state|default("present",true)}}'
+  with_items: '{{virtualenv_global_packages}}'
+  when: _virtualenv_becoming
+
+- name: run update tasks with become
+  include: update.yaml
+  when: _virtualenv_user != _virtualenv_actual_user
+  become: yes
+  become_user: '{{ _virtualenv_user }}'
+
+- name: run included tasks without become
+  include: update.yaml
+  when: _virtualenv_user == _virtualenv_actual_user
 
 ### END DBK

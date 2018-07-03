@@ -60,7 +60,4 @@
     - role: add-admin-user
       tags: setup-pi
 
-    - role: avahi
-      tags: setup-pi
-
 ### END DBK

@@ -66,11 +66,6 @@
       tags:
         - always
 
-    - role: ../roles/avahi
-      tags:
-        - setup-pi
-        - always
-
     - role: roles/package-management
       tags:
         - always

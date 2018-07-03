@@ -1,0 +1,53 @@
+# Name:    PyHouse-ansible/roles/install-octoprint/tasks/update.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-06-27
+# Updated: 2018-06-30
+#
+# This role will install  * * * O C T O P R I N T * * *  on a raspberry pi computer.
+#
+# Be sure to edit group_vars/octoprint.yaml
+
+---
+
+- name: UpdateTask-01 - remove existing virtualenv
+  file:
+    path: '{{_virtualenv_path}}'
+    state: absent
+  when: virtualenv_recreate
+
+- name: UpdateTask-02 - create virtualenv
+  pip:
+    name: '{{ virtual_default_package | default("wsgiref") }}'
+    virtualenv: '{{ _virtualenv_path }}'
+    virtualenv_command: '{{ virtualenv_command | default(omit) }}'
+    virtualenv_site_packages: '{{ virtualenv_site_packages | default(omit) }}'
+  register: _virtualenv_create_result
+  changed_when: _virtualenv_create_result is success and _virtualenv_create_result.stdout|search('New python executable')
+  notify: '{{ virtualenv_notify_on_updated | default("virtualenv default handler",true) }}'
+
+- name: UpdateTask-03 - install virtualenv pre packages
+  pip:
+    name: '{{ item.name | default(item,true) }}'
+    version: '{{ item.version | default(omit,true) }}'
+    state: '{{ item.state | default("present",true) }}'
+    virtualenv: '{{ _virtualenv_path }}'
+  with_items: '{{ virtualenv_pre_packages }}'
+  notify: '{{ virtualenv_notify_on_updated | default("virtualenv default handler",true) }}'
+
+- name: UpdateTask-04 - install virtualenv requirements
+  pip:
+    requirements: '{{ item }}'
+    virtualenv: '{{ _virtualenv_path }}'
+  with_items: '{{ virtualenv_requirements }}'
+  notify: '{{ virtualenv_notify_on_updated | default("virtualenv default handler",true) }}'
+
+- name: UpdateTask-05 - install virtualenv post packages
+  pip:
+    name: '{{ item.name | default(item,true) }}'
+    version: '{{ item.version | default(omit,true) }}'
+    state: '{{ item.state | default("present",true) }}'
+    virtualenv: '{{ _virtualenv_path }}'
+  with_items: '{{ virtualenv_post_packages }}'
+  notify: '{{ virtualenv_notify_on_updated | default("virtualenv default handler",true) }}'
+
+### END DBK
