@@ -6,15 +6,19 @@
 # @copyright: (c) 2015-2017 by D. Brian Kimmel
 # @license:   MIT License
 # @note:      Created on Oct 19, 2015
+# Updated:	  2018-07-20
 # @Summary:   This starts PyHouse
 
 
-WORK=/home/pyhouse/workspace/PyHouse/
+HOME=/home/pyhouse/
+VENV=${HOME}venv/
+WORK=${VENV}PyHouse/
+MAIN=${WORK}src/PyHouse.py
 
 echo "Starting the PyHouse system"
-cd ~
+cd ${HOME}
 > nohup.out
-nohup python3 ${WORK}src/PyHouse.py  1>/dev/null 2>&1 </dev/null &
-cd
+source ${VENV}bin/activate
+nohup python ${MAIN}  1>/dev/null 2>&1 </dev/null &
 
 ### END DBK

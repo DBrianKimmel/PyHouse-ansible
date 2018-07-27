@@ -28,7 +28,10 @@ galaxy_info:
   galaxy_tags:
     - development
     - packaging
+    
 allow_duplicates: true
-dependencies: []
+
+#dependencies:
+#  - install-basic-system
 
 ### END DBK

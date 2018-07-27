@@ -1,56 +1,29 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2018-06-24
+# Updated: 2018-07-26
+#
+# Set up all networking
+
+# include is dynamic
 
 ---
 
-- name: Task-01-Pi - Install the wifi.j2 file into /etc/wpa_supplicant/wpa_supplicant.conf
+- name:             Task-01-A-Pi - Install WiFi
   ignore_errors:    yes
-  template:
-    src:            ./wifi.j2
-    dest:           /etc/wpa_supplicant/wpa_supplicant.conf
-    owner:          root
-    group:          root
-    mode:           0600
-  when:
-    - ansible_lsb.id == 'Raspbian'
-    - pyh_ipv4_wifi_addr != 'no'
-
-# this will set up static addresses on all interfaces except 'lo'
-# It is the correct method for debian Jessie, Stretch and beyond.
-# Earlier releases used a different mechanism.
-- name: Task-02-Pis - Install dhcpcd.conf file with interface IP definitions.
+  include_tasks:    install-wifi.yaml
+  tags:             always
+ 
+- name:             Task-01-B-Pi - Install WiFi
   ignore_errors:    yes
-  become_user:      root
-  become:           yes
-  template:
-    src:            ./dhcpcd_conf.j2
-    dest:           /etc/dhcpcd.conf
-    owner:          root
-    group:          netdev
-    mode:           0664
-    backup:         true
-  when:             ansible_lsb.id == 'Raspbian'
-
-- name: Task-02-Nucs - Install network/interfaces file with interface IP definitions.
+  include_tasks:    install-ethernet.yaml
+  tags:             always
+ 
+- name:             Task-01-C-Pi - Install WiFi
   ignore_errors:    yes
-  become_user:      root
-  become:           yes
-  template:
-    src:            ./interfaces.j2
-    dest:           /etc/network/interfaces
-    owner:          root
-    group:          netdev
-    mode:           0664
-    backup:         true
-  when:             ansible_lsb.id == 'Ubuntu'
-
-- name: Task-03 - Install IPv6 Tunnel tp Hurricane electric
   include_tasks:    install-v6-tunnel
-  when:             pyh_roles.find("ipv6tunnel") != -1
 
-- name: Task-04-Pi - Add ntpdate to raspbian
+- name:             Task-02-Pi - Add ntpdate to raspbian
   apt: 
     name:           ntpdate
     state:          present

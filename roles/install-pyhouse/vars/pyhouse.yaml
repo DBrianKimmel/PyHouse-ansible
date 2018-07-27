@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install-pyhouse/vars/pyhouse.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-31
-# Updated: 2017-10-31
+# Updated: 2018-07-17
 
 ---
 
@@ -25,22 +25,23 @@ pyh_extra_zypper_packages:
 pyh_extra_pip_packages:
     - aniso8601
     - astral
-    - autobahn
     - jsonpickle
     - netaddr
     - netifaces
-    - pyOpenSSL
+    - pyopenSSL
+    - pyserial
     - python-dateutil
     - pyudev
+    - serial
     - service-identity
     - twisted
+    #- autobahn
     #- athena
     #- idna
     #- nevow
     #- passlib
     #- pyasn1
     #- pycrypto
-    #- pyserial
     #- pytz
     #- pyusb
 

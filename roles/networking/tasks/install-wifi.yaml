@@ -1,21 +1,29 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/install-wifi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-04-22
-# Updated: 2018-04-22
+# Updated: 2018-07-26
 
 ---
 
-- name: task-01 - delete any new file created
+- name:             WiFi-Task-01 - delete any new file created
+  ignore_errors:    yes
   file:
-    name:   /etc/wpa_supplicant/wpa_supplicant.conf-new
-    state:  absent
+    name:           /etc/wpa_supplicant/wpa_supplicant.conf-new
+    state:          absent
 
-- name: task-02 - Install the wpa_supplicant file
+- name:             WiFi-Task-02 - delete any new file created
+  ignore_errors:    yes
+  debug:
+    msg:
+      -             "User: {{ pyh_admin_user }}"
+      -             "AP:   {{ pyh_access_points }}"
+
+- name:             WiFi-Task-03 - Install the wpa_supplicant file
   template:
-    src:    ./wifi.j2
-    dest:   /etc/wpa_supplicant/wpa_supplicant.conf
-    owner:  root
-    group:  root
-    mode:   0600
+    src:            ./wifi.j2
+    dest:           /etc/wpa_supplicant/wpa_supplicant.conf-new
+    owner:          root
+    group:          root
+    mode:           0600
 
 ### END DBK

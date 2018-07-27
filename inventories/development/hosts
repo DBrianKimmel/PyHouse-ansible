@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/development/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2018-06-29
+# Updated: 2018-07-18
 
 # for testing various things
 
@@ -9,12 +9,19 @@
 
 [nucs]
 # nuc-devel
+# nuc-01-ct		# Mqtt
 
 [pis]
+#pi-01-ct		# pyhouse
+#pi-02-ct		# node-red,pyhouse,mqtt
+pi-04-ct		# node-red
+#pi-05-ct		# octoprint
+#pi-06-ct		# pandora
+#pi-11-ct		# node-red
+
+#pi-01-pp
 #pi-07-pp
-#pi-11-ct
-#pi-04-ct
-pi-05-ct
+#pi-11-pp
 
 
 [others]
@@ -22,9 +29,11 @@ pi-05-ct
 #alki-devel
 
 
-# Groupname must be a house-name
-[pinkpoppy:children]
-# [cannontrail:children]
+#  -*- Groupname must be a house-name
+#  -*- Uncomment the one we are in as the wifi params differ
+#
+#[pinkpoppy:children]
+[cannontrail:children]
 nucs
 pis
 others

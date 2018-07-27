@@ -1,40 +1,29 @@
 # Name:    PyHouse-ansible/playbook-development.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-12-15
-# Updated: 2018-05-02
+# Updated: 2018-07-25
 #
 # This is the top level playbook for development computers.
-# It is involed by the ansible-production command
-# This playbook is a dispatcher.
-#
-# Loads other playbooks when calling tags are defined.
-#
-# Valid Tags:
-#   setup_development
-
-
-
-
-
+# It is invoked by the ansible-development command.
 
 ---
 
-- name:             Playbook-Development
-  strategy:         linear
-  hosts:            all
-  gather_facts:     yes
+- name:                 Playbook-Development
+  strategy:             linear
+  hosts:                all
+  gather_facts:         yes
+  remote_user:          root
 
   pre_tasks:
 
-  - name:           Play-Devel - PreTask-01 - List the pyh_role for each host
+  - name:               Play-Devel - PreTask-01 - List the pyh_role for each host
     debug:
-      msg: "Installing Development for {{ pyh_hostname }} - {{ pyh_roles }}"
+      msg:              "Installing Development for {{ pyh_hostname }} - {{ pyh_roles }}"
     tags: always
 
-# Development
-
-- import_playbook: "./playbooks/development-pis.yaml"
-
-#- import_playbook: "./playbooks/fetch-config-files.yaml"
+- import_playbook:      "./playbooks/all-pis.yaml"
+- import_playbook:      "./playbooks/development-pis.yaml"
+- import_playbook:      "./playbooks/roles-dispatch.yaml"
+- import_playbook:      "./playbooks/fetch-config-files.yaml"
 
 ### END DBK

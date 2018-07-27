@@ -17,15 +17,15 @@
 
 # Set up all the network interfaces on this server.
 - name: task-01C - Imports 
-  include: roles/common/tasks/network.yaml
+  include_task: roles/common/tasks/network.yaml
 
 # Handle the package menager (apt)
 - name: task-01A - Imports
-  include: roles/common/tasks/pkg_mgr.yaml
+  include_task: roles/common/tasks/pkg_mgr.yaml
 
 # Set upthe avahi (zeroconf, bonjour) to config the servers 
 - name: task-01B - Imports
-  include: roles/common/tasks/avahi.yaml
+  include_task: roles/common/tasks/avahi.yaml
 
 - name: task-02 - Create directory for ansible custom facts
   file:
@@ -45,7 +45,7 @@
     - exim4
 
 - name: task-04 - Create admin user
-  include: roles/common/tasks/add_user.yaml
+  include_task: roles/common/tasks/add_user.yaml
 
 - name: task-05 - Copy Private Key
   copy:

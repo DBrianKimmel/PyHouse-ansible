@@ -1,0 +1,24 @@
+# Name:    PyHouse-ansible/roles/install-octoprint/templates/octpoprint.service.j2
+# Author:  D. Brian Kimmel
+# Created: 2018-07-06
+# Updated: 2018-07-19
+#
+
+[Unit]
+Description=OctoPrint
+Requires=network.target
+After=network.target
+
+[Service]
+Environment=PORT={{ listen_port }}
+Environment=BASEDIR={{ pyh_octoprint_path }}/.octoprint
+Environment=CONFIGFILE={{ pyh_octoprint_path }}/.octoprint/config.yaml
+User={{ pyh_octo_user_name }}
+Group={{ pyh_octo_user_name }}
+Nice=-2
+ExecStart={{ virtualenv_dir }}/bin/octoprint serve --basedir ${BASEDIR} --config ${CONFIGFILE} --port ${PORT}
+
+[Install]
+WantedBy=multi-user.target
+
+### END DBK

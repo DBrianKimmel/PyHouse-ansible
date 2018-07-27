@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install-octoprint/handlers/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-07-01
-# Updated: 2018-07-01
+# Updated: 2018-07-03
 #
 # This role will install  * * * O C T O P R I N T * * *  on a raspberry pi computer.
 #
@@ -9,8 +9,11 @@
 
 ---
 
+#=======================
+# Virtualenv definitions
+
 - name: virtualenv default handler
   debug:
-    msg: 'Updated virtualenv at {{virtualenv_path}}.'
+    msg: 'Updated virtualenv at {{ virtualenv_path }}.'
 
 ### END DBK

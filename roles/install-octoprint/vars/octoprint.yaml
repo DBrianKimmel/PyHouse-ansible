@@ -9,7 +9,7 @@
 ---
 
 # These packages are needed before we can install octoprint.
-pyh_extra_apt_packages:
+pyh_XXXextra_apt_packages:
     - git
     - python-pip
     - python-dev
@@ -18,9 +18,9 @@ pyh_extra_apt_packages:
     - libyaml-dev
     - build-essential
 
-pyh_user_name:          octo
-pyh_user_comment:       "The OctoPrint User"
-pyh_user_groups:        "dialout,audio,video"
-pyh_octoprint_dir:      OctoPrint
+pyh_XXXuser_name:          octo
+pyh_XXXuser_comment:       "The OctoPrint User"
+pyh_XXXuser_groups:        "dialout,audio,video"
+pyh_XXXoctoprint_dir:      OctoPrint
 
 ### END DBK

@@ -18,11 +18,11 @@
       - "Dist:      {{ ansible_os_family }}"
       - "Lsb:       {{ ansible_lsb }}"
 
-- name: Task-01 - fix up the default 'pi' user if we are using raspbian distribution.
-  include: roles/add-admin-user/tasks/fix-pi-user.yaml
+- name:             Task-01 - fix up the default 'pi' user if we are using raspbian distribution.
+  include_tasks:    fix-pi-user.yaml
   when: ansible_lsb.id == 'Raspbian'
 
-- name: Task-02 - add an admin user account
-  include: roles/add-admin-user/tasks/fix-pi-user.yaml
+- name:             Task-02 - add an admin user account
+  include_tasks:    fix-pi-user.yaml
 
 ### END DBK

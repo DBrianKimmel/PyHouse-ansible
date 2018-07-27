@@ -7,19 +7,19 @@
 
 ---
 
-- name: Task-01 - Install the apt timeoutfile
+- name:             Debian-Task-01 - Install the apt timeoutfile
   ignore_errors:    yes
   become_user:      root
   become:           yes
   copy:
-    src:        "99-timeout"
-    dest:       "/etc/apt/apt.conf.d/99-timeout"
-    owner:      "root"
-    group:      "root"
-    mode:       0755
-  when:         ansible_os_family == 'Debian'
+    src:            "99-timeout"
+    dest:           "/etc/apt/apt.conf.d/99-timeout"
+    owner:          "root"
+    group:          "root"
+    mode:           0755
+  when:             ansible_os_family == 'Debian'
 
-- name: Task-02- - Update Packages
+- name:             Debian-Task-02- - Update Packages
   ignore_errors:    yes
   become_user:      root
   become:           yes

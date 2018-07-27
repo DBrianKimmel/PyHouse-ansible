@@ -1,4 +1,4 @@
-# Name:    PyHouse-ansible/roles/install-vnc/tasks/main.yaml
+# Name:    PyHouse-ansible/roles/setup-vnc/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-12-16
 # Updated: 2017-12-16

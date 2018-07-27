@@ -10,5 +10,4 @@
 - name: Task-01 - Apt if a Debian type distribution
   include_tasks:    "setup-{{ansible_os_family}}.yaml"
 
-
 ### END DBK

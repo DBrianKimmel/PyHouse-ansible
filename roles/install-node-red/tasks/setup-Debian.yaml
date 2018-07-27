@@ -36,7 +36,7 @@
 
 - name: SetupDebian-05 - Ensure Node.js and npm are installed.
   apt: 
-    name:               "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
+    name:               "nodejs"
     state:              present
 
 # Different Distributions within Debian have different user groups

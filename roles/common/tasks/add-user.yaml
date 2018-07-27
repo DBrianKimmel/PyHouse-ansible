@@ -5,7 +5,7 @@
 
 #   include_tasks:         "../roles/common/tasks/add-user.yaml p_user={{ pyh_user_name }} p_comment={{ pyh_user_comment}} p_groups={{ pyh_user_groups }}"
 
-
+# TODO: Add user to /etc/sudoers.d/user
 
 
 ---
