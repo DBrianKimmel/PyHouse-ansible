@@ -21,7 +21,7 @@ pyh_ipv4_ethernet_addr:     192.168.9.52
 pyh_ipv4_wifi_addr:         192.168.9.22
 pyh_ipv6_ethernet_addr:     :10:22
 pyh_ipv6_wifi_addr:         :9:22
-pyh_roles:                  pandora,pyhouse
+pyh_roles:                  none
 
 pyh_extra_apt_packages:
     - sqlite3

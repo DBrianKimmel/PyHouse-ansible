@@ -10,7 +10,7 @@
 # Template File:    PyHouse-ansible/roles/networking/templates/he-service.j2
 # Gets variables from:
 #       ixxx
-- name: InstallSystemd-01 - Create he-ipv6.service
+- name: V6Tunnel-01 - Create he-ipv6.service
   template:
     # in /roles/networking/templates/
     src: he-service.j2

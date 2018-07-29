@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/development/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2018-07-18
+# Updated: 2018-07-29
 
 # for testing various things
 
@@ -14,8 +14,8 @@
 [pis]
 #pi-01-ct		# pyhouse
 #pi-02-ct		# node-red,pyhouse,mqtt
-pi-04-ct		# node-red
-#pi-05-ct		# octoprint
+#pi-04-ct		# node-red
+pi-05-ct		# octoprint
 #pi-06-ct		# pandora
 #pi-11-ct		# node-red
 

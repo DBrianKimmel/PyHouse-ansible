@@ -8,11 +8,10 @@
 
 ---
 
-- name:                 Playbook-Production
+- name:                 Play 1 - Production
   strategy:             linear
   hosts:                all
   gather_facts:         yes
-  remote_user:          root
 
   pre_tasks:
 

@@ -11,7 +11,6 @@
 - name:                 Play - Production-Pis - Starting
   hosts:                pis
   strategy:             linear
-  remote_user:          root
   become:               yes
   become_method:        sudo
   gather_facts:         yes

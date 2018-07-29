@@ -9,21 +9,35 @@
 
 ---
 
+- name:             Task-00 - Starting, Display some vars...
+  debug:
+    msg:
+      - "User:  {{ pyh_admin_user }}"
+      - "Dist:  {{ ansible_os_family }}"
+      - "Host:  {{ pyh_hostname }}"
+      - "Role:  {{ pyh_roles }}"
+      - "A-P:   {{ pyh_access_points }}"
+      - "A-P:   {{ vault_pyh_access_points }}"
+  tags:
+    - always
+
 - name:             Task-01-A-Pi - Install WiFi
   ignore_errors:    yes
-  include_tasks:    install-wifi.yaml
+  import_tasks:     install-wifi.yaml
   tags:             always
  
-- name:             Task-01-B-Pi - Install WiFi
+- name:             Task-01-B-Pi - Install ethernet
   ignore_errors:    yes
-  include_tasks:    install-ethernet.yaml
+  import_tasks:     install-ethernet.yaml
   tags:             always
  
-- name:             Task-01-C-Pi - Install WiFi
+- name:             Task-01-C-Pi - Install IPv6 Tunnels
   ignore_errors:    yes
-  include_tasks:    install-v6-tunnel
+  import_tasks:     install-v6-tunnel.yaml
+  when:             pyh_roles.find("ipv6tunnel") != -1 
 
 - name:             Task-02-Pi - Add ntpdate to raspbian
+  ignore_errors:    yes
   apt: 
     name:           ntpdate
     state:          present

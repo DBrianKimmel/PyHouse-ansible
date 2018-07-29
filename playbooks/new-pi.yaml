@@ -15,7 +15,7 @@
 - name: Play - New-Pi - Set up a fresh Pi 
   hosts:            raspberrypi
   strategy:         debug
-  remote_user:      root
+  # remote_user:      root
   become:           yes
   become_method:    sudo
 

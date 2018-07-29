@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/package-management/tasks/setup-Debian.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-12-06
-# Updated: 2017-12-07
+# Updated: 2018-07-27
 #
 # Raspbian and Ubuntu use the Debian package management system.
 
@@ -24,7 +24,7 @@
   become_user:      root
   become:           yes
   apt:
-    upgrade: dist
-    update_cache: yes
+    upgrade:        dist
+    update_cache:   yes
 
 ### END DBK

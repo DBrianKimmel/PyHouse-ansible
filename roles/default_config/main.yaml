@@ -10,7 +10,7 @@
 
 # Default variables that are shared by more than one role in the Playbook.
 
-install_networking:     no
+install_networking:     yes
 install_webserver:      no
 
 

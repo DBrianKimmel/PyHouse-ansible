@@ -16,11 +16,10 @@
 # Earlier releases used a different mechanism.
 - name:             Ethernet-Task-01-Pi - Install dhcpcd.conf file with interface IP definitions. 
   ignore_errors:    yes
-  become_user:      root
-  become:           yes
   template:
     src:            ./dhcpcd_conf.j2
-    dest:           /etc/dhcpcd.conf-new
+    dest:           /etc/dhcpcd.conf
+    force:          yes
     owner:          root
     group:          netdev
     mode:           0664
@@ -33,11 +32,10 @@
     state:          absent
 
 - name:             Ethernet-Task-02-Nuc - Install network/interfaces file with interface IP definitions.
-c  become_user:      root
-  become:           yes
+  ignore_errors:    yes
   template:
     src:            ./interfaces.j2
-    dest:           /etc/network/interfaces-new
+    dest:           /etc/network/interfaces
     owner:          root
     group:          netdev
     mode:           0664

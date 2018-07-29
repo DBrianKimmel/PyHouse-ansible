@@ -24,10 +24,12 @@ pyh_domain:                    ""
 
 # Used by role networking
 pyh_access_points:              vault_pyh_access_points
+pyh_router_nameservers:         192.168.9.1 8.8.8.8
+
 pyh_ipv4_router_addr:           192.168.9.1
 pyh_ipv4_router_netmask:        255.255.240.0
-pyh_ipv4_router_prefix_len:     vault_pyh_ipv4_router_prefix_len
-pyh_router_nameservers:         vault_pyh_router_nameservers
+pyh_ipv4_router_prefix_len:     20
+
 pyh_ipv6_network_prefix:        vault_pyh_ipv6_network_prefix
 pyh_ipv6_network_prefix_len:    /64
 
