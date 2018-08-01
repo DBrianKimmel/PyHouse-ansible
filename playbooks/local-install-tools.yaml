@@ -79,5 +79,4 @@
         path:           "~/backup/"
         state:          directory
 
-
 ### END DBK

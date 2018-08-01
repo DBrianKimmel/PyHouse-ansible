@@ -1,21 +1,9 @@
 # Name:    PyHouse-ansible/inventories/development/host_vars/pi-05-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-01
-# Updated: 2018-06-29
-#
-# This pi is for development - do not use for anything production.
+# Updated: 2018-07-29
 #
 # Raspberry Pi Model: 2B v1.2; Embest, China    RAM: 1024
-#
-
-
-
-
-
-
-
-
-
 
 ---
 
