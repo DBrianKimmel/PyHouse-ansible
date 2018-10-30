@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/playbooks/local-install-tools.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-18
-# Updated: 2018-04-12
+# Updated: 2018-05-29
 
 ---
 
@@ -52,20 +52,11 @@
         src:            "{{ item.src }}"
         dest:           "{{ item.dest }}"
       with_items:
-        - { src:        '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
-      tags:
-        - always
-
-    - name: LocalPreTask-05 - Install ssh config file
-      copy:
-        src:            "{{ item.src }}"
-        dest:           "{{ item.dest }}"
-      with_items:
         - { src:        '../ssh.cfg', dest: '~/.ssh/config' }
       tags:
         - always
 
-    - name: LocalPreTask-06 - Install ansible config file
+    - name: LocalPreTask-05 - Install ansible config file
       become:           yes
       become_user:      root
       copy:
@@ -74,7 +65,7 @@
       tags:
         - always
 
-    - name: LocalPreTask-07 - Create the backup directory
+    - name: LocalPreTask-06 - Create the backup directory
       file:
         path:           "~/backup/"
         state:          directory
