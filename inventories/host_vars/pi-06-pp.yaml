@@ -1,0 +1,20 @@
+# Name:    PyHouse-ansible/host_vars/pi-06-pp
+# Author:  D. Brian Kimmel
+# Created: 2017-11-08
+# Updated: 2017-11-08
+#
+# This computer is for pandora
+#
+
+---
+
+ansible_host:               192.168.1.16
+
+pyh_hostname:               pi-06-pp
+pyh_ipv4_ethernet_addr:     192.168.2.16
+pyh_ipv4_wifi_addr:         192.168.1.16
+pyh_ipv6_ethernet_addr:     :2:16
+pyh_ipv6_wifi_addr:         :1:16
+pyh_roles:                  pandora
+
+### END DBK

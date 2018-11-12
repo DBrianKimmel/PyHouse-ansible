@@ -1,0 +1,45 @@
+# Name:    PyHouse-ansible/inventories/production/host_vars/pi-02-pp.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-26
+# Updated: 2018-04-11
+
+# Pink Poppy
+#
+# This Pi runs node red and ...
+
+# Model 3-B     1024M ram   Jessie      armv7l
+
+---
+
+ansible_host:               192.168.1.12
+
+pyh_hostname:               pi-02-pp
+pyh_ipv4_ethernet_addr:     192.168.2.12
+pyh_ipv4_wifi_addr:         192.168.1.12
+pyh_ipv6_ethernet_addr:     :2:12
+pyh_ipv6_wifi_addr:         :1:12
+pyh_roles:                  node-red
+
+pyh_extra_apt_packages:
+    - sqlite3
+
+pyh_extra_nodered_nodes:
+    - i2c
+    - canvas-gauges
+    - node-red-contrib-i2c
+    - node-red-contrib-os
+    - node-red-contrib-timerswitch
+    - node-red-dashboard
+    - node-red-node-email
+    - node-red-node-ping
+    - node-red-node-snmp
+
+
+#
+#    - node-red-node-sqlite
+
+# This is a part of the johnny-five system.
+#    - node-red-contrib-gpio
+
+### END DBK
+ 

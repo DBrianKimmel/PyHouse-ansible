@@ -1,0 +1,34 @@
+# Name:    PyHouse-ansible/inventories/production/host_vars/pi-02-ct.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-29
+# Updated: 2018-04-07
+
+
+
+
+
+
+
+
+
+
+---
+
+ansible_host:               192.168.9.12
+
+pyh_hostname:               pi-02-ct
+pyh_ipv4_ethernet_addr:     192.168.10.12
+pyh_ipv4_wifi_addr:         192.168.9.12
+pyh_ipv6_ethernet_addr:     :10:12
+pyh_ipv6_wifi_addr:         :9:12
+pyh_roles:                  node-red,pyhouse,mqtt
+
+pyh_extra_apt_packages:
+    - sqlite3
+
+pyh_extra_nodered_nodes:
+    - node-red-dashboard
+    - node-red-node-sqlite
+    - node-red-contrib-timerswitch
+
+### END DBK

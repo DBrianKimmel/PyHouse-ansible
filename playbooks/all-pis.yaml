@@ -41,20 +41,20 @@
 
   roles:
 
-    - role: roles/package-management
+    - role: ../roles/package-management
       tags:
         - always
 
-    - role: roles/networking
+    - role: ../roles/networking
       when: install_networking | default(True)
       tags: 
         - always
 
-    - role: roles/hostname
+    - role: ../roles/hostname
       tags:
         - always
 
-    - role: roles/add-admin-user
+    - role: ../roles/add-admin-user
       tags:
         - always
 

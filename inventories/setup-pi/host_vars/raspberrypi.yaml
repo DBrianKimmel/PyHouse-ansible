@@ -12,13 +12,13 @@
 ---
 
 # These must be changed
-ansible_host:               192.168.9.127
+ansible_host:               192.168.9.228
 
-pyh_hostname:               pi-06-ct
-pyh_ipv4_ethernet_addr:     192.168.10.16
-pyh_ipv4_wifi_addr:         192.168.9.16
-pyh_ipv6_ethernet_addr:     :10:16
-pyh_ipv6_wifi_addr:         :9:16
+pyh_hostname:               pi-03-ct
+pyh_ipv4_ethernet_addr:     192.168.10.13
+pyh_ipv4_wifi_addr:         192.168.9.13
+pyh_ipv6_ethernet_addr:     :10:13
+pyh_ipv6_wifi_addr:         :9:13
 pyh_roles:                  setup
 
 # These are only for setup - normally they are in a group_vars file for the house we are using

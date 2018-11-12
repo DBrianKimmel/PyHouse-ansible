@@ -1,0 +1,18 @@
+# Name:    PyHouse-ansible/host_vars/piduino-01.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-13
+# Updated: 2017-11-01
+
+---
+
+ansible_host:               192.168.8.81
+set_timezone:               False
+
+pyh_hostname:               piduino-01
+pyh_ipv4_ethernet_addr:     192.168.8.81
+pyh_ipv4_wifi_addr:         no
+pyh_ipv6_ethernet_addr:     :8:81
+pyh_ipv6_wifi_addr:         :8:82
+pyh_roles:                  none
+
+### END DBK

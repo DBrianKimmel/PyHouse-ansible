@@ -1,0 +1,23 @@
+# Name:    PyHouse-ansible/host_vars/pi-03-pp
+# Author:  D. Brian Kimmel
+# Created: 2017-09-28
+# Updated: 2017-11-01
+
+# This is a very old Pi.
+# It provides backup and testing for PyHouse
+---
+
+ansible_host:               192.168.1.13
+
+pyh_hostname:               pi-03-pp
+pyh_ipv4_ethernet_addr:     192.168.2.13
+pyh_ipv4_wifi_addr:         192.168.1.13
+pyh_ipv6_ethernet_addr:     :2:13
+pyh_ipv6_wifi_addr:         :1:13
+pyh_roles:                  mqtt,pyhouse
+
+pyh_extra_apt_packages:
+    - git
+    - python3
+
+### END DBK

@@ -18,12 +18,12 @@
 
   roles:
 
-    - role: roles/timezone
+    - role: ../roles/timezone
       when: set_timezone|default(True)
       tags:
         - timezone
 
-    - role: roles/motd
+    - role: ../roles/motd
       when: install_motd|default(True)
       tags:
         - motd

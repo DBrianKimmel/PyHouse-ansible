@@ -1,0 +1,19 @@
+# Name:    PyHouse-ansible/host_vars/pi-08-pp
+# Author:  D. Brian Kimmel
+# Created: 2017-09-28
+# Updated: 2017-11-18
+
+# This computer runs Octopi and controls my 3D printer.
+
+---
+
+ansible_host:               192.168.1.18
+
+pyh_hostname:               pi-08-pp
+pyh_ipv4_ethernet_addr:     192.168.2.18
+pyh_ipv4_wifi_addr:         192.168.1.18
+pyh_ipv6_ethernet_addr:     :2:18
+pyh_ipv6_wifi_addr:         :1:18
+pyh_roles:                  octoprint
+
+### END DBK
