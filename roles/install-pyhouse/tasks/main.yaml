@@ -10,6 +10,14 @@
 
 # All includes are dynamic
 
+- name: MainTask-00 - main info for the role.
+  debug:
+    msg:
+      - "Install PyHouse     * * * P Y H O U S E * * *"
+      - " "
+      - "Dist:          {{ ansible_os_family }}"
+      - "Lsb:           {{ ansible_lsb }}"
+
 - name: Main-Task-01 - Set up the proper OS distribution
   include_tasks:    "setup-{{ansible_os_family}}.yaml"
 

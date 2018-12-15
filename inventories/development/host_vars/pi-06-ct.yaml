@@ -16,7 +16,7 @@ pyh_ipv4_ethernet_addr:     192.168.10.16
 pyh_ipv4_wifi_addr:         192.168.9.16
 pyh_ipv6_ethernet_addr:     :10:16
 pyh_ipv6_wifi_addr:         :9:16
-pyh_roles:                  pandora
+pyh_roles:                  pandora,pyhouse
 
 # Overrides
 pyh_ipv4_router_addr:           192.168.9.1

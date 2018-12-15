@@ -1,0 +1,29 @@
+# Name:    PyHouse-ansible/playbook-test.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-09-23
+# Updated: 2018-09-23
+#
+# This is the top level playbook for testing various components of a playbook.
+# It is invoked by the ansible-test command.
+
+---
+
+- name:                 Playbook-Test
+  strategy:             linear
+  hosts:                all
+  gather_facts:         yes
+
+  pre_tasks:
+
+  - name:               Play-Test - PreTask-01 - List the pyh_role for each host
+    debug:
+        msg:
+          - "User: {{ pyh_admin_user }}"
+          - "Dist: {{ ansible_os_family }}"
+          - "Host: {{ pyh_hostname }}"
+          - "Role: {{ pyh_roles }}"
+    tags: always
+
+- import_playbook:      "./playbooks/test.yaml"
+
+### END DBK

@@ -1,0 +1,21 @@
+# Name:    PyHouse-ansible/playbooks/test.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-09-23
+# Updated: 2018-09-23
+#
+# This is the test production playbook.
+
+---
+
+- name:                 Play - Test - Starting
+  hosts:                test
+  strategy:             linear
+  become:               yes
+  become_method:        sudo
+  gather_facts:         yes
+
+  roles:
+    - role: roles/motd
+      when: install_motd|default(True)
+
+### END DBK

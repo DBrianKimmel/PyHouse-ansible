@@ -11,17 +11,24 @@
 # nuc-devel
 # nuc-01-ct		# Mqtt
 
-[pis]
+[pis_ct]
 #pi-01-ct		# pyhouse
 #pi-02-ct		# node-red,pyhouse,mqtt
 #pi-04-ct		# node-red
-pi-05-ct		# octoprint
-#pi-06-ct		# pandora
+#pi-05-ct		# octoprint
+#pi-06-ct		# pandora,pyhouse
 #pi-11-ct		# node-red
 
+[pis_pp]
 #pi-01-pp
-#pi-07-pp
+../pi-07-pp
 #pi-11-pp
+
+
+# All Raspberry Pis
+[pis:children]
+pis_pp
+pis_ct
 
 
 [others]

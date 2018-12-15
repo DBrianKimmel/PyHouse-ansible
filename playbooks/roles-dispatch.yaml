@@ -17,30 +17,30 @@
 
   roles:
 
-    - role: roles/install-basic-system
+    - role: ../roles/install-basic-system
       tags: always
 
-    - role: roles/install-mqtt
+    - role: ../roles/install-mqtt
       when: pyh_roles.find("mqtt") != -1
       tags: always
 
-    - role: roles/install-octoprint
+    - role: ../roles/install-octoprint
       when: pyh_roles.find("octoprint") != -1
       tags: always
 
-    - role: roles/install-pyhouse
+    - role: ../roles/install-pyhouse
       when: pyh_roles.find("pyhouse") != -1
       tags: always
 
-    - role: roles/install-pandora
+    - role: ../roles/install-pandora
       when: pyh_roles.find("pandora") != -1
       tags: always
 
-    - role: roles/install-node-red
+    - role: ../roles/install-node-red
       when: pyh_roles.find("node-red") != -1
       tags: always
 
-    - role: roles/install-ansible
+    - role: ../roles/install-ansible
       when: pyh_roles.find("ansible") != -1
       tags: always
 

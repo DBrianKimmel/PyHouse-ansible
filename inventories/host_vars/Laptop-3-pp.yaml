@@ -1,0 +1,16 @@
+# Name:    PyHouse-ansible/host_vars/Laptop-3.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-13
+# Updated: 2017-11-01
+
+---
+
+ansible_host:           192.168.1.50
+#ansible_host:           192.168.9.50
+
+pyh_hostname:           Laptop-3
+pyh_ipv4_ethernet_addr:        dhcp
+pyh_ipv4_wifi_addr:            dhcp
+pyh_roles:              control,ansible
+
+### END DBK

@@ -1,0 +1,27 @@
+# Name:    PyHouse-ansible/host_vars/pi-10-pp
+# Author:  D. Brian Kimmel
+# Created: 2017-09-26
+# Updated: 2017-11-09
+#
+# This computer is for backup pyhouse with an attached PLM.
+# It has an attached Insteon PLM for controlling lighting.
+# It also is a backup MQTT broker.
+#
+# Raspberry Pi Model: 3B; Embest, China RAM: 1024
+#
+
+---
+
+ansible_host:               192.168.1.20
+
+pyh_hostname:               pi-10-pp
+pyh_ipv4_ethernet_addr:     192.168.2.20
+pyh_ipv4_wifi_addr:         192.168.1.20
+pyh_ipv6_ethernet_addr:     :2:20
+pyh_ipv6_wifi_addr:         :1:20
+pyh_roles:                  pyhouse,mqtt
+
+pyh_extra_apt_packages:
+    - git
+
+### END DBK

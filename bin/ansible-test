@@ -1,0 +1,25 @@
+#!/bin/bash
+# Name:     PyHouse-ansible/bin/ansible-test
+# Author:   D. Brian Kimmel
+# Created:  2018-09-23
+# Updated:  2018-09-23
+#
+# Run ansible to test if a portion works correctly.
+
+
+INVENTORY=" -i inventories/test/hosts "
+PLAYBOOK=" playbook-test.yaml "
+PSWD1=" --vault-password-file ~/.vault-pass.txt "
+TAGS=" --tags=tag_test "
+PIUSER=" --become-user=pi --ask-become-pass "
+ASKPASS=" --ask-pass "
+
+
+
+
+cd ~/workspace/PyHouse-ansible
+echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} ${PIUSER}"
+ansible-playbook -vv ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1} # ${PIUSER} # ${ASKPASS} 
+cd -
+
+### END DBK
