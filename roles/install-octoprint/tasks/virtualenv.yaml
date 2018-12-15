@@ -1,0 +1,130 @@
+# Name:    PyHouse-ansible/roles/install-octoprint/tasks/virtualenv.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-06-27
+# Updated: 2018-07-03
+#
+# This role will install  * * * O C T O P R I N T * * *  on a raspberry pi computer.
+#
+# Be sure to edit group_vars/octoprint.yaml
+#
+# See: github.com/cchurch/ansible-role-virtualenv
+
+---
+
+- name: MainTask-00 - main info for the role.
+  debug:
+    msg:
+      - "Install Octoprint     * * * O C T O P R I N T * * *"
+      - " "
+      - "Dist:          {{ ansible_os_family }}"
+      - "Lsb:           {{ ansible_lsb }}"
+
+
+- name: MainTask-01 - Install apt packages
+  include_tasks:         "../roles/install-octoprint/tasks/install-extra-packages.yaml"
+
+- name: MainTask-02 - Add User "octo"
+  include_tasks:         "../roles/common/tasks/add-user.yaml p_user={{ pyh_octo_user_name }} p_comment={{ pyh_octo_user_comment}} p_groups={{ pyh_octo_user_groups }}"
+
+- name: MainTask-03 - Create OctoPrint dir
+  ignore_errors:        yes
+  become_user:          root
+  become:               yes
+  file:
+    name:               "{{ pyh_octoprint_path }}"
+    state:              directory
+    owner:              "{{ pyh_octo_user_name }}"
+    group:              "{{ pyh_octo_user_name }}"
+    mode:               0755
+
+- name: MainTask-04 - Create Directory  ~/bin
+  ignore_errors:        yes
+  become_user:          root
+  become:               yes
+  file:
+    name:               "/home/{{ pyh_octo_user_name }}/bin"
+    state:              directory
+    owner:              '{{ pyh_octo_user_name }}'
+    group:              '{{ pyh_octo_user_name }}'
+    mode:               0755
+
+- name: MainTask-05 - Install virtualenv
+  include_tasks:         ../roles/install-octoprint/tasks/venv-setup.yaml
+
+- name: MainTask-06 - Copy files to ~/bin
+  copy:
+    src:                "./bin/"
+    dest:               "/home/{{ pyh_octo_user_name }}/bin"
+    owner:              '{{ pyh_octo_user_name }}'
+    group:              '{{ pyh_octo_user_name }}'
+    mode:               0755
+
+#virtualenv venv
+#source venv/bin/activate
+#pip install pip --upgrade
+#pip install https://get.octoprint.org/latest
+
+
+
+
+
+
+# From: github.com/alanquillin/OctoPrint-Ansible
+
+- name: MainTask-07 - set fact
+  set_fact:
+    virtualenv_dir:     "{{ pyh_octoprint_path }}/.env"
+    listen_port:        "{{ pyh_octo_listen_port }}"
+
+- name: MainTask-08 - Download OctoPrint source
+  git:
+    repo:               https://github.com/foosel/OctoPrint.git
+    dest:               "{{ pyh_octoprint_path }}/clone"
+  become:               yes
+  become_user:          "{{ pyh_octo_user_name }}"
+
+- name: MainTask-09
+  stat:
+    path:               "{{ virtualenv_dir }}/bin/activate"
+  register:             virtualenv_stats
+
+- name: MainTask-10 - Create virtualenv {{ virtualenv_dir }} (if it does not already exist)
+  command: "{{item}}"
+  with_items:
+    - virtualenv --prompt="(OctoPrint) " {{ virtualenv_dir }}
+  become:               yes
+  become_user:          "{{ pyh_octo_user_name }}"
+  when:                 not virtualenv_stats.stat.exists
+
+- name: MainTask-11 - Update pip
+  pip: 
+    name:               pip
+    state:              latest
+    virtualenv:         "{{ virtualenv_dir }}"
+  become:               yes
+  become_user:          "{{ pyh_octo_user_name }}"
+
+- name: MainTask-12 - Install OctoPrint systemd Unit
+  template:
+    src:                octoprint.service.j2
+    dest:               "/etc/systemd/system/octoprint.service"
+  become:               yes
+  become_method:        sudo
+
+- name: MainTask-13 - reload systemd
+  command:              systemctl daemon-reload
+  become:               yes
+  become_method:        sudo
+
+- name: MainTask-14 - Enable and start OctoPrint service
+  service:
+    name:               octoprint
+    enabled:            yes
+    state:              restarted
+  become:               yes
+  become_method:        sudo
+
+- name: MainTask-15 - HaProxy
+  include_tasks:         "../roles/install-octoprint/tasks/haproxy.yaml"
+
+### END DBK

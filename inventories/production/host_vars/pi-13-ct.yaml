@@ -1,0 +1,29 @@
+# Name:    PyHouse-ansible/inventories/production/host_vars/pi-13-ct.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-05-02
+# Updated: 2018-05-02
+
+
+
+
+
+
+
+
+
+
+---
+
+ansible_host:               192.168.9.23
+
+pyh_hostname:               pi-13-ct
+pyh_ipv4_ethernet_addr:     192.168.10.23
+pyh_ipv4_wifi_addr:         192.168.9.23
+pyh_ipv6_ethernet_addr:     :10:23
+pyh_ipv6_wifi_addr:         :9:23
+pyh_roles:                  none
+
+pyh_extra_apt_packages:
+    - sqlite3
+
+### END DBK

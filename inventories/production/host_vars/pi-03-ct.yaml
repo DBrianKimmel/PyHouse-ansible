@@ -3,6 +3,15 @@
 # Created: 2017-10-01
 # Updated: 2018-04-07
 
+
+
+
+
+
+
+
+
+
 ---
 
 ansible_host:               192.168.9.13
@@ -12,6 +21,6 @@ pyh_ipv4_ethernet_addr:     192.168.10.13
 pyh_ipv4_wifi_addr:         192.168.9.13
 pyh_ipv6_ethernet_addr:     :10:13
 pyh_ipv6_wifi_addr:         :9:13
-pyh_roles:                  pyhouse
+pyh_roles:                  none
 
 ### END DBK

@@ -1,142 +1,21 @@
 # Name:    PyHouse-ansible/playbooks/production-pis.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-12
-# Updated: 2018-04-12
+# Updated: 2018-07-27
 #
 # This is the main production playbook.
-
-# Tags:
-#   motd                    - Change motd to ansible configged
-#   setup-network           -
-#   setup-pi                - Initial setup of new image SDcard Pi
-#   fetch-files             - Pull back selected config files
-
-# Vars:
-#   install_fail2ban        -
-#   install_loadbalancer    -
-#   install_logwatch        -
-#   install_motd            -
-#   install_proxycache      -
-#   install_webserver       -
-#   set_timezone            -
+# Do all the basic stuff here.
 
 ---
 
-# The second play is to install remote PI hosts.
-- name: Play - Production-Pis - Install
-  hosts:            pis
-  strategy:         linear
-  become:           yes
-  become_method:    sudo
-  gather_facts:     yes
-
-  pre_tasks:
-
-    - name: ProductionPis-PreTask-01 - Fail if Ansible is ancient
-      fail:
-        msg:        "We need Ansible >= 2.4. Please update your installed ansible"
-      when:         ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
-      tags:
-        - always
-
-    # Dynamic include
-    - name: ProductionPis-PreTask-02 - Dynamic Include vars from local-configure.yaml if found
-      include_vars: "{{ item }}"
-      with_first_found:
-        - files:
-            - "local-configure.yaml"
-            - "null.yaml"
-          paths:
-            - "../defaults/"
-      tags:
-        - always
-
-
-#    # Update all packages
-#    - name: ProductionPis-PreTask-04-Suse - Update packages
-#      ignore_errors:        yes
-#      when: ansible_os_family == 'Suse'
-#      zypper:
-#        name:               "*"
-#        state:              latest
-#        update_cache:       yes
-
-
-#    - name: ProductionPis-PreTask-05-Debian - Ensure optional packages via apt
-#      when: ansible_os_family == 'Debian'
-#      apt:
-#        pkg: "{{ item }}"
-#        state: present
-#      with_items: "{{ additional_packages|default([]) }}"
-
-#    - name: ProductionPis-PreTask-06-CentOS - Enable aditional repos for CentOS
-#      yum:
-#        pkg: "{{ item }}"
-#        state: present
-#      when: ansible_distribution == 'CentOS'
-#      with_items:
-#        - epel-release
-#      tags:
-#        - munin
-#        - varnish
-
-
-#    - name: ProductionPis-PreTask-07-RedHat - Ensure optional packages via yum
-#      when: ansible_os_family == 'RedHat'
-#      yum:
-#        name: "{{ item }}:"
-#        state: present
-#        update_cache: yes
-#      with_items: "{{ additional_packages|default([]) }}"
-
-#    - name: ProductionPis-PreTask-08-RedHat  - Ensure selinux packages via yum
-#      when: ansible_os_family == 'RedHat' and ansible_selinux
-#      yum:
-#        name: "{{ item }}"
-#        state: present
-#        update_cache: yes
-#      with_items:
-#        - libsemanage-python
-#      tags:
-#        - nginx
-#        - haproxy
-
-# ========================================================================
-# ==== pyh_roles dispatch
-
-#  ansible
-#  control
-#  install-mqtt
-#  install-pandora
-#  install-pyhouse
-#  install-node-red
-#  octoprint
-#  package-management
-#  postgresql
-#  relay
+- name:                 Play - Production-Pis - Starting
+  hosts:                pis
+  strategy:             linear
+  become:               yes
+  become_method:        sudo
+  gather_facts:         yes
 
   roles:
-
-    - role: roles/package-management
-      tags:
-        - always
-
-    - role: roles/networking
-      when: install_networking|default(True)
-      tags: 
-        - always
-
-    - role: roles/hostname
-      tags:
-        - always
-
-    - role: roles/add-user
-      tags:
-        - always
-
-    - role: roles/avahi
-      tags:
-        - always
 
     - role: roles/timezone
       when: set_timezone|default(True)
@@ -147,25 +26,5 @@
       when: install_motd|default(True)
       tags:
         - motd
-
-    - role: roles/install-mqtt
-      when: pyh_roles.find("mqtt") != -1
-      tags:
-        - always
-
-    - role: roles/install-pyhouse
-      when: pyh_roles.find("pyhouse") != -1
-      tags:
-        - always
-
-    - role: roles/install-pandora
-      when: pyh_roles.find("pandora") != -1
-      tags:
-        - always
-
-    - role: roles/install-node-red
-      when: pyh_roles.find("node-red") != -1
-      tags:
-        - always
 
 ### END DBK

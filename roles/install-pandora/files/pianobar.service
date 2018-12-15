@@ -1,0 +1,20 @@
+# Name:     PyHouse-ansible/roles/install-pandora/files/pianobar.service
+# Author: 	D Brian Kimmel
+# Created:	2018-06-20
+# Updated:  2018-06-20
+#
+
+[Unit]
+Description=PianoBar Pandora Player
+After=network.target
+Requires=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+### END DBK

@@ -3,11 +3,13 @@
 # @name:      PyHouse_Install/bin/update_pyhouse
 # @author:    D. Brian Kimmel
 # @contact:   D.BrianKimmel@gmail.com
-# @copyright: (c) 2015-2015 by D. Brian Kimmel
+# @copyright: (c) 2015-2018 by D. Brian Kimmel
 # @license:   MIT License
 # @note:      Created on Oct 15, 2015
 # @Summary:   This updates the PyHouse package
 #
+# __updated__ = '2018-07-17'
+
 
 HOME_DIR='/home/pyhouse/'
 WORK_DIR=${HOME_DIR}workspace/
@@ -16,8 +18,8 @@ INSTALL_DIR=${WORK_DIR}PyHouse/
 echo "--Running update_pyhouse shell script now ..."
 cd ${INSTALL_DIR}
 git pull
-git checkout develop
-sudo python3 ${WORK_DIR}PyHouse_Install/src/Update/update_pyhouse.py
+git checkout master
+#sudo python3 ${WORK_DIR}PyHouse_Install/src/Update/update_pyhouse.py
 
 echo "--Finished running update_pyhouse shell script."
 echo " "

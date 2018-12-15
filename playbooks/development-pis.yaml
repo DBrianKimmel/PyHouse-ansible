@@ -1,69 +1,32 @@
 # Name:    PyHouse-ansible/playbooks/development-pis.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-20
-# Updated: 2018-04-24
+# Updated: 2018-07-25
+
+
+
 
 ---
 
-- name: Development-Pis.yaml - First.
+- name:                 Development-Pis.yaml
   hosts:                all
   strategy:             linear
   become:               yes
   become_method:        sudo
+  gather_facts:         yes
 
-  pre_tasks:
-
-    - name: Development-Pis-01- Starting...
-      debug:
-        msg:
-          - "User: {{pyh_admin_user}}"
-          - "Pass: {{vault_pyh_admin_password}}"
-          - "Dist: {{ansible_os_family}}"
-          - "Host: {{pyh_hostname}}"
-          - "Role: {{pyh_roles}}"
-      tags:
-        - always
-
-    - name: Development-Pis-02- Include vars from local-configure.yaml if found
-      include_vars: "{{ item }}"
-      with_first_found:
-       - '../defaults/local-configure.yaml'
-       - ../defaults/null.yaml
-      tags:
-        - always
-
-
-# ========================================================================
-# ==== pyh_roles dispatch
-
-#   ansible
-#   control
-#   install-mqtt
-#   install-pandora
-#   install-pyhouse
-#   install-node-red
-#   networking
-#   octoprint
-#   package-management
-#   postgresql
-#   relay
 
   roles:
 
-    - role: roles/install-mqtt
-      when: pyh_roles.find("mqtt") != -1
-      tags: always
+    - role: roles/timezone
+      when: set_timezone|default(True)
+      tags:
+        - timezone
 
-    - role: roles/install-pyhouse
-      when: pyh_roles.find("pyhouse") != -1
-      tags: always
+    - role: roles/motd
+      when: install_motd|default(True)
+      tags:
+        - motd
 
-    - role: roles/install-pandora
-      when: pyh_roles.find("pandora") != -1
-      tags: always
 
-    - role: roles/install-node-red
-      when: pyh_roles.find("node-red") != -1
-      tags: always
-
-### END DBK
+  ### END DBK

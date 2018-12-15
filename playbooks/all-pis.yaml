@@ -1,0 +1,61 @@
+# Name:    PyHouse-ansible/playbooks/roles-dispatch.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-07-08
+# Updated: 2018-07-25
+
+# This will first install the basic system that goes on every computer.
+# Then it will add the pyh_roles to specialize that computer.
+
+---
+
+- name:                 Play-02 - All-Pis - Starting
+  hosts:                pis
+  strategy:             linear
+  become:               yes
+  become_method:        sudo
+  gather_facts:         yes
+
+  pre_tasks:
+
+    - name:     All-Pis-PreTask-00 - Starting, Display some vars...
+      debug:
+        msg:
+          - "User: {{ pyh_admin_user }}"
+          - "Dist: {{ ansible_os_family }}"
+          - "Host: {{ pyh_hostname }}"
+          - "Role: {{ pyh_roles }}"
+      tags:
+        - always
+
+    # Dynamic include
+    - name:     All-Pis-PreTask-01 - Dynamic Include vars from local-configure.yaml if found
+      include_vars: "{{ item }}"
+      with_first_found:
+        - files:
+            - "local-configure.yaml"
+            - "null.yaml"
+          paths:
+            - "../defaults/"
+      tags:
+        - always
+
+  roles:
+
+    - role: roles/package-management
+      tags:
+        - always
+
+    - role: roles/networking
+      when: install_networking | default(True)
+      tags: 
+        - always
+
+    - role: roles/hostname
+      tags:
+        - always
+
+    - role: roles/add-admin-user
+      tags:
+        - always
+
+### END DBK

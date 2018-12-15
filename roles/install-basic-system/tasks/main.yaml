@@ -1,0 +1,41 @@
+# Name:    PyHouse-ansible/roles/install-basic-system/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-06-27
+# Updated: 2018-07-08
+#
+# This role will do the basics on each computer.
+#
+# Add admin user
+# MOTD
+# SSH and VNC access
+
+---
+
+- name: Main-Task-00 - main info for the role.
+  debug:
+    msg:
+      - "Dist:          {{ ansible_os_family }}"
+      - "Lsb:           {{ ansible_lsb }}"
+
+# sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
+- name: Main-Task-01 - Install apt packages.
+  ignore_errors: yes
+  apt:
+    name:               "{{ item }}"
+    state:              latest
+  with_items:           "{{pyh_extra_apt_packages}}"
+
+- name: Main-Task-02 - Set ip autoreboot.
+  include_tasks:        auto-reboot.yaml
+
+- name: Main-Task-03 - Set avahi.
+  include_tasks:        setup-avahi.yaml
+
+- name: Main-Task-04 - Set time/timezone.
+  include_tasks:        setup-time.yaml
+
+- name: Main-Task-05 - Setup the weekly os software update
+  include_tasks:        update-os.yaml
+
+
+### END DBK

@@ -10,19 +10,19 @@
 
 # All includes are dynamic
 
-- name: Task-01 - Set up the proper OS distribution
+- name: Main-Task-01 - Set up the proper OS distribution
   include_tasks:    "setup-{{ansible_os_family}}.yaml"
 
-- name: Task-02 - Install extra apt packages for pyhouse prerequsite
+- name: Main-Task-02 - Install extra apt packages for pyhouse prerequsite
   include_tasks:    install-extra-packages.yaml
 
-- name: Task-03 - Install PyHouse
+- name: Main-Task-03 - Install PyHouse
   include_tasks:    install-pyhouse.yaml
 
-- name: Task-10 - Setup auto run on reboot
+- name: Main-Task-10 - Setup auto run on reboot
   include_tasks:    autostart.yaml
 
-- name: Task-11 - Save the config files we have
+- name: Main-Task-11 - Save the config files we have
   include_tasks:    backup-config.yaml
   tags:             fetch-files
 

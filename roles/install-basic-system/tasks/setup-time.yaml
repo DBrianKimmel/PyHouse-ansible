@@ -1,0 +1,24 @@
+# Name:    PyHouse-ansible/roles/install-basic-system/tasks/setup-time.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-07-08
+# Updated: 2018-07-08
+#
+# This role will set the clocks and timezone.
+# Run NTP as a systemd service.
+#
+
+---
+
+- name: time-Task-01 - Select correct timezone.
+  ignore_errors: yes
+  timezone:
+    name:               "{{ pyh_timezone | default(default_timezone) }}"
+    hwclock:            UTC
+
+#- name: time-Task-02 - run ntp service.
+#  service:
+#    name:               ntp
+#    state:              started
+#    enabled:            yes
+
+### END DBK

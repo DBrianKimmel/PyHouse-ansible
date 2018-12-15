@@ -1,0 +1,35 @@
+# Name:    PyHouse-ansible/inventories/production/host_vars/pi-04-ct.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-06-13
+# Updated: 2018-06-13
+
+
+
+
+
+
+
+
+
+
+---
+
+ansible_host:               192.168.9.14
+
+pyh_hostname:               pi-04-ct
+pyh_ipv4_ethernet_addr:     192.168.10.14
+pyh_ipv4_wifi_addr:         192.168.9.14
+pyh_ipv6_ethernet_addr:     :10:14
+pyh_ipv6_wifi_addr:         :9:14
+pyh_roles:                  node-red,pyhouse
+
+pyh_extra_apt_packages:
+    - sqlite3
+
+pyh_extra_nodered_nodes:
+    - node-red-dashboard
+    - node-red-node-sqlite
+    - node-red-contrib-timerswitch
+
+
+### END DBK

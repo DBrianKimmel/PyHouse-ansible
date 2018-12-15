@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# @name:      PyHouse-ansible/roles/install-octoprint/files/bin/stop-octoprint
+# @author:    D. Brian Kimmel
+# @contact:   D.BrianKimmel@gmail.com
+# @copyright: (c) 2018-2018 by D. Brian Kimmel
+# @license:   MIT License
+# @note:      Created on Jul 05, 2018
+# @Summary:   This starts OctoPrint
+
+echo "Stopping the OctoPrint system"
+cd ~
+> nohup.out
+nohup ./OctoPrint/venv/bin/octoprint serve  1>/dev/null 2>&1 </dev/null &
+cd
+
+### END DBK

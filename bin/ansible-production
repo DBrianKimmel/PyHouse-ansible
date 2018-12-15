@@ -12,7 +12,7 @@
 #		backup
 
 INVENTORY=" -i inventories/production/hosts "
-PLAYBOOK="  playbook.yaml "
+PLAYBOOK="  playbook-production.yaml "
 PSWD1="     --vault-password-file  ~/.vault-pass.txt "
 TAGS=""
 
@@ -25,6 +25,7 @@ else
 fi
 
 cd ~/workspace/PyHouse-ansible
+echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
 ansible-playbook  -vv  ${INVENTORY} ${PLAYBOOK} ${PSWD1}  ${TAGS}
 cd -
 

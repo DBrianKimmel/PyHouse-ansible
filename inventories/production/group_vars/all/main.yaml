@@ -12,22 +12,25 @@
 
 ---
 
-pyh_domain:             ""
+pyh_domain:                     ""
 
-pyh_admin_user:         "{{ vault_pyh_admin_user }}"
-pyh_admin_password:     "{{ vault_pyh_admin_password }}"
-pyh_long_admin_name:    "{{ vault_pyh_long_admin_name }}"
+pyh_admin_user:                 "{{ vault_pyh_admin_user }}"
+pyh_admin_password:             "{{ vault_pyh_admin_password }}"
+pyh_long_admin_name:            "{{ vault_pyh_long_admin_name }}"
 
-pyh_pi_user:            "{{ vault_pyh_pi_user }}"
-pyh_pi_password:        "{{ vault_pyh_pi_password }}"
-pyh_long_pi_name:       "{{ vault_pyh_pi_admin_name }}" 
+pyh_pi_user:                    "{{ vault_pyh_pi_user }}"
+pyh_pi_password:                "{{ vault_pyh_pi_password }}"
+pyh_long_pi_name:               "{{ vault_pyh_pi_admin_name }}" 
 
-pyh_nodered_user:       "{{ vault_pyh_nodered_user }}"
-pyh_nodered_password:   "{{ vault_pyh_nodered_password }}"
-pyh_long_nodered_name:  "{{ vault_pyh_long_nodered_name }}"
+pyh_nodered_user:               "{{ vault_pyh_nodered_user }}"
+pyh_nodered_password:           "{{ vault_pyh_nodered_password }}"
+pyh_long_nodered_name:          "{{ vault_pyh_long_nodered_name }}"
 
-pyh_pyhouse_user:       "{{ vault_pyh_pyhouse_user }}"
-pyh_pyhouse_password:   "{{ vault_pyh_pyhouse_password }}"
-pyh_long_pyhouse_name:  "{{ vault_pyh_long_pyhouse_name }}"
+pyh_pyhouse_user:               "{{ vault_pyh_pyhouse_user }}"
+pyh_pyhouse_password:           "{{ vault_pyh_pyhouse_password }}"
+pyh_long_pyhouse_name:          "{{ vault_pyh_long_pyhouse_name }}"
+
+# Networking
+pyh_ipv4_router_prefix_len:     20
 
 ### END DBK

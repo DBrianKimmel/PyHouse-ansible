@@ -1,0 +1,27 @@
+# Name:    PyHouse-ansible/inventories/production/host_vars/pi-11-ct.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-01
+# Updated: 2018-04-07
+
+---
+
+ansible_host:               192.168.9.21
+
+pyh_hostname:               pi-11-ct
+pyh_ipv4_ethernet_addr:     192.168.10.21
+pyh_ipv4_wifi_addr:         192.168.9.21
+pyh_ipv6_ethernet_addr:     :10:21
+pyh_ipv6_wifi_addr:         :9:21
+pyh_roles:                  node-red
+
+pyh_extra_apt_packages:
+    - sqlite3
+    - i2c-tools
+
+pyh_extra_nodered_nodes:
+    - node-red-dashboard
+    - node-red-contrib-timerswitch
+    - node-red-node-sqlite
+    - node-red-contrib-i2c
+
+### END DBK

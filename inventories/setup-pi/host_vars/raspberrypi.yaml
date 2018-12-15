@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/setup-pi/host_vars/raspberrypi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-30
-# Updated: 2018-04-22
+# Updated: 2018-06-13
 
 # This is the host_vars file for setting up a raspberry pi for home automation use.
 
@@ -12,21 +12,21 @@
 ---
 
 # These must be changed
-ansible_host:               192.168.1.233
+ansible_host:               192.168.9.127
 
-pyh_hostname:               pi-07-pp
-pyh_ipv4_ethernet_addr:     192.168.2.17
-pyh_ipv4_wifi_addr:         192.168.1.17
-pyh_ipv6_ethernet_addr:     :2:17
-pyh_ipv6_wifi_addr:         :1:17
+pyh_hostname:               pi-06-ct
+pyh_ipv4_ethernet_addr:     192.168.10.16
+pyh_ipv4_wifi_addr:         192.168.9.16
+pyh_ipv6_ethernet_addr:     :10:16
+pyh_ipv6_wifi_addr:         :9:16
 pyh_roles:                  setup
 
 # These are only for setup - normally they are in a group_vars file for the house we are using
-pyh_ipv4_router_addr:       192.168.1.1
+pyh_ipv4_router_addr:       192.168.9.1
 pyh_ipv4_router_prefix_len: 20
-vault_pyh_access_points:    {'PinkPoppy-Guest': 'MarciaBrian'}
-pyh_access_points:          {'PinkPoppy-Guest': 'MarciaBrian'}
-pyh_router_nameservers:     "192.168.1.1 8.8.8.8"
+vault_pyh_access_points:    {'CannonTrail-2': 'Koepfinger-59'}
+pyh_access_points:          {'CannonTrail': 'Koepfinger-59'}
+pyh_router_nameservers:     "192.168.9.1 8.8.8.8"
 
 # these are normaly in a group_vars file for the type of computer
 pyh_admin_user_groups:      adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio

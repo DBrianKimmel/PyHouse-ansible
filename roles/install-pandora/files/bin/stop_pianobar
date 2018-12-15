@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# name:      PyHouse-ansible/roles/install-pandora/files/bin/stop_pianobar
+# author:    D. Brian Kimmel
+# contact:   D.BrianKimmel@gmail.com
+# copyright: (c) 2018-2018 by D. Brian Kimmel
+# license:   MIT License
+# Created:   2018-06-20
+# Updated:   2018-06-20
+# Summary:   This stops Pianobar
+
+echo Closing out Pandora processes...
+pkill -xf 'SCREEN -S pianobar -d -m bash -c pianobar'
+pkill -xf 'node index.js patiobar'
+echo done
+
+### END DBK
+

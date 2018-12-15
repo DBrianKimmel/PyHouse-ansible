@@ -10,6 +10,13 @@
 ---
 
 - name: ExtraNodes-01 Add extra npm nodes
+  debug:
+    msg:
+      - "name:    {{ item }}"
+      - "path:    /home/{{pyh_nodered_user}}/.node-red/"
+  with_items:   "{{pyh_extra_nodered_nodes}}"
+
+- name: ExtraNodes-02 Add extra npm nodes
   become:           yes
   become_user:      "{{ pyh_nodered_user }}"
   become_method:    sudo

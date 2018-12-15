@@ -10,14 +10,26 @@
 - name: ExtraPackages-01 - fetch the pyhouse group vars
   include_vars:     pyhouse.yaml
 
-- name: ExtraPackages-02 - install extra apt packages used by pyhouse.
+- name: ExtraPackages-02-Debian - install extra apt packages used by pyhouse.
   ignore_errors:        yes
   apt:
     name:               "{{ item }}"
     state:              latest
   with_items:           "{{ pyh_extra_apt_packages }}"
+  when:                 ansible_os_family == 'Debian'
+
+- name: ExtraPackages-02-OpenSuse - install extra zypper packages used by pyhouse.
+  ignore_errors:        yes
+  zypper:
+    name:               "{{ item }}"
+    state:              latest
+    update_cache:       yes
+  with_items:           "{{ pyh_extra_apt_packages }}"
+  when:                 ansible_os_family == 'Suse'
 
 - name: ExtraPackages-03 - install extra pip packages used by pyhouse.
+  become:               yes
+  become_method:        sudo
   ignore_errors:        yes
   pip:
     name:               "{{ item }}"

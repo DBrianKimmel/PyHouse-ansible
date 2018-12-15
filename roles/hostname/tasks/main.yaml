@@ -52,18 +52,18 @@
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^127.0.1.1"
-    line:       "127.0.1.1{{'\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost"
+    line:       "127.0.1.1{{'\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh_domain}}{% endif %}{{'\t'}}localhost"
     state:      present
   tags: hostname
 
-- name: Task-02D - Update the IPv6 hostname (pt. 3) - (/etc/hosts)
+- name: Task-02D - Update the IPv6 hostname (pt. 4) - (/etc/hosts)
   ignore_errors:    yes
   become_user:      root
   become:           yes
   lineinfile:
     dest:       /etc/hosts
     regexp:     "^::1"
-    line:       "::1{{'\t\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh.domain}}{% endif %}{{'\t'}}localhost ip6-localhost ip6-loopback"
+    line:       "::1{{'\t\t'}}{{pyh_hostname}}{% if pyh_domain != '' %}{{'\t'}}{{pyh_hostname}}.{{pyh_domain}}{% endif %}{{'\t'}}localhost ip6-localhost ip6-loopback"
     state:      present
   tags: hostname
 

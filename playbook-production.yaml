@@ -1,40 +1,30 @@
 # Name:    PyHouse-ansible/playbook-production.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-04-19
-# Updated: 2018-04-19
+# Updated: 2018-07-27
 #
 # This is the top level playbook for production computers.
-# This playbook is a dispatcher.
+# It is invoked by the ansible-production command.
 
 ---
 
-- name: Playbook (Production)
-  hosts:            all
-  strategy:         linear
-  gather_facts:     yes
+- name:                 Play 1 - Production
+  strategy:             linear
+  hosts:                all
+  gather_facts:         yes
 
-# Install ansible on the admin machine.
-  - name: Admin - Set up ansible on the ansible admin computers.
-    set_fact: flag_ansible "True"
-    tags: setup_ansible
+  pre_tasks:
 
-  - name: Debug
-    debug: msg="Flag Settings {{ ansible_local }}"
+  - name:               Play-Production - PreTask-01 - List the pyh_role for each host
+    debug:
+      msg:              "Running production ansible now."
+    tags: always
 
-
-# Now define the plays
-
-# Now get the proper Production playbook(s)
-- import_playbook: "./playbooks/production-pis.yaml"
-#  when:
-#  - tag_production is defined
-
-- import_playbook: "./playbooks/production-nucs.yaml"
-#  when:
-#  - tag_production is defined
-
-- import_playbook: "./playbooks/production-others.yaml"
-#  when:
-#  - tag_production is defined
+- import_playbook:      "./playbooks/all-pis.yaml"
+- import_playbook:      "./playbooks/production-pis.yaml"
+- import_playbook:      "./playbooks/production-nucs.yaml"
+- import_playbook:      "./playbooks/production-others.yaml"
+- import_playbook:      "./playbooks/roles-dispatch.yaml"
+- import_playbook:      "./playbooks/fetch-config-files.yaml"
 
 ### END DBK

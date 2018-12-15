@@ -1,0 +1,41 @@
+# Name:    PyHouse-ansible/roles/install-pandora/tasks/install-extra-packages.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-06-20
+# Updated: 2018-06-20
+#
+# The extra node  names are stored in "pyh_extra_apt_packages" in each host_vars file that installs .
+#
+---
+
+- name: ExtraPackages-01 - fetch the pyhouse group vars
+  include_vars:     pandora.yaml
+
+- name: ExtraPackages-02 - install extra apt packages used by pandora.
+  ignore_errors:        yes
+  apt:
+    name:               "{{ item }}"
+    state:              latest
+  with_items:           "{{ pyh_extra_apt_packages }}"
+
+# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+- name: ExtraPackages-03 - Add repository
+
+# sudo apt install nodejs
+- name: ExtraPackages-04 - install nodejs
+  ignore_errors:        yes
+  pip:
+    name:               "{{ item }}"
+    executable:         pip3
+    state:              latest
+  with_items:           "{{ pyh_extra_pip_packages }}"
+
+
+# Clone Pianobar’s git repository.
+# git clone https://github.com/kylejohnson/Patiobar.git
+# Change to newly created directory.
+# cd Patiobar
+# Install.
+# bash install.sh
+
+
+### END DBK

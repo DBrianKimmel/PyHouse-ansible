@@ -1,0 +1,32 @@
+# Name:    PyHouse-ansible/roles/install-octoprint/tasks/autologin.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-07-05
+# Updated: 2018-07-05
+#
+# This task will autologin the octo user on computer start up.
+#
+# 
+#
+---
+
+- name: AutoLogin-01 - Autologin as octo user
+  lineinfile:
+    path:               '/etc/systemd/system/autologin@.service'
+    regexp:             'ExecStart=-/sbin/agetty --autologin '
+    line:               'ExecStart=-/sbin/agetty --autologin {{ pyh_octo_user_name }} --noclear %I $TERM'
+
+- name: AutoStart-02 - append to .bashrc
+  blockinfile:
+    path:               '/home/{{ pyh_octo_user_name }}/.bashrc'
+    block: |
+      ### AutoLogin octo ###
+      #
+      # Start pyhoctoprintouse if we autologin this user
+      #
+      if [ $(tty) == /dev/tty1 ]; then
+          bin/start_octoprint
+      fi
+      ### END DBK
+
+#
+### END DBK
