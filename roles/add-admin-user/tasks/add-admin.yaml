@@ -9,7 +9,7 @@
 ---
 
 # Create the admin user
-- name: Task-01-Suse - Add Admin User
+- name:             AddAdminUser Task-01-Suse - Add Admin User
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -21,7 +21,7 @@
     groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_lsb.id == 'Suse'
 
-- name: Task-01-Raspbian - Add Admin User
+- name:             AddAdminUser Task-01-Raspbian - Add Admin User
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -33,7 +33,7 @@
     groups:         "{{ pyh_admin_user_groups }}"
   when: ansible_lsb.id == 'Raspbian'
 
-- name: Task-01-Ubuntu - Add Admin User
+- name:             AddAdminUser Task-01-Ubuntu - Add Admin User
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -46,7 +46,7 @@
   when: ansible_lsb.id == 'Ubuntu'
 
 
-- name: Task-02 - Create the sudoers.d file for admin user
+- name:             AddAdminUser Task-02 - Create the sudoers.d file for admin user
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -57,68 +57,68 @@
     group:          root
     mode:           0600
 
-- name: Task-03 - Be sure admin user home dir ownership is OK
+- name:             AddAdminUser Task-03 - Be sure admin user home dir ownership is OK
   ignore_errors:    yes
   become_user:      root
   become:           yes
   file:
-    name:       "/home/{{ pyh_admin_user }}/"
-    state:      directory
-    owner:      "{{ pyh_admin_user }}"
-    group:      "{{ pyh_admin_user }}"
-    mode:       0755
+    name:           "/home/{{ pyh_admin_user }}/"
+    state:          directory
+    owner:          "{{ pyh_admin_user }}"
+    group:          "{{ pyh_admin_user }}"
+    mode:           0755
 
-- name: Task-04 - Create bin dir for admin user
+- name:             AddAdminUser Task-04 - Create bin dir for admin user
   ignore_errors:    yes
   become_user:      root
   become:           yes
   file:
-    name:       "/home/{{ pyh_admin_user }}/bin"
-    state:      directory
-    owner:      "{{ pyh_admin_user }}"
-    group:      "{{ pyh_admin_user }}"
-    mode:       0755
+    name:           "/home/{{ pyh_admin_user }}/bin"
+    state:          directory
+    owner:          "{{ pyh_admin_user }}"
+    group:          "{{ pyh_admin_user }}"
+    mode:           0755
 
-- name: Task-05 - Copy admin files to ~/bin
+- name:             AddAdminUser Task-05 - Copy admin files to ~/bin
   ignore_errors:    yes
   become_user:      root
   become:           yes
   copy:
-    src:        "../files/ModelDiscovery.sh"
-    dest:       "/home/{{ pyh_admin_user }}/bin"
-    owner:      "{{ pyh_admin_user }}"
-    group:      "{{ pyh_admin_user }}"
-    mode:       0755
+    src:            "../files/ModelDiscovery.sh"
+    dest:           "/home/{{ pyh_admin_user }}/bin"
+    owner:          "{{ pyh_admin_user }}"
+    group:          "{{ pyh_admin_user }}"
+    mode:           0755
 
-- name: Task-06 - Create admin user .ssh dir
+- name:             AddAdminUser Task-06 - Create admin user .ssh dir
   ignore_errors:    yes
   become_user:      root
   become:           yes
   file:
-    name:       "/home/{{ pyh_admin_user }}/.ssh"
-    state:      directory
-    owner:      "{{ pyh_admin_user }}"
-    group:      "{{ pyh_admin_user }}"
-    mode:       0700
+    name:           "/home/{{ pyh_admin_user }}/.ssh"
+    state:          directory
+    owner:          "{{ pyh_admin_user }}"
+    group:          "{{ pyh_admin_user }}"
+    mode:           0700
 
-- name: Task-07 - Copy authorized_keys file to ~/.ssh
+- name:             AddAdminUser Task-07 - Copy authorized_keys file to ~/.ssh
   become_user:      root
   become:           yes
   copy:
-    src:        "~/.ssh/authorized_keys"
-    dest:       "/home/{{ pyh_admin_user }}/.ssh"
-    owner:      "{{ pyh_admin_user }}"
-    group:      "{{ pyh_admin_user }}"
-    mode:       0600
+    src:            "~/.ssh/authorized_keys"
+    dest:           "/home/{{ pyh_admin_user }}/.ssh"
+    owner:          "{{ pyh_admin_user }}"
+    group:          "{{ pyh_admin_user }}"
+    mode:           0600
 
-- name: Task-08 - Copy id_rsa file to ~/.ssh
+- name:             AddAdminUser Task-08 - Copy id_rsa file to ~/.ssh
   become_user:      root
   become:           yes
   copy:
-    src:        "~/.ssh/id_rsa"
-    dest:       "/home/{{ pyh_admin_user }}/.ssh"
-    owner:      "{{ pyh_admin_user }}"
-    group:      "{{ pyh_admin_user }}"
-    mode:       0600
+    src:            "~/.ssh/id_rsa"
+    dest:           "/home/{{ pyh_admin_user }}/.ssh"
+    owner:          "{{ pyh_admin_user }}"
+    group:          "{{ pyh_admin_user }}"
+    mode:           0600
 
 ### END DBK

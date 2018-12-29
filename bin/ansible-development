@@ -25,6 +25,6 @@ else
 fi
 
 echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
-ansible-playbook  -vv  ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
+ansible-playbook  -vvv  ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
 
 ### END DBK

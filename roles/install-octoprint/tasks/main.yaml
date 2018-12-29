@@ -26,7 +26,11 @@
   include_tasks:         "../roles/install-octoprint/tasks/install-extra-packages.yaml"
 
 - name: MainTask-02 - Add User "octo"
-  include_tasks:         "../roles/common/tasks/add-user.yaml p_user={{ pyh_octo_user_name }} p_comment={{ pyh_octo_user_comment}} p_groups={{ pyh_octo_user_groups }}"
+  include_tasks:            ../roles/common/tasks/add-user.yaml
+  vars:
+          p_user:           "{{ pyh_octo_user_name }}"
+          p_comment:        "{{ pyh_octo_user_comment}}"
+          p_groups:         "{{ pyh_octo_user_groups }}"
 
 - name: MainTask-03 - Create OctoPrint dir
   ignore_errors:        yes

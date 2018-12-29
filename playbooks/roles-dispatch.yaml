@@ -40,8 +40,8 @@
       when: pyh_roles.find("node-red") != -1
       tags: always
 
-    - role: ../roles/install-ansible
-      when: pyh_roles.find("ansible") != -1
-      tags: always
+#    - role: install-ansible
+#      when: pyh_roles.find("ansible") != -1
+#      tags: always
 
 ### END DBK

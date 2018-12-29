@@ -12,34 +12,12 @@
 #
 ---
 
-- name: Play - New-Pi - Set up a fresh Pi 
+- name: Play-01 - New-Pi - Set up a fresh Pi 
   hosts:            raspberrypi
-  strategy:         debug
-  # remote_user:      root
   become:           yes
-  become_method:    sudo
-
+ 
   pre_tasks:
-
-    - name: New-Pi-pre-task-01 - Fail if Ansible is ancient
-      fail:
-        msg: "We need Ansible >= 2.4. Please update your installed ansible"
-      when: ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
-      tags:
-        - always
-
-    - name: New-Pi-pre-task-02- Include vars from local-configure.yaml if found
-      include_vars: "{{ item }}"
-      with_first_found:
-        - files:
-            - "local-configure.yaml"
-            - "null.yaml"
-          paths:
-            - "../defaults/"
-      tags:
-        - always
-
-    - name: New-Pi-pre-task-03 - Working on raspi
+    - name: New-Pi-pre-task-01 - Working on raspi
       debug:
         msg: "Host:{{ pyh_hostname }}; WiFi:{{ pyh_ipv4_wifi_addr }}; Ethernet:{{ pyh_ipv4_ethernet_addr }}; Access:{{ ansible_host }}"
       tags:
@@ -49,7 +27,6 @@
 # ========================================================================
 
   roles:
-
     - role: ../roles/add-admin-user
       tags:
         - setup-pi

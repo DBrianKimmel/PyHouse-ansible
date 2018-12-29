@@ -5,20 +5,20 @@
 
 ---
 
-- name:             WiFi-Task-01 - delete any new file created
+- name:             NetworkingInstallWiFi WiFi-Task-01 - delete any new file created
   ignore_errors:    yes
   file:
     name:           /etc/wpa_supplicant/wpa_supplicant.conf-new
     state:          absent
 
-- name:             WiFi-Task-02 - debug
+- name:             NetworkingInstallWiFi WiFi-Task-02 - debug
   ignore_errors:    yes
   debug:
     msg:
       -             "User: {{ pyh_admin_user }}"
       -             "AP:   {{ pyh_access_points }}"
 
-- name:             WiFi-Task-03 - Install the wpa_supplicant file
+- name:             NetworkingInstallWiFi WiFi-Task-03 - Install the wpa_supplicant file
   ignore_errors:    yes
   template:
     src:            ./wifi.j2

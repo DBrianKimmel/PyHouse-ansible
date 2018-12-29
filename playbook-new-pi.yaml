@@ -28,8 +28,8 @@
 
     - name: New-Pi-pre-task-01 - Fail if Ansible is ancient
       fail:
-        msg: "We need Ansible >= 2.4. Please update your installed ansible"
-      when: ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 4 )
+        msg: "We need Ansible >= 2.7. Please update your installed ansible"
+      when: ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 7 )
       tags:
         - always
 
@@ -40,7 +40,7 @@
         - always
 
 
-    - name: New-Pi-pre-task-03- Include vars from local-configure.yaml if found
+    - name: New-Pi-pre-task-03 - Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
       with_first_found:
         - files:
@@ -52,7 +52,5 @@
         - always
 
 - import_playbook: "./playbooks/new-pi.yaml"
-#  when:
-#  - tag_production is defined
 
 ### END DBK

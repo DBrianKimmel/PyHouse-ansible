@@ -7,14 +7,17 @@
 #
 # Deployes ansible commands on the local ansible workstation.
 
-# Put this where it can just be called
-cp ~/workspace/PyHouse-ansible/bin/ansible*  ~/bin/
-
-
+BINDIR=/usr/local/bin
 INVENTORY=" -i inventories/local/hosts"
 PLAYBOOK=" playbooks/local-install-tools.yaml"
 PSWD1=" --vault-password-file ~/.vault-pass.txt"
 TAGS=""
+
+# Put all script tools where they can just be called
+sudo cp ~/workspace/PyHouse-ansible/bin/ansible*  ${BINDIR}/
+sudo cp ~/workspace/PyHouse-ansible/bin/ansible*  ~/bin
+sudo chmod a+x ${BINDIR}/*
+sudo chmod a+x ~/bin
 
 if [ $# -gt 0 ]; then
     TAGS+=" --tags=setup_ansible,$1 "

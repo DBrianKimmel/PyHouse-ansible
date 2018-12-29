@@ -12,7 +12,6 @@ localhost ansible_connection=local
 # 127.0.0.1
 
 
-
 # ----- Define all the Raspberry Pis -----
 # Pink Poppy Raspberry Pis
 [pis_pp]

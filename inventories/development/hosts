@@ -1,17 +1,25 @@
 # Name:    PyHouse-ansible/inventories/development/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2018-07-29
+# Updated: 2018-12-19
 
 # for testing various things
 
-# ----- Define all the testing boxes -----
+#=========================================
 
-[nucs]
+[pis]
+pi-08-pp
+
+# ----- Define the localhost -----
+#localhost ansible_connection=local
+# [localhost]
+# 127.0.0.1
+
+#[nucs]
 # nuc-devel
 # nuc-01-ct		# Mqtt
 
-[pis_ct]
+#[pis_ct]
 #pi-01-ct		# pyhouse
 #pi-02-ct		# node-red,pyhouse,mqtt
 #pi-04-ct		# node-red
@@ -21,28 +29,38 @@
 
 [pis_pp]
 #pi-01-pp
-../pi-07-pp
+#pi-07-pp
+#pi-08-pp
 #pi-11-pp
 
-
 # All Raspberry Pis
-[pis:children]
-pis_pp
-pis_ct
+#[pis:children]
+#pis_pp
+#pis_ct
 
-
-[others]
+#[others]
 # other-devel
 #alki-devel
-
 
 #  -*- Groupname must be a house-name
 #  -*- Uncomment the one we are in as the wifi params differ
 #
 #[pinkpoppy:children]
-[cannontrail:children]
-nucs
-pis
-others
+#[cannontrail:children]
+#nucs
+#pis
+#others
+
+# -------------- House Groups ------------------
+# Pink Poppy Group
+#[pinkpoppy:children]
+#pis_pp
+#nucs_pp
+#alki-pp
+
+# Cannon Trail Group
+#[cannontrail:children]
+#pis_ct
+#nucs_ct                                                                                                                                                                                                   pcduino-ct
 
 ### END DBK

@@ -12,21 +12,21 @@
 ---
 
 # These must be changed
-ansible_host:               192.168.9.228
+ansible_host:               192.168.1.18
 
-pyh_hostname:               pi-03-ct
-pyh_ipv4_ethernet_addr:     192.168.10.13
-pyh_ipv4_wifi_addr:         192.168.9.13
-pyh_ipv6_ethernet_addr:     :10:13
-pyh_ipv6_wifi_addr:         :9:13
+pyh_hostname:               pi-08-pp
+pyh_ipv4_ethernet_addr:     192.168.2.18
+pyh_ipv4_wifi_addr:         192.168.1.18
+pyh_ipv6_ethernet_addr:     :2:18
+pyh_ipv6_wifi_addr:         :1:18
 pyh_roles:                  setup
 
 # These are only for setup - normally they are in a group_vars file for the house we are using
-pyh_ipv4_router_addr:       192.168.9.1
+pyh_ipv4_router_addr:       192.168.1.1
 pyh_ipv4_router_prefix_len: 20
-vault_pyh_access_points:    {'CannonTrail-2': 'Koepfinger-59'}
-pyh_access_points:          {'CannonTrail': 'Koepfinger-59'}
-pyh_router_nameservers:     "192.168.9.1 8.8.8.8"
+vault_pyh_access_points:    {'PinkPoppy-1': 'Koepfinger-59'}
+pyh_access_points:          {'PinkPoppy-2': 'Koepfinger-59'}
+pyh_router_nameservers:     "192.168.1.1 8.8.8.8"
 
 # these are normaly in a group_vars file for the type of computer
 pyh_admin_user_groups:      adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio

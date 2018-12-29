@@ -8,13 +8,7 @@
 
 ---
 
-- name: Task-01 - Info
-  debug:
-    msg:
-      - "User:      {{ pyh_admin_user }}"
-      - "Dist:      {{ ansible_os_family }}"
-
-- name: Task-02 - Create pi .ssh dir
+- name:         FixPiUser Task-01 - Create pi .ssh dir
   ignore_errors:    yes
   file:
     name:       "/home/pi/.ssh"
@@ -23,7 +17,7 @@
     group:      "pi"
     mode:       0700
 
-- name: Task-03 - Copy authorized_keys file to ~/.ssh
+- name:         FixPiUser Task-02 - Copy authorized_keys file to ~/.ssh
   copy:
     src:        "~/.ssh/authorized_keys"
     dest:       "/home/pi/.ssh"
@@ -33,7 +27,7 @@
 
 # --- "pi" user
 # Change the pi user's password
-- name: Task-04-Debian - Change "pi" password
+- name:         FixPiUser Task-03-Debian - Change "pi" password
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -42,6 +36,5 @@
     password:       "{{ pyh_pi_password }}"
     comment:        "Default User"
   when: ansible_os_family == 'Debian'
-
 
 ### END DBK

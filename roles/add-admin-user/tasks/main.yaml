@@ -11,18 +11,19 @@
 
 ---
 
-- name: Task-00 - main info for the role.
+- name:             Task-01 - Main info for the role.
   debug:
     msg:
+      - "Adding admin user "
       - "User:      {{ pyh_admin_user }}"
       - "Dist:      {{ ansible_os_family }}"
       - "Lsb:       {{ ansible_lsb }}"
 
-- name:             Task-01 - fix up the default 'pi' user if we are using raspbian distribution.
+- name:             Task-02 - fix up the default 'pi' user if we are using raspbian distribution.
   include_tasks:    fix-pi-user.yaml
   when: ansible_lsb.id == 'Raspbian'
 
-- name:             Task-02 - add an admin user account
-  include_tasks:    fix-pi-user.yaml
+- name:             Task-03 - add an admin user account
+  include_tasks:    add-admin.yaml
 
 ### END DBK
