@@ -21,9 +21,8 @@
 - name: Main-Task-01 - Install apt packages.
   ignore_errors: yes
   apt:
-    name:               "{{ item }}"
+    name:               "{{pyh_extra_apt_packages}}"
     state:              latest
-  with_items:           "{{pyh_extra_apt_packages}}"
 
 - name: Main-Task-02 - Set ip autoreboot.
   include_tasks:        auto-reboot.yaml

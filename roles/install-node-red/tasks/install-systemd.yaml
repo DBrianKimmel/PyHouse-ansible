@@ -8,6 +8,14 @@
 
 ---
 
+- name: InstallSystemdNodeRed - Msg
+  debug:
+    msg:
+      - "Installing Node-Red SystemD"
+      - "Admin User: {{pyh_admin_user}}"
+      - "NodeRed User: {{pyh_nodered_user}}"
+  tags: always
+
 # this creates a systemd service
 - name: InstallSystemd-01 - Create nodered.service
   template:

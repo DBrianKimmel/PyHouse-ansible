@@ -5,6 +5,14 @@
 #
 ---
 
+- name: Backup Configuration - Msg
+  debug:
+    msg:
+      - "BackingUp Node-Red Configuration"
+      - "Admin User: {{pyh_admin_user}}"
+      - "NodeRed User: {{pyh_nodered_user}}"
+  tags: always
+
 #
 # For now, we have to name each file as wildcards are not yet supported.
 #

@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install-octoprint/tasks/install-extra-packages.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-27
-# Updated: 2018-06-27
+# Updated: 2019-02-24
 #
 # The extra package names are stored in "pyh_extra_apt_packages".
 #
@@ -13,8 +13,7 @@
 - name: ExtraPackages-02 - install extra apt packages used by octoprint.
   ignore_errors:        yes
   apt:
-    name:               "{{ item }}"
+    name:               "{{ pyh_extra_apt_packages }}"
     state:              latest
-  with_items:           "{{ pyh_extra_apt_packages }}"
 
 ### END DBK

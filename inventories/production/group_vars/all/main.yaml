@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/group_vars/all/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-23
-# Updated: 2018-04-17
+# Updated: 2019-02-24
 #
 # The vault variables are stored in group_vars/all/vault.yaml
 # Keep the ~/.vault-pass.txt file a secret.
@@ -32,5 +32,8 @@ pyh_long_pyhouse_name:          "{{ vault_pyh_long_pyhouse_name }}"
 
 # Networking
 pyh_ipv4_router_prefix_len:     20
+
+# Added 2019-02 to start using python3 on clients.
+ansible_python_interpreter:     "/usr/bin/python3"
 
 ### END DBK

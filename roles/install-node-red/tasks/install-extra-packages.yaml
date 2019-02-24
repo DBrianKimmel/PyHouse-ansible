@@ -7,10 +7,19 @@
 #
 ---
 
+- name: InstallExtraPackages - Msg
+  debug:
+    msg:
+      - "Installing Node-Red Extra Packages."
+      - "Admin User: {{pyh_admin_user}}"
+      - "NodeRed User: {{pyh_nodered_user}}"
+  tags: always
+
 - name: ExtraPackages-01 - install extra apt packages used by node red.
   apt:
-    name:               "{{ item }}"
+#    name:               "{{ item }}"
+    name:               "{{pyh_extra_apt_packages}}"
     state:              latest
-  with_items:   "{{pyh_extra_apt_packages}}"
+#  with_items:           "{{pyh_extra_apt_packages}}"
 
 ### END DBK

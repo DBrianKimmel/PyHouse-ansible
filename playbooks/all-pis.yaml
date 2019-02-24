@@ -27,7 +27,7 @@
       tags:
         - always
 
-    # Dynamic include
+    ### this is a Dynamic include
     - name:     All-Pis-PreTask-01 - Dynamic Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
       with_first_found:
@@ -48,14 +48,15 @@
     - role: ../roles/networking
       when: install_networking | default(True)
       tags: 
-        - always
+        - initial_setup_only
 
     - role: ../roles/hostname
       tags:
-        - always
+        - initial_setup_only
 
-    - role: ../roles/add-admin-user
-      tags:
-        - always
+### This should only be run when setting up a new computer - not as development or production
+    #- role: ../roles/add-admin-user
+    #  tags:
+    #    - always
 
 ### END DBK

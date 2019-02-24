@@ -3,8 +3,6 @@
 # Created: 2017-09-18
 # Updated: 2018-04-12
 
-
-
 #=========================================
 # ----- Define the localhost -----
 localhost ansible_connection=local
@@ -28,12 +26,12 @@ pi-11-pp
 
 # Cannon Trail Raspberry Pis
 [pis_ct]
-pi-01-ct
-pi-02-ct
-pi-03-ct
-pi-05-ct
-pi-07-ct
-pi-11-ct
+#pi-01-ct
+#pi-02-ct
+#pi-03-ct
+#pi-05-ct
+#pi-07-ct
+#pi-11-ct
 
 # All Raspberry Pis
 [pis:children]

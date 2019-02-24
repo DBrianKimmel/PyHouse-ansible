@@ -22,7 +22,7 @@
 
 - import_playbook:      "./playbooks/all-pis.yaml"
 #- import_playbook:      "./playbooks/development-pis.yaml"
-#- import_playbook:      "./playbooks/roles-dispatch.yaml"
+- import_playbook:      "./playbooks/roles-dispatch.yaml"
 #- import_playbook:      "./playbooks/fetch-config-files.yaml"
 
 ### END DBK

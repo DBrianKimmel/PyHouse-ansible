@@ -7,7 +7,16 @@
 # The install scripts and apt both sorta do the wrong versions so do it all manually here.
 
 # Node red needs to start automatically every time the computer starts.
+
 ---
+
+- name: InstallNodeRed_Main - Msg
+  debug:
+    msg:
+      - "Installing Node-Red System (Main)"
+      - "Admin User: {{pyh_admin_user}}"
+      - "NodeRed User: {{pyh_nodered_user}}"
+  tags: always
 
 # Setup the OS distribution on which we will be installing.
 - name: inr-main-Task-01 - Set up the proper OS distribution.
@@ -30,9 +39,10 @@
 - name: inr-main-Task-05 - Install Node-Red (correct version)
   include_tasks:     install-nodered.yaml
 
+# Use the new Node-Red Palate Manager for this so we remain upgradable.
 # Depending on the flows for this machine, we may need extra node-red nodes.
-- name: inr-main-Task-06 - Install extra node red nodes
-  include_tasks:     install-extra-nodes.yaml
+#- name: inr-main-Task-06 - Install extra node red nodes
+#  include_tasks:     install-extra-nodes.yaml
 
 # Node red needs to run whenever we start up this computer - make it so.
 - name: inr-main-Task-07 - Setup auto run on reboot
@@ -42,10 +52,11 @@
 - name: inr-main-Task-08 - Setup configuration
   include_tasks:    install-configuration.yaml
 
+# This will destroy existing backup of the flows on a reload
 # As a precaution, we will copy all the flows back to the ansible host for safekeeping.
-- name: inr-main-Task-09 - Save the flows we have
-  include_tasks:    backup-flows.yaml
-  tags:             fetch-files
+#- name: inr-main-Task-09 - Save the flows we have
+#  include_tasks:    backup-flows.yaml
+#  tags:             fetch-files
 
 # As a precaution, we will copy all the configuration back to the ansible host for safekeeping.
 - name: inr-main-Task-10 - Save the config we have

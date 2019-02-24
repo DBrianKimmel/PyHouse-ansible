@@ -28,6 +28,10 @@ pyh_pyhouse_user:       "{{ vault_pyh_pyhouse_user }}"
 pyh_pyhouse_password:   "{{ vault_pyh_pyhouse_password }}"
 pyh_long_pyhouse_name:  "{{ vault_pyh_long_pyhouse_name }}"
 
+pyh_octoprint_user:         "octo"
+pyh_octoprint_password:     "{{ vault_pyh_admin_password }}"
+pyh_long_octoprint_name:    "Octoprint"
+
 # Used by role 'networking'
 #pyh_access_points:              vault_pyh_access_points
 pyh_access_points:             "{{ vault_pyh_access_points }}"

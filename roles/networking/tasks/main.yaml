@@ -5,7 +5,7 @@
 #
 # Set up all networking
 
-# include is dynamic
+# This should not be routinely run.  Errors can cause loss of connectivity necessitating a trip to the site.
 
 ---
 
@@ -23,17 +23,17 @@
 
 - name:             NetworkingMain Task-01-A-Pi - Install WiFi
   ignore_errors:    yes
-  import_tasks:     install-wifi.yaml
+  include_tasks:    install-wifi.yaml
   tags:             always
  
 - name:             NetworkingMain Task-01-B-Pi - Install ethernet
   ignore_errors:    yes
-  import_tasks:     install-ethernet.yaml
+  include_tasks:    install-ethernet.yaml
   tags:             always
  
 - name:             TNetworkingMain ask-01-C-Pi - Install IPv6 Tunnels
   ignore_errors:    yes
-  import_tasks:     install-v6-tunnel.yaml
+  include_tasks:    install-v6-tunnel.yaml
   when:             pyh_roles.find("ipv6tunnel") != -1 
 
 - name:             NetworkingMain Task-02-Pi - Add ntpdate to raspbian

@@ -7,6 +7,14 @@
 
 ---
 
+- name: AddUser - Msg
+  debug:
+    msg:
+      - "Installing Node-Red - Add User "
+      - "Admin User: {{pyh_admin_user}}"
+      - "NodeRed User: {{pyh_nodered_user}}"
+  tags: always
+
 # Create the Node Red user
 - name: AddUser-01 - Add Node Red User
   user:

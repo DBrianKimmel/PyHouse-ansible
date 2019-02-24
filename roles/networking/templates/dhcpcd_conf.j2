@@ -33,11 +33,11 @@ nohook lookup-hostname
 interface {{ if_name }}
 {% if if_name.startswith('e') %}
     static ip_address={{ pyh_ipv4_ethernet_addr }}/{{ pyh_ipv4_router_prefix_len | default('21') }}
-    static ip6_address={{ vault_pyh_ipv6_network_prefix }}{{ pyh_ipv6_ethernet_addr }}{{ pyh_ipv6_network_prefix_len }}
+    static ip6_address={{ pyh_ipv6_network_prefix }}{{ pyh_ipv6_ethernet_addr }}{{ pyh_ipv6_network_prefix_len }}
 {% endif %}
 {% if if_name.startswith('w') %}
     static ip_address={{ pyh_ipv4_wifi_addr }}/{{ pyh_ipv4_router_prefix_len | default('21') }}
-    static ip6_address={{ vault_pyh_ipv6_network_prefix }}{{ pyh_ipv6_wifi_addr }}{{ pyh_ipv6_network_prefix_len }}
+    static ip6_address={{ pyh_ipv6_network_prefix }}{{ pyh_ipv6_wifi_addr }}{{ pyh_ipv6_network_prefix_len }}
 {% endif %}
     static routers={{ pyh_ipv4_router_addr }}
     static domain_name_servers={{ pyh_router_nameservers }}

@@ -3,7 +3,17 @@
 # Created: 2017-10-29
 # Updated: 2017-12-08
 #
+# Install the base node red on the target.
+
 ---
+
+- name: InstallNodeRed- Msg
+  debug:
+    msg:
+      - "Installing Node-Red."
+      - "Admin User: {{pyh_admin_user}}"
+      - "NodeRed User: {{pyh_nodered_user}}"
+  tags: always
 
 - name: InstallNodeRed-01 - Npm install "node-red"
   become:           yes
