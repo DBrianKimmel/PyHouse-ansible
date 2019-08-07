@@ -1,16 +1,15 @@
 # Name:    PyHouse-ansible/roles/install-mqtt/tasks/setup-Debian.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-19
-# Updated: 2017-11-19
+# Updated: 2019-08-07
 #
 # The Pis and Nucs are both Debian
 
 ---
 
 - name: SetupDebian-01 - M
-  apt: 
-    name:           mosquitto
-    state:          present
-
+  apt:
+    name: mosquitto
+    state: present
 
 ### END DBK

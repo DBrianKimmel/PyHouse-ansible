@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install-basic-system/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-27
-# Updated: 2018-07-08
+# Updated: 2019-08-07
 #
 # This role will do the basics on each computer.
 #
@@ -21,20 +21,19 @@
 - name: Main-Task-01 - Install apt packages.
   ignore_errors: yes
   apt:
-    name:               "{{pyh_extra_apt_packages}}"
-    state:              latest
+    name: "{{pyh_extra_apt_packages}}"
+    state: latest
 
 - name: Main-Task-02 - Set ip autoreboot.
-  include_tasks:        auto-reboot.yaml
+  include_tasks: auto-reboot.yaml
 
 - name: Main-Task-03 - Set avahi.
-  include_tasks:        setup-avahi.yaml
+  include_tasks: setup-avahi.yaml
 
 - name: Main-Task-04 - Set time/timezone.
-  include_tasks:        setup-time.yaml
+  include_tasks: setup-time.yaml
 
 - name: Main-Task-05 - Setup the weekly os software update
-  include_tasks:        update-os.yaml
-
+  include_tasks: update-os.yaml
 
 ### END DBK

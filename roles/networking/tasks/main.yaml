@@ -1,15 +1,16 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2018-07-26
+# Updated: 2019-08-07
 #
 # Set up all networking
 
-# This should not be routinely run.  Errors can cause loss of connectivity necessitating a trip to the site.
+# This should not be routinely run.
+# Errors can cause loss of connectivity necessitating a trip to the site.
 
 ---
 
-- name:             NetworkingMain Task-00 - Starting, Display some vars...
+- name: NetworkingMain Task-00 - Starting, Display some vars...
   debug:
     msg:
       - "User:  {{ pyh_admin_user }}"
@@ -21,26 +22,26 @@
   tags:
     - always
 
-- name:             NetworkingMain Task-01-A-Pi - Install WiFi
-  ignore_errors:    yes
-  include_tasks:    install-wifi.yaml
-  tags:             always
- 
-- name:             NetworkingMain Task-01-B-Pi - Install ethernet
-  ignore_errors:    yes
-  include_tasks:    install-ethernet.yaml
-  tags:             always
- 
-- name:             TNetworkingMain ask-01-C-Pi - Install IPv6 Tunnels
-  ignore_errors:    yes
-  include_tasks:    install-v6-tunnel.yaml
-  when:             pyh_roles.find("ipv6tunnel") != -1 
+- name: NetworkingMain Task-01-A-Pi - Install WiFi
+  ignore_errors: true
+  include_tasks: install-wifi.yaml
+  tags: always
 
-- name:             NetworkingMain Task-02-Pi - Add ntpdate to raspbian
-  ignore_errors:    yes
-  apt: 
-    name:           ntpdate
-    state:          present
-  when:             ansible_lsb.id == 'Raspbian'
+- name: NetworkingMain Task-01-B-Pi - Install ethernet
+  ignore_errors: true
+  include_tasks: install-ethernet.yaml
+  tags: always
+
+- name: NetworkingMain ask-01-C-Pi - Install IPv6 Tunnels
+  ignore_errors: true
+  include_tasks: install-v6-tunnel.yaml
+  when: pyh_roles.find("ipv6tunnel") != -1
+
+- name: NetworkingMain Task-02-Pi - Add ntpdate to raspbian
+  ignore_errors: true
+  apt:
+    name: ntpdate
+    state: present
+  when: ansible_lsb.id == 'Raspbian'
 
 ### END DBK

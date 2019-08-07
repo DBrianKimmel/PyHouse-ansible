@@ -3,8 +3,8 @@
 # Created: 2017-10-29
 # Updated: 2017-11-18
 
-# This part of the node-red install will set up the computer to automatically start
-# node red every time that the computer starts up.
+# This part of the node-red install will set up the computer to automatically
+# start node red every time that the computer starts up.
 
 ---
 
@@ -26,22 +26,10 @@
 
 - name: InstallSystemd-02 - Enable & start Node-RED
   systemd:
-    daemon_reload: yes
-    enabled: yes
+    daemon_reload: true
+    enabled: true
     state: restarted
     name: nodered
   when: 'ansible_os_family == "Debian"'
-#  notify:
-    # this calls a handler in /roles/web/handlers/main.yml, the contents of which are:
-    # ---
-    # - name: restart nginx
-    #   service:
-    #     name: nginx
-    #     enabled: yes
-    #     state: restarted
-    #     become: yes
-
-    #- restart nginx
-
 
 ### END DBK

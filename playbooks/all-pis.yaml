@@ -8,16 +8,16 @@
 
 ---
 
-- name:                 Play-02 - All-Pis - Starting
-  hosts:                pis
-  strategy:             linear
-  become:               yes
-  become_method:        sudo
-  gather_facts:         yes
+- name: Play-02 - All-Pis - Starting
+  hosts: pis
+  strategy: linear
+  become: true
+  become_method: sudo
+  gather_facts: true
 
   pre_tasks:
 
-    - name:     All-Pis-PreTask-00 - Starting, Display some vars...
+    - name:  All-Pis-PreTask-00 - Starting, Display some vars...
       debug:
         msg:
           - "User: {{ pyh_admin_user }}"
@@ -28,7 +28,7 @@
         - always
 
     ### this is a Dynamic include
-    - name:     All-Pis-PreTask-01 - Dynamic Include vars from local-configure.yaml if found
+    - name: All-Pis-PreTask-01 - Dynamic Include vars from local-configure.yaml if found
       include_vars: "{{ item }}"
       with_first_found:
         - files:
@@ -53,10 +53,5 @@
     - role: ../roles/hostname
       tags:
         - initial_setup_only
-
-### This should only be run when setting up a new computer - not as development or production
-    #- role: ../roles/add-admin-user
-    #  tags:
-    #    - always
 
 ### END DBK

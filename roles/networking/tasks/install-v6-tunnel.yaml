@@ -1,7 +1,7 @@
 # Name:     PyHouse-ansible/roles/networking/tasks/install-v6-tunnel.yaml
 # Author:   D Brian Kimmel
 # Created:  2018-03-04
-# Updated:  2018-03-04
+# Updated:  2019-08-07
 #
 
 ---
@@ -19,22 +19,10 @@
 
 - name: InstallSystemd-02 - Enable & start ipv6 tunnel
   systemd:
-    daemon_reload: yes
-    enabled: yes
+    daemon_reload: true
+    enabled: true
     state: restarted
     name: he-ipv6
   when: 'ansible_os_family == "Debian"'
-
-#  notify:
-    # this calls a handler in /roles/networking/handlers/main.yml, the contents of which are:
-    # ---
-    # - name: restart nginx
-    #   service:
-    #     name: nginx
-    #     enabled: yes
-    #     state: restarted
-    #     become: yes
-
-    #- restart nginx
 
 ### END DBK

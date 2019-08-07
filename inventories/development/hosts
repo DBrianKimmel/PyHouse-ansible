@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/development/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2019-22-24
+# Updated: 2019-08-07
 
 ## for testing various things
 ## For single machines.
@@ -10,30 +10,41 @@
 
 ## ----- Define the Raspberry Pis
 ## First is cannon Trail
-#[pis_ct]
+[pis_ct]
 #pi-01-ct		# pyhouse
-#pi-02-ct		# node-red,pyhouse,mqtt
+#pi-02-ct		# pyhouse
+#pi-03-ct		#
 #pi-04-ct		# node-red
-#pi-05-ct		# octoprint
+pi-05-ct		# mqtt,dns
 #pi-06-ct		# pandora,pyhouse
+#pi-07-ct 		# pyhouse,node-red,mqtt
+#pi-08-ct		# octoprint
+#pi-09-ct		#
+#pi-10-ct		#
 #pi-11-ct		# node-red
 
 ## Next is Pink Poppy
-[pis_pp]
-#pi-01-pp
-#pi-04-pp
-#pi-07-pp
-pi-08-pp
-#pi-11-pp
+#[pis_pp]
+#pi-01-pp		#
+#pi-02-pp		#
+#pi-03-pp		#
+#pi-04-pp		#
+#pi-05-pp		# mqtt
+#pi-06-pp		#
+#pi-07-pp		#
+#pi-08-pp		#
+#pi-09-pp		#
+#pi-10-pp		#
+#pi-11-pp		#
 
 ## All Raspberry Pis
 [pis:children]
-pis_pp
-#pis_ct
+#pis_pp			#
+pis_ct			#
 
 
 #[nucs]
-# nuc-devel
+# nuc-devel		#
 # nuc-01-ct		# Mqtt
 
 
@@ -44,22 +55,22 @@ pis_pp
 ##  -*- Groupname must be a house-name
 ##  -*- Uncomment the one we are in as the wifi params differ
 ##
-[pinkpoppy:children]
-#[cannontrail:children]
+#[pinkpoppy:children]
+[cannontrail:children]
 #nucs
 pis
 #others
 
 ## -------------- House Groups ------------------
 ## Pink Poppy Group
-[pinkpoppy:children]
-pis_pp
+#[pinkpoppy:children]
+#pis_pp
 #nucs_pp
 #alki-pp
 
 ## Cannon Trail Group
-#[cannontrail:children]
-#pis_ct
-#nucs_ct                                                                                                                                                                                                   pcduino-ct
+[cannontrail:children]
+pis_ct
+#nucs_ct
 
 ### END DBK

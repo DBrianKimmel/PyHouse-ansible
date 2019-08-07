@@ -1,0 +1,14 @@
+# Name:    PyHouse-ansible/inventories/development/hosts.yaml
+# Author:  D. Brian Kimmel
+# Created: 2019-08-07
+# Updated: 2019-08-07
+#
+
+---
+
+all:
+   children:
+      pis:
+         pi-04-ct:
+
+### END DBK

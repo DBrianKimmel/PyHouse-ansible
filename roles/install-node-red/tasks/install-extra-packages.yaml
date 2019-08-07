@@ -1,9 +1,11 @@
-# Name:    PyHouse-ansible/roles/install-node-red/tasks/install-extra-packages.yaml
+# Name:    PyHouse-ansible/roles/install-node-red/tasks/
+#           install-extra-packages.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-29
 # Updated: 2017-10-29
 #
-# The extra node  names are stored in "pyh_extra_apt_packages" in each host_vars file that installs node-red.
+# The extra node  names are stored in "pyh_extra_apt_packages" in each
+#  host_vars file that installs node-red.
 #
 ---
 
@@ -17,9 +19,7 @@
 
 - name: ExtraPackages-01 - install extra apt packages used by node red.
   apt:
-#    name:               "{{ item }}"
-    name:               "{{pyh_extra_apt_packages}}"
-    state:              latest
-#  with_items:           "{{pyh_extra_apt_packages}}"
+    name: "{{pyh_extra_apt_packages}}"
+    state: latest
 
 ### END DBK

@@ -1,16 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/host_vars/pi-04-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-13
-# Updated: 2018-06-13
-
-
-
-
-
-
-
-
-
+# Updated: 2018-08-06
 
 ---
 
@@ -30,6 +21,5 @@ pyh_extra_nodered_nodes:
     - node-red-dashboard
     - node-red-node-sqlite
     - node-red-contrib-timerswitch
-
 
 ### END DBK

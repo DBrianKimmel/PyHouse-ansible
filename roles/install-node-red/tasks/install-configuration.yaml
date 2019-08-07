@@ -1,7 +1,7 @@
-# Name:    PyHouse-ansible/roles/install-node-red/tasks/install-configuration.yaml
+# Name:    roles/install-node-red/tasks/install-configuration.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-03-21
-# Updated: 2018-05-11
+# Updated: 2019-08-07
 #
 ---
 
@@ -12,30 +12,24 @@
       - "Admin User: {{pyh_admin_user}}"
       - "NodeRed User: {{pyh_nodered_user}}"
   tags: always
-  
+
 - name: install-configuration-02 - Edit settings.js
   copy:
-    src:        "../files/settings.js"
-    dest:       "/home/{{ pyh_nodered_user }}/.node-red/"
-    owner:      "{{ pyh_nodered_user }}"
-    group:      "{{ pyh_nodered_user }}"
-    mode:       0755
+    src: "../files/settings.js"
+    dest: "/home/{{ pyh_nodered_user }}/.node-red/"
+    owner: "{{ pyh_nodered_user }}"
+    group: "{{ pyh_nodered_user }}"
+    mode: 0755
   tags: always
 
-    # dest:       "/home/{{ pyh_admin_user }}/bin"
-    # owner:      "{{ pyh_admin_user }}"
-    # group:      "{{ pyh_admin_user }}"
-
-#- name: BackupFlows-03 - Check flow into a git repository.
-
 - name: install-configuration-03 - Copy localSettings.js
-  ignore_errors:    yes
-  become_user:      root
-  become:           yes
+  ignore_errors: true
+  become_user: root
+  become: true
   template:
     # in /roles/install-node-red/templates/
-    src:        "../templates/localSettings.j2"
-    dest:       "/home/{{ pyh_nodered_user }}/.node-red/"
+    src: "../templates/localSettings.j2"
+    dest: "/home/{{ pyh_nodered_user }}/.node-red/"
   tags: always
 
 ### END DBK

@@ -1,23 +1,23 @@
 # Name:    PyHouse-ansible/roles/setup-ansible/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-26
-# Updated: 2017-11-26
+# Updated: 2019-08-07
 
 ---
 
 # The first play is to install to the localhost
-  - name: Play Local-Install-Tools - On localhost, install the commands we are using.
+- name: Play Local-Install-Tools - On localhost, install the commands to use.
 
     - name: Task-01 - Message
       debug:
-        msg:        "Play is on the local ansible machine."
+        msg: "Play is on the local ansible machine."
       tags:
         - always
 
     - name: Task-02 - Copy bin files
       copy:
-        src:        "{{ item.src }}"
-        dest:       "{{ item.dest }}"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
       with_items:
         - { src: '../bin/ansible-production', dest: '~/bin/' }
         - { src: '../bin/ansible-setup-pi', dest: '~/bin/' }
@@ -27,36 +27,38 @@
 
     - name: LocalPreTask-03 - Copy .git files
       copy:
-        src:        "{{ item.src }}"
-        dest:       "{{ item.dest }}"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
       with_items:
-        - { src: '../bin/vault-hook', dest: '~/workspace/PyHouse-ansible/.git/hooks/pre-commit' }
+        - { src: '../bin/vault-hook',
+            dest: '~/workspace/PyHouse-ansible/.git/hooks/pre-commit'
+          }
       tags:
         - always
 
     - name: LocalPreTask-04 - Install ssh config file
       copy:
-        src:        "{{ item.src }}"
-        dest:       "{{ item.dest }}"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
       with_items:
-        - { src:    '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
+        - { src: '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
       tags:
         - always
 
     - name: LocalPreTask-05 - Install ansible config file
-      become:       yes
-      become_user:  root
+      become: yes
+      become_user: root
       copy:
-        src:        "../ansible.cfg"
-        dest:       "/etc/ansible/"
+        src: "../ansible.cfg"
+        dest: "/etc/ansible/"
       with_items:
-        - { src:    '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
+        - { src: '../ssh.cfg', dest: '~/.ssh/ansible-ssh-config' }
       tags:
         - always
 
     - name: LocalPreTask-06 - Create the backup directory
       file:
-        path:           "~/backup/"
-        state:          directory
+        path: "~/backup/"
+        state: directory
 
 ### END DBK

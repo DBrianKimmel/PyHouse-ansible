@@ -1,7 +1,7 @@
-# Name:    PyHouse-ansible/roles/install-node-red/tasks/backup-configuration.yaml
+# Name:    roles/install-node-red/tasks/backup-configuration.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-03-21
-# Updated: 2018-03-21
+# Updated: 2019-08-07
 #
 ---
 
@@ -17,21 +17,19 @@
 # For now, we have to name each file as wildcards are not yet supported.
 #
 - name: BackupFlows-01-A - Pull back the flows for backup / archive
-  ignore_errors:    yes
+  ignore_errors: true
   fetch:
-    src:                "/home/{{ pyh_nodered_user }}/.node-red/settings.js"
-    # dest:               host_files/
-    dest:               '{{ pyh_backup_dir }}'
-    fail_on_missing:    no
+    src: "/home/{{ pyh_nodered_user }}/.node-red/settings.js"
+    dest: '{{ pyh_backup_dir }}'
+    fail_on_missing: false
 
 - name: BackupFlows-01-B - Pull back the flows for backup / archive
-  ignore_errors:    yes
+  ignore_errors: true
   fetch:
-    src:                "/home/{{ pyh_nodered_user }}/.node-red/localSettings.js"
-    # dest:               host_files/
-    dest:               '{{ pyh_backup_dir }}'
-    fail_on_missing:    no
+    src: "/home/{{ pyh_nodered_user }}/.node-red/localSettings.js"
+    dest: '{{ pyh_backup_dir }}'
+    fail_on_missing: false
 
-#- name: BackupFlows-03 - Check flow into a git repository.
+# - name: BackupFlows-03 - Check flow into a git repository.
 
 ### END DBK

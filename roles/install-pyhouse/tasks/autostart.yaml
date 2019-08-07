@@ -24,7 +24,7 @@
       # Start pyhouse if we autologin this user
       #
       if [ $(tty) == /dev/tty1 ]; then
-          bin/start_pyhouse
+          bin/start-pyhouse
       fi
       ### END DBK
 
