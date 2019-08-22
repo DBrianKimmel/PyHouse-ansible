@@ -9,6 +9,7 @@
 all:
    children:
       pis:
-         pi-04-ct:
+         # pi-04-ct:
+         pi-05-ct:
 
 ### END DBK
