@@ -12,12 +12,12 @@ localhost ansible_connection=local
 
 # ----- Define all the Raspberry Pis -----
 # Pink Poppy Raspberry Pis
-#[pis_pp]
-#pi-01-pp
+[pis_pp]
+pi-01-pp
 #pi-02-pp
 #pi-03-pp
-#pi-04-pp
-#pi-05-pp
+pi-04-pp
+pi-05-pp
 #pi-06-pp
 #pi-07-pp
 #pi-08-pp
@@ -29,7 +29,7 @@ localhost ansible_connection=local
 #pi-01-ct
 #pi-02-ct
 #pi-03-ct
-pi-04-ct
+#pi-04-ct
 #pi-05-ct
 #pi-06-ct
 #pi-07-ct
@@ -40,8 +40,8 @@ pi-04-ct
 
 # All Raspberry Pis
 [pis:children]
-#pis_pp
-pis_ct
+pis_pp
+#pis_ct
 
 
 
@@ -61,31 +61,31 @@ pis_ct
 
 
 # ----- Define all the other computers -----
-[pcduino-ct]
-pcduino-01-ct
+#[pcduino-ct]
+#pcduino-01-ct
 
 #[alki-pp]
 #alki
 
-[laptop-roam]
-Laptop-3
+#[laptop-roam]
+#Laptop-3
 
-[others:children]
-pcduino-ct
+#[others:children]
+#pcduino-ct
 #alki-pp
-laptop-roam
+#laptop-roam
 
 
 # -------------- House Groups ------------------
 # Pink Poppy Group
-#[pinkpoppy:children]
-#pis_pp
+[pinkpoppy:children]
+pis_pp
 #nucs_pp
 #alki-pp
 
 # Cannon Trail Group
-[cannontrail:children]
-pis_ct
+#[cannontrail:children]
+#pis_ct
 #nucs_ct
 #                                                                                                                                                                                                        pcduino-ct
 

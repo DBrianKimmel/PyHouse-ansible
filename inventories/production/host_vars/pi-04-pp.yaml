@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/host_vars/pi-04-pp
 # Author:  D. Brian Kimmel
 # Created: 2017-09-28
-# Updated: 2018-05-11
+# Updated: 2019-11-12
 
 # Model B+     512M ram   Jessie      armv6l
 
@@ -16,25 +16,22 @@
 
 ---
 
-ansible_host:               192.168.1.14
+ansible_host:               172.16.2.4
 
 pyh_hostname:               pi-04-pp
-pyh_ipv4_ethernet_addr:     192.168.2.14
-pyh_ipv4_wifi_addr:         192.168.1.14
-pyh_ipv6_ethernet_addr:     :2:14
-pyh_ipv6_wifi_addr:         :1:14
+pyh_ipv4_ethernet_addr:     172.16.2.4
+pyh_ipv4_wifi_addr:         172.16.4.4
+pyh_ipv6_ethernet_addr:     :2:4
+pyh_ipv6_wifi_addr:         :4:4
 pyh_roles:                  node-red
 
 pyh_extra_apt_packages:
-    - sqlite3
     - i2c-tools
 
 pyh_extra_nodered_nodes:
     - i2c
     - i2c-bus
     - node-red-dashboard
-    - node-red-node-sqlite
-    - node-red-contrib-i2c
     - node-red-contrib-timerswitch
 
 ### END DBK
