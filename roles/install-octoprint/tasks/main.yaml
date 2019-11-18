@@ -25,7 +25,7 @@
 
 
 - name: MainTask-01 - Install apt packages
-  include_tasks:         "../roles/install-octoprint/tasks/install-extra-packages.yaml"
+  include_tasks:         ../roles/install-octoprint/tasks/install-extra-packages.yaml
 
 - name: MainTask-02 - Add User "octo"
   include_tasks:            ../roles/common/tasks/add-user.yaml

@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# Name:    PyHouse-ansible/bin/ansible-backup
+# Author:  D. Brian Kimmel
+# Created: 2019-03-05
+# Updated: 2019-03-05
+#
+# Backup all computers used for production, development.
+#
+#
+
+BASE="${HOME}/workspace/PyHouse-ansible"
+INVENTORY="-i ${BASE}/inventories/production/hosts"
+PLAYBOOK="${BASE}/playbook-backup.yaml"
+PSWD1="--vault-password-file ~/.vault-pass.txt"
+TAGS=""
+
+if [ $# -gt 0 ]; then
+    TAGS+=" --tags=tag_backup,$1 "
+    echo "Tags = ${TAGS} "
+else
+    TAGS+=" --tags=tag_backup "
+    echo "No Tags - only tag_backup "
+fi
+
+echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
+ansible-playbook  -v  ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
+
+### END DBK

@@ -29,7 +29,7 @@
   become:               yes
   become_user:          "{{ pyh_octo_user_name }}"
   become_method:        sudo
-  command:              "virtualenv  {{ pyh_octoprint_path }}"
+  command:              virtualenv  "{{ pyh_octoprint_path }}"
 
 - name: VenvSetupTask-04 - install additional os packages to support virtualenv
   action:

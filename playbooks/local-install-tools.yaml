@@ -34,6 +34,7 @@
         - { src: '../bin/ansible-development', dest: '~/bin/' }
         - { src: '../bin/ansible-new-pi',      dest: '~/bin/' }
         - { src: '../bin/ansible-ansible',     dest: '~/bin/' }
+        - { src: '../bin/ansible-backup',      dest: '~/bin/' }
       tags:
         - always
 

@@ -1,20 +1,24 @@
 #!/bin/bash
 #
-# @name:      PyHouse-ansible/roles/install-octoprint/files/bin/start-octoprint
-# @author:    D. Brian Kimmel
-# @contact:   D.BrianKimmel@gmail.com
-# @copyright: (c) 2018-2018 by D. Brian Kimmel
-# @license:   MIT License
-# @note:      Created on Jul 05, 2018
-# @Summary:   This starts OctoPrint
+# name:      PyHouse-ansible/roles/install-octoprint/files/bin/start-octoprint
+# author:    D. Brian Kimmel
+# contact:   D.BrianKimmel@gmail.com
+# copyright: (c) 2018-2018 by D. Brian Kimmel
+# license:   MIT License
+# Summary:   This starts OctoPrint
+# Created: 2018-07-05
+# Updated: 2019-04-16
 
 
-WORK=/home/octo/OctoPrint/venv/
+HOME=/home/octo/
+WORK=${HOME}Octoprint/
+VENV=${WORK}/venv/
 
 echo "Starting the OctoPrint system"
 cd ~
+source ${VENV}/bin/activate
 > nohup.out
-nohup ./OctoPrint/venv/bin/octoprint serve  1>/dev/null 2>&1 </dev/null &
+nohup ${VENV}bin/octoprint serve  1>/dev/null 2>&1 </dev/null &
 cd
 
 ### END DBK

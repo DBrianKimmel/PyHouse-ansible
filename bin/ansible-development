@@ -7,7 +7,11 @@
 #
 # Deploys the development setup.
 #
-# ansible-playbook -i /home/briank/workspace/PyHouse-ansible/inventories/development/hosts /home/briank/workspace/PyHouse-ansible/playbook-development.yaml  --tags=tag_development  --vault-password-file ~/.vault-pass.txt
+# ansible-playbook -i \
+#    /home/briank/workspace/PyHouse-ansible/inventories/development/hosts \
+#    /home/briank/workspace/PyHouse-ansible/playbook-development.yaml \
+#    --tags=tag_development \
+#    --vault-password-file ~/.vault-pass.txt
 #
 
 BASE="${HOME}/workspace/PyHouse-ansible"
@@ -15,6 +19,7 @@ INVENTORY="-i ${BASE}/inventories/development/hosts"
 PLAYBOOK="${BASE}/playbook-development.yaml"
 PSWD1="--vault-password-file ~/.vault-pass.txt"
 TAGS=""
+VERBOSITY="-v"
 
 if [ $# -gt 0 ]; then
     TAGS+=" --tags=tag_development,$1 "
@@ -24,7 +29,7 @@ else
     echo "No Tags - only setup_development "
 fi
 
-echo "ansible-playbook ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
-ansible-playbook  -vv  ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
+echo "ansible-playbook ${VERBOSITY} ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
+ansible-playbook  ${VERBOSITY}  ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
 
 ### END DBK
