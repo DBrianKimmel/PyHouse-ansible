@@ -5,41 +5,41 @@
 
 ---
 
-- name:             Ethernet-Task-01 - delete any new file created
-  ignore_errors:    yes
+- name: Ethernet-Task-01 - delete any new file created
+  ignore_errors: true
   file:
-    name:           /etc/dhcpcd.conf-new
-    state:          absent
+    name: /etc/dhcpcd.conf-new
+    state: absent
 
 # this will set up static addresses on all interfaces except 'lo'
 # It is the correct method for debian Jessie, Stretch and beyond.
 # Earlier releases used a different mechanism.
-- name:             Ethernet-Task-01-Pi - Install dhcpcd.conf file with interface IP definitions. 
-  ignore_errors:    yes
+- name: Ethernet-Task-01-Pi - Install dhcpcd.conf with interface IP defs.
+  ignore_errors: true
   template:
-    src:            ./dhcpcd_conf.j2
-    dest:           /etc/dhcpcd.conf
-    force:          yes
-    owner:          root
-    group:          netdev
-    mode:           0664
-    backup:         true
-  when:             ansible_lsb.id == 'Raspbian'
+    src: ./dhcpcd_conf.j2
+    dest: /etc/dhcpcd.conf
+    force: true
+    owner: root
+    group: netdev
+    mode: 0664
+    backup: true
+  when: ansible_lsb.id == 'Raspbian'
 
-- name:             Ethernet-Task-02 - delete any new file created
+- name: Ethernet-Task-02 - delete any new file created
   file:
-    name:           /etc/network/interfaces-new
-    state:          absent
+    name: /etc/network/interfaces-new
+    state: absent
 
-- name:             Ethernet-Task-02-Nuc - Install network/interfaces file with interface IP definitions.
-  ignore_errors:    yes
+- name: Ethernet-Task-02-Nuc - Install network/interfaces with IP defs.
+  ignore_errors: true
   template:
-    src:            ./interfaces.j2
-    dest:           /etc/network/interfaces
-    owner:          root
-    group:          netdev
-    mode:           0664
-    backup:         true
-  when:             ansible_lsb.id == 'Ubuntu'
+    src: ./interfaces.j2
+    dest: /etc/network/interfaces
+    owner: root
+    group: netdev
+    mode: 0664
+    backup: true
+  when: ansible_lsb.id == 'Ubuntu'
 
 ### END DBK

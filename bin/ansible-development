@@ -3,7 +3,7 @@
 # Name:    PyHouse-ansible/bin/ansible-development
 # Author:  D. Brian Kimmel
 # Created: 2017-10-18
-# Updated: 2018-07-09
+# Updated: 2019-08-07
 #
 # Deploys the development setup.
 #
@@ -29,7 +29,7 @@ else
     echo "No Tags - only setup_development "
 fi
 
-echo "ansible-playbook ${VERBOSITY} ${INVENTORY} ${PLAYBOOK} ${TAGS} ${PSWD1}"
-ansible-playbook  ${VERBOSITY}  ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
+echo "ansible-playbook ${VERBOSITY} ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}"
+ansible-playbook ${VERBOSITY} ${INVENTORY} ${PLAYBOOK} ${PSWD1} ${TAGS}
 
 ### END DBK

@@ -5,7 +5,7 @@
 # Created: 2017-11-05
 # Updated: 2017-11-19
 #
-# Deployes ansible commands on the local ansible workstation.
+# Deploys ansible commands on the local ansible workstation.
 
 BINDIR=/usr/local/bin
 INVENTORY=" -i inventories/local/hosts"

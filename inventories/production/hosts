@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2019-03-05
+# Updated: 2019-08-06
 
 #=========================================
 # ----- Define the localhost -----
@@ -14,76 +14,79 @@ localhost ansible_connection=local
 # Pink Poppy Raspberry Pis
 [pis_pp]
 pi-01-pp
-pi-02-pp
-pi-03-pp
+#pi-02-pp
+#pi-03-pp
 pi-04-pp
 pi-05-pp
-pi-06-pp
-pi-07-pp
-pi-08-pp
-pi-09-pp
-pi-10-pp
-pi-11-pp
-pi-12-pp
+#pi-06-pp
+#pi-07-pp
+#pi-08-pp
+#pi-10-pp
+#pi-11-pp
 
 # Cannon Trail Raspberry Pis
 [pis_ct]
 #pi-01-ct
 #pi-02-ct
 #pi-03-ct
+#pi-04-ct
 #pi-05-ct
+#pi-06-ct
 #pi-07-ct
+#pi-08-ct
+#pi-09-ct
+#pi-10-ct
 #pi-11-ct
 
 # All Raspberry Pis
 [pis:children]
 pis_pp
-pis_ct
+#pis_ct
 
 
 
 # ----- Define all the NUC boxes -----
 # Pink Poppy Nucs (Jump Box)
-[nucs_pp]
-nuc-01-pp
+#[nucs_pp]
+#nuc-01-pp
 
 # Cannon Trail Nucs (Jump Box)
-[nucs_ct]
-nuc-01-ct
+#[nucs_ct]
+#nuc-01-ct
 
 # All Nucs
-[nucs:children]
-nucs_pp
-nucs_ct
+#[nucs:children]
+#nucs_pp
+#nucs_ct
 
 
 # ----- Define all the other computers -----
-[pcduino-ct]
+#[pcduino-ct]
 #pcduino-01-ct
 
-[alki-pp]
-alki
+#[alki-pp]
+#alki
 
-[laptop-roam]
-Laptop-3
+#[laptop-roam]
+#Laptop-3
 
-[others:children]
+#[others:children]
 #pcduino-ct
-alki-pp
-laptop-roam
+#alki-pp
+#laptop-roam
 
 
 # -------------- House Groups ------------------
 # Pink Poppy Group
 [pinkpoppy:children]
 pis_pp
-nucs_pp
-alki-pp
+#nucs_pp
+#alki-pp
 
 # Cannon Trail Group
-[cannontrail:children]
-pis_ct
-nucs_ct
+#[cannontrail:children]
+#pis_ct
+#nucs_ct
 #                                                                                                                                                                                                        pcduino-ct
 
 ### END DBK

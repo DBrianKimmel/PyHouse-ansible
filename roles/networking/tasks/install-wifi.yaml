@@ -5,26 +5,26 @@
 
 ---
 
-- name:             NetworkingInstallWiFi WiFi-Task-01 - delete any new file created
-  ignore_errors:    yes
+- name: NetworkingInstallWiFi WiFi-Task-01 - delete any new file created
+  ignore_errors: true
   file:
-    name:           /etc/wpa_supplicant/wpa_supplicant.conf-new
-    state:          absent
+    name: /etc/wpa_supplicant/wpa_supplicant.conf-new
+    state: absent
 
-- name:             NetworkingInstallWiFi WiFi-Task-02 - debug
-  ignore_errors:    yes
+- name: NetworkingInstallWiFi WiFi-Task-02 - debug
+  ignore_errors: true
   debug:
     msg:
-      -             "User: {{ pyh_admin_user }}"
-      -             "AP:   {{ pyh_access_points }}"
+      - "User: {{ pyh_admin_user }}"
+      - "AP:   {{ pyh_access_points }}"
 
-- name:             NetworkingInstallWiFi WiFi-Task-03 - Install the wpa_supplicant file
-  ignore_errors:    yes
+- name: NetworkingInstallWiFi WiFi-Task-03 - Install the wpa_supplicant file
+  ignore_errors: true
   template:
-    src:            ./wifi.j2
-    dest:           /etc/wpa_supplicant/wpa_supplicant.conf
-    owner:          root
-    group:          root
-    mode:           0600
+    src: ./wifi.j2
+    dest: /etc/wpa_supplicant/wpa_supplicant.conf
+    owner: root
+    group: root
+    mode: 0600
 
 ### END DBK

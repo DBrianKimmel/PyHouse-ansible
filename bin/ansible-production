@@ -3,11 +3,13 @@
 # Name:    PyHouse-ansible/bin/ansible-production
 # Author:  D. Brian Kimmel
 # Created: 2017-11-05
-# Updated: 2017-11-12
+# Updated: 2019-08-06
+#
+# 2019-08-06 Now using Buster-Light
 #
 # Deploys the full production setup.
 #
-# Valis extra tags on the commandline:
+# Valid extra tags on the commandline:
 #		all
 #		backup
 
