@@ -25,11 +25,11 @@
     _virtualenv_actual_user:    '{{ _virtualenv_whoami_result.stdout }}'
 
 # virtualenv venv
-- name: VenvSetupTask-03 - Create virtualenv
-  become:               yes
-  become_user:          "{{ pyh_octo_user_name }}"
-  become_method:        sudo
-  command:              virtualenv  "{{ pyh_octoprint_path }}"
+# - name: VenvSetupTask-03 - Create virtualenv
+  # become:               yes
+  # become_user:          "{{ pyh_octo_user_name }}"
+  # become_method:        sudo
+  # command:              virtualenv  "{{ pyh_octoprint_path }}"
 
 - name: VenvSetupTask-04 - install additional os packages to support virtualenv
   action:
@@ -59,8 +59,8 @@
 - name: VenvSetupTask-07 - run update tasks with become
   include_tasks: ../roles/install-octoprint/tasks/venv-update.yaml
   when: _virtualenv_user != _virtualenv_actual_user
-  become: yes
-  become_user: '{{ _virtualenv_user }}'
+  # become: yes
+  # become_user: '{{ _virtualenv_user }}'
 
 - name: VenvSetupTask-08 - run included tasks without become
   include_tasks: ../roles/install-octoprint/tasks/venv-update.yaml
@@ -103,8 +103,8 @@
 - name: VenvSetupTask-13 - run update tasks with become
   include_tasks: ../roles/install-octoprint/tasks/venv-update.yaml
   when: _virtualenv_user != _virtualenv_actual_user
-  become: yes
-  become_user: '{{ _virtualenv_user }}'
+  # become: yes
+  # become_user: '{{ _virtualenv_user }}'
 
 - name: VenvSetupTask-14 - run included tasks without become
   include_tasks: ../roles/install-octoprint/tasks/venv-update.yaml

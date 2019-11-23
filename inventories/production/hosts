@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/hosts
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2019-08-06
+# Updated: 2019-11-21
 
 #=========================================
 # ----- Define the localhost -----
@@ -13,15 +13,15 @@ localhost ansible_connection=local
 # ----- Define all the Raspberry Pis -----
 # Pink Poppy Raspberry Pis
 [pis_pp]
-pi-01-pp
+#pi-01-pp
 #pi-02-pp
 #pi-03-pp
-pi-04-pp
-pi-05-pp
+#pi-04-pp
+#pi-05-pp
 #pi-06-pp
 #pi-07-pp
-#pi-08-pp
-#pi-10-pp
+pi-08-pp
+pi-10-pp
 #pi-11-pp
 
 # Cannon Trail Raspberry Pis

@@ -9,5 +9,6 @@ default_timezone:       America/New_York
 # These packages are needed as a part of the base system.
 pyh_extra_apt_packages:
   - ntpdate
+  - aptitude
 
 ### END DBK

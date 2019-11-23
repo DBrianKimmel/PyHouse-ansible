@@ -10,12 +10,12 @@
 
 ## ----- Define the Raspberry Pis
 ## First is cannon Trail
-[pis_ct]
+#[pis_ct]
 #pi-01-ct		# pyhouse
 #pi-02-ct		# pyhouse
 #pi-03-ct		#
 #pi-04-ct		# node-red
-pi-05-ct		# mqtt,dns
+#pi-05-ct		# mqtt,dns
 #pi-06-ct		# pandora,pyhouse
 #pi-07-ct 		# pyhouse,node-red,mqtt
 #pi-08-ct		# octoprint
@@ -24,7 +24,7 @@ pi-05-ct		# mqtt,dns
 #pi-11-ct		# node-red
 
 ## Next is Pink Poppy
-#[pis_pp]
+[pis_pp]
 #pi-01-pp		#
 #pi-02-pp		#
 #pi-03-pp		#
@@ -32,15 +32,15 @@ pi-05-ct		# mqtt,dns
 #pi-05-pp		# mqtt
 #pi-06-pp		#
 #pi-07-pp		#
-#pi-08-pp		#
+pi-08-pp		# octoprint
 #pi-09-pp		#
-#pi-10-pp		#
+pi-10-pp		# pyhouse
 #pi-11-pp		#
 
 ## All Raspberry Pis
 [pis:children]
-#pis_pp			#
-pis_ct			#
+pis_pp			#
+#pis_ct			#
 
 
 #[nucs]
@@ -55,22 +55,22 @@ pis_ct			#
 ##  -*- Groupname must be a house-name
 ##  -*- Uncomment the one we are in as the wifi params differ
 ##
-#[pinkpoppy:children]
-[cannontrail:children]
+[pinkpoppy:children]
+#[cannontrail:children]
 #nucs
-pis
+#pis
 #others
 
 ## -------------- House Groups ------------------
 ## Pink Poppy Group
-#[pinkpoppy:children]
-#pis_pp
+[pinkpoppy:children]
+pis_pp
 #nucs_pp
 #alki-pp
 
 ## Cannon Trail Group
-[cannontrail:children]
-pis_ct
+#[cannontrail:children]
+#pis_ct
 #nucs_ct
 
 ### END DBK

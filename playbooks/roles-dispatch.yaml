@@ -6,14 +6,27 @@
 # This will first install the basic system that goes on every computer.
 # Then it will add the pyh_roles to specialize that computer.
 
+# The following roles are contained within host_vars in the inventory section.
+#
+# ansible
+# control
+# ipv6tunnel
+# mqtt
+# node-red
+# none
+# octoprint
+# pandora
+# pyhouse
+# setup
+
 ---
 
 - name: PLAY - roles-dispatch.yaml - First.
-  hosts:            pis
-  strategy:         linear
-  become:           yes
-  become_method:    sudo
-  gather_facts:     yes
+  hosts: pis
+  strategy: linear
+  become: yes
+  become_method: sudo
+  gather_facts: yes
 
   roles:
 

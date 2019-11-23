@@ -8,12 +8,24 @@
 
 ---
 
-- name:                 Play - Production-Pis - Starting
-  hosts:                pis
-  strategy:             linear
-  become:               yes
-  become_method:        sudo
-  gather_facts:         yes
+- name: Play - Production-Pis - Starting
+  hosts: pis
+  strategy: linear
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+
+  pre_tasks:
+
+    - name:  Production-Pis-PreTask-00 - Starting, Display some vars...
+      debug:
+        msg:
+          - "User: {{ pyh_admin_user }}"
+          - "Dist: {{ ansible_os_family }}"
+          - "Host: {{ pyh_hostname }}"
+          - "Role: {{ pyh_roles }}"
+      tags:
+        - always
 
   roles:
 

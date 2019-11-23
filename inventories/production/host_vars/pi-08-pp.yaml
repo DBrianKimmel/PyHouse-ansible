@@ -7,13 +7,13 @@
 
 ---
 
-ansible_host:               192.168.1.18
+ansible_host: 172.16.2.8
 
-pyh_hostname:               pi-08-pp
-pyh_ipv4_ethernet_addr:     192.168.2.18
-pyh_ipv4_wifi_addr:         192.168.1.18
-pyh_ipv6_ethernet_addr:     :2:18
-pyh_ipv6_wifi_addr:         :1:18
-pyh_roles:                  octoprint
+pyh_hostname: pi-08-pp
+pyh_ipv4_ethernet_addr: 172.16.4.8
+pyh_ipv4_wifi_addr: 172.16.2.8
+pyh_ipv6_ethernet_addr: ":4:8"
+pyh_ipv6_wifi_addr: ":2:8"
+pyh_roles: octoprint
 
 ### END DBK

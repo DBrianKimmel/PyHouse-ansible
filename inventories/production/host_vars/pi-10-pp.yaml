@@ -12,14 +12,14 @@
 
 ---
 
-ansible_host:               192.168.1.20
+ansible_host: 172.16.2.10
 
-pyh_hostname:               pi-10-pp
-pyh_ipv4_ethernet_addr:     192.168.2.20
-pyh_ipv4_wifi_addr:         192.168.1.20
-pyh_ipv6_ethernet_addr:     :2:20
-pyh_ipv6_wifi_addr:         :1:20
-pyh_roles:                  pyhouse,mqtt
+pyh_hostname: pi-10-pp
+pyh_ipv4_ethernet_addr: 172.16.2.10
+pyh_ipv4_wifi_addr: 172.16.4.10
+pyh_ipv6_ethernet_addr: ":2:10"
+pyh_ipv6_wifi_addr: ":4:10"
+pyh_roles: pyhouse
 
 pyh_extra_apt_packages:
     - git

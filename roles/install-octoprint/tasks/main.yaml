@@ -18,10 +18,10 @@
     msg:
       - "Install Octoprint system (Main)    * * * O C T O P R I N T * * *"
       - " "
-      - "Dist:          {{ ansible_os_family }}"
-      - "Lsb:           {{ ansible_lsb }}"
-      - "Admin User:    {{pyh_admin_user}}"
-      - "NodeRed User:  {{pyh_octoprint_user}}"
+      - "Dist:            {{ ansible_os_family }}"
+      - "Lsb:             {{ ansible_lsb }}"
+      - "Admin User:      {{pyh_admin_user}}"
+      - "Octoprint User:  {{pyh_octoprint_user}}"
 
 
 - name: MainTask-01 - Install apt packages
