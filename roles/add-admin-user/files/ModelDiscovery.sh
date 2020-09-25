@@ -41,11 +41,20 @@ elif [[ $rev == '0015' ]] ; then
 elif [[ $rev == 'a01041' ]] ; then
 	model='2B v1.1; Sony, UK'
 	ram=1024
+elif [[ $rev == 'a02082' ]] ; then
+	model='3B; Sony, UK'
+	ram=1024
+elif [[ $rev == 'a020d3' ]] ; then
+	model='3B+ v1.3; Sony, UK'
+	ram=1024
 elif [[ $rev == 'a21041' ]] ; then
 	model='2B v1.2; Embest, China'
 	ram=1024
 elif [[ $rev == 'a22042' ]] ; then
 	model='2B v1.2; Embest, China'
+	ram=1024
+elif [[ $rev == 'a22082' ]] ; then
+	model='3B; Embest, China'
 	ram=1024
 elif [[ $rev == '900092' ]] ; then
 	model='0 v1.2'
@@ -56,12 +65,6 @@ elif [[ $rev == '900093' ]] ; then
 elif [[ $rev == '0x9000C1' ]] ; then
 	model='0W'
 	ram=512
-elif [[ $rev == 'a02082' ]] ; then
-	model='3B; Sony, UK'
-	ram=1024
-elif [[ $rev == 'a22082' ]] ; then
-	model='3B; Embest, China'
-	ram=1024
 else
 	echo "ERROR no such Revision: as $rev"
 fi
