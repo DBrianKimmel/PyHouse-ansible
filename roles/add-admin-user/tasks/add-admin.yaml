@@ -14,8 +14,8 @@
   become_user:      root
   become:           yes
   user:
-    name:           "{{ pyh_admin_user }}"
-    password:       "{{ pyh_admin_password }}"
+    name:           "{{ vault_pyh_admin_user }}"
+    password:       "{{ vault_pyh_admin_password }}"
     comment:        "{{ vault_pyh_long_admin_name }}"
     shell:          /bin/bash
     groups:         "{{ pyh_admin_user_groups }}"
@@ -26,8 +26,8 @@
   become_user:      root
   become:           yes
   user:
-    name:           "{{ pyh_admin_user }}"
-    password:       "{{ pyh_admin_password }}"
+    name:           "{{ vault_pyh_admin_user }}"
+    password:       "{{ vault_pyh_admin_password }}"
     comment:        "{{ vault_pyh_long_admin_name }}"
     shell:          /bin/bash
     groups:         "{{ pyh_admin_user_groups }}"
@@ -38,8 +38,8 @@
   become_user:      root
   become:           yes
   user:
-    name:           "{{ pyh_admin_user }}"
-    password:       "{{ pyh_admin_password }}"
+    name:           "{{ vault_pyh_admin_user }}"
+    password:       "{{ vault_pyh_admin_password }}"
     comment:        "{{ vault_pyh_long_admin_name }}"
     shell:          /bin/bash
     groups:         "{{ pyh_admin_user_groups }}"
@@ -52,7 +52,7 @@
   become:           yes
   template:
     src:            ./sudoers.j2
-    dest:           "/etc/sudoers.d/{{ pyh_admin_user }}"
+    dest:           "/etc/sudoers.d/{{ vault_pyh_admin_user }}"
     owner:          root
     group:          root
     mode:           0600
@@ -62,10 +62,10 @@
   become_user:      root
   become:           yes
   file:
-    name:           "/home/{{ pyh_admin_user }}/"
+    name:           "/home/{{ vault_pyh_admin_user }}/"
     state:          directory
-    owner:          "{{ pyh_admin_user }}"
-    group:          "{{ pyh_admin_user }}"
+    owner:          "{{ vault_pyh_admin_user }}"
+    group:          "{{ vault_pyh_admin_user }}"
     mode:           0755
 
 - name:             AddAdminUser Task-04 - Create bin dir for admin user
@@ -73,10 +73,10 @@
   become_user:      root
   become:           yes
   file:
-    name:           "/home/{{ pyh_admin_user }}/bin"
+    name:           "/home/{{ vault_pyh_admin_user }}/bin"
     state:          directory
-    owner:          "{{ pyh_admin_user }}"
-    group:          "{{ pyh_admin_user }}"
+    owner:          "{{ vault_pyh_admin_user }}"
+    group:          "{{ vault_pyh_admin_user }}"
     mode:           0755
 
 - name:             AddAdminUser Task-05 - Copy admin files to ~/bin
@@ -85,9 +85,9 @@
   become:           yes
   copy:
     src:            "../files/ModelDiscovery.sh"
-    dest:           "/home/{{ pyh_admin_user }}/bin"
-    owner:          "{{ pyh_admin_user }}"
-    group:          "{{ pyh_admin_user }}"
+    dest:           "/home/{{ vault_pyh_admin_user }}/bin"
+    owner:          "{{ vault_pyh_admin_user }}"
+    group:          "{{ vault_pyh_admin_user }}"
     mode:           0755
 
 - name:             AddAdminUser Task-06 - Create admin user .ssh dir
@@ -95,10 +95,10 @@
   become_user:      root
   become:           yes
   file:
-    name:           "/home/{{ pyh_admin_user }}/.ssh"
+    name:           "/home/{{ vault_pyh_admin_user }}/.ssh"
     state:          directory
-    owner:          "{{ pyh_admin_user }}"
-    group:          "{{ pyh_admin_user }}"
+    owner:          "{{ vault_pyh_admin_user }}"
+    group:          "{{ vault_pyh_admin_user }}"
     mode:           0700
 
 - name:             AddAdminUser Task-07 - Copy authorized_keys file to ~/.ssh
@@ -106,9 +106,9 @@
   become:           yes
   copy:
     src:            "~/.ssh/authorized_keys"
-    dest:           "/home/{{ pyh_admin_user }}/.ssh"
+    dest:           "/home/{{ vault_pyh_admin_user }}/.ssh"
     owner:          "{{ pyh_admin_user }}"
-    group:          "{{ pyh_admin_user }}"
+    group:          "{{ vault_pyh_admin_user }}"
     mode:           0600
 
 - name:             AddAdminUser Task-08 - Copy id_rsa file to ~/.ssh
@@ -116,9 +116,9 @@
   become:           yes
   copy:
     src:            "~/.ssh/id_rsa"
-    dest:           "/home/{{ pyh_admin_user }}/.ssh"
-    owner:          "{{ pyh_admin_user }}"
-    group:          "{{ pyh_admin_user }}"
+    dest:           "/home/{{ vault_pyh_admin_user }}/.ssh"
+    owner:          "{{ vault_pyh_admin_user }}"
+    group:          "{{ vault_pyh_admin_user }}"
     mode:           0600
 
 ### END DBK

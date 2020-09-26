@@ -1,0 +1,24 @@
+---
+- name: Update apt cache if needed.
+  apt:
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Ensure /usr/local/bin exists and is group writable.
+  file:
+    path: /usr/local/bin
+    state: directory
+    mode: 0775
+
+- name: Ensure dependencies are installed.
+  apt:
+    name:
+      - cron
+      - curl
+      - libffi-dev
+      - libssl-dev
+      - openssh-server
+      - openssh-client
+    state: present
+
+### END DBK

@@ -1,0 +1,7 @@
+[pi]
+
+# need to find this address using arp-scan
+
+172.17.31.10 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=pi ansible_ssh_pass=raspberry host_key_checking=false
+
+### END DBK

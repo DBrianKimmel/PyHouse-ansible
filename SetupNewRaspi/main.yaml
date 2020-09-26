@@ -1,0 +1,53 @@
+# Name:  SetupNewRaspi/main.yaml
+#
+#   cd SetupNewRaspi
+#   ansible-playbook main.yaml
+#
+# To encrypt / decript do one of the following:
+#      ansible-vault encrypt ~/Shared/Workspace/PyHouse-ansible/SetupNewRaspi/group_vars/vault.yaml --vault-password-file ~/.vault-pass.txt
+#      ansible-vault decrypt ~/Shared/Workspace/PyHouse-ansible/SetupNewRaspi/group_vars/vault.yaml --vault-password-file ~/.vault-pass.txt
+# Keep the ~/.vault-pass.txt file a secret.
+---
+- hosts: pi
+  gather_facts: yes
+  become: yes
+
+  vars_files:
+    - default.config.yaml
+    - group-vars/vault.yaml
+
+  pre_tasks:
+    - name: Include config override file, if it exists.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - config.yaml
+      tags: ['always']
+
+    - import_tasks: tasks/init.yaml
+
+  roles:
+    - role: ../roles/add-admin-user
+      tags: ['always']
+
+    - role: security
+      tags: ['security', 'ssh']
+
+    - role: ../roles/install-wifi
+      tags: ['always']
+
+    # - role: geerlingguy.firewall
+    #   tags: ['security', 'firewall']
+
+    # - role: geerlingguy.git
+    #   tags: ['git']
+
+    # - role: geerlingguy.pip
+    #   tags: ['pip']
+
+  tasks:
+
+    - name: Task-01
+      debug:
+        msg: Done setting up a new Raspberry Pi
+
+### END DBK
