@@ -1,0 +1,79 @@
+# Name:    setup-firewall/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-01
+# Updated: 2018-14-22
+#
+# Called from roles/common/tasks/network.yaml
+# Firewall
+
+
+# NOTE: This playbook *adds* rules.
+# It does not delete existing rules.
+
+# ---
+
+# - name: Enable ufw
+#   ufw: state=enabled policy=allow
+
+# - name: Disable default in
+#   ufw: direction=incoming policy=deny
+
+# - name: Port 33 (SSH) is open
+#   ufw: rule=limit name=OpenSSH
+
+# - name: Port 80 (HTTP) is open
+#   ufw: rule=allow port=80 proto=tcp
+
+# - name: Port 443 (HTTPS) is open
+#   ufw: rule=allow port=443 proto=tcp
+
+#- name: 4949 (munin-node) is open to monitor(s)
+#  when: install_muninnode|default(True)
+#  ufw: rule=allow port=4949 proto=tcp from_ip={{ item }}
+#  with_items: muninnode_query_ips|default([])
+
+### END DBK
+---
+- name: Task-01 - Ensure iptables is present.
+  package: name=iptables state=present
+
+- name: Task-02 - Flush iptables the first time playbook runs.
+  command: >
+    iptables -F
+    creates=/etc/firewall.bash
+
+- name: Task-03 - Copy firewall script into place.
+  template:
+    src: firewall.bash.j2
+    dest: /etc/firewall.bash
+    owner: root
+    group: root
+    mode: 0744
+  notify: restart firewall
+
+- name: Task-04 - Copy firewall init script into place.
+  template:
+    src: firewall.init.j2
+    dest: /etc/init.d/firewall
+    owner: root
+    group: root
+    mode: 0755
+  when: "ansible_service_mgr != 'systemd'"
+
+- name: Task-05 - Copy firewall systemd unit file into place (for systemd systems).
+  template:
+    src: firewall.unit.j2
+    dest: /etc/systemd/system/firewall.service
+    owner: root
+    group: root
+    mode: 0644
+  when: "ansible_service_mgr == 'systemd'"
+
+- name: Task-06 - Configure the firewall service.
+  service:
+    name: firewall
+    state: "{{ firewall_state }}"
+    enabled: "{{ firewall_enabled_at_boot }}"
+
+- import_tasks: disable-other-firewalls.yaml
+  when: firewall_disable_firewalld or firewall_disable_ufw

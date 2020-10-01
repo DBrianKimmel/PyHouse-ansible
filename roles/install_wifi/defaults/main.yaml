@@ -1,0 +1,6 @@
+#
+
+wifi_enabled: true
+wifi_access_points: {'ssid-01': 'password-01', 'ssid-02': 'password-02'}
+
+### END DBKs

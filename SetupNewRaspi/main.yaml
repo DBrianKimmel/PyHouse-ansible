@@ -26,27 +26,27 @@
     - import_tasks: tasks/init.yaml
 
   roles:
-    - role: ../roles/add-admin-user
+    - role: add_admin_user
       tags: ['always']
 
     - role: security
       tags: ['security', 'ssh']
 
-    - role: ../roles/install-wifi
+    - role: install_wifi
       tags: ['always']
 
-    # - role: geerlingguy.firewall
-    #   tags: ['security', 'firewall']
+    - role: setup-firewall
+      tags: ['security', 'firewall']
 
-    # - role: geerlingguy.git
-    #   tags: ['git']
+    - role: install-zero-tier
+      tags: ['zerotier']
 
     # - role: geerlingguy.pip
     #   tags: ['pip']
 
   tasks:
 
-    - name: Task-01
+    - name: Main-Task-01 - Done
       debug:
         msg: Done setting up a new Raspberry Pi
 

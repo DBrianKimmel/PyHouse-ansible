@@ -1,15 +1,39 @@
-* Name:    PyHouse-ansible/SetupNewRaspi
-* Author:  D. Brian Kimmel
-* Created: 2020-09-26
-* Updated: 2020-09-26
+# Ansible Role: SetupNewRaspi
 
-# New Raspberry Pi Setyp
+
+# New Raspberry Pi Setup
 
 * Start with a fesshly installed Raspberry OS on a SD card
 * Boot
+* Run the following command:
 
-```
-ansible-playbook main.yaml
-```
 
-# ### END DBK
+    ansible-playbook --vault-password-file ~/.vault-pass.txt  main.yaml
+
+## Requirements
+
+None.
+
+## Playbook Variables
+
+## Dependencies
+
+None.
+
+## Example Playbook
+
+## TODO
+
+  - Make
+  - Make
+
+## License
+
+MIT / BSD
+
+
+## Author Information
+
+This role was created  Sept 27, 2020 by D. Brian Kimmel.
+
+### END DBK

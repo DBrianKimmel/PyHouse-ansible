@@ -1,0 +1,12 @@
+# Name:   role/add_admin_user/defaults/main.yaml
+#
+# defaults file for add_admin_user
+# These are about the lowest possible priority - they SHOULD be overridden!
+---
+
+admin_user_name: briank
+admin_user_password: $6$tiuFB7p31L$G2Z/NoFyTEz18HwOsbaTPh4fM5rSq1nratdP8YhFjyR7U6xwC7KLg4GKOGaKXLOBr6TfZBTzUN63Afp11ZOan.
+admin_user_full_name: 'John Q. Public'
+admin_user_groups: adm,dialout,sudo,audio,video
+
+### END DBK

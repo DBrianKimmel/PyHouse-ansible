@@ -1,20 +1,21 @@
 # Name:    PyHouse-ansible/playbooks/new-pi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-17
-# Updated: 2018-06-26
+# Updated: 2020-10-01
 
 # This playbook is used to set up one raspberry pi computer
 #
 # It goes from installing a fresh version of the particular OS to being a basically functioning unit/
 #
 # It works for:
-#   Raspbian - Stretch Lite
+#   Raspbian - Stretch Lite (9)
+#   Raspberry OS - Buster Lite (10)
 #
 ---
 
 - name: Play-01 - New-Pi - Set up a fresh Pi 
-  hosts:            raspberrypi
-  become:           yes
+  hosts: raspberrypi
+  remote_user: root
  
   pre_tasks:
     - name: New-Pi-pre-task-01 - Working on raspi

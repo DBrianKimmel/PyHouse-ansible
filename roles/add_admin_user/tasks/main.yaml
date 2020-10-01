@@ -1,0 +1,29 @@
+# Name:    PyHouse-ansible/roles/add_admin_user/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-15
+# Updated: 2020-09-28
+#
+# This role adds the admin user to the node.
+# This user is in the vault of production and setup-pi under group_vars/all.
+#
+# This is called from several different places.
+#
+
+---
+
+- name: Task-01 - Main info for the role.
+  debug:
+    msg:
+      - "Adding admin user "
+      - "User:      {{ admin_user_name }}"
+      - "Dist:      {{ ansible_os_family }}"
+      - "Lsb:       {{ ansible_lsb }}"
+
+- name: Task-02 - fix up the default 'pi' user if we are using raspbian distribution.
+  import_tasks: fix_pi_user.yaml
+  when: ansible_lsb.id == 'Raspbian'
+
+- name: Task-03 - add an admin user account
+  import_tasks: add_admin.yaml
+
+### END DBK

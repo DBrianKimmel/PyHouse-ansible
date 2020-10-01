@@ -1,0 +1,121 @@
+# Name:    roles/add_admin_user/tasks/add_admin.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-06-26
+# Updated: 2020-09-29
+#
+# This role adds an admin user account.
+#
+---
+- name: Task-01-Suse - Add Admin User
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  user:
+    name:           "{{ admin_user_name }}"
+    password:       "{{ admin_user_password }}"
+    comment:        "{{ admin_user_full_name }}"
+    shell:          /bin/bash
+    groups:         "{{ admin_user_groups }}"
+  when: ansible_lsb.id == 'Suse'
+
+- name: Task-01-Raspbian - Add Admin User
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  user:
+    name:           "{{ admin_user_name }}"
+    password:       "{{ admin_user_password }}"
+    comment:        "{{ admin_user_full_name }}"
+    shell:          /bin/bash
+    groups:         "{{ admin_user_groups }}"
+  when: ansible_lsb.id == 'Raspbian'
+
+- name: Task-01-Ubuntu - Add Admin User
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  user:
+    name:           "{{ admin_user_name }}"
+    password:       "{{ admin_user_password }}"
+    comment:        "{{ admin_user_full_name }}"
+    shell:          /bin/bash
+    groups:         "{{ admin_user_groups }}"
+  when: ansible_lsb.id == 'Ubuntu'
+
+
+- name: Task-02 - Create the sudoers.d file for admin user
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  template:
+    src:            ./sudoers.j2
+    dest:           "/etc/sudoers.d/{{ admin_user_name }}"
+    owner:          root
+    group:          root
+    mode:           0600
+
+- name: Task-03 - Be sure admin user home dir ownership is OK
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  file:
+    name:           "/home/{{ admin_user_name }}/"
+    state:          directory
+    owner:          "{{ admin_user_name }}"
+    group:          "{{ admin_user_name }}"
+    mode:           0755
+
+- name: Task-04 - Create bin dir for admin user
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  file:
+    name:           "/home/{{ admin_user_name }}/bin"
+    state:          directory
+    owner:          "{{ admin_user_name }}"
+    group:          "{{ admin_user_name }}"
+    mode:           0755
+
+- name: Task-05 - Copy admin files to ~/bin
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  copy:
+    src:            "files/ModelDiscovery.sh"
+    dest:           "/home/{{ admin_user_name }}/bin"
+    owner:          "{{ admin_user_name }}"
+    group:          "{{ admin_user_name }}"
+    mode:           0755
+
+- name: Task-06 - Create admin user .ssh dir
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  file:
+    name:           "/home/{{ admin_user_name }}/.ssh"
+    state:          directory
+    owner:          "{{ admin_user_name }}"
+    group:          "{{ admin_user_name }}"
+    mode:           0700
+
+- name: Task-07 - Copy authorized_keys file to ~/.ssh
+  become_user:      root
+  become:           yes
+  copy:
+    src:            "~/.ssh/authorized_keys"
+    dest:           "/home/{{ admin_user_name }}/.ssh"
+    owner:          "{{ admin_user_name }}"
+    group:          "{{ admin_user_name }}"
+    mode:           0600
+
+- name: Task-08 - Copy id_rsa file to ~/.ssh
+  become_user:      root
+  become:           yes
+  copy:
+    src:            "~/.ssh/id_rsa"
+    dest:           "/home/{{ admin_user_name }}/.ssh"
+    owner:          "{{ admin_user_name }}"
+    group:          "{{ admin_user_name }}"
+    mode:           0600
+
+### END DBK

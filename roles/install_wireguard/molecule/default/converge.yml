@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include install_wireguard"
+      include_role:
+        name: "install_wireguard"

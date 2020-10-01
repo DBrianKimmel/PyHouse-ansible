@@ -1,16 +1,16 @@
 ---
-- name: Update apt cache if needed.
+- name: Init-Tsak-01 - Update apt cache if needed.
   apt:
     update_cache: true
     cache_valid_time: 86400
 
-- name: Ensure /usr/local/bin exists and is group writable.
+- name: Init-Task-02 - Ensure /usr/local/bin exists and is group writable.
   file:
     path: /usr/local/bin
     state: directory
     mode: 0775
 
-- name: Ensure dependencies are installed.
+- name: Init-Task-03 - Ensure basic modules are installed.
   apt:
     name:
       - cron

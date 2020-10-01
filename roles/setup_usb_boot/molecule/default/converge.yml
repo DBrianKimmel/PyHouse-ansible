@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include setup_usb_boot"
+      include_role:
+        name: "setup_usb_boot"

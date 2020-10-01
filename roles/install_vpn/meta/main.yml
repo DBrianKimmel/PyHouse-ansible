@@ -1,0 +1,32 @@
+# Name:   roles/install_vpn/meta/main.yaml
+---
+galaxy_info:
+  author: your nameD. Brian Kimmel
+  description: Creator
+  company: PyHousse.org
+
+  # If the issue tracker for your role is not on github, uncomment the
+  # next line and provide a value
+  # issue_tracker_url: http://example.com/issue/tracker
+
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  platforms:
+    - name: Debian
+      versions: [all]
+    - name: Ubuntu
+      versions: [all]
+
+  galaxy_tags:
+    - networking
+    - peervpn
+    - zerotier
+
+dependencies: []
+  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
+  # if you add dependencies to this list.
