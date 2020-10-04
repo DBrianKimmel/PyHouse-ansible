@@ -1,0 +1,38 @@
+# Name:    PyHouse-ansible/inventories/group_vars/cannontrail/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-11-05
+# Updated: 2020-10-02
+#
+# Variables for the Cannon Trail house.
+#
+# The vault variables are stored in group_vars/cannontrail/vault.yaml
+#
+# To encrypt / decript do one of the following:
+#       ansible-vault encrypt inventories/group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
+#       ansible-vault decrypt inventories/group_vars/cannontrail/vault.yaml --vault-password-file ~/.vault-pass.txt
+#
+# Keep the ~/.vault-pass.txt file a secret.
+
+---
+log_track: inventories/group_vars/cannontrail/main.yaml
+
+pyh_house_name: vault_pyh_house_name
+pyh_house_latitude: vault_pyh_house_latitude
+pyh_house_longitude: vault_pyh_house_longitude
+pyh_house_elevation: vault_pyh_house_elevation
+
+hostname_domain: ""
+
+# Used by role networking
+pyh_ipv4_wifi_addr: 172.16.4.6
+wifi_access_points: vault_wifi_access_points
+pyh_router_nameservers: 172.17.2.5 8.8.8.8
+
+pyh_ipv4_router_addr: 172.17.0.1
+pyh_ipv4_router_netmask: 255.255.224.0
+pyh_ipv4_router_prefix_len: 19
+
+pyh_ipv6_network_prefix: vault_pyh_ipv6_network_prefix
+pyh_ipv6_network_prefix_len: /64
+
+### END DBK

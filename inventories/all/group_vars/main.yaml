@@ -1,0 +1,9 @@
+# Name:   inventories/all/group_vars/main.yaml
+# Updated: 2020-10-04
+---
+
+log_track: inventories/all/group_vars/main.yaml
+
+pyh_pi_password: gobbledegook
+
+### END DBK

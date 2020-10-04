@@ -20,7 +20,7 @@
     - name:  Production-Pis-PreTask-00 - Starting, Display some vars...
       debug:
         msg:
-          - "User: {{ pyh_admin_user }}"
+          - "User: {{ admin_user_name }}"
           - "Dist: {{ ansible_os_family }}"
           - "Host: {{ pyh_hostname }}"
           - "Role: {{ pyh_roles }}"

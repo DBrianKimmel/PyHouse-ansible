@@ -1,0 +1,14 @@
+# defaults file for setup_hostname
+# Name:    PyHouse-ansible/roles/setup_hostname/defaults/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-14
+# Updated: 2020-10-01
+#
+# Set up the computer's hostname
+---
+
+hostname_enabled: true
+hostname_hostname: fake_hostname
+hostname_domain: fake_domain
+
+### END DBK

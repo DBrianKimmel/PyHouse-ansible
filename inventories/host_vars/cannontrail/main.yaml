@@ -1,0 +1,9 @@
+# Name:   inventories/host_vars/cannontrail/main.yaml
+# Updated: 2020-10-04
+---
+
+log_track: inventories/host_vars/cannontrail/main.yaml
+
+pyh_ipv4_ethernet_addr: 172.17.30.30
+
+### END DBK

@@ -33,7 +33,7 @@
   become:           yes
   user:
     name:           pi
-    password:       "{{ vault_pyh_pi_password }}"
+    password:       "{{ pyh_pi_password }}"
     comment:        "Default User"
   when: ansible_os_family == 'Debian'
 

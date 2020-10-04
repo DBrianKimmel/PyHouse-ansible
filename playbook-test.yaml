@@ -18,7 +18,7 @@
   - name:               Play-Test - PreTask-01 - List the pyh_role for each host
     debug:
         msg:
-          - "User: {{ pyh_admin_user }}"
+          - "User: {{ admin_user_name }}"
           - "Dist: {{ ansible_os_family }}"
           - "Host: {{ pyh_hostname }}"
           - "Role: {{ pyh_roles }}"

@@ -1,6 +1,7 @@
 # add-admin-user role vars
-pyh_admin_user: briank
-pyh_admin_user_groups:      adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+---
+admin_user_name: briank
+admin_user_groups:      adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
 
 
 # Security configuration.

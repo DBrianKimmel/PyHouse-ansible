@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/networking/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-15
-# Updated: 2019-08-07
+# Updated: 2020-10-01
 #
 # Set up all networking
 
@@ -13,12 +13,11 @@
 - name: NetworkingMain Task-00 - Starting, Display some vars...
   debug:
     msg:
-      - "User:  {{ pyh_admin_user }}"
+      - "User:  {{ admin_user_name }}"
       - "Dist:  {{ ansible_os_family }}"
       - "Host:  {{ pyh_hostname }}"
       - "Role:  {{ pyh_roles }}"
-      - "A-P:   {{ pyh_access_points }}"
-      - "A-P:   {{ vault_pyh_access_points }}"
+      - "A-P:   {{ wifi_access_points }}"
   tags:
     - always
 

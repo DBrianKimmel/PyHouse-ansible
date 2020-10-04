@@ -1,0 +1,69 @@
+# Name:    PyHouse-ansible/roles/setup_hostname/tasks/main.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-14
+# Updated: 2020-10-01
+#
+# Set up the computer's hostname
+#
+# Tags:
+#   hostname
+#
+# Vars:
+#   inventory_hostname
+#   inventory_hostname_short
+#
+---
+
+- name: Task-01Debian - APT - Ensure dbus installed
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  apt:
+    name:       dbus
+    state:      present
+  when:         ansible_os_family == 'Debian'
+  tags:         hostname
+
+- name: Task-02A - Update the hostname (pt. 1) - hostname cmd
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  hostname:
+    name:       "{{ hostname_hostname }}"
+  tags: hostname
+
+- name: Task-02B - Update the hostname (pt. 2) - (/etc/hostname)
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  copy:
+    content:    "{{ hostname_hostname }}{{'\n'}}"
+    dest:       /etc/hostname
+    owner:      root
+    group:      root
+    mode:       0644
+  tags: hostname
+
+- name: Task-02C - Update the IPv4 hostname (pt. 3) - (/etc/hosts)
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  lineinfile:
+    dest:       /etc/hosts
+    regexp:     "^127.0.1.1"
+    line:       "127.0.1.1{{'\t'}}{{ hostname_hostname }}{% if hostname_domain != '' %}{{'\t'}}{{ hostname_hostname }}.{{ hostname_domain }}{% endif %}{{'\t'}}localhost"
+    state:      present
+  tags: hostname
+
+- name: Task-02D - Update the IPv6 hostname (pt. 4) - (/etc/hosts)
+  ignore_errors:    yes
+  become_user:      root
+  become:           yes
+  lineinfile:
+    dest:       /etc/hosts
+    regexp:     "^::1"
+    line:       "::1{{'\t\t'}}{{ hostname_hostname }}{% if hostname_domain != '' %}{{'\t'}}{{ hostname_hostname }}.{{ hostname_domain }}{% endif %}{{'\t'}}localhost ip6-localhost ip6-loopback"
+    state:      present
+  tags: hostname
+
+  ### END DBK

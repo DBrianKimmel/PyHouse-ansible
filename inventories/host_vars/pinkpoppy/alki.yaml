@@ -1,0 +1,18 @@
+# Name:     PyHouse-ansible/host_vars/alki.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-13
+# Updated: 2017-11-01
+
+---
+
+ansible_host:               pinkpoppy.asuscomm.com
+ansible_port:               2254
+
+pyh_hostname:               Alki
+pyh_ipv4_ethernet_addr:     192.168.1.54
+pyh_ipv4_wifi_addr:         no
+pyh_roles:                  control,ansible,pyhouse,ipv6tunnel
+
+admin_user_groups:      dialout,sudo,audio,video,plugdev,input
+
+### END DBK

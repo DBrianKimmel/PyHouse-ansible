@@ -9,7 +9,7 @@
   debug:
     msg:
       - "BackingUp Node-Red Configuration"
-      - "Admin User: {{pyh_admin_user}}"
+      - "Admin User: {{admin_user_name}}"
       - "NodeRed User: {{pyh_nodered_user}}"
   tags: always
 

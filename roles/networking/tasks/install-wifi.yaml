@@ -15,8 +15,8 @@
   ignore_errors: true
   debug:
     msg:
-      - "User: {{ vault_pyh_admin_user }}"
-      - "AP:   {{ vault_pyh_access_points }}"
+      - "User: {{ admin_user_name }}"
+      - "AP:   {{ wifi_access_points }}"
 
 - name: NetworkingInstallWiFi WiFi-Task-03 - Install the wpa_supplicant file
   ignore_errors: true
