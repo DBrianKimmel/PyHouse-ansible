@@ -5,6 +5,9 @@
 #
 ---
 
+log_track: inventories/group_vars/pis.yaml
+
+
 # adm: Group adm is used for system monitoring tasks. Members of this group can read many log files in /var/log, and can use xconsole. Historically, /var/log was /usr/adm (and later /var/adm), thus the name of the group.
 # systemd-journal: Since Debian 8 (Jessie), members of this group can use the command journalctl and read log files of systemd (in /var/log/journal).
 # plugdev: Allows members to mount (only with the options nodev and nosuid, for security reasons) and umount removable devices through pmount.

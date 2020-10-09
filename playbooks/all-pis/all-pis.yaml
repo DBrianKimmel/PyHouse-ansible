@@ -1,58 +1,34 @@
 # Name:    PyHouse-ansible/playbooks/roles-dispatch.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-07-08
-# Updated: 2018-07-25
+# Updated: 2020-10-07
 
 # This playbook will first install the basic system that goes on every computer.
 # Then it will add the pyh_roles to specialize that computer.
-
+#
+# Select a host from individual or one of the groups (pis, cannontrail, pinkpoppy)
+#
 ---
 
-- name: Play-02 - All-Pis - Starting
+- name: Play-01 - All-Pis - Starting
   hosts: pi-02-ct
-  strategy: linear
+  remote_user: root
   become: true
-  become_method: sudo
-  gather_facts: true
 
-  pre_tasks:
-
-    - name:  All-Pis-PreTask-00 - Starting, Display some vars...
-      debug:
-        msg:
-          - "log_track:{{ log_track }}"
-          - "     User: {{ admin_user_name }}"
-          - "     Dist: {{ ansible_os_family }}"
-          - "     Host: {{ pyh_hostname }}"
-          - "     Role: {{ pyh_roles }}"
-      tags:
-        - always
-
-    ### this is a Dynamic include
-    - name: All-Pis-PreTask-01 - Dynamic Include vars from local-configure.yaml if found
-      include_vars: "{{ item }}"
-      with_first_found:
-        - files:
-            - "local-configure.yaml"
-            - "null.yaml"
-          paths:
-            - "../defaults/"
-      tags:
-        - always
-
+  tasks:
+  - name:  All-Pis-PreTask-01 - Starting, Display some vars...
+    debug:
+      msg:
+        - "-----"
+        - "log_track:{{ log_track }}"
+  #      - "     User: {{ admin_user_name }}"
+  #      - "     Dist: {{ ansible_os_family }}"
+  #          - "     Host: {{ pyh_hostname }}"
+  #          - "     Role: {{ pyh_roles }}"
+  #      tags:
+  #        - always
+  #
   roles:
-
-    - role: ../../roles/package-management
-      tags:
-        - always
-
-    - role: ../../roles/networking
-      when: install_networking | default(True)
-      tags: 
-        - initial_setup_only
-
-    - role: ../../roles/setup_hostname
-      tags:
-        - initial_setup_only
+    - install_basic_system
 
 ### END DBK

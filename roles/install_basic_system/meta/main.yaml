@@ -1,3 +1,4 @@
+# Name:   roles/install_basic_system/meta/main.yaml
 galaxy_info:
   author: D. Brian Kimmel
   description: Guru
@@ -18,9 +19,9 @@ galaxy_info:
   - name: debian
     versions:
     - buster
-  - name: ubuntu
-    versions:
-    - 20.04
+  #- name: ubuntu
+  #  versions:
+  #  - 20.04
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

@@ -1,3 +1,5 @@
+# Name:   roles/setup_firewall/default/main.yaml
+# Updated: 2020-10-08
 ---
 firewall_state: started
 firewall_enabled_at_boot: true
@@ -8,6 +10,7 @@ firewall_allowed_tcp_ports:
   - "22"
   - "25"
   - "80"
+  - "123"
   - "443"
 firewall_allowed_udp_ports: []
 firewall_forwarded_tcp_ports: []

@@ -1,39 +1,9 @@
-# Name:    setup-firewall/tasks/main.yaml
+# Name:    roles/setup_firewall/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-10-01
-# Updated: 2018-14-22
-#
-# Called from roles/common/tasks/network.yaml
-# Firewall
-
-
-# NOTE: This playbook *adds* rules.
-# It does not delete existing rules.
-
-# ---
-
-# - name: Enable ufw
-#   ufw: state=enabled policy=allow
-
-# - name: Disable default in
-#   ufw: direction=incoming policy=deny
-
-# - name: Port 33 (SSH) is open
-#   ufw: rule=limit name=OpenSSH
-
-# - name: Port 80 (HTTP) is open
-#   ufw: rule=allow port=80 proto=tcp
-
-# - name: Port 443 (HTTPS) is open
-#   ufw: rule=allow port=443 proto=tcp
-
-#- name: 4949 (munin-node) is open to monitor(s)
-#  when: install_muninnode|default(True)
-#  ufw: rule=allow port=4949 proto=tcp from_ip={{ item }}
-#  with_items: muninnode_query_ips|default([])
-
-### END DBK
+# Updated: 2020-10-08
 ---
+
 - name: Task-01 - Ensure iptables is present.
   package: name=iptables state=present
 
@@ -77,3 +47,6 @@
 
 - import_tasks: disable-other-firewalls.yaml
   when: firewall_disable_firewalld or firewall_disable_ufw
+
+### END DBK
+  

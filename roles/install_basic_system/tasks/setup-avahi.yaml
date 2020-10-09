@@ -1,7 +1,7 @@
-# Name:    PyHouse-ansible/roles/install-basic-system/tasks/setup-avahi.yaml
+# Name:    PyHouse-ansible/roles/install_basic_system/tasks/setup-avahi.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-07-02
-# Updated: 2018-07-08
+# Updated: 2020-10-07
 #
 # The avahi package is used to advertise various communications to the server (ssh, vpn etc.)
 # Add the avahi config files and restart the daemon

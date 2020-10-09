@@ -1,0 +1,29 @@
+---
+# tasks file for install_mopidy
+
+- name: Task-01 - add iptable rule V4
+  iptable:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 6680
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+    action: insert
+    rule_num: 5
+    comment: Accept new mopidy connections.
+
+- name: Task-01A - add iptable rule V6
+  iptable:
+    ip_version: 6
+    chain: INPUT
+    protocol: tcp
+    destination_port: 6680
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+    action: insert
+    rule_num: 5
+    comment: Accept new mopidy connections.
+
+    ### END DBK

@@ -1,22 +1,7 @@
-# Name:    PyHouse-ansible/roles/install-basic-system/tasks/timezone.yaml
+# Name:    PyHouse-ansible/roles/install_basic_system/tasks/timezone.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-29
-# Updated: 2018-06-29
-
-
-
-
-
-
-
-                                           
-
-
-
-
-
-
-
+# Updated: 2020-10-07
 ---
 
 # Set target server timezone from 'timezone' variable.

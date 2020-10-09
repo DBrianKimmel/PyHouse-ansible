@@ -1,12 +1,12 @@
-# Name:    PyHouse-ansible/roles/install-basic-system/tasks/update-os.yaml
+# Name:    PyHouse-ansible/roles/install_basic_system/tasks/update-os.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-07-18
-# Updated: 2018-07-18
+# Updated: 2020-10-07
 #
 # This task will update the crontab to run a software update weekly
 ---
 
-- name: Task-01 - Copy admin files
+- name: UpdateOs Task-01 - Copy admin files
   ignore_errors:    yes
   become_user:      root
   become:           yes
@@ -18,11 +18,11 @@
     mode:       0755
 
 # Update roots crontab 
-- name: RebootTask-01 - Update root crontab.
+- name: UpdateOs Task-02 - Update root crontab.
   cron:
     name:    "UpdateOs"
     hour:    "5"
-    minute:  "3"
+    minute:  "6"
     weekday: "1"
     job:     "/usr/local/bin/weekly-update"
     user:    "root"

@@ -1,0 +1,22 @@
+# Name:   roles/install_basic_system/defaults/main.yaml
+# Updated: 2020-10-07
+#
+---
+
+log_track: roles/install_basic_system/default/main.yaml
+default_timezone: "US/Eastern"
+
+test_default_token: 'Test Default Token'
+
+# Namespace 'basic'
+#
+basic_reboot_enabled: true
+basic_update_enabled: yes
+basic_avahi_enabled: yes
+basic_timezone: US/Eastern
+basic_backup_enabled: yes
+basic_dyndns_enabled: yes
+basic_firewall_enabled: yes
+
+
+### END DBK

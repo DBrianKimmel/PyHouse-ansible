@@ -5,5 +5,6 @@
 log_track: inventories/group_vars/main.yaml
 
 pyh_pi_password: gobbledegook
+pyh_extra_apt_packages: 
 
 ### END DBK

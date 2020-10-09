@@ -1,12 +1,12 @@
 # Name:    PyHouse-ansible/roles/install-basic-system/files/weekly-update
 # Author:  D. Brian Kimmel
 # Created: 2018-07-19
-# Updated: 2018-07-19
+# Updated: 2020-10-07
 #
 # This cron task will update the raspbian/debian os weekly 
 #
-sudo apt-get update
-sudo apt-get dist-upgrade -y
-sudo apt-get autoremove -y
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
 #
 ### END DBK

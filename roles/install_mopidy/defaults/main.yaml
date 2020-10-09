@@ -1,0 +1,5 @@
+# Name:   roles/install_mopidy/default/main.yamel
+---
+# defaults file for install_mopidy
+
+mopidy-enables: yes

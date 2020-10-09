@@ -1,0 +1,7 @@
+# Name:   inventories/host_vars/pinkpoppy/main.yaml
+# Updated: 2020-10-07
+---
+
+log_track: inventories/host_vars/pinkpoppy/main.yaml
+
+### END DBK

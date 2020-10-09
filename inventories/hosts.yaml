@@ -8,13 +8,11 @@
 #   127.0.0.1
 ---
 all:
-  hosts:
-    laptop.zbook:
-  children:
-    pinkpoppy:
-      children:
-        pis:
-          hosts:
+   hosts:
+      laptop.zbook:
+   children:
+      pinkpoppy:
+         hosts:
             pi-01-pp:
             pi-02-pp:
             pi-03-pp:
@@ -27,20 +25,13 @@ all:
             pi-10-pp:
             pi-11-pp:
             pi-12-pp:
-        nucs:
-          hosts:
             nuc-01-pp:
-        others:
-          hosts:
-            alki-pp:
-            nuc-01-pp:
-            router-01-pp:
-      vars:
-        pinkpoppy_vars: pp
-    cannon_trail:
-      children:
-        pis:
-          hosts:
+            nas-01-pp:
+            router01-pp:
+         vars:
+            gateway_router: 172.16.0.5
+      cannon_trail:
+         hosts:
             pi-01-ct:
             pi-02-ct:
             pi-03-ct:
@@ -51,14 +42,52 @@ all:
             pi-08-ct:
             pi-09-ct:
             pi-10-ct:
-        nucs:
-          hosts:
+            pi-11-ct:
+         vars:
+            gateway_router: 172.17.0.1
+      floating:
+         hosts:
+            laptop_zbook:
+            laptop_marcia:
+      pis:
+         hosts:
+            pi-01-ct:
+            pi-02-ct:
+            pi-03-ct:
+            pi-04-ct:
+            pi-05-ct:
+            pi-06-ct:
+            pi-07-ct:
+            pi-08-ct:
+            pi-09-ct:
+            pi-10-ct:
+            pi-11-ct:
+            pi-01-pp:
+            pi-02-pp:
+            pi-03-pp:
+            pi-04-pp:
+            pi-05-pp:
+            pi-06-pp:
+            pi-07-pp:
+            pi-08-pp:
+            pi-09-pp:
+            pi-10-pp:
+            pi-11-pp:
+            pi-12-pp:
+      nucs:
+         hosts:
             nuc-01-ct:
-        others:
-          hosts:
+            nuc-01-pp:
+      others:
+         hosts:
             pcduino-ct:
             router-01-ct:
-      vars:
-        cannontrail_vars: ct
+            alki-pp:
+            nuc-01-pp:
+            router-01-pp:
+   vars:
+      domain-name: pyhouse.org
+      global123: 123
+      vpn_zt-network: vault_vpn_network_key
 
 ### END DBK

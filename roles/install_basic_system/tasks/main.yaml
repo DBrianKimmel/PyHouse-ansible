@@ -1,39 +1,54 @@
-# Name:    PyHouse-ansible/roles/install-basic-system/tasks/main.yaml
+# Name:    PyHouse-ansible/roles/install_basic_system/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-27
-# Updated: 2019-08-07
+# Updated: 2020-10-07
 #
 # This role will do the basics on each computer.
 #
-# Add admin user
 # MOTD
 # SSH and VNC access
 
 ---
 
-- name: Main-Task-00 - main info for the role.
+- name: Task-00 - main info for debugging the role.
   debug:
     msg:
-      - "Dist:          {{ ansible_os_family }}"
-      - "Lsb:           {{ ansible_lsb }}"
+      - "log_track: {{ log_track | default(test_default_token) }}"
+      - "      Lsb: {{ ansible_lsb | default(test_default_token) }}"
+      - "     User: {{ admin_user_name | default(test_default_token) }}"
+      - "     Dist: {{ ansible_os_family | default(test_default_token) }}"
+      - "     Host: {{ pyh_hostname | default(test_default_token) }}"
+      - "     Role: {{ pyh_roles | default(test_default_token) }}"
+      - "  Gateway: {{ gateway_router | default(test_default_totken) }}"
+
+- name: Main Task-01 - Update and upgrade apt packages
+  apt:
+    upgrade: 'True'
+    update_cache: 'True'
 
 # sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
-- name: Main-Task-01 - Install apt packages.
-  ignore_errors: yes
+- name: Main Task-02 - Install extra apt packages.
   apt:
-    name: "{{pyh_extra_apt_packages}}"
+    name: "{{ pyh_extra_apt_packages | default(test_default_token) }}"
     state: latest
 
-- name: Main-Task-02 - Set ip autoreboot.
+- name: Main Task-03 - Set up autoreboot.
   include_tasks: auto-reboot.yaml
 
-- name: Main-Task-03 - Set avahi.
+- name: Main Task-04 - Set up avahi.
   include_tasks: setup-avahi.yaml
 
-- name: Main-Task-04 - Set time/timezone.
+- name: Main Task-05 - Set up time/timezone.
   include_tasks: setup-time.yaml
 
-- name: Main-Task-05 - Setup the weekly os software update
+- name: Main Task-06 - Set up the weekly os software update
   include_tasks: update-os.yaml
+
+- name: Main Task-07 - Set up Backup with rpi-clone
+  include_tasks: backup_system.yaml
+
+- name: Main Task-08 - Setup basic firewall
+  include_role:
+    name: setup_firewall
 
 ### END DBK
