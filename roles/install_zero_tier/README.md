@@ -1,38 +1,90 @@
-Role Name
-=========
+[![Build Status](https://travis-ci.org/m4rcu5nl/ansible-role-zerotier.svg?branch=master)](https://travis-ci.org/m4rcu5nl/ansible-role-zerotier)
+[![GitHub issues](https://img.shields.io/github/issues/m4rcu5nl/ansible-role-zerotier.svg)](https://github.com/m4rcu5nl/ansible-role-zerotier/issues)
 
-A brief description of the role goes here.
+# ZeroTier
 
-Requirements
-------------
+This Ansible role adds the ZeroTier repository and installs the `zerotier-one` package using your system's package manager.
+Depending on the provided variables this role can also add and authorize new members to (existing) ZeroTier networks, and tell the new member to join the network.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+Technically this role has no requirements. If it's ran without any variables set it will only run the installation tasks. The following variables impact the role's behavior:
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+[**zerotier_network_id**](#zerotier_network_id): when set hosts are told to join this network.  
+[**zerotier_api_accesstoken**](#zerotier_api_accesstoken): when set the role can handle member authentication and configuration using the ZeroTier API.  
 
-Dependencies
-------------
+## Role Variables
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+### zerotier_network_id
+*Type*: string  
+*Default value*:  
+*Description*: The 16 character network ID of the network the new members should join. The node will not join any network if omitted.
 
-Example Playbook
-----------------
+### zerotier_member_register_short_hostname
+*Type*: boolean  
+*Default value*: `false`  
+*Description*: By default `inventory_hostname` will be used to name a member in a network. If set to `true`, `inventory_hostname_short` will be used instead.
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+### zerotier_member_ip_assignments
+*Type*: list  
+*Default value*: `[]`  
+*Description*: A list of IP addresses to assign this member. The member will be automatically assigned an address on the network if left out.
 
+### zerotier_member_description
+*Type*: string  
+*Default value*: `""`  
+*Description*: Optional description for a member.
+
+### zerotier_api_accesstoken
+*Type*: string  
+*Default value*: `""`  
+*Description*: The access token needed to authorize with the ZeroTier API. You can generate one in your account settings at https://my.zerotier.com/. If this is left out then the newly joined member will not be automatically authorized.
+
+### zerotier_api_url
+*Type*: string  
+*Default value*: `https://my.zerotier.com`  
+*Description*: The url where the Zerotier API lives. Must use HTTPS protocol.  
+
+### zerotier_api_delegate
+*Type*: string  
+*Default value*: `localhost`  
+*Description*: Option to delegate tasks for Zerotier API calls. This is useful in a situation where API calls can only be made from a white-listed management server, for example.
+
+## Example Playbook
+
+```yaml
     - hosts: servers
+      vars:
+         zerotier_network_id: 1234567890qwerty
+         zerotier_api_accesstoken: "{{ vault_zerotier_accesstoken }}"
+         zerotier_register_short_hostname: true
+
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: m4rcu5nl.zerotier, become: true }
+```
 
-License
--------
+## Example Inventory
 
-BSD
+```INI
+    [servers]
+    web1.example.com zerotier_member_ip_assignments='["192.168.195.1", "192.168.195.2"]'
+    web2.example.com zerotier_member_ip_assignments='["192.168.195.3", "192.168.195.4"'
+    db1.example.com zerotier_member_ip_assignments='["192.168.195.10"]'
+    db2.example.com zerotier_member_ip_assignments='["192.168.195.11"]'
+    db3.example.com zerotier_member_ip_assignments='["192.168.195.12"]'
 
-Author Information
-------------------
+    [webservers]
+    web1.example.com
+    web2.example.com
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+    [dbservers]
+    db1.example.com
+    db2.example.com
+    db3.example.com
+
+    [webservers:vars]
+    zerotier_member_description='<AppName> webserver'
+
+    [dbservers:vars]
+    zerotier_member_description='<AppName> db cluster node'
+```

@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include dispatch_function_install"
+      include_role:
+        name: "dispatch_function_install"

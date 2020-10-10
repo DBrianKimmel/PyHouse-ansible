@@ -1,0 +1,8 @@
+# Name:   inventories/localhost.yaml
+# Updated: 2020-10-09
+#
+---
+
+test_default_totken: "localhost.yaml file"
+
+### END DBK

@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: all
+
   tasks:
     - name: "Include install_basic_system"
       include_role:

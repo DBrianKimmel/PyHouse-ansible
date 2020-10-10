@@ -21,7 +21,7 @@
       msg:
         - "-----"
         - "log_track:{{ log_track }}"
-  #      - "     User: {{ admin_user_name }}"
+        - "     User: {{ admin_user_name }}"
   #      - "     Dist: {{ ansible_os_family }}"
   #          - "     Host: {{ pyh_hostname }}"
   #          - "     Role: {{ pyh_roles }}"

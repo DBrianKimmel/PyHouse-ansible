@@ -11,11 +11,11 @@
   become_user:      root
   become:           yes
   copy:
-    src:        "../files/weekly-update"
-    dest:       "/usr/local/bin"
-    owner:      "root"
-    group:      "root"
-    mode:       0755
+      src:        "files/weekly-update"
+      dest:       "/usr/local/bin"
+      owner:      "root"
+      group:      "root"
+      mode:       0755
 
 # Update roots crontab 
 - name: UpdateOs Task-02 - Update root crontab.

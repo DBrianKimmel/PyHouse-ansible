@@ -13,13 +13,14 @@
 - name: Task-00 - main info for debugging the role.
   debug:
     msg:
-      - "log_track: {{ log_track | default(test_default_token) }}"
-      - "      Lsb: {{ ansible_lsb | default(test_default_token) }}"
-      - "     User: {{ admin_user_name | default(test_default_token) }}"
-      - "     Dist: {{ ansible_os_family | default(test_default_token) }}"
-      - "     Host: {{ pyh_hostname | default(test_default_token) }}"
-      - "     Role: {{ pyh_roles | default(test_default_token) }}"
-      - "  Gateway: {{ gateway_router | default(test_default_totken) }}"
+      - "log_track: {{ log_track | default('test_default_token') }}"
+      - "      Lsb: {{ ansible_lsb | default('test_default_token') }}"
+      - "     User: {{ admin_user_name | default('test_default_token') }}"
+      - "     Dist: {{ ansible_os_family | default('test_default_token') }}"
+      - "     Host: {{ pyh_hostname | default('test_default_token') }}"
+      - "     Role: {{ pyh_roles | default('test_default_token') }}"
+      - "  Gateway: {{ gateway_router | default('test_default_totken') }}"
+      - "Host Role: {{ host_roles | default('test_default_totken') }}"
 
 - name: Main Task-01 - Update and upgrade apt packages
   apt:
@@ -30,7 +31,7 @@
 - name: Main Task-02 - Install extra apt packages.
   apt:
     name: "{{ pyh_extra_apt_packages | default(test_default_token) }}"
-    state: latest
+    state: present
 
 - name: Main Task-03 - Set up autoreboot.
   include_tasks: auto-reboot.yaml

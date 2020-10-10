@@ -18,11 +18,12 @@ pyh_ipv4_wifi_addr: 172.17.3.2
 pyh_ipv6_ethernet_addr: ':2:2'
 pyh_ipv6_wifi_addr: ':3:2'
 
-host_roles:
-  - basic_system
-  - homeautomation
-  - vnc
-  - vpn
+host_functions:
+  - install_basic_system
+  - harden_linux
+  - install_homeautomation
+  - install_vnc
+  - install_vpn
 
 
 pyh_extra_apt_packages:
