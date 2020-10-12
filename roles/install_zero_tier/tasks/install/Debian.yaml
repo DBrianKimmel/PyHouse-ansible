@@ -1,9 +1,14 @@
-- name: Add ZeroTier PGP key
+# Name:   roles/install_zero_tier/tasks/install/Debian.yaml
+# Updated: 2020-10-10
+#
+---
+
+- name: Task-01-Debian - Add ZeroTier PGP key;;;
   apt_key:
     url: "{{ zerotier_gpg_url }}"
     id: "{{ zerotier_gpg_fingerprint }}"
 
-- name: Check if Ubuntu release has dedicated repo
+- name: Task-02-Debian - Check if Ubuntu release has dedicated repo;;;
   uri:
     url: "{{ zerotier_download_base_url }}/debian/{{ zerotier_deb_release_repo }}"
   failed_when: false
@@ -12,11 +17,11 @@
   register: release_repo
 
 - block:
-  - name: Overwrite Ubuntu release repo name
+  - name: Task-03-Debian - Overwrite Ubuntu release repo name;;;
     set_fact:
       zerotier_deb_release_repo: bionic
 
-  - name: Re-gather facts
+  - name: Task-04 - Debian - Re-gather facts
     setup: ~
 
   when:
@@ -24,7 +29,7 @@
     - ansible_facts['distribution_major_version'] == "18"
     - release_repo.status == 404
 
-- name: Add ZeroTier APT repository
+- name: Task-05-Debian - Add ZeroTier APT repository;;;
   apt_repository:
     repo: deb {{ zerotier_download_base_url }}/debian/{{ zerotier_deb_release_repo }} {{ zerotier_deb_release_repo }} main
     filename: zerotier

@@ -1,6 +1,6 @@
 ---
 - block:
-  - name: Authorize new members to network
+  - name: Task-01 (AN) - Authorize new members to network;;;
     uri:
       url: "{{ zerotier_api_url }}/api/network/{{ zerotier_network_id }}/member/{{ ansible_local['zerotier']['node_id'] }}"
       method: POST
@@ -17,7 +17,7 @@
     - ansible_local['zerotier']['networks'][zerotier_network_id] is not defined or
       ansible_local['zerotier']['networks'][zerotier_network_id]['status'] != 'OK'
 
-  - name: Configure members in network
+  - name: Task-02 (AN) - Configure members in network;;;
     uri:
       url: "{{ zerotier_api_url }}/api/network/{{ zerotier_network_id }}/member/{{ ansible_local['zerotier']['node_id'] }}"
       method: POST
@@ -32,6 +32,7 @@
     register: conf_apiresult
     delegate_to: "{{ zerotier_api_delegate }}"
 
+# Block when
   when:
   - not ansible_check_mode
   tags:

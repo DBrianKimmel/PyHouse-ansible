@@ -10,14 +10,16 @@
 
 ---
 
-ansible_host:               192.168.1.11
+ansible_host: 172.16.2.1
 
-pyh_hostname:               pi-01-pp
-pyh_ipv4_ethernet_addr:     192.168.2.11
-pyh_ipv4_wifi_addr:         192.168.1.11
-pyh_ipv6_ethernet_addr:     :2:11
-pyh_ipv6_wifi_addr:         :1:11
-pyh_roles:                  pyhouse
+pyh_hostname: pi-01-pp
+pyh_ipv4_ethernet_addr: 172.16.2.1
+pyh_ipv4_wifi_addr: 172.16.3.1
+pyh_ipv6_ethernet_addr: :2:1
+pyh_ipv6_wifi_addr: :3:1
+pyh_roles: pyhouse
+
+wireguard_address: "10.8.0.101/24"
 
 pyh_extra_apt_packages:
     - git

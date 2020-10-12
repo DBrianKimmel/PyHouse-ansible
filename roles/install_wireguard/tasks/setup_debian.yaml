@@ -1,0 +1,16 @@
+---
+- name: Task-00(Debian) - Debug
+  debug:
+    msg:
+    - "lsb: {{ ansible_lsb }}"
+
+- name: Task-01(Debian) - Include debian raspbian;;;
+  include_tasks: "setup_debian_raspbian.yaml"
+  when: ansible_lsb.id == "Raspbian"
+  register: wireguard__register_raspbian_setup
+
+- name: Task-02(Debian) - Include debian vanilla;;;
+  include_tasks: "setup_debian_vanilla.yaml"
+  when: wireguard__register_raspbian_setup is skipped
+#
+### END DBK

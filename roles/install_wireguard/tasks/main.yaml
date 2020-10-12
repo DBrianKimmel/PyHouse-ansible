@@ -1,0 +1,147 @@
+# Name: roles/install_wireguard/tasks/main.yaml
+# Updated: 2020-10-10
+#
+---
+
+- name: Task-00 - Debug;;;
+  debug:
+    msg:
+       - " Distribution: {{ ansible_distribution }}"
+       - "        Major: {{ ansible_distribution_major_version }}"
+       - "      Version: {{ ansible_distribution_version }}"
+       - "      Release: {{ ansible_distribution_release }}"
+       - "     OsFamily: {{ ansible_os_family }}"
+
+- name: Task-01 - Gather instance facts;;;
+  setup:
+
+- name: Task-02 - Include tasks ...;;;
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "setup_{{ ansible_distribution|lower }}_{{ ansible_distribution_major_version }}.yaml"
+    - "setup_{{ ansible_distribution|lower }}_{{ ansible_distribution_version }}.yaml"
+    - "setup_{{ ansible_distribution|lower }}_{{ ansible_distribution_release }}.yaml"
+    - "setup_{{ ansible_distribution|lower }}.yaml"
+    - "setup_{{ ansible_os_family|lower }}.yaml"
+
+- name: Task-03 - Enable WireGuard kernel module;;;
+  modprobe:
+    name: wireguard
+    state: present
+  register: wireguard_module_enabled
+  until:  wireguard_module_enabled is succeeded
+  retries: 10
+  delay: 10
+  failed_when: wireguard_module_enabled is failure
+  tags:
+    - wg-install
+  when: not ansible_os_family == 'Darwin'
+
+- name: Task-04 - Register if config/private key already exists on target host;;;
+  stat:
+    path: "{{ wireguard_remote_directory }}/{{ wireguard_interface }}.conf"
+  register: wireguard__register_config_file
+  tags:
+    - wg-generate-keys
+    - wg-config
+
+- name: Task-05 - Get wg subcommands;;;
+  command: "wg --help"
+  register: wireguard__register_subcommands
+  changed_when: false
+
+- name: Task-06 - Check if wg syncconf subcommand is available;;;
+  set_fact:
+    wg_syncconf: "{{ 'syncconf:' in wireguard__register_subcommands.stdout }}"
+
+- name: Task-07 - Show syncconf subcommand status;;;
+  debug:
+    var: wg_syncconf
+
+- block:
+  - name: Task-08-Blk-1 - Generate WireGuard private key;;;
+    command: "wg genkey"
+    register: wireguard__register_private_key
+    changed_when: false
+    tags:
+      - wg-generate-keys
+
+  - name: Task-09-Blk-1 - Set private key fact;;;
+    set_fact:
+      wireguard__fact_private_key: "{{ wireguard__register_private_key.stdout }}"
+    tags:
+      - wg-generate-keys
+  when: not wireguard__register_config_file.stat.exists
+
+- block:
+  - name: Task-10-Blk-2 - Read WireGuard config file;;;
+    slurp:
+      src: "{{ wireguard_remote_directory }}/{{ wireguard_interface }}.conf"
+    register: wireguard__register_config
+    tags:
+      - wg-config
+
+  - name: Task-11-Blk-2 - Set private key fact;;;
+    set_fact:
+      wireguard__fact_private_key: "{{ wireguard__register_config['content'] | b64decode | regex_findall('PrivateKey = (.*)') | first }}"
+    tags:
+      - wg-config
+  when: wireguard__register_config_file.stat.exists
+
+- name: Task-12 - Derive WireGuard public key;;;
+  command: "wg pubkey"
+  args:
+    stdin: "{{ wireguard__fact_private_key }}"
+  register: wireguard__register_public_key
+  changed_when: false
+  tags:
+    - wg-config
+
+- name: Task-13 - Set public key fact;;;
+  set_fact:
+    wireguard__fact_public_key: "{{ wireguard__register_public_key.stdout }}"
+  tags:
+    - wg-config
+
+- name: Task-14 - Create WireGuard configuration directory;;;
+  file:
+    dest: "{{ wireguard_remote_directory }}"
+    state: directory
+    mode: 0700
+  tags:
+    - wg-config
+
+- name: Task-15A - Debug
+  debug:
+    msg:
+      - "       Dir: {{ wireguard_remote_directory }}"
+      - " Interface: {{ wireguard_interface }}"
+      - "     Owner: {{ wireguard_conf_owner }}"
+
+- name: Task-15B - Generate WireGuard configuration file;;;
+  template:
+    src: etc/wireguard/wg.conf.j2
+    dest: "{{ wireguard_remote_directory }}/{{ wireguard_interface }}.conf"
+    owner: "{{ wireguard_conf_owner }}"
+    group: "{{ wireguard_conf_group }}"
+    mode: "{{ wireguard_conf_mode }}"
+  tags:
+    - wg-config
+  notify:
+    - reconfigure wireguard
+
+- name: Task-16 - Ensure legacy reload-module-on-update is absent;;;
+  file:
+    dest: "{{ wireguard_remote_directory }}/.reload-module-on-update"
+    state: absent
+  tags:
+    - wg-config
+
+- name: Task-17 - Start and enable WireGuard service;;;
+  service:
+    name: "wg-quick@{{ wireguard_interface }}"
+    state: started
+    enabled: yes
+  when: not ansible_os_family == 'Darwin'
+#
+### END DBK

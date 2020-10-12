@@ -5,6 +5,7 @@
 #
 # This role adds Fixes the pi user from the distribution defaults.
 #
+# Warning!  the pi password is changed - be sure you know what the new password is before using this role.
 
 ---
 
@@ -33,7 +34,7 @@
   become:           yes
   user:
     name:           pi
-    password:       "{{ pyh_pi_password }}"
+    password:       "{{ bootstrap_pi_user_password }}"
     comment:        "Default User"
   when: ansible_os_family == 'Debian'
 

@@ -1,7 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-    - name: "Include install-zero-tier"
-      include_role:
-        name: "install-zero-tier"

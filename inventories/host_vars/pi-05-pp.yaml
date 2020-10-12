@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/production/host_vars/pi-05-pp.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-06
-# Updated: 2017-12-12
+# Updated: 2020-10-10
 #
 # This computer is for developing node red I2C flows.
 #
@@ -10,14 +10,17 @@
 
 ---
 
-ansible_host:               192.168.1.15
+#ansible_host: 172.16.2.5
+ansible_host: 10.244.120.206
 
-pyh_hostname:               pi-05-pp
-pyh_ipv4_ethernet_addr:     192.168.2.15
-pyh_ipv4_wifi_addr:         192.168.1.15
-pyh_ipv6_ethernet_addr:     :2:15
-pyh_ipv6_wifi_addr:         :1:15
-pyh_roles:                  node-red
+pyh_hostname: pi-05-pp
+pyh_ipv4_ethernet_addr: 172.16.2.5
+pyh_ipv4_wifi_addr: 172.16.3.5
+pyh_ipv6_ethernet_addr: :2:5
+pyh_ipv6_wifi_addr: :3:5
+pyh_roles: node-red
+
+wireguard_address: "10.8.0.105/24"
 
 pyh_extra_apt_packages:
     - python3

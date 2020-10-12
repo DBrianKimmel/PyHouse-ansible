@@ -43,7 +43,7 @@
         msg:
           - "Host:{{ pyh_hostname }};"
           - "WiFi:{{ pyh_ipv4_wifi_addr }};"
-          - "Ethernet:{{ pyh_ipv4_ethernet_addr }};"
+          # - "Ethernet:{{ pyh_ipv4_ethernet_addr }};"
           - "Access:{{ ansible_host }}"
       tags:
         - always

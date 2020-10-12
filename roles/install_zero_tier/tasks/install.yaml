@@ -1,20 +1,21 @@
 
 ---
 
-- include_tasks: install/{{ ansible_facts['os_family'] }}.yaml
+- name: Task-01 (I) 0 Install task list;;;
+  include_tasks: install/{{ ansible_facts['os_family'] }}.yaml
   tags:
   - installation
   - repositories
 
 - block: #Install and enable zerotier-one
-  - name: Install zerotier-one
+  - name: Task-02 (I) Block-01 - Install zerotier-one;;;
     package:
       name: zerotier-one
       state: present
       update_cache: yes
     register: zerotier_client
 
-  - name: Start zerotier-one service
+  - name: Task-02 (I) Block-02 - Start zerotier-one service;;;
     service:
       name: zerotier-one
       state: started

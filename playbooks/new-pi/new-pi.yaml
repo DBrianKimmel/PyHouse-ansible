@@ -14,7 +14,7 @@
 ---
 
 - name: Play-01 - New-Pi - Set up a fresh Pi 
-  hosts: pi-02-ct
+  hosts: bootstrap_pi
   remote_user: root
  
   pre_tasks:
@@ -22,8 +22,8 @@
       debug:
         msg:
           - "     Host:{{ hostname_hostname }}"
-          - "log_track:{{ log_track }}"
-          - " Ethernet:{{ pyh_ipv4_ethernet_addr }}"
+#         # - "log_track:{{ log_track }}"
+          # - " Ethernet:{{ pyh_ipv4_ethernet_addr }}"
           - "   Access:{{ ansible_host }}"
           # - "     WiFi:{{ pyh_ipv4_wifi_addr }}"
       tags:

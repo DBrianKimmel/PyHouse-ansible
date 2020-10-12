@@ -1,27 +1,30 @@
 # Name:   roles/install_zero_tier/tasks/main.yaml
-# Updated: 2020-10-09
+# Updated: 2020-10-10
 #
 ---
 
 # tasks file for ansible-role-zerotier
-- import_tasks: install.yaml
+- name: Task-01 - Import install.yaml task list;;;
+  import_tasks: install.yaml
   when:
   - not skip_install | default(false) | bool
 
 - block:
-  - name: Update ansible_local facts
+  - name: Task-02 - Update ansible_local facts;;;
     script: set_facts.sh
 
-  - name: Re-gather ansible_local facts
+  - name: Task-03 - Re-gather ansible_local facts;;;
     setup: filter=ansible_local
 
 
-- import_tasks: authorize_node.yaml
+- name: Task-04 - Import authorize_node task list;;;
+  import_tasks: authorize_node.yaml
   when:
   - zerotier_api_accesstoken | length > 0
   - ansible_local['zerotier']['node_id'] is defined
 
-- import_tasks: join_network.yaml
+- name: Task-05 - Import join-network task list;;;
+  import_tasks: join_network.yaml
   when:
   - zerotier_network_id is defined
 

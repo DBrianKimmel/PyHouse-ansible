@@ -1,0 +1,37 @@
+# Name: roles/install_wireguard/tasks/setup_debian_vanilla.yaml
+---
+- name: Task-01(Debian_Vanilla) Add WireGuard repository on buster;;;
+  apt_repository:
+    repo: "deb http://deb.debian.org/debian buster-backports main"
+    state: "{{ 'present' if (ansible_distribution_version | int <= 10) else 'absent' }}"
+    update_cache: yes
+  tags:
+    - wg-install
+
+- name: Task-01(Debian_Vanilla) Install kernel headers for the currently running kernel to compile Wireguard with DKMS;;;
+  apt:
+    name:
+      - "linux-headers-{{ ansible_kernel }}"
+    state: present
+
+- name: (Debian) Get architecture
+  command: "dpkg --print-architecture"
+  register: wireguard__fact_dpkg_arch
+  changed_when: False
+
+- name: Task-01(Debian_Vanilla) Install kernel headers metapackage to ensure headers will be installed;;;
+  apt:
+    name:
+      - "linux-headers-{{ wireguard__fact_dpkg_arch.stdout }}"
+    state: present
+  when: ('-cloud-' not in ansible_kernel)
+
+- name: Task-01(DebianVanilla) Install WireGuard packages;;;
+  apt:
+    name:
+      - "wireguard"
+    state: present
+  tags:
+    - wg-install
+#
+### END DBK

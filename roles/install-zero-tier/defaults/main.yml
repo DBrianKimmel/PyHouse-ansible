@@ -1,6 +1,0 @@
-# Name:   install-zero-tier/defaults/main.yaml
----
-zero_tier_state: started
-zero_tier_enabled_at_boot: true
-
-### END DBK

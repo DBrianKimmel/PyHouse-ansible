@@ -10,6 +10,7 @@
 all:
    hosts:
       laptop.zbook:
+      bootstrap_pi:
    children:
       pinkpoppy:
          hosts:

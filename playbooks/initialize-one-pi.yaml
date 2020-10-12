@@ -39,7 +39,12 @@
         - always
 
     - name: playbook-setup-pre-task-03 - Working on raspi
-      debug: msg="Host:{{ pyh_hostname }}; WiFi:{{ pyh_ipv4_wifi_addr }}; Ethernet:{{ pyh_ipv4_ethernet_addr }}; Access:{{ ansible_host }}"
+      debug:
+        msg:
+          - "     Host:{{ pyh_hostname }}"
+          - "     WiFi:{{ pyh_ipv4_wifi_addr }}"
+          - " Ethernet:{{ pyh_ipv4_ethernet_addr }}"
+          - "   Access:{{ ansible_host }}"
       tags:
         - always
 

@@ -2,7 +2,7 @@
 # to get started, ensure you have ansible installed:
 #  $ sudo apt install ansible
 # Then run this playbook:
-#  $ ansible-playbook -i localhost, python3.6.yml
+#  $ ansible-playbook -i localhost, python3.6.yaml
 # Then you can get started:
 #  $ python3.6
 #

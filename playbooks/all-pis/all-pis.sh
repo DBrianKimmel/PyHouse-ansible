@@ -1,5 +1,11 @@
 #!/bin/bash
 
+MY_NAME="all-pis"
+
+INVENTORY="-i ./inventories/hosts.yaml "
+PLAYBOOK="playbooks/${MY_NAME}/${MY_NAME}.yaml"
+DEBUG=" "
+
 CUR_DIR=`pwd`
 WORK_DIR=${HOME}
 
@@ -18,10 +24,10 @@ fi
 
 # The repository 
 ANS_DIR=${WORK_DIR}/PyHouse-ansible
-PLAY_DIR=${ANS_DIR}/playbooks/all-pis
+PLAY_DIR=${ANS_DIR}/playbooks/${MY_NAME}
 
 # Update the sh file for next time.
-cp ${PLAY_DIR}/all-pis.sh ${HOME}/bin
+cp ${PLAY_DIR}/${MY_NAME}.sh  ${HOME}/bin
 
 # go  to th base of the repository where ansible.cfg is located
 cd ${ANS_DIR}
@@ -31,12 +37,12 @@ echo "Start Dir: ${CUR_DIR}"
 echo "Play Dir: ${ANS_DIR}"
 echo "Work Dir: ${WORK_DIR}"
 
-INVENTORY="-i ./inventories/hosts.yaml "
-DEBUG="-vv "
 PASSWD="--vault-password-file  ${HOME}/.vault-pass.txt "
-CMD="ansible-playbook ${INVENTORY} ${PASSWD} ${DEBUG} playbooks/all-pis/all-pis.yaml"
+CMD="ansible-playbook ${INVENTORY} ${PASSWD} ${DEBUG} ${PLAYBOOK}"
 echo "Executing:  $CMD"
 echo ' '
 $CMD
 
 cd ${CUR_DIR}
+
+### END DBK

@@ -1,15 +1,16 @@
-# Name:    PyHouse-ansible/inventories/host_vars/cannontrail/pi-02-ct.yaml
+# Name:    PyHouse-ansible/inventories/host_vars/pi-02-ct.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-29
-# Updated: 2020-10-09
+# Updated: 2020-10-10
+#
 ---
 
-log_track: inventories/host_vars/pi-02-ct.yaml
 admin_user_name: briank
-
 ansible_host: 172.17.2.2
+#ansible_user: pi
+
 ansible_python_interpreter: /usr/bin/python3
-ansible_ssh_user: briank
+ansible_ssh_user: pi
 host_key_checking: false
 
 pyh_hostname: pi-02-ct
@@ -17,6 +18,9 @@ pyh_ipv4_ethernet_addr: 172.17.2.2
 pyh_ipv4_wifi_addr: 172.17.3.2
 pyh_ipv6_ethernet_addr: ':2:2'
 pyh_ipv6_wifi_addr: ':3:2'
+
+wireguard_address: "10.8.0.202/24"
+wireguard_endpoint: "pi-02-ct"
 
 host_functions:
   - install_basic_system

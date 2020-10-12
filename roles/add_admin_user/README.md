@@ -7,13 +7,18 @@ As such, it hs no necessary roles to precede it.
 It adds an administrative user, in my case it is 'briank'.
 The administrative user gets virtually every group ID as the 'pi' user has.
 
+ Warning!  the pi password is changed - be sure you know what the new password is before using this role.
+
 ## Requirements
 
 None.
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+bootstrap_pi_user_password: $6$tiuFB7p31L$G2Z/NoFyTEz18HwOsbaTPh4fM5rSq1nratdP8YhFjyR7U6xwC7KLg4GKOGaKXLOBr6TfZBTzUN63Afp11ZOan.
+	See https://docs.ansible.com/ansible/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
+	mkpasswd --method=sha-512 <new-password>
+
 
 ## Dependencies
 
