@@ -13,6 +13,11 @@
 #
 ---
 
+  vars_prompt:
+    - name: "password"
+      prompt: "Enter new password for user pi"
+      private: yes
+
 - name: Play-01 - New-Pi - Set up a fresh Pi 
   hosts: bootstrap_pi
   remote_user: root
@@ -22,7 +27,6 @@
       debug:
         msg:
           - "     Host:{{ hostname_hostname }}"
-#         # - "log_track:{{ log_track }}"
           # - " Ethernet:{{ pyh_ipv4_ethernet_addr }}"
           - "   Access:{{ ansible_host }}"
           # - "     WiFi:{{ pyh_ipv4_wifi_addr }}"

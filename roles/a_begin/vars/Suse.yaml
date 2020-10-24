@@ -1,0 +1,15 @@
+# Name: roles/a_begin/vars/Suse.yaml
+# Updated:
+#
+---
+
+begin_basic_package_list:
+   - git
+   - openssh-server
+   - python3-pip
+   - python3-dev
+   - python3-setuptools
+   - python3-venv
+   - tree
+
+### END DBK

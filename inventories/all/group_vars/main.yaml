@@ -2,7 +2,4 @@
 # Updated: 2020-10-04
 ---
 
-log_track: inventories/all/group_vars/main.yaml
-
-
 ### END DBK

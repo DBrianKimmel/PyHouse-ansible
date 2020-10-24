@@ -3,8 +3,6 @@
 #
 ---
 
-log_track: inventories/all/group_vars/cannontrail/network.yaml
-
 network_prefix: '172.17.'
 network_ipv4_gateway: 172.17.0.1
 

@@ -1,0 +1,23 @@
+# Name:    playbooks/one-pi/one-pi.yaml
+# Updated: 2020-10-19
+
+# This playbook will work with one pi for testing
+
+# Select a single host.
+#
+---
+
+- name: Play-01 - All-Pis - Starting play;;;
+  hosts: pi-03-ct
+  remote_user: root
+  become: true
+
+# Uncomment what you want to test, all others commented out.
+  roles:
+    - a_begin
+    #- dispatch_function_install
+    # - install_wireguard
+    # - install_zero_tier
+    - finalize
+
+### END DBK

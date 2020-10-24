@@ -1,0 +1,10 @@
+# Name:   roles/install_raspi_clone/tasks/main.yaml
+# Updated: 2020-10-24
+
+---
+
+- name: Task-01 - configured?
+  include_tasks: install_raspi_clone.yaml
+  when: raspi_clone_role_enabled | bool
+
+### END DBK

@@ -1,12 +1,10 @@
-# Name:    PyHouse-ansible/roles/install-basic-system/tasks/auto-reboot.yaml
-# Author:  D. Brian Kimmel
-# Created: 2016-07-01
-# Updated: 2020-10-07
+# Name:   roles/install-basic-system/tasks/auto-reboot.yaml
+# Updated: 2020-10-12
 #
 ---
 
 # Update roots crontab 
-- name: Task-01 - Update root crontab.
+- name: reboot-Task-01 - Update root crontab.
   cron:
     name: "Reboot"
     hour: "4"

@@ -1,8 +1,8 @@
 # Name:   inventories/group_vars/main.yaml
-# Updated: 2020-10-04
+# Updated: 2020-10-017
 ---
 
-log_track: inventories/group_vars/main.yaml
+ansible_python_interpreter: /usr/bin/python3
 
 pyh_extra_apt_packages: 
 

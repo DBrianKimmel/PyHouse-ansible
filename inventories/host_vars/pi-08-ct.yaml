@@ -1,0 +1,28 @@
+# Name:   inventories/host_vars/pi-08-ct.yaml
+# Updated: 2020-10-18
+
+---
+#
+# Change the following definitions as needed:
+
+ansible_host: 172.17.2.8
+basic_hostname: pi-08-ct
+wireguard_address: "10.12.14.108/24"
+
+host_functions:
+  - harden_linux
+  - finalize
+
+# ==============================
+# The following should probably be left as defined.
+
+admin_user_name: briank
+basic_domain: ""
+awireguard_endpoint: "{{ basic_hostname }}-wg"
+nsible_python_interpreter: /usr/bin/python3
+
+hostname_hostname: "{{ basic_hostname }}"
+hostname_domain: "{{ basic_domain | default('')}}"
+ansible_ssh_user: "{{ admin_user_name }}"
+
+### END DBK

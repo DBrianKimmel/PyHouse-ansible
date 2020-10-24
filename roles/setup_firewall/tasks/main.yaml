@@ -4,15 +4,16 @@
 # Updated: 2020-10-08
 ---
 
-- name: Task-01 - Ensure iptables is present.
+- name: Task-01(Firewall) - Ensure iptables is present.
+  ignore_errors: true # If package not present
   package: name=iptables state=present
 
-- name: Task-02 - Flush iptables the first time playbook runs.
+- name: Task-02(Firewall) - Flush iptables the first time playbook runs.
   command: >
     iptables -F
     creates=/etc/firewall.bash
 
-- name: Task-03 - Copy firewall script into place.
+- name: Task-03(Firewall) - Copy firewall script into place.
   template:
     src: firewall.bash.j2
     dest: /etc/firewall.bash
@@ -21,7 +22,7 @@
     mode: 0744
   notify: restart firewall
 
-- name: Task-04 - Copy firewall init script into place.
+- name: Task-04(Firewall) - Copy firewall init script into place.
   template:
     src: firewall.init.j2
     dest: /etc/init.d/firewall
@@ -30,7 +31,7 @@
     mode: 0755
   when: "ansible_service_mgr != 'systemd'"
 
-- name: Task-05 - Copy firewall systemd unit file into place (for systemd systems).
+- name: Task-05(Firewall) - Copy firewall systemd unit file into place (for systemd systems).
   template:
     src: firewall.unit.j2
     dest: /etc/systemd/system/firewall.service
@@ -39,7 +40,7 @@
     mode: 0644
   when: "ansible_service_mgr == 'systemd'"
 
-- name: Task-06 - Configure the firewall service.
+- name: Task-06(Firewall) - Configure the firewall service.
   service:
     name: firewall
     state: "{{ firewall_state }}"
@@ -49,4 +50,3 @@
   when: firewall_disable_firewalld or firewall_disable_ufw
 
 ### END DBK
-  

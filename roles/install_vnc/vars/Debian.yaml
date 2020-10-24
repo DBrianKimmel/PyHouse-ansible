@@ -1,0 +1,9 @@
+# Name:   roles/install_vnc/vars/Debian.yaml
+# Updated: 2020-10-20
+#
+---
+
+vnc_package_list:
+   - tightvncserver
+
+### END DBK

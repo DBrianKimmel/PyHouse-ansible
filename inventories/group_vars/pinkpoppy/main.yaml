@@ -14,8 +14,6 @@
 # Keep the ~/.vault-pass.text file a secret.
 
 ---
-log_track: inventories/group_vars/pinkpoppy/main.yaml
-
 
 pyh_house_name:                 vault_pyh_house_name
 pyh_house_latitude:             vault_pyh_house_latitude

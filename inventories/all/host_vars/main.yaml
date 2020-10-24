@@ -2,8 +2,6 @@
 # Updated: 2020-10-04
 ---
 
-log_track: inventories/all/host_vars/main.yaml
-
 ansible_python_interpreter: /usr/bin/python3
 
 ### END DBK

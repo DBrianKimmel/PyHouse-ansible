@@ -20,7 +20,7 @@ iface lo inet loopback
 auto {{ if_name }}
 iface {{ if_name }} inet static
 {% if if_name.startswith('e') %}
-    ipaddress {{pyh_ipv4_ethernet_addr}}
+    ipaddress {{ XXXpyh_ipv4_ethernet_addr }}
     ip6address {{pyh_ipv6_network_prefix}}{{pyh_ipv6_eth_suffix}}{{pyh_ipv6_network_prefix_len}}
     netmask {{pyh_ipv4_router_netmask}}
     gateway {{pyh_ipv4_router_addr}}

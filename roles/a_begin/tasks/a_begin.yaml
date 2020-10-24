@@ -1,0 +1,52 @@
+# Name:   roles/a_begin/tasks/main.yaml
+# Updated: 2020-10-18
+#
+# Set up all computers the same with basic functionality for me.
+#
+#---
+
+- name: Task-01(Main) - Info about each computer in this play...
+  debug:
+    msg:
+      - " Role:   a_begin/tasks/main.yaml"
+      - "   Admin_User: {{ admin_user_name | default('Missing Admin_user_name') }}"
+      - "         Host: {{ ansible_facts.hostname | default('Missing Host Name') }}"
+      - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"
+      - " MajorVersion: {{ ansible_facts.distribution_major_version }}"
+      - "    Os Family: {{ ansible_os_family }}"
+      - "          Lsb: {{ ansible_lsb }}"
+
+# ansible_os_family:   Debian, RedHat, Suse, Darwin, 
+# ansible_lsb.id:   Raspbian, Ubuntu, Suse
+#
+#
+# Set up vars for the OS family
+#
+# Set up tasks for each distribution
+#
+# Run common tasks
+#
+#- name: Task-02 - run roles
+
+- name: Task-02(Main) - Update System task list;;;
+  include_tasks: update_system.yaml
+  when: begin_updating_enabled | bool
+
+- name: Task-03(Main) - VPNs
+  include_tasks: install_vpns.yaml
+  when: begin_install_vpns_enabled | bool
+
+- name: Task-04(Main) - Harden Linux
+  include_tasks: harden_linux.yaml
+  when: begin_harden_linux_enabled | bool
+
+- name: Task-05(Main) - Firewall
+  include_tasks: setup_firewall.yaml
+  when: begin_setup_firewall_enabled | bool
+
+- name: Task-06(Main) - VNCs
+  include_tasks: install_vnc.yaml
+  when: begin_install_vnc_enabled | bool
+
+### END DBK
+

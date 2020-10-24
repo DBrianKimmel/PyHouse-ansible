@@ -1,0 +1,26 @@
+# Name: roles/dispatch_function_install/tasks/dispatch.yaml
+# Updated: 2020-10-17
+#
+---
+
+- name: Task-01(Dispatch) - Install Pandora step is next
+  include_role:
+    name: install_pandora
+  when: selected == 'pandora'
+
+- name: Task-01(Dispatch) - Install PyHouse step is next
+  include_role:
+    name: install_pyhouse
+  when: selected == 'pyhouse'
+
+- name: Task-01(Dispatch) - Install Vnc step is next
+  include_role:
+    name: install_vnc
+  when: selected == 'vnc'
+
+- name: Task-01(Dispatch) - Install Wireguard step is next
+  include_role:
+    name: install_wireguard
+  when: selected == 'wireguard'
+
+### END DBK

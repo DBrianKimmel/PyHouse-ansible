@@ -15,7 +15,7 @@
     msg:
       - "User:  {{ admin_user_name }}"
       - "Dist:  {{ ansible_os_family }}"
-      - "Host:  {{ pyh_hostname }}"
+      - "Host:  {{ hostname_hostname }}"
       - "Role:  {{ pyh_roles }}"
       - "A-P:   {{ wifi_access_points }}"
   tags:

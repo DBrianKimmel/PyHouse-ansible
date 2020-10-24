@@ -1,31 +1,43 @@
 # Name: roles/install_wireguard/tasks/setup_debian_raspbian.yaml
 # Updated: 2020-10-10
 #
+# This set of tasks will:
+#   Add a repository for wireguard
+#   Ensure the latest kernel is being used
+#   Reboot if the kernel was updated
+#   Wait till reboot is complete
+#   Install kernel headers and wireguard
+#
 ---
 
-- name: Task-01(Raspbian) - Install GPG - required to add WireGuard key;;;
-  apt:
-    name: gnupg
-    state: present
+- name: Task-00(Raspbian) - Raspberry OS specific tasks
+  debug:
+    msg:
+    - "-----"
 
-- name: Task-02(Raspbian) Add Debian repository key;;;
-  apt_key:
-    keyserver: "keyserver.ubuntu.com"
-    id: "04EE7237B7D453EC"
-    state: present
-  when: ansible_lsb.id == "Raspbian"
-  tags:
-    - wg-install
+#- name: Task-01(Raspbian) - Install GPG - required to add WireGuard key;;;
+#  apt:
+#    name: gnupg
+#    state: present
 
-- name: Task-02(Raspbian) Add Debian Unstable repository for WireGuard;;;
-  apt_repository:
-    repo: "deb http://deb.debian.org/debian unstable main"
-    state: present
-    update_cache: yes
-  tags:
-    - wg-install
+#- name: Task-02(Raspbian) Add Debian repository key;;;
+#  apt_key:
+#    keyserver: "keyserver.ubuntu.com"
+#    id: "04EE7237B7D453EC"
+#    state: present
+#  when: ansible_lsb.id == "Raspbian"
+#  tags:
+#    - wg-install
 
-- name: Task-03 - (Raspbian) Install latest kernel;;;
+#- name: Task-03(Raspbian) Add Debian Unstable repository for WireGuard;;;
+#  apt_repository:
+#    repo: "deb http://deb.debian.org/debian unstable main"
+#    state: present
+#    update_cache: yes
+#  tags:
+#    - wg-install
+
+- name: Task-04(Raspbian) - Install latest kernel;;;
   apt:
     name:
     - "raspberrypi-kernel"
@@ -34,7 +46,7 @@
   tags:
     - wg-install
 
-- name: Task-04(Raspbian) Reboot after kernel update (Ansible >= 2.8);;;
+- name: Task-05(Raspbian) Reboot after kernel update (Ansible >= 2.8);;;
   reboot:
     search_paths: ['/lib/molly-guard', '/usr/sbin']
   when:
@@ -43,12 +55,12 @@
   tags:
     - wg-install
 
-- name: (Raspbian) Check if molly-guard is installed (Ansible < 2.8)
+- name: Task-06(Raspbian) - Check if molly-guard is installed (Ansible < 2.8)
   stat:
     path: /lib/molly-guard/
   register: wireguard__register_molly_guard
 
-- name: (Raspbian) Reboot after kernel update (Ansible < 2.8, no molly-guard)
+- name: Task-07(Raspbian) - Reboot after kernel update (Ansible < 2.8, no molly-guard)
   reboot:
   when:
     - ansible_version.full is version('2.8.0', '<')
@@ -57,7 +69,7 @@
   tags:
     - wg-install
 
-- name: (Raspbian) Reboot after kernel update (Ansible < 2.8, with molly-guard)
+- name: Task-08(Raspbian) - Reboot after kernel update (Ansible < 2.8, with molly-guard)
   command: /lib/molly-guard/shutdown -r now
   async: 1
   poll: 0
@@ -69,7 +81,7 @@
   tags:
     - wg-install
 
-- name: (Raspbian) Waiting for host to be available (Ansible < 2.8, with molly-guard)
+- name: Task-09(Raspbian) - Waiting for host to be available (Ansible < 2.8, with molly-guard)
   wait_for_connection:
   when:
     - ansible_version.full is version('2.8.0', '<')
@@ -78,7 +90,7 @@
   tags:
     - wg-install
 
-- name: (Raspbian) Install latest kernel headers to compile Wireguard with DKMS
+- name: Task-10(Raspbian) - Install latest kernel headers to compile Wireguard with DKMS
   apt:
     name:
     - "raspberrypi-kernel-headers"
@@ -86,7 +98,7 @@
   tags:
     - wg-install
 
-- name: (Raspbian) Install WireGuard packages
+- name: Task-11(Raspbian) - Install WireGuard packages
   apt:
     name:
       - "wireguard-dkms"

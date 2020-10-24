@@ -1,0 +1,9 @@
+# Name:   roles/install_raspi_clone/defaults/main.yaml
+# Updated: 2020-10-24
+
+---
+# defaults file for install_raspi_clone
+
+raspi_clone_role_enabled: true
+
+### END DBK

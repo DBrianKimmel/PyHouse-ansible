@@ -1,35 +1,28 @@
-# Name:    PyHouse-ansible/inventories/production/host_vars/pi-04-ct.yaml
-# Author:  D. Brian Kimmel
-# Created: 2018-06-13
-# Updated: 2018-06-13
-
-
-
-
-
-
-
-
-
-
+# Name:    inventories/host_vars/pi-04-ct.yaml
+# Updated: 2020-10-18
+#
 ---
+#
+# Change the following definitions as needed:
 
-ansible_host:               192.168.9.14
+ansible_host: 172.17.2.4
+basic_hostname: pi-04-ct
+wireguard_address: "10.12.14.204/24"
 
-pyh_hostname:               pi-04-ct
-pyh_ipv4_ethernet_addr:     192.168.10.14
-pyh_ipv4_wifi_addr:         192.168.9.14
-pyh_ipv6_ethernet_addr:     :10:14
-pyh_ipv6_wifi_addr:         :9:14
-pyh_roles:                  node-red,pyhouse
+host_functions:
+  - harden_linux
+  - install_nodered
+  - finalize
 
-pyh_extra_apt_packages:
-    - sqlite3
+# ==============================
+# The following should probably be left as defined.
 
-pyh_extra_nodered_nodes:
-    - node-red-dashboard
-    - node-red-node-sqlite
-    - node-red-contrib-timerswitch
-
+admin_user_name: briank
+basic_domain: ""
+wireguard_endpoint: "{{ basic_hostname }}-wg"
+hostname_hostname: "{{ basic_hostname }}"
+hostname_domain: "{{ basic_domain | default('')}}"
+ansible_ssh_user: "{{ admin_user_name }}"
+host_key_checking: false
 
 ### END DBK

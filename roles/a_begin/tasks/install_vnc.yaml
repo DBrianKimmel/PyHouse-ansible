@@ -1,0 +1,16 @@
+# Name:   roles/a_begin/tasks/install_vnc.yaml
+# Updated: 2020-10-18
+#
+---
+
+- name: Task-01(vnc) - Info
+  debug:
+    msg:
+      - " Role a_begin - Install_Vnc"
+
+- name: Task-02(Vnc) - 
+  include_role:
+    name: install_vnc
+  when: begin_install_vnc_enabled | bool
+
+### END DBK

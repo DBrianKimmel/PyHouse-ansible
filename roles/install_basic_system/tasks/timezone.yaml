@@ -1,6 +1,4 @@
-# Name:    PyHouse-ansible/roles/install_basic_system/tasks/timezone.yaml
-# Author:  D. Brian Kimmel
-# Created: 2018-06-29
+# Name:   roles/install_basic_system/tasks/timezone.yaml
 # Updated: 2020-10-09
 ---
 

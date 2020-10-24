@@ -31,7 +31,7 @@ all:
             router01-pp:
          vars:
             gateway_router: 172.16.0.5
-      cannon_trail:
+      cannontrail:
          hosts:
             pi-01-ct:
             pi-02-ct:
@@ -41,9 +41,9 @@ all:
             pi-06-ct:
             pi-07-ct:
             pi-08-ct:
-            pi-09-ct:
-            pi-10-ct:
             pi-11-ct:
+            # laptop-dell-ct:
+            laptop-hp-ct:
          vars:
             gateway_router: 172.17.0.1
       floating:
@@ -86,6 +86,10 @@ all:
             alki-pp:
             nuc-01-pp:
             router-01-pp:
+      wireguardhosts:
+         hosts:
+            pi-02-ct:
+            pi-03-ct:
    vars:
       domain-name: pyhouse.org
       global123: 123

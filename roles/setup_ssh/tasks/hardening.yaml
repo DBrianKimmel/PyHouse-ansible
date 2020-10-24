@@ -1,0 +1,127 @@
+# Name:   roles/setup_ssh/tasks/hardening.yaml
+# Updated: 2020-10-17
+#
+---
+- name: Task-01(Hardening) - set OS dependent variables
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+
+- name: Task-02(Hardening) - Install any needed packages
+  include_tasks: install_ssh.yaml
+  when: ssh_hardening_enabled | bool
+
+
+- name: Task-03(Hardening) - get openssh-version
+  command: ssh -V
+  register: sshd_version_raw
+  changed_when: false
+  check_mode: false
+
+- name: Task-04(Hardening) - parse openssh-version
+  set_fact:
+    sshd_version: "{{ sshd_version_raw.stderr | regex_replace('.*_([0-9]*.[0-9]).*', '\\1') }}"
+
+- name: Task-05(Hardening) - set default for ssh_host_key_files if not supplied
+  include_tasks: crypto_hostkeys.yaml
+  when: not ssh_host_key_files
+
+#- name: Task-05(Hardening) - set default for ssh_macs if not supplied
+#  include_tasks: crypto_macs.yaml
+#  when: not ssh_macs
+
+- name: Task-06(Hardening) - set default for ssh_ciphers if not supplied
+  include_tasks: crypto_ciphers.yaml
+  when: not ssh_ciphers
+
+- name: Task-07(Hardening) - set default for ssh_kex if not supplied
+  include_tasks: crypto_kex.yaml
+  when: not ssh_kex
+
+- name: Task-08(Hardening) - create revoked_keys and set permissions to root/600
+  template:
+    src: 'revoked_keys.j2'
+    dest: '/etc/ssh/revoked_keys'
+    mode: '0600'
+    owner: '{{ ssh_owner }}'
+    group: '{{ ssh_group }}'
+  notify: restart sshd
+  when: ssh_server_hardening | bool
+
+- name: Task-09(Hardening) - create sshd_config and set permissions to root/600
+  template:
+    src: 'opensshd.conf.j2'
+    dest: '/etc/ssh/sshd_config'
+    mode: '0600'
+    owner: '{{ ssh_owner }}'
+    group: '{{ ssh_group }}'
+    validate: '{{ sshd_path }} -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %s'
+  notify: restart sshd
+  when: ssh_server_hardening | bool
+
+- name: Task-10(Hardening) - disable dynamic MOTD
+  pamd:
+    name: sshd
+    type: session
+    control: optional
+    module_path: pam_motd.so
+    state: absent
+    backup: true
+  when:
+    - ssh_server_hardening | bool
+    - ssh_pam_support | bool
+    - not (ssh_print_pam_motd | bool)
+
+- name: Task-11(Hardening) - create ssh_config and set permissions to root/644
+  template:
+    src: 'openssh.conf.j2'
+    dest: '/etc/ssh/ssh_config'
+    mode: '0644'
+    owner: '{{ ssh_owner }}'
+    group: '{{ ssh_group }}'
+  when: ssh_client_hardening | bool
+
+- name: Task-12(Hardening) - check if {{ sshd_moduli_file }} contains weak DH parameters
+  shell: awk '$5 < {{ sshd_moduli_minimum }}' {{ sshd_moduli_file }}
+  register: sshd_register_moduli
+  changed_when: false
+  check_mode: false
+  when: ssh_server_hardening | bool
+
+- name: Task-13(Hardening) - remove all small primes
+  shell: awk '$5 >= {{ sshd_moduli_minimum }}' {{ sshd_moduli_file }} > {{ sshd_moduli_file }}.new ;
+         [ -r {{ sshd_moduli_file }}.new -a -s {{ sshd_moduli_file }}.new ] && mv {{ sshd_moduli_file }}.new {{ sshd_moduli_file }} || true
+  notify: restart sshd
+  when:
+    - ssh_server_hardening | bool
+    - sshd_register_moduli.stdout
+
+- name: Task-14(Hardening) - include tasks to setup ca keys and principals
+  include_tasks: ca_keys_and_principals.yaml
+  when: ssh_trusted_user_ca_keys_file | length > 0
+
+- name: Task-15(Hardening) - include selinux specific tasks
+  include_tasks: selinux.yaml
+  when: ansible_facts.selinux and ansible_facts.selinux.status == "enabled"
+
+- name: Task-16(Hardening) - gather package facts
+  package_facts:
+  check_mode: false
+  when:
+    - sshd_disable_crypto_policy | bool
+
+- name: Task-17(Hardening) - disable SSH server CRYPTO_POLICY
+  copy:
+    src: sshd
+    dest: /etc/sysconfig/sshd
+    owner: 'root'
+    group: 'root'
+    mode: '0640'
+  when:
+    - sshd_disable_crypto_policy | bool
+    - ('crypto-policies' in ansible_facts.packages)
+
+### END DBK

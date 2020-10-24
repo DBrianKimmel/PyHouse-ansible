@@ -34,8 +34,8 @@ cd ${ANS_DIR}
 
 # Debugging, verfy the above work.
 echo "Start Dir: ${CUR_DIR}"
-echo "Play Dir: ${ANS_DIR}"
-echo "Work Dir: ${WORK_DIR}"
+echo " Play Dir: ${ANS_DIR}"
+echo " Work Dir: ${WORK_DIR}"
 
 PASSWD="--vault-password-file  ${HOME}/.vault-pass.txt "
 CMD="ansible-playbook ${INVENTORY} ${PASSWD} ${DEBUG} ${PLAYBOOK}"

@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install_basic_system/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-27
-# Updated: 2020-10-07
+# Updated: 2020-10-12
 #
 # This role will do the basics on each computer.
 #
@@ -10,28 +10,37 @@
 
 ---
 
-- name: Task-00 - main info for debugging the role.
+- name: Task-01 - Fail if Ansible is ancient
+  fail:
+    msg: "We need Ansible >= 2.9. Please update your installed ansible"
+  when: ansible_version.major < 2 or ( ansible_version.major >= 2 and ansible_version.minor < 9 )
+  tags:
+    - always
+
+- name: Task-02 - main info for debugging the role.
   debug:
     msg:
-      - "log_track: {{ log_track | default('test_default_token') }}"
       - "      Lsb: {{ ansible_lsb | default('test_default_token') }}"
       - "     User: {{ admin_user_name | default('test_default_token') }}"
       - "     Dist: {{ ansible_os_family | default('test_default_token') }}"
-      - "     Host: {{ pyh_hostname | default('test_default_token') }}"
+      - "     Host: {{ hostname_hostname | default('test_default_token') }}"
       - "     Role: {{ pyh_roles | default('test_default_token') }}"
       - "  Gateway: {{ gateway_router | default('test_default_totken') }}"
       - "Host Role: {{ host_roles | default('test_default_totken') }}"
 
-- name: Main Task-01 - Update and upgrade apt packages
+- name: Task-02 - setup Host
+  include_tasks: setup_hostname.yaml
+
+- name: Task-03 - Update and upgrade apt packages
   apt:
     upgrade: 'True'
     update_cache: 'True'
 
-# sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
-- name: Main Task-02 - Install extra apt packages.
+## sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
+- name: Main Task-04 - Install needed apt packages.
   apt:
-    name: "{{ pyh_extra_apt_packages | default(test_default_token) }}"
-    state: present
+     name: "{{ basic_apt_package_list }}"
+     state: present
 
 - name: Main Task-03 - Set up autoreboot.
   include_tasks: auto-reboot.yaml
@@ -45,11 +54,11 @@
 - name: Main Task-06 - Set up the weekly os software update
   include_tasks: update-os.yaml
 
-- name: Main Task-07 - Set up Backup with rpi-clone
-  include_tasks: backup_system.yaml
+#- name: Main Task-07 - Set up Backup with rpi-clone
+#  include_tasks: backup_system.yaml
 
-- name: Main Task-08 - Setup basic firewall
-  include_role:
-    name: setup_firewall
+#- name: Main Task-08 - Setup basic firewall
+#  include_role:
+#    name: setup_firewall
 
 ### END DBK

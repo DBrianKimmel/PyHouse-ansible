@@ -3,7 +3,6 @@
 #
 ---
 
-log_track: roles/install_basic_system/default/main.yaml
 default_timezone: "US/Eastern"
 
 test_default_token: 'Test Default Token'
@@ -17,6 +16,16 @@ basic_timezone: US/Eastern
 basic_backup_enabled: yes
 basic_dyndns_enabled: yes
 basic_firewall_enabled: yes
+
+# apt packages used on all raspberry pi computers
+basic_apt_package_list:
+   - git
+   - python3-pip
+   - python3-dev
+   - python3-setuptools
+   - python3-venv
+   - tree
+  
 
 
 ### END DBK

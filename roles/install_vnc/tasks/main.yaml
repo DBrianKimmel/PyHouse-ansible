@@ -1,0 +1,12 @@
+# Name:   roles/install_vnc/tasks/main.yaml
+# Updated: 2020-10-20
+#
+---
+
+# Allow this role to be skipped.
+- name: Task-01 
+  include_tasks: install_vnc.yaml
+  when: vnc_tightvnc_enabled | bool
+
+### END DBK
+

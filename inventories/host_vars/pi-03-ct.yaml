@@ -1,20 +1,37 @@
-# Name:    PyHouse-ansible/inventories/host_vars/pi-03-ct.yaml
-# Author:  D. Brian Kimmel
-# Created: 2017-10-01
-# Updated: 2020-10-01
+# Name:    inventories/host_vars/pi-03-ct.yaml
+# Updated: 2020-10-14
 
 ---
-ansible_host: 172.17.2.3
-ansible_python_interpreter: /usr/bin/python3
-ansible_ssh_user: pi
-ansible_ssh_pass: raspberry
-host_key_checking: false
+#
+# Change the following definitions as needed:
 
-hostname_hostname: pi-03-ct
-pyh_ipv4_ethernet_addr: 172.17.2.3
-pyh_ipv4_wifi_addr: 172.17.3.3
-pyh_ipv6_ethernet_addr: ':2:3'
-pyh_ipv6_wifi_addr: ':3:3'
-pyh_roles: none
+ansible_host: 172.17.2.3
+basic_hostname: pi-03-ct
+wireguard_address: "10.12.14.203/24"
+
+host_functions:
+   - harden_linux
+   - install_homeautomation
+   - install_vnc
+   - install_vpn
+   - install_zerotier
+   - finalize
+
+firewall_forwarded_tcp_ports:
+   - { src: "1234", dest: "12345" }
+
+
+# ==============================
+# The following should probably be left as defined.
+
+admin_user_name: briank
+basic_domain: ""
+ansible_python_interpreter: /usr/bin/python3
+wireguard_endpoint: "{{ basic_hostname }}-wg"
+
+hostname_hostname: "{{ basic_hostname }}"
+hostname_domain: "{{ basic_domain | default('')}}"
+ansible_ssh_user: "{{ admin_user_name }}"
+
 
 ### END DBK

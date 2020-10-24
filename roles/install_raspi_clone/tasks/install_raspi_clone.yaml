@@ -1,0 +1,12 @@
+# Name:   roles/install_raspi_clone/tasks/install_raspi_clone.yaml
+# Updated: 2020-10-24
+
+---
+
+- name: Task-01 - configured?
+  debug:
+    msg:
+      - "Install Raspi Clone"
+
+- name: Task-02 - clone the git repository
+### END DBK

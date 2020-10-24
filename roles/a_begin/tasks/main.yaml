@@ -1,0 +1,10 @@
+# Name:   roles/a_begin/tasks/main.yaml
+# Updated: 2020-10-21
+#
+---
+
+# Allow this role to be skipped.
+- include_tasks: a_begin.yaml
+  when: begin_role_enabled | bool
+
+### END DBK

@@ -1,0 +1,24 @@
+# Name:   roles/install_vnc/tasks/install_vnc.yaml
+# Updated: 2020-10-20
+#
+---
+
+- name: Task-01(TightVnc) - set OS dependent variables
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+
+
+# Ignore errors if internet is down
+- name: Task-01(TightVnc) - install VNC server
+  ignore_errors: true # Ignore errors if internet is down
+  apt:
+    name: "{{ vnc_package_list }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+
+### END DBK

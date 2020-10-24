@@ -1,0 +1,12 @@
+# Name:   roles/finalize/tasks/main.yaml
+# Updated: 2020-10-12
+#
+---
+
+- name: Task99 - All done
+  debug:
+    msg:
+      - "All done"
+
+### END DBK
+

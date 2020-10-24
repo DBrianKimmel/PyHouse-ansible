@@ -1,5 +1,7 @@
 #jinja2: lstrip_blocks:"True",trim_blocks:"True"
 # {{ ansible_managed }}
+# Public Key: {{ wireguard__fact_public_key}}
+# Private Key: {{ wireguard__fact_private_key }}
 
 [Interface]
 # {{ inventory_hostname }}

@@ -1,0 +1,23 @@
+# Name:   roles/a_begin/defaults/main.yaml
+# Updated: 2020-10-18
+#
+---
+# defaults file for a_begin
+
+# To allow this role to be turned off.
+begin_role_enabled: true
+
+# Set to false to turn the role into a no-op. Useful when using the Ansible role dependency mechanism.
+begin_updating_enabled: true
+
+begin_harden_linux_enabled: true
+begin_install_vpns_enabled: true
+begin_install_vnc_enabled: true
+begin_setup_firewall_enabled: true
+
+begin_setup_ssh_enabled: true
+
+# packages used on all computers - by distribution, release type.
+begin_basic_package_list: []
+
+### END DBK

@@ -1,0 +1,8 @@
+# Name:   roles/install_vnc/vars/Ubuntu.yaml
+# Updated: 2020-10-24
+#
+---
+
+vnc_package_list: []
+
+### END DBK

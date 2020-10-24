@@ -33,7 +33,7 @@ nohook lookup-hostname
 
 interface {{ if_name }}
 {% if if_name.startswith('e') %}
-    static ip_address={{ pyh_ipv4_ethernet_addr }}/{{ pyh_ipv4_router_prefix_len | default('21') }}
+    static ip_address={{ XXXpyh_ipv4_ethernet_addr }}/{{ pyh_ipv4_router_prefix_len | default('21') }}
     static ip6_address={{ pyh_ipv6_network_prefix }}{{ pyh_ipv6_ethernet_addr }}{{ pyh_ipv6_network_prefix_len }}
 {% endif %}
 {% if if_name.startswith('w') %}

@@ -1,22 +1,28 @@
-# Name:    PyHouse-ansible/inventories/production/host_vars/pi-01-ct.yaml
-# Author:  D. Brian Kimmel
-# Created: 2017-09-29
-# Updated: 2018-04-07
+# Name:   inventories/host_vars/pi-01-ct.yaml
+# Updated: 2020-10-16
 
 ---
+#
+# Change the following definitions as needed:
 
 ansible_host: 172.17.2.1
+basic_hostname: pi-01-ct
+wireguard_address: "10.12.14.101/24"
 
-pyh_hostname: pi-01-ct
-pyh_ipv4_ethernet_addr: 172.17.2.1
-pyh_ipv4_wifi_addr: 172.17.3.1
-pyh_ipv6_ethernet_addr: :2:1
-pyh_ipv6_wifi_addr: :3:1
-pyh_roles: pyhouse
+host_functions:
+  - harden_linux
+  - finalize
 
-wireguard_address: "10.8.0.201/24"
+# ==============================
+# The following should probably be left as defined.
 
-pyh_extra_apt_packages:
-    - python3
+admin_user_name: briank
+basic_domain: ""
+awireguard_endpoint: "{{ basic_hostname }}-wg"
+nsible_python_interpreter: /usr/bin/python3
+
+hostname_hostname: "{{ basic_hostname }}"
+hostname_domain: "{{ basic_domain | default('')}}"
+ansible_ssh_user: "{{ admin_user_name }}"
 
 ### END DBK

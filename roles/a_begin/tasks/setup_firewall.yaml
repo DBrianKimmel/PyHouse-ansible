@@ -1,0 +1,17 @@
+# Name:   roles/a_begin/tasks/setup_firewall.yaml
+# Updated: 2020-10-20
+#
+---
+
+- name: Task-01(Firewall) - Info
+  debug:
+    msg:
+      - " Role a_begin - Setup_Firewall"
+      - "    Forwarded TCP: {{ firewall_forwarded_tcp_ports | default('No special forwarding') }}"
+
+#- name: Task-02(Firewall) - setup basic firewall on every computer
+#  include_role:
+#    name: setup_firewall
+#  when: begin_setup_firewall_enabled | bool
+
+### ED DBK

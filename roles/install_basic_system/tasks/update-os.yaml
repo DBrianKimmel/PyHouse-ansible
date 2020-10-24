@@ -1,6 +1,4 @@
 # Name:    PyHouse-ansible/roles/install_basic_system/tasks/update-os.yaml
-# Author:  D. Brian Kimmel
-# Created: 2018-07-18
 # Updated: 2020-10-07
 #
 # This task will update the crontab to run a software update weekly

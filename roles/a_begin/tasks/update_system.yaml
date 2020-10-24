@@ -1,0 +1,41 @@
+# Name:   roles/a_begin/tasks/update_system.yaml
+# Updated: 2020-10-18
+#
+# This task set will add the minimum software needed for all computers so we may maintain them.
+# It covers all the distributions that I use.
+#      Raspberry OS (formerly Raspbian) Buster Lite
+#      Open Suse Leap 15.2
+#      Kubuntu 20.04
+---
+
+- name: Task-01(System) - Info
+  debug:
+    msg:
+      - " Role a_begin - Update System"
+      - "  Distribution: {{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}"
+      - "     OS Family: {{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml"
+
+- name: Task-02(System) - set OS dependent variables.
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+
+# Ignore errors if internet is down
+- name: Task-03(System) - Update and upgrade apt packages.
+  ignore_errors: true # Ignore errors if internet is down
+  apt:
+    upgrade: 'True'
+    update_cache: 'True'
+    cache_valid_time: 3600
+
+## sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
+- name: Task-04(System) - Install needed apt packages.
+  ignore_errors: true # Ignore errors if internet is down
+  apt:
+     name: "{{ begin_basic_package_list }}"
+     state: present
+
+### END DBK

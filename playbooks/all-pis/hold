@@ -22,10 +22,9 @@
     - name:  All-Pis-PreTask-00 - Starting, Display some vars...
       debug:
         msg:
-          - "log_track:{{ log_track }}"
           - "     User: {{ admin_user_name }}"
           - "     Dist: {{ ansible_os_family }}"
-          - "     Host: {{ pyh_hostname }}"
+          - "     Host: {{ hostname_hostname | default() }}"
           - "     Role: {{ pyh_roles }}"
       tags:
         - always

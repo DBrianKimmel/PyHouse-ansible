@@ -1,0 +1,10 @@
+# Name:   roles/setup_ssh/tasks/main.yaml
+# Updated" 2020-10-22
+#
+---
+#
+# Allow this role to be skipped.
+- include_tasks: hardening.yaml
+  when: ssh_hardening_enabled | bool
+
+### END DBK

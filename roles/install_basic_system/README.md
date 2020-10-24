@@ -13,6 +13,7 @@ For instance, if the role uses the EC2 module, it may be a good idea to mention 
 
 ## Functions
 
+Hostname
 Auto Reboot
 Update OS
 Backup System

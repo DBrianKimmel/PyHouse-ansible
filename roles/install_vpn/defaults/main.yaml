@@ -1,9 +1,11 @@
 # Name:   role/install_vpn/defaults/main.yaml
+# Updated: 2020-10-13
 #
----
-vpn_enabled: true
 
-zerotier_enabled: true
+---
+vpn_enabled: no
+
+vpn_zerotier_enabled: no
 
 # present | absent | latest
 zerotier_state: present
@@ -28,6 +30,6 @@ zerotier_apt_state: present
 zerotier_member_register_short_hostname: "{{ zerotier_register_short_hostname | default(false) }}" # For backwards compatibility
 zerotier_authorize_member: true
 
-wireguard_enabled: true
+vpn_wireguard_enabled: no
 
 ### END DBK

@@ -1,0 +1,13 @@
+# Name"   Ubuntu.yaml
+# Updated: 2020-10-23
+#
+---
+
+begin_basic_package_list:
+   - arp-scan
+   - git
+   - gitk
+   - nmap
+   - tree
+
+### END DBL

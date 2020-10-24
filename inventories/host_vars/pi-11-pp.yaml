@@ -1,15 +1,13 @@
-# Name:    PyHouse-ansible/host_vars/pi-04-pp
+# Name:    PyHouse-ansible/host_vars/pi-11-pp
 # Author:  D. Brian Kimmel
 # Created: 2017-12-11
-# Updated: 2017-12-11
-
-# Model B+     512M ram   Jessie      armv6l
+# Updated: 20020-10-12
 
 ---
 
-ansible_host:               192.168.1.21
+ansible_host: 172.16.2.11
 
-pyh_hostname:               pi-11-pp
+hostname_hostname: pi-11-pp
 pyh_ipv4_ethernet_addr:     192.168.2.21
 pyh_ipv4_wifi_addr:         192.168.1.21
 pyh_ipv6_ethernet_addr:     :2:21

@@ -1,0 +1,8 @@
+# Name:   roles/setup_firewall/vars/main.yaml
+# Updated: 2020-10-22
+#
+---
+
+firewall_forwarded_tcp_ports: []
+
+### END DBK

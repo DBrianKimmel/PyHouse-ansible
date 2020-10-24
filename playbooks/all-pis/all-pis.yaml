@@ -1,7 +1,5 @@
-# Name:    PyHouse-ansible/playbooks/roles-dispatch.yaml
-# Author:  D. Brian Kimmel
-# Created: 2018-07-08
-# Updated: 2020-10-07
+# Name:    playbooks/all-pis.yaml
+# Updated: 2020-10-12
 
 # This playbook will first install the basic system that goes on every computer.
 # Then it will add the pyh_roles to specialize that computer.
@@ -10,26 +8,20 @@
 #
 ---
 
-- name: Play-01 - All-Pis - Starting
-  hosts: pi-03-ct
+- name: Play-01 - All-Pis - Starting play;;;
+  #hosts: pi-03-ct
+  hosts: cannontrail
   remote_user: root
   become: true
 
-  tasks:
-  - name:  All-Pis-PreTask-01 - Starting, Display some vars...;;;
-    debug:
-      msg:
-        - "-----"
-        - "log_track: {{ log_track | default('Missing from here') }}"
-        - "     User: {{ admin_user_name | default() }}"
-        - "     Dist: {{ ansible_os_family | default() }}"
-  #          - "     Host: {{ pyh_hostname }}"
-  #          - "     Role: {{ pyh_roles }}"
-  #      tags:
-  #        - always
-  #
   roles:
-    - install_wireguard
-#    - install_basic_system
+    - a_begin
+    #- dispatch_function_install
+    # - install_wireguard
+    # - install_zero_tier
+    - finalize
+
+#- name: Play-02 - All Pis
+#  hosts: pi-03-ct
 
 ### END DBK

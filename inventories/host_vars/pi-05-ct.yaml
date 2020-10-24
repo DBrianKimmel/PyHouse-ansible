@@ -1,21 +1,31 @@
-# Name:    PyHouse-ansible/inventories/production/host_vars/pi-05-ct.yaml
-# Author:  D. Brian Kimmel
-# Created: 2017-10-01
-# Updated: 2018-07-29
+# Name:    inventories/host_vars/pi-05-ct.yaml
+# Updated: 2020-10-18
 #
-# This pi is for development - do not use for anything production.
-#
-# Raspberry Pi Model: 2B v1.2; Embest, China    RAM: 1024
-
 ---
+#
+# Change the following definitions as needed:
 
-ansible_host:               192.168.9.15
+ansible_host: 172.17.2.5
+basic_hostname: pi-05-ct
+wireguard_address: "10.12.14.205/24"
 
-pyh_hostname:               pi-05-ct
-pyh_ipv4_ethernet_addr:     192.168.10.15
-pyh_ipv4_wifi_addr:         192.168.9.15
-pyh_ipv6_ethernet_addr:     :10:15
-pyh_ipv6_wifi_addr:         :9:15
-pyh_roles:                  pyhouse,octoprint
+host_functions:
+  - harden_linux
+  - install_homeautomation
+  - install_vnc
+  - wireguard
+  - zerotier
+  - finalize
+
+# ==============================
+# The following should probably be left as defined.
+
+admin_user_name: briank
+basic_domain: ""
+wireguard_endpoint: "{{ basic_hostname }}-wg"
+hostname_hostname: "{{ basic_hostname }}"
+hostname_domain: "{{ basic_domain | default('')}}"
+ansible_ssh_user: "{{ admin_user_name }}"
+host_key_checking: false
 
 ### END DBK
