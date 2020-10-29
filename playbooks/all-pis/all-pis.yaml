@@ -1,5 +1,5 @@
 # Name:    playbooks/all-pis.yaml
-# Updated: 2020-10-12
+# Updated: 2020-10-29
 
 # This playbook will first install the basic system that goes on every computer.
 # Then it will add the pyh_roles to specialize that computer.
