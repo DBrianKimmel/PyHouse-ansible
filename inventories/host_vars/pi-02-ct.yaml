@@ -9,13 +9,19 @@ ansible_host: 172.17.2.2
 basic_hostname: pi-02-ct
 wireguard_address: "10.12.14.202/24"
 
+usb_clone_drive_type: SSD-128GB
+usb_clone_drive_id: /dev/sda
+usb_storage_drive_type: Disk-4TB
+usb_storage_drive_id: /dev/sdb
+
 host_functions:
-  - harden_linux
-  - install_homeautomation
-  - install_vnc
-  - wireguard
-  - zerotier
-  - finalize
+  # - harden_linux
+  # - install_homeassistant
+  # - install_nginx
+  # - install_vnc
+  # - install_wireguard
+  # - install_zero_tier
+  - setup_house_proxy
 
 # ==============================
 # The following should probably be left as defined.

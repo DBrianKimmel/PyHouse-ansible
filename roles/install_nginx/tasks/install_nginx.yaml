@@ -1,0 +1,49 @@
+# Name:   roles/install_nginx/tasks/install_nginx.yaml
+# Updated: 2020-10-27
+#
+#---
+
+- name: Task-01(Install) - Info about each computer in this play...
+  debug:
+    msg:
+      - " Role:   tasks/install_nginx.yaml"
+      - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"
+      - " MajorVersion: {{ ansible_facts.distribution_major_version }}"
+      - "    Os Family: {{ ansible_os_family }}"
+      - "          Lsb: {{ ansible_lsb }}"
+
+# ansible_os_family:   Debian, RedHat, Suse, Darwin, 
+# ansible_lsb.id:   Raspbian, Ubuntu, Suse
+#
+- name: Task-02(Install) - set OS dependent variables.
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+
+# Ignore errors if internet is down
+- name: Task-03(Install) - Update and upgrade apt packages.
+  ignore_errors: true # Ignore errors if internet is down
+  apt:
+    upgrade: 'True'
+    update_cache: 'True'
+    cache_valid_time: 3600
+
+## sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
+- name: Task-04(Install) - Install needed apt packages.
+  ignore_errors: true # Ignore errors if internet is down
+  package:
+     name: "{{ nginx_package_list }}"
+     state: present
+
+- name: Task-05(Install) - Enable & start nginx
+  systemd:
+    name: nginx
+    daemon_reload: true
+    enabled: true
+    state: restarted
+  when: 'ansible_os_family == "Debian"'
+
+### END DBK

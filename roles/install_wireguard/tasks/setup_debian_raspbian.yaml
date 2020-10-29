@@ -91,7 +91,7 @@
     - wg-install
 
 - name: Task-10(Raspbian) - Install latest kernel headers to compile Wireguard with DKMS
-  apt:
+  package:
     name:
     - "raspberrypi-kernel-headers"
     state: latest
@@ -99,7 +99,7 @@
     - wg-install
 
 - name: Task-11(Raspbian) - Install WireGuard packages
-  apt:
+  package:
     name:
       - "wireguard-dkms"
       - "wireguard-tools"

@@ -1,0 +1,8 @@
+# Name:   roles/setup_house_proxy/vars/Debian.yaml
+# Updated: 2020-10-27
+#
+---
+
+proxy_dummy: 1
+
+### END DBK

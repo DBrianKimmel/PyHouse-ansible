@@ -282,4 +282,6 @@ sshd_strict_modes: true
 # see: https://access.redhat.com/solutions/4410591
 sshd_disable_crypto_policy: true
 
+ss_host_keys_dir: "/etc/ssh"
+
 ### END DBK

@@ -1,0 +1,11 @@
+# Name:   roles/install_nginx/defaults/main.yaml
+# Updated: 2020-10-27
+#
+---
+# To allow this role to be turned off.
+nginx_role_enabled: true
+
+# packages used on all computers - by distribution, release type.
+nginx_basic_package_list: []
+
+### END DBK

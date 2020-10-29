@@ -1,6 +1,8 @@
 # Name:   roles/dispatch_function_install/tasks/main.yaml
 # Updated: 2020-10-16
 #
+# host_functions are defined in every computers host_vars file.
+#      It defines what is to be installed on this computer.
 ---
 #
 - name: Task-01(Main) - Dispatch
@@ -9,12 +11,9 @@
       - "---"
       - "   Host Functions: {{ host_functions }}"
 
-#- name: Task-02(Main) - Install a basic system
-#  include_role:
-#    name: install_basic_system
-
-- name: Task-03(Main) - some step is next
-  ansible.builtin.command: echo {{ item }}
+- name: Task-02(Main) - do the next step in host_functions (defined in the given host_vars yaml file).
+  include_role:
+    name: "{{ item }}"
   loop: "{{ host_functions }}"
 
 

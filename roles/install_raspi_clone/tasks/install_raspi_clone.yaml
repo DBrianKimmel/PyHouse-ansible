@@ -9,4 +9,19 @@
       - "Install Raspi Clone"
 
 - name: Task-02 - clone the git repository
+  become: false
+  git:
+    repo: https://github.com/billw2/rpi-clone.git
+    dest: "home/{{ admin_user }}/rpi-clone"
+
+- name: Task-03 - copy to /usr/local/bin
+  cp:
+    src: "home/{{ admin_user }}/rpi-clone/{{ item }}"
+    dest: /usr/local/sbin
+    with_items:
+      - rpi-clone
+      - rpi-clone-setup
+
+
+
 ### END DBK

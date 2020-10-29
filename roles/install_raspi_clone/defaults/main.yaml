@@ -4,6 +4,7 @@
 ---
 # defaults file for install_raspi_clone
 
-raspi_clone_role_enabled: true
+clone_role_enabled: true
+clone_role_target_device: /dev/sda
 
 ### END DBK

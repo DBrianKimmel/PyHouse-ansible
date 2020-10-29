@@ -8,7 +8,7 @@
 # The first play is to install to the localhost
 - name: Play Local-Install-Tools - On localhost, install the commands to use.
 
-    - name: Task-01 - Message
+  - name: Task-01 - Message
       debug:
         msg: "Play is on the local ansible machine."
       tags:

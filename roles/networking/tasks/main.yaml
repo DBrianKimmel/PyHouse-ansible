@@ -38,7 +38,7 @@
 
 - name: NetworkingMain Task-02-Pi - Add ntpdate to raspbian
   ignore_errors: true
-  apt:
+  package:
     name: ntpdate
     state: present
   when: ansible_lsb.id == 'Raspbian'

@@ -1,0 +1,10 @@
+# Name:   roles/install_nginx/tasks/main.yaml
+# Updated: 2020-10-27
+#
+---
+
+# Allow this role to be skipped.
+- include_tasks: install_nginx.yaml
+  when: nginx_role_enabled | bool
+
+### END DBK

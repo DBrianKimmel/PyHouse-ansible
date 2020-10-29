@@ -1,0 +1,11 @@
+# Name: roles/setup_house_proxy/handlers/main.yaml
+# Updated: 2020-10-27
+#
+---
+
+- name: restart proxy
+  service:
+    name: nginx
+    state: restarted
+
+### END DBK

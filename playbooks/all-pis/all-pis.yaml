@@ -9,19 +9,17 @@
 ---
 
 - name: Play-01 - All-Pis - Starting play;;;
-  #hosts: pi-03-ct
-  hosts: cannontrail
+  hosts: pi-05-pp
+  # hosts: pinkpoppy
   remote_user: root
   become: true
 
   roles:
-    - a_begin
-    #- dispatch_function_install
-    # - install_wireguard
-    # - install_zero_tier
+    # - a_begin
+    - dispatch_function_install
     - finalize
 
-#- name: Play-02 - All Pis
+#- name: Play-02 - Another play if we need it.
 #  hosts: pi-03-ct
 
 ### END DBK

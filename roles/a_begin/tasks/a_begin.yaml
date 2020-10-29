@@ -1,4 +1,4 @@
-# Name:   roles/a_begin/tasks/main.yaml
+# Name:   roles/a_begin/tasks/a_begin.yaml
 # Updated: 2020-10-18
 #
 # Set up all computers the same with basic functionality for me.
@@ -8,7 +8,7 @@
 - name: Task-01(Main) - Info about each computer in this play...
   debug:
     msg:
-      - " Role:   a_begin/tasks/main.yaml"
+      - " Role:   a_begin/tasks/a_begin.yaml"
       - "   Admin_User: {{ admin_user_name | default('Missing Admin_user_name') }}"
       - "         Host: {{ ansible_facts.hostname | default('Missing Host Name') }}"
       - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"

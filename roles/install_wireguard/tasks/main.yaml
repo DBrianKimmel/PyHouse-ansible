@@ -32,6 +32,7 @@
 # Wireguard package is now installed - continue with setup:
 
 - name: Task-03(Main) - Enable WireGuard kernel module;;;
+  ignore_errors: true
   modprobe:
     name: wireguard
     state: present

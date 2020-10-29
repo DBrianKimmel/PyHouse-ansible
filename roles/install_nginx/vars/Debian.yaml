@@ -1,0 +1,9 @@
+# Name:   roles/install_nginx/vars/Debian.yaml
+# Updated: 2020-10-27
+#
+---
+
+nginx_package_list:
+  - nginx
+#
+### END DBK

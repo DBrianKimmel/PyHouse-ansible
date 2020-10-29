@@ -1,0 +1,58 @@
+# Name:   roles/setup_house_proxy/tasks/setup_house_proxy.yaml
+# Updated: 2020-10-27
+#
+#---
+
+- name: Task-01(Proxy) - Info about each computer in this play...
+  debug:
+    msg:
+      - " Role:   tasks/setup_house_proxy.yaml"
+      - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"
+      - " MajorVersion: {{ ansible_facts.distribution_major_version }}"
+      - "    Os Family: {{ ansible_os_family }}"
+      - "          Lsb: {{ ansible_lsb }}"
+
+# ansible_os_family:   Debian, RedHat, Suse, Darwin, 
+# ansible_lsb.id:   Raspbian, Ubuntu, Suse
+#
+- name: Task-02(Proxy) - set OS dependent variables.
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+
+- name: Task-03(Proxy) - Create css configuration directory;;;
+  file:
+    dest: "{{ house_proxy_html_dir }}/css"
+    state: directory
+    mode: 0755
+  tags:
+    - proxy-config
+
+- name: Task-04(Proxy) - Load Files;;;
+  template:
+    src: index.html.j2
+    dest: "{{ house_proxy_html_dir }}/index.html"
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - proxy-config
+  notify:
+    - restart proxy
+
+- name: Task-05(Proxy) - Load Files;;;
+  template:
+    src: style.css.j2
+    dest: "{{ house_proxy_html_dir }}/css/style.css"
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - proxy-config
+  notify:
+    - restart proxy
+
+### END DBK

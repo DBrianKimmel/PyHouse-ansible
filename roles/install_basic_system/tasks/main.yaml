@@ -37,8 +37,8 @@
     update_cache: 'True'
 
 ## sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
-- name: Main Task-04 - Install needed apt packages.
-  apt:
+- name: Main Task-04 - Install needed packages.
+  package:
      name: "{{ basic_apt_package_list }}"
      state: present
 

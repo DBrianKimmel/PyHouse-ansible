@@ -5,6 +5,6 @@
 
 - name: Task-01 - configured?
   include_tasks: install_raspi_clone.yaml
-  when: raspi_clone_role_enabled | bool
+  when: clone_role_enabled | bool
 
 ### END DBK

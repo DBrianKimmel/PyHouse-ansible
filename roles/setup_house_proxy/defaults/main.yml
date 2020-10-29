@@ -1,2 +1,14 @@
+# Name:   roles/setup_house_proxy/defaults/main.yaml
+# Updated: 2020-10-27
+#
 ---
-# defaults file for setup_house_proxy
+# To allow this role to be turned off.
+house_proxy_role_enabled: true
+
+house_proxy_html_dir: /var/www/html/
+
+house_proxy_houses:
+   - Cannon Trail
+   - Pink Poppy
+
+### END DBK

@@ -1,0 +1,10 @@
+# Name:   roles/setup_house_proxy/tasks/main.yaml
+# Updated: 2020-10-27
+#
+---
+
+# Allow this role to be skipped.
+- include_tasks: setup_house_proxy.yaml
+  when: house_proxy_role_enabled | bool
+
+### END DBK

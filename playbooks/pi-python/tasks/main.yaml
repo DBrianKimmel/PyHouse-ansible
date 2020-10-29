@@ -16,9 +16,10 @@
     version: 3.6.8
     threads: 4
   tasks:
-    - name: "python{{version}} runtime&build dependencies"
+    - name: "python{{ version }} runtime&build dependencies"
       become: yes
-      apt: name={{item}}
+      apt:
+        name: {{ item }}
       with_items:
         - build-essential
         - tk-dev

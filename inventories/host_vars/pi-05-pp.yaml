@@ -1,5 +1,5 @@
-# Name:    PyHouse-ansible/inventories/production/host_vars/pi-05-pp.yaml
-# Updated: 2020-10-10
+# Name:    inventories/host_vars/pi-05-pp.yaml
+# Updated: 2020-10-28
 
 ---
 #
@@ -7,37 +7,27 @@
 
 ansible_host: 172.16.2.5
 basic_hostname: pi-05-pp
-basic_domain: ""
+wireguard_address: "10.12.14.105/24"
 
-pyh_ipv4_ethernet_addr: "{{ ansible_host }}"
-pyh_ipv4_wifi_addr: 172.16.3.5
-pyh_ipv6_ethernet_addr: :2:5
-pyh_ipv6_wifi_addr: :3:5
-
-wireguard_address: "10.12.14.202/24"
-wireguard_endpoint: "{{ basic_hostname }}-wg"
+#usb_clone_drive_type: SSD-128GB
+#usb_clone_drive_id: /dev/sda
+#usb_storage_drive_type: Disk-4TB
+#usb_storage_drive_id: /dev/sdb
 
 host_functions:
-  - install_basic_system
-  - harden_linux
-  - install_vpn
-  - install_zerotier
-  - finalize
+  #- harden_linux
+  - setup_house_proxy
+  #- finalize
 
 vpn_enabled: yes
 vpn_zerotier_enabled: yes
 vpn_wireguard_enabled: yes
 
-# ==============================
-# The following should probably be left as defined.
-#
-wireguard_address: "10.12.14.105/24"
-wireguard_endpoint: "{{ basic_hostname }}-wg"
-
 admin_user_name: briank
+basic_domain: ""
+wireguard_endpoint: "{{ basic_hostname }}-wg"
 hostname_hostname: "{{ basic_hostname }}"
 hostname_domain: "{{ basic_domain | default('')}}"
-ansible_python_interpreter: /usr/bin/python3
 ansible_ssh_user: "{{ admin_user_name }}"
 host_key_checking: false
 
