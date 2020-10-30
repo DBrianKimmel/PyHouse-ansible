@@ -1,0 +1,11 @@
+# Name:   roles/install_mqtt/defaults/main.yaml
+# Updated: 2020-10-30
+#
+---
+# To allow this role to be turned off.
+mqtt_role_enabled: true
+
+# packages used on all computers - by distribution, release type.
+mqtt_basic_package_list: []
+
+### END DBK

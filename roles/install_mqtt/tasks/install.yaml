@@ -1,17 +1,32 @@
-# Name:    PyHouse-ansible/roles/install-mqtt/tasks/main.yaml
-# Author:  D. Brian Kimmel
-# Created: 2017-10-04
-# Updated: 2019-08-07
-
-# Install MQTT broker on a computer
+# Name:    roles/install_mqtt/tasks/install.yaml
+# Updated: 2020-10-30
 
 ---
 
-- name: Task-01 - Apt install mqtt broker
-  apt:
-    name: mosquitto
-    update_cache: true
-    cache_valid_time: 3600
+- name: Task-01(Install) - Info about each computer in this play...
+  debug:
+    msg:
+      - " Role:   tasks/install.yaml"
+      - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"
+      - " MajorVersion: {{ ansible_facts.distribution_major_version }}"
+      - "    Os Family: {{ ansible_os_family }}"
+      - "          Lsb: {{ ansible_lsb }}"
+
+# ansible_os_family:   Debian, RedHat, Suse, Darwin, 
+# ansible_lsb.id:   Raspbian, Ubuntu, Suse
+#
+- name: Task-02(Install) - set OS dependent variables.
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+
+- name: Task-03(Install) - Install mqtt broker
+  package:
+    name: "{{ mqtt_basic_package_list }}"
+    state: present
 
 - name: Task-02 - install pyhouse.conf config file
   copy:
