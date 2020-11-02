@@ -11,4 +11,16 @@ house_proxy_houses:
    - Cannon Trail
    - Pink Poppy
 
+house_proxy_services:
+   - HomeAssistant
+   - Octoprint
+   - Sonoff
+   - Node-Red
+   - Pi-Hole
+   - Pandora
+   - Mopidy
+   - PyHouse
+   - Mqtt
+   - Monitor
+
 ### END DBK

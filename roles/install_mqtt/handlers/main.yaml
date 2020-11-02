@@ -1,0 +1,14 @@
+# Name:   roles/install_mqtt/handlers/main.yaml
+# Updated: 2020-10-30
+#
+---
+
+- name: restart mqtt
+  service:
+      name: '{{ mqtt_service_name }}'
+      state: restarted
+  when: mqtt_broker_enabled | bool
+  become: true
+
+
+### END DBK

@@ -5,7 +5,7 @@
 #
 # Change the following definitions as needed:
 
-ansible_host: 172.16.2.5
+ansible_host: 172.16.31.202
 basic_hostname: pi-05-pp
 wireguard_address: "10.12.14.105/24"
 
