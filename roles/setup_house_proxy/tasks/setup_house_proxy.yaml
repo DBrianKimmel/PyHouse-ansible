@@ -1,5 +1,5 @@
 # Name:   roles/setup_house_proxy/tasks/setup_house_proxy.yaml
-# Updated: 2020-10-27
+# Updated: 2020-11-09
 #
 #---
 
@@ -22,6 +22,11 @@
     - '{{ ansible_facts.distribution }}.yaml'
     - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
     - '{{ ansible_facts.os_family }}.yaml'
+
+- name: Task093(Proxy) - Install Nginx
+  package:
+     name: nginx
+     state: present
 
 - name: Task-03(Proxy) - Create css configuration directory;;;
   file:
