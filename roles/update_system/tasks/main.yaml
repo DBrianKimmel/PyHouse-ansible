@@ -1,0 +1,10 @@
+# Name:   roles/update_system/tasks/main.yaml
+# Updated: 2020-11-08
+#
+---
+
+# Allow this role to be skipped.
+- include_tasks: update.yaml
+  when: update_system_role_enabled | bool
+
+### END DBK

@@ -5,8 +5,11 @@
 #
 # Change the following definitions as needed:
 
-ansible_host: 172.17.2.3
-bootstrap_hostname: pi-03-ct
+ansible_host: 172.16.31.197
+basic_hostname: pi-06-pp
+bootstrap_hostname: pi-06-pp
+wireguard_address: "10.12.14.106/24"
+
 # See https://docs.ansible.com/ansible/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
 # mkpasswd --method=sha-512 <new-password>
 bootstrap_pi_user_password: $6$tiuFB7p31L$G2Z/NoFyTEz18HwOsbaTPh4fM5rSq1nratdP8YhFjyR7U6xwC7KLg4GKOGaKXLOBr6TfZBTzUN63Afp11ZOan.

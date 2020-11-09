@@ -1,5 +1,5 @@
 # Name:    PyHouse-ansible/inventories/production/host_vars/pi-02-pp.yaml
-# Updated: 2018-04-11
+# Updated: 2020-11-07
 #
 ---
 #
@@ -15,12 +15,7 @@ wireguard_address: "10.12.14.102/24"
 #usb_storage_drive_id: /dev/sdb
 
 host_functions:
-  #- harden_linux
-  #- install_homeautomation
-  #- install_vnc
-  #- wireguard
-  #- zerotier
-  - finalize
+   - function_none
 
 # ==============================
 # The following should probably be left as defined.

@@ -1,9 +1,0 @@
-# Name:   roles/install_mqtt/vars/Debian.yaml
-# Updated: 2020-10-30
-#
-#---
-
-mqtt_basic_package_list:
-   - mosquitto
-
-### END DBK

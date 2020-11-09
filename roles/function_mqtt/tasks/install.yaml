@@ -1,0 +1,84 @@
+# Name:    roles/function_mqtt/tasks/install.yaml
+# Updated: 2020-11-07
+
+---
+
+- name: Task-01(Install) - Info about each computer in this play...
+  debug:
+    msg:
+      - " Role:   tasks/install.yaml"
+      - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"
+      - " MajorVersion: {{ ansible_facts.distribution_major_version }}"
+      - "    Os Family: {{ ansible_os_family }}"
+      - "          Lsb: {{ ansible_lsb }}"
+
+# ansible_os_family:   Debian, RedHat, Suse, Darwin, 
+# ansible_lsb.id:   Raspbian, Ubuntu, Suse
+#
+- name: Task-02(Install) - set OS dependent variables.
+  include_vars: '{{ distribution_item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+  loop_control:
+     loop_var: distribution_item
+
+- name: Task-03(Install) - Install mqtt broker
+  package:
+    name: "{{ mqtt_basic_package_list }}"
+    state: present
+
+- name: Task-04(Install) - install pyhouse.conf config file
+  copy:
+    src: ./pyhouse.conf
+    dest: /etc/mosquitto/conf.d/pyhouse.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Task-05(Install) - install mosquitto.service file
+  copy:
+    src: ./mosquitto.service
+    dest: /etc/systemd/system/mosquitto.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Task-06(Install) - install mosquitto.passwd file
+  copy:
+    src: ./mosquitto.passwd
+    dest: /etc/mosquitto/passwd
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Task-07(Install) - Make MQTT TLS certs dir
+  file:
+    name: "/etc/mosquitto/certs"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Task-08(Install) - Make MQTT TLS ca_certificates dir
+  file:
+    name: "/etc/mosquitto/ca_certificates"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Task-09(Install) -Reload and restart systemd
+  systemd:
+    name: mosquitto
+    daemon_reload: true
+    state: restarted
+
+- name: Task-10(Install) -Enable service to run on reboot
+  systemd:
+    name: mosquitto
+    enabled: true
+
+### END DBK

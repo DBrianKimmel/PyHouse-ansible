@@ -1,0 +1,10 @@
+# Name:   roles/update_system/defaults/main.yaml
+# Updated: 2020-11-08
+#
+---
+# defaults file for a_begin
+
+# To allow this role to be turned off.
+update_system_role_enabled: true
+
+### END DBK

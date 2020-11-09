@@ -1,0 +1,9 @@
+# Name:   roles/function_mqtt/vars/Debian.yaml
+# Updated: 2020-11-07
+#
+#---
+
+mqtt_basic_package_list:
+   - mosquitto
+
+### END DBK

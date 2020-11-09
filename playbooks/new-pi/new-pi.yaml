@@ -13,10 +13,10 @@
 #
 ---
 
-  vars_prompt:
-    - name: "password"
-      prompt: "Enter new password for user pi"
-      private: yes
+#- vars_prompt:
+#    - name: "password"
+#      prompt: "Enter new password for user pi"
+#      private: yes
 
 - name: Play-01 - New-Pi - Set up a fresh Pi 
   hosts: bootstrap_pi

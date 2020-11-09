@@ -15,13 +15,8 @@ wireguard_address: "10.12.14.112/24"
 #usb_storage_drive_id: /dev/sdb
 
 host_functions:
-  #- harden_linux
-  #- install_homeautomation
-  #- install_vnc
-  #- wireguard
-  #- zerotier
-  - setup_house_proxy
-  - finalize
+   - function_pihole: true
+   - function_none: false
 
 # ==============================
 # The following should probably be left as defined.

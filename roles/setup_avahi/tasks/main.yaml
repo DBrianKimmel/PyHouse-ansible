@@ -1,0 +1,38 @@
+# Name:    roles/setup_avahi/tasks/main.yaml
+# Updated: 2020-11-08
+#
+# The avahi package is used to advertise various communications to the server (ssh, vpn etc.)
+# Add the avahi config files and restart the daemon
+
+---
+
+# We must have ssh in order for ansible to work so we advertise it here.
+- name: Task-01 - Add avahi service files
+  become_user:      root
+  become:           yes
+  copy:
+    src:    ./ssh.service
+    dest:   /etc/avahi/services/ssh.service
+    owner:  root
+    group:  root
+    mode:   0644
+
+# VPN adds a graphic way to talk to the server
+- name: Task-02 - Add avahi service files
+  become_user:      root
+  become:           yes
+  copy:
+    src:    ./vnc.service
+    dest:   /etc/avahi/services/vnc.service
+    owner:  root
+    group:  root
+    mode:   0644
+
+- name: Task-03 - Enable avahi so it runs at boot time.
+  become_user:      root
+  become:           yes
+  systemd:
+    name: avahi-daemon.service
+    enabled:
+
+### END DBK

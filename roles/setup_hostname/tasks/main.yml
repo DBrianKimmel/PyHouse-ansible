@@ -1,6 +1,4 @@
-# Name:    PyHouse-ansible/roles/setup_hostname/tasks/main.yaml
-# Author:  D. Brian Kimmel
-# Created: 2017-10-14
+# Name:    roles/setup_hostname/tasks/main.yaml
 # Updated: 2020-10-12
 #
 # Set up the computer's hostname

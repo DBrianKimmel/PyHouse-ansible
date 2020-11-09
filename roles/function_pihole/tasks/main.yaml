@@ -1,0 +1,11 @@
+# Name:   roles/function_pihole/tasks/main.yaml
+# Updated: 2020-11-0
+---
+#
+- name: Task-01(Main) - installing pi_hole
+  debug:
+    msg:
+      - "--- function_pihole ---"
+      - "   Host Functions: {{ host_functions }}"
+
+### END DBK

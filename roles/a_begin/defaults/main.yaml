@@ -1,5 +1,5 @@
 # Name:   roles/a_begin/defaults/main.yaml
-# Updated: 2020-10-18
+# Updated: 2020-11-08
 #
 ---
 # defaults file for a_begin
@@ -10,12 +10,13 @@ begin_role_enabled: true
 # Set to false to turn the role into a no-op. Useful when using the Ansible role dependency mechanism.
 begin_updating_enabled: true
 
-begin_harden_linux_enabled: true
-begin_install_vpns_enabled: true
-begin_install_vnc_enabled: true
-begin_setup_firewall_enabled: true
-
-begin_setup_ssh_enabled: true
+begin_roles_to_run:
+   - update_system
+   - setup_avahi
+   - setup_hostname
+   - setup_security
+   - setup_ssh
+   - setup_usb_boot
 
 # packages used on all computers - by distribution, release type.
 begin_basic_package_list: []

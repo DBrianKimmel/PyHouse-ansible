@@ -1,25 +1,36 @@
-Role Name
-=========
+# Role Name: a_begin
 
-A brief description of the role goes here.
+This role is run from a list of roles in the playbook.
+It is run first - hence the name a_begin.
+It will initialize the package manager and update each computer.
+Roles that apply to all or lmost all will be done a a part of this installation
 
-Requirements
-------------
+Avahi
+Firewall
+Harden Base OS
+	SSH
+VNC
+VPN
+	Wireguard
+	ZeroTier
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
-Role Variables
---------------
+## Requirements
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here.
+For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
-Dependencies
-------------
+## Role Variables
+
+begin_role_enabled
+* Default: true
+  * Description: True = do not skip this role
+
+## Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Example Playbook
-----------------
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
@@ -27,12 +38,10 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
          - { role: username.rolename, x: 42 }
 
-License
--------
+## License
 
-BSD
+MIT
 
-Author Information
-------------------
+## Author Information
 
 This role was created in Oct 18, 2020 by D. Brian Kimmel

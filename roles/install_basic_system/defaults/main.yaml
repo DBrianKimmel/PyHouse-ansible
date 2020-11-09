@@ -11,7 +11,6 @@ test_default_token: 'Test Default Token'
 #
 basic_reboot_enabled: true
 basic_update_enabled: yes
-basic_avahi_enabled: yes
 basic_timezone: US/Eastern
 basic_backup_enabled: yes
 basic_dyndns_enabled: yes

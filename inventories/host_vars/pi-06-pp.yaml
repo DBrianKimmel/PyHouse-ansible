@@ -1,20 +1,32 @@
 # Name:    PyHouse-ansible/host_vars/pi-06-pp
-# Author:  D. Brian Kimmel
-# Created: 2017-11-08
-# Updated: 2017-11-08
+# Updated: 2020-11-03
 #
-# This computer is for pandora
-#
-
 ---
 
-ansible_host:               192.168.1.16
+#
+# Change the following definitions as needed:
 
-pyh_hostname:               pi-06-pp
-pyh_ipv4_ethernet_addr:     192.168.2.16
-pyh_ipv4_wifi_addr:         192.168.1.16
-pyh_ipv6_ethernet_addr:     :2:16
-pyh_ipv6_wifi_addr:         :1:16
-pyh_roles:                  pandora
+ansible_host: 172.16.2.6
+basic_hostname: pi-06-pp
+wireguard_address: "10.12.14.106/24"
+
+#usb_clone_drive_type: SSD-128GB
+#usb_clone_drive_id: /dev/sda
+#usb_storage_drive_type: Disk-4TB
+#usb_storage_drive_id: /dev/sdb
+
+host_functions:
+   - function_none
+
+# ==============================
+# The following should probably be left as defined.
+
+admin_user_name: briank
+basic_domain: ""
+wireguard_endpoint: "{{ basic_hostname }}-wg"
+hostname_hostname: "{{ basic_hostname }}"
+hostname_domain: "{{ basic_domain | default('')}}"
+ansible_ssh_user: "{{ admin_user_name }}"
+host_key_checking: false
 
 ### END DBK

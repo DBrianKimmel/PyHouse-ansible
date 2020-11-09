@@ -2,16 +2,17 @@
 
 This will run an ansible roll for each function declared in the host_vars file for a particular host computer.
 host_functions include:
-	mqtt
-	pyhouse
+	function_mqtt
+	function_pyhouse
 	vpn
 	basic_system
-	homeautomation
+	function_homeautomation
 	...
 
 ## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here.
+For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
 ## Role Variables
 

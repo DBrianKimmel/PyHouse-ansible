@@ -1,0 +1,11 @@
+# Name:   roles/function_mqtt/tasks/main.yaml
+# Updated: 2020-11-07
+#
+---
+
+# Allow this role to be skipped.
+- name: Task-01 
+  include_tasks: install.yaml
+  when: mqtt_role_enabled | bool
+
+### END DBK

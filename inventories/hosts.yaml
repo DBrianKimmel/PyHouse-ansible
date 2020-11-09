@@ -26,9 +26,9 @@ all:
             pi-10-pp:
             pi-11-pp:
             pi-12-pp:
-            nuc-01-pp:
-            nas-01-pp:
-            router01-pp:
+            # nuc-01-pp:
+            # nas-01-pp:
+            # router01-pp:
          vars:
             gateway_router: 172.16.0.5
       cannontrail:

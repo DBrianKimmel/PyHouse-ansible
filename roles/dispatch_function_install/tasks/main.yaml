@@ -8,12 +8,13 @@
 - name: Task-01(Main) - Dispatch
   debug:
     msg:
-      - "---"
+      - "--- Dispatcher ---"
       - "   Host Functions: {{ host_functions }}"
 
 - name: Task-02(Main) - do the next step in host_functions (defined in the given host_vars yaml file).
   include_role:
-    name: "{{ item }}"
+    name: "{{ item.key }}"
+  when: "{{ item.value | bool == false }}"
   loop: "{{ host_functions }}"
 
 

@@ -1,5 +1,5 @@
 # Name:    inventories/host_vars/pi-01-pp.yaml
-# Updated: 2020-10-27
+# Updated: 2020-11-07
 #
 ---
 #
@@ -14,13 +14,11 @@ wireguard_address: "10.12.14.101/24"
 #usb_storage_drive_type: Disk-4TB
 #usb_storage_drive_id: /dev/sdb
 
+# This pi is used for testing out ansible roles - no production uses.
+#
 host_functions:
-  - harden_linux
-  #- install_homeautomation
-  #- install_vnc
-  #- wireguard
-  #- zerotier
-  - finalize
+   - function_mqtt: true
+   - function_none: true
 
 # ==============================
 # The following should probably be left as defined.
