@@ -4,18 +4,10 @@
 # host_functions are defined in every computers host_vars file.
 #      It defines what is to be installed on this computer.
 ---
-#
-- name: Task-01(Main) - Dispatch
-  debug:
-    msg:
-      - "--- Dispatcher ---"
-      - "   Host Functions: {{ host_functions }}"
 
-- name: Task-02(Main) - do the next step in host_functions (defined in the given host_vars yaml file).
-  include_role:
-    name: "{{ item.key }}"
-  when: "{{ item.value | bool == false }}"
-  loop: "{{ host_functions }}"
-
+# Allow this role to be skipped.
+- name: Task-01(Main) - Dispatch_function_install called
+  include_tasks: dispatch.yaml
+  when: dispatch_function_enabled | bool
 
 ### END DBK

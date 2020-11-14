@@ -6,12 +6,9 @@
 - name: Task-01(Install) - Info about each computer in this play...
   debug:
     msg:
-      - " Role:   tasks/install.yaml"
-      - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"
-      - " MajorVersion: {{ ansible_facts.distribution_major_version }}"
-      - "    Os Family: {{ ansible_os_family }}"
-      - "          Lsb: {{ ansible_lsb }}"
-
+      - " Roll: Function_Mqtt"
+      - "         Host: {{ ansible_host }}"
+      - " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
 # ansible_os_family:   Debian, RedHat, Suse, Darwin, 
 # ansible_lsb.id:   Raspbian, Ubuntu, Suse
 #
@@ -81,4 +78,10 @@
     name: mosquitto
     enabled: true
 
+
+- name: Task-99(Install) - Finished installing MQTT
+  debug:
+    msg:
+      - " Roll: Function_Mqtt"
+      - "         Host: {{ ansible_host }}"
 ### END DBK

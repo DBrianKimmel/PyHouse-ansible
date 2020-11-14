@@ -1,0 +1,9 @@
+# Name:   roles/function_pihole/vars/Debian.yaml
+# Updated: 2020-11-12
+#
+#---
+
+pihole_package_list:
+   - pihole
+
+### END DBK

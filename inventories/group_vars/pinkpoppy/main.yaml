@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/inventories/group_vars/pinkpoppy/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-11-05
-# Updated: 2020-10-04
+# Updated: 2020-11-13
 #
 # Variables for the Pink Poppy house.
 
@@ -29,5 +29,9 @@ pyh_router_nameservers:         vault_pyh_router_nameservers
 pyh_ipv6_network_prefix:        vault_pyh_ipv6_network_prefix
 pyh_ipv6_network_prefix_len:    /64
 hostname_domain: vault_hostname_domain
+
+# Household Configurations
+household_house_name: Pink Poppy
+household_time_server: pi-05-pp
 
 ### END DBK

@@ -1,0 +1,11 @@
+# Name:   roles/setup_time_services/tasks/main.yaml
+# Updated: 2020-11-09
+#
+---
+
+# Allow this role to be skipped.
+- name: Task-01 
+  include_tasks: time_service.yaml
+  when: time_services_role_enabled | bool
+
+### END DBK

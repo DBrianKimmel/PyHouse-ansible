@@ -16,7 +16,7 @@
 
   roles:
     - a_begin
-    #- dispatch_function_install
+    - dispatch_function_install
     - finalize
 
 #- name: Play-02 - Another play if we need it.

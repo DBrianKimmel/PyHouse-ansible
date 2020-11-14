@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include function_node_red"
+      include_role:
+        name: "function_node_red"

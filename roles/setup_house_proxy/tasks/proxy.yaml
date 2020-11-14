@@ -1,5 +1,5 @@
-# Name:   roles/setup_house_proxy/tasks/setup_house_proxy.yaml
-# Updated: 2020-11-09
+# Name:   roles/setup_house_proxy/tasks/proxy.yaml
+# Updated: 2020-11-12
 #
 #---
 
@@ -23,23 +23,30 @@
     - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
     - '{{ ansible_facts.os_family }}.yaml'
 
-- name: Task093(Proxy) - Install Nginx
-  package:
-     name: nginx
-     state: present
+- name: Task-03(Proxy) - Install Nginx
+  include_role:
+     name: install_nginx
 
-- name: Task-03(Proxy) - Create css configuration directory;;;
+- name: Task-04(Proxy) - Create css configuration directory;;;
   file:
-    dest: "{{ house_proxy_html_dir }}/css"
+    dest: "{{ house_main_proxy_html_dir }}/css"
     state: directory
     mode: 0755
   tags:
     - proxy-config
 
+- name: Task-05(Install) - install mosquitto.service file
+  copy:
+    src: ./mosquitto.service
+    dest: /etc/systemd/system/mosquitto.service
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Task-04(Proxy) - Load Files;;;
   template:
     src: index.html.j2
-    dest: "{{ house_proxy_html_dir }}/index.html"
+    dest: "{{ house_main_proxy_html_dir }}/index.html"
     owner: root
     group: root
     mode: 0644
@@ -51,7 +58,7 @@
 - name: Task-05(Proxy) - Load Files;;;
   template:
     src: style.css.j2
-    dest: "{{ house_proxy_html_dir }}/css/style.css"
+    dest: "{{ house_main_proxy_html_dir }}/css/style.css"
     owner: root
     group: root
     mode: 0644

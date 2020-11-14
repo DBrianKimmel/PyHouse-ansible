@@ -15,13 +15,13 @@ usb_storage_drive_type: Disk-4TB
 usb_storage_drive_id: /dev/sdb
 
 host_functions:
-  # - harden_linux
-  # - install_homeassistant
-  # - install_nginx
-  # - install_vnc
-  # - install_wireguard
-  # - install_zero_tier
-  - setup_house_proxy
+   # - harden_linux
+   # - install_homeassistant
+   # - install_nginx
+   # - install_vnc
+   # - install_wireguard
+   # - install_zero_tier
+   - function_none
 
 # ==============================
 # The following should probably be left as defined.

@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Cannon Trail Proxy</title>
+	<title>{{ household_house_name }} Proxy</title>
 	<link rel="stylesheet" href="css/style.css">
 	<style>
 	html, body { background: black; }
@@ -27,7 +27,7 @@
 			<div class="lcars-elbow left-bottom lcars-tan-bg"></div>
 			<!-- BAR WITH TITLE -->
 			<div class="lcars-bar horizontal">
-				<div class="lcars-title center">Cannon Trail</div>
+				<div class="lcars-title center">{{ hpusehold_house_name }}</div>
 			</div>
 			<!-- ROUNDED EDGE DECORATED -->
 			<div class="lcars-bar horizontal right-end decorated"></div>
@@ -67,21 +67,25 @@
 					</div>
 					<div class="lcars-row">
 						<li>Node red</li>
-							<a href="/nodered/">Irrigation/Pond</a> (pi-04-ct)
+							<a href="/nodered/">Irrigation/Pond</a> (pi-04-pp)
 					</div>
 
 
 					<!-- Pi-Hole -->
 					<div class="lcars-row">
-						<div class="lcars-element centered rounded lcars-u-2-1">
+						<div class="lcars-element centered lcars-u-1-1">
 							Pi-Hole
 						</div>
 					</div>
+					<div class="lcars-row">
+						<a href="/pihole/">Pi-Hole</a> (pi-12-pp)
+					</div>
+
 
 					<!-- homeassistant -->
 					<div class="lcars-row">
 						Home Assistant
-							<a href="/homeassistant">Home Assistant</a> (pi-03-ct)
+						<a href="/homeassistant">Home Assistant</a> (pi-09-pp)
 					</div>
 
 					<div class="lcars-row">
@@ -93,7 +97,7 @@
 					</div>
 					<div class="lcars-row">
 						<li>Node red</li>
-							<a href="/nodered/">Irrigation/Pond</a> (pi-04-ct)
+							<a href="/nodered/">Irrigation/Pond</a> (pi-04-pp)
 					</div>
 
 
@@ -139,7 +143,7 @@
 					<!-- Services -->
 					{% for l_service in house_proxy_services %}
 						<div class="lcar-row full-centered">
-							<div class="lcars-element lcars-u-2 rounded button">
+							<div class="lcars-element lcars-u-1 button">
 								<div>{{ l_service }}</div>
 							</div>
 						</div>

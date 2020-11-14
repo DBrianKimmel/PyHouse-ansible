@@ -1,0 +1,11 @@
+# Name   roles/setup_time_service/tasks/time_service.yaml
+# Updated: 2020-11-09
+#
+---
+
+- name: Task_01(Timeervice) Debug
+  debug:
+    msg:
+      - "Time Services"
+
+### END DBK

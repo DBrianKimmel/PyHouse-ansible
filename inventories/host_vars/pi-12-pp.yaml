@@ -15,8 +15,8 @@ wireguard_address: "10.12.14.112/24"
 #usb_storage_drive_id: /dev/sdb
 
 host_functions:
-   - function_pihole: true
-   - function_none: false
+   #- function_pihole
+   - function_none
 
 # ==============================
 # The following should probably be left as defined.

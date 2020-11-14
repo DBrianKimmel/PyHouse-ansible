@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include setup_ipv6_tunnel"
+      include_role:
+        name: "setup_ipv6_tunnel"

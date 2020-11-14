@@ -3,24 +3,39 @@
 #
 ---
 
-- name: Task-01(Dispatch) - Install Pandora step is next
-  include_role:
-    name: install_pandora
-  when: selected == 'pandora'
+- name: Task-01(Dispatch) - Dispatch
+  debug:
+    msg:
+      - "--- Dispatch_function_install ---"
+      - "   Host Functions: {{ host_functions }}"
 
-- name: Task-01(Dispatch) - Install PyHouse step is next
+- name: Task-02(Main) - do the next step in host_functions (defined in the given host_vars yaml file).
+  ignore_errors: true
   include_role:
-    name: install_pyhouse
-  when: selected == 'pyhouse'
+    name: "{{ dispatch_item }}"
+  loop: "{{ host_functions }}"
+  loop_control:
+    loop_var: dispatch_item
 
-- name: Task-01(Dispatch) - Install Vnc step is next
-  include_role:
-    name: install_vnc
-  when: selected == 'vnc'
 
-- name: Task-01(Dispatch) - Install Wireguard step is next
-  include_role:
-    name: install_wireguard
-  when: selected == 'wireguard'
+#- name: Task-01(Dispatch) - Install Pandora step is next
+#  include_role:
+#    name: install_pandora
+#  when: selected == 'pandora'
+
+#- name: Task-01(Dispatch) - Install PyHouse step is next
+#  include_role:
+#    name: install_pyhouse
+#  when: selected == 'pyhouse'
+
+#- name: Task-01(Dispatch) - Install Vnc step is next
+#  include_role:
+#    name: install_vnc
+#  when: selected == 'vnc'
+
+#- name: Task-01(Dispatch) - Install Wireguard step is next
+#  include_role:
+#    name: install_wireguard
+#  when: selected == 'wireguard'
 
 ### END DBK

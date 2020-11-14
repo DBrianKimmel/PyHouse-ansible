@@ -1,2 +1,11 @@
+# Name:   roles/function_pihole/defaults/main.yaml
+# Updated: 2020-11-12
+#
 ---
-# defaults file for install_pihole
+# To allow this role to be turned off.
+pihole_role_enabled: true
+
+# packages used on all computers - by distribution, release type.
+pihole_package_list: []
+
+### END DBK

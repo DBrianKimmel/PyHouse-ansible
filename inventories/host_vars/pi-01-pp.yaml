@@ -17,8 +17,9 @@ wireguard_address: "10.12.14.101/24"
 # This pi is used for testing out ansible roles - no production uses.
 #
 host_functions:
-   - function_mqtt: true
-   - function_none: true
+   - function_mqtt
+   - function_node_red
+   - function_none
 
 # ==============================
 # The following should probably be left as defined.

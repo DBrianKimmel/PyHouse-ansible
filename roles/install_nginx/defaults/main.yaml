@@ -8,4 +8,6 @@ nginx_role_enabled: true
 # packages used on all computers - by distribution, release type.
 nginx_basic_package_list: []
 
+nginx_owner: 'default_nginx_owner'
+
 ### END DBK

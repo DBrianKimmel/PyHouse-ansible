@@ -1,0 +1,8 @@
+# Name:   roles/setup_time_services/defaults/main.yaml
+# Updated: 2020-11-09
+#
+---
+# To allow this role to be turned off.
+time_services_role_enabled: true
+
+### END DBK

@@ -1,0 +1,18 @@
+# Name:`proxienode-red
+# Updated: 2020-11-13
+#
+# This is the proxy server for nodered (irrigation)
+
+server {
+    location /nodered {
+        proxy_passsystem       http://172.16.2.4;
+        proxy_set_header       Host $host;
+        proxy_buffering        on;
+        proxy_cache            STATIC;
+        proxy_cache_valid      200  1d;
+        proxy_cache_use_stale  error timeout invalid_header updating
+                               http_500 http_502 http_503 http_504;
+    }
+}
+
+### END DBK

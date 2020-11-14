@@ -2,15 +2,27 @@
 
 A brief description of the role goes here.
 
+https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms
+
+https://www.linkedin.com/pulse/how-use-nginx-reverse-proxy-https-wss-self-signed-ramos-da-silva?articleId=6678584723419226112
+https://aimechanics.tech/2020/06/06/nginx-reverse-proxy/
+https://geektechstuff.com/2020/05/05/installing-and-configuring-nginx-as-a-reverse-proxy-via-an-ansible-playbook/
+
+
 ## Requirements
 
 Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here.
 For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
- ## Role Variables
+## Role Variables
 
 A description of the settable variables for this role should go here, including any variables that are in defaults/main.yaml, vars/main.yaml, and any variables that can/should be set via parameters to the role.
 Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+
+* Name: nginx_role_enabled
+	* Default: true
+	* Description: enable the entire role
+
 
 ## Dependencies
 

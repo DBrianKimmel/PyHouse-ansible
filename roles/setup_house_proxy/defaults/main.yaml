@@ -5,7 +5,7 @@
 # To allow this role to be turned off.
 house_proxy_role_enabled: true
 
-house_proxy_html_dir: /var/www/html/
+house_main_proxy_html_dir: /var/www/html/
 
 house_proxy_houses:
    - Cannon Trail

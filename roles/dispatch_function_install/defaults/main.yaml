@@ -1,6 +1,8 @@
 # Name:   roles/dispatch_function_install/defaults/main.yaml
-# Updated: 2020-10-27
+# Updated: 2020-11-09
 #
 ---
+
+dispatch_function_enabled: true
 
 ### END DBK
