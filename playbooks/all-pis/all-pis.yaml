@@ -11,6 +11,7 @@
 - name: Play-01 - All-Pis - Starting play;;;
   # hosts: pi-05-pp
   hosts: pinkpoppy
+  connection: ssh
   remote_user: root
   become: true
 

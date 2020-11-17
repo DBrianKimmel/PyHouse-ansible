@@ -23,11 +23,11 @@
     - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
     - '{{ ansible_facts.os_family }}.yaml'
 
-- name: Task-03(Proxy) - Install Nginx
+- name: Task-03(Proxy) - Install Nginx.
   include_role:
      name: install_nginx
 
-- name: Task-04(Proxy) - Create css configuration directory;;;
+- name: Task-04(Proxy) - Create css configuration directory.
   file:
     dest: "{{ house_main_proxy_html_dir }}/css"
     state: directory
@@ -35,36 +35,76 @@
   tags:
     - proxy-config
 
-- name: Task-05(Install) - install mosquitto.service file
+- name: Task-05(Proxy) - Install the CSS file (Lcars).
   copy:
-    src: ./mosquitto.service
-    dest: /etc/systemd/system/mosquitto.service
-    owner: root
-    group: root
+    src: ./style.css
+    dest: "{{ house_main_proxy_html_dir }}/css/style.css"
+    owner: "{{ nginx_installed_owner }}"
+    group: "{{ nginx_installed_owner }}"
     mode: 0644
+  tags:
+    - proxy-config
+  notify:
+    - restart proxy
 
-- name: Task-04(Proxy) - Load Files;;;
+- name: Task-06(Proxy) - Load index.html file
   template:
     src: index.html.j2
     dest: "{{ house_main_proxy_html_dir }}/index.html"
-    owner: root
-    group: root
+    owner: "{{ nginx_installed_owner }}"
+    group: "{{ nginx_installed_owner }}"
     mode: 0644
   tags:
-    - proxy-config
+    - proxy-config7
   notify:
     - restart proxy
 
-- name: Task-05(Proxy) - Load Files;;;
+- name: Task-07(Proxy) - install proxy config file.
   template:
-    src: style.css.j2
-    dest: "{{ house_main_proxy_html_dir }}/css/style.css"
+    src: proxy-main.j2
+    dest: /etc/nginx/sites-available/proxy-main
     owner: root
     group: root
     mode: 0644
-  tags:
-    - proxy-config
-  notify:
-    - restart proxy
+
+- name: Task-08(Proxy) - Create a symbolic link.
+  file:
+    src: /etc/nginx/sites-available/proxy-main
+    dest: /etc/nginx/sites-enabled/01-proxy-main
+    owner: root
+    group: root
+    state: link
+
+- name: Task-09(Proxy) - install proxy config file.
+  template:
+    src: proxy-node-red.j2
+    dest: /etc/nginx/sites-available/proxy-node-red
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Task-10(Proxy) - Create a symbolic link.
+  file:
+    src: /etc/nginx/sites-available/proxy-node-red
+    dest: /etc/nginx/sites-enabled/11-proxy-node-red
+    owner: root
+    group: root
+    state: link
+
+- name: Task-11(Proxy) - install proxy config file.
+  template:
+    src: proxy-pihole.j2
+    dest: /etc/nginx/sites-available/proxy-pihole
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Task-12(Proxy) - Create a symbolic link.
+  file:
+    src: /etc/nginx/sites-available/proxy-pihole
+    dest: /etc/nginx/sites-enabled/12-proxy-pihole
+    owner: root
+    group: root
+    state: link
 
 ### END DBK

@@ -7,7 +7,7 @@ mqtt_role_enabled: true
 
 mqtt_service_name: mosquitto
 
-mqtt_broker_enabled: true
+mqtt_broker_enabled: false
 
 # packages used on all computers - by distribution, release type.
 mqtt_basic_package_list: []

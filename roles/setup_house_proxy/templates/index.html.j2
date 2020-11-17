@@ -27,7 +27,7 @@
 			<div class="lcars-elbow left-bottom lcars-tan-bg"></div>
 			<!-- BAR WITH TITLE -->
 			<div class="lcars-bar horizontal">
-				<div class="lcars-title center">{{ hpusehold_house_name }}</div>
+				<div class="lcars-title center">{{ household_house_name }}</div>
 			</div>
 			<!-- ROUNDED EDGE DECORATED -->
 			<div class="lcars-bar horizontal right-end decorated"></div>
@@ -51,9 +51,10 @@
 
 		<!-- MAIN CONTAINER -->
 		<div id="container">
-
 			<!-- COLUMN LAYOUT -->
-			<div class="lcars-column lcars-u-5">
+			<div class="lcars-column lcars-u-7">
+
+
 				<!-- LAYOUT -->
 				<div>
 
@@ -66,17 +67,18 @@
 						</div>
 					</div>
 					<div class="lcars-row">
-						<li>Node red</li>
-							<a href="/nodered/">Irrigation/Pond</a> (pi-04-pp)
+						Node red
+						<a href="/nodered/">Irrigation/Pond a1</a> (pi-04-pp)
 					</div>
 
 
 					<!-- Pi-Hole -->
 					<div class="lcars-row">
-						<div class="lcars-element centered lcars-u-1-1">
+						<div class="lcars-element centered lcars-u-2-1">
 							Pi-Hole
 						</div>
 					</div>
+
 					<div class="lcars-row">
 						<a href="/pihole/">Pi-Hole</a> (pi-12-pp)
 					</div>
@@ -84,7 +86,9 @@
 
 					<!-- homeassistant -->
 					<div class="lcars-row">
-						Home Assistant
+						<div class="lcars-element centered lcars-u-2-1">
+							Home Assistant
+						</div>
 						<a href="/homeassistant">Home Assistant</a> (pi-09-pp)
 					</div>
 
@@ -95,30 +99,72 @@
 							</div>
 						</div>
 					</div>
+
+
 					<div class="lcars-row">
-						<li>Node red</li>
-							<a href="/nodered/">Irrigation/Pond</a> (pi-04-pp)
+
+						<p>
+							PiHole
+							<a href="/pihole/">Pihole</a> (pi-12-pp)
+						</p>
+						<p>
+							Mopidity
+							<a href="/mopidity/">mopidity Music</a> (pi-07-pp)
+						</p>
+						<p>
+							Pandora
+							<a href="/pandora/">Pandora Music</a> (pi-01-pp)
+						</p>
+						<p>
+							Sonoff-01
+							<a href="/sonoff/1/">Sonoff - 01</a> (pi-02-pp)
+						</p>
+						<p>
+							Sonoff-02
+							<a href="/sonoff/2/">Sonoff 2</a> (pi-07-pp)
+						</p>
+						<p>
+							Camera-01
+							<a href="/camera/1/">Camera - 01</a> (pi-02-pp)
+						</p>
+					</div>
+
+					<div class="lcars-row">
+						<div class="lcars-element centered rounded lcars-u-3-1">
+							Node-Red
+						</div>
+						<a href="/camera/2/">Camera 2</a> (pi-07-pp)
 					</div>
 
 
+					<div class="lcars-row">
+						<div class="lcars-element centered rounded lcars-u-3-1">
+							Node-Red
+						</div>
+						<a href="/nodered/">Irrigation/Pond</a> (pi-04-pp)
+					</div>
+					<div class="lcars-row">
 
-					<!-- mopidy -->
+
+						<!-- mopidy -->
 						<li>Mopidy</li>
 							<a href="/mopidy">Mopidy Music player</a> (pi-06-ct)
-					<!-- octoprint -->
+						<!-- octoprint -->
 						<li>Octoprint</li> class="lcars-row"
 							<a href="/octoprint/"> Octoprint </a> (pi-08-ct)
-					<!-- cameras -->
+						<!-- cameras -->
 						<li>Cameras</li>
 						<li>Sonoff</li>
 							<a href="/sonoff/1/"> Garage Workbench</a> (sonoff-01-ct)
 							<br>
 							<a href="/sonoff/2/"> Brian's Couch Light</a> (sonoff-02-ct)
+					</div>
 
 
 					<!-- Sonoff -->
 					<div class="lcars-row">
 						<div class="lcars-bracket left">
+							www
 						</div>
 						<div class="lcars-column">
 							<div class="lcars-element button">
@@ -137,17 +183,83 @@
 							</div>
 						</div>
 						<div class="lcars-bracket right">
+							sss
 						</div>
 					</div>
 
-					<!-- Services -->
+
+
+
+					<!-- HYPERLINKS -->
+					<h2>Hyperlinks</h2>
+	
+					<span>Class: <pre class="lcars-dodger-blue-color">:link :hover :focus :active :visited </pre> (but note that these are pseudo-classes, automatically applied by the web browser)</span>
+					<p>
+					<a href="#">Hyperlinks are highlighted</a> with an energetic color, and not bluish.
+					<a>Hyperlinks without an href attribute</a> are a little different: they will highlight only when you hover.
+					Emphasis but subtlety.
+					</p>
+
+
+
+					<h2>BRACKETS</h2>
+
+					<span>Class: <pre class="lcars-dodger-blue-color">lcars-bracket</pre></span>
+					<p>
+						<a>Decorative Brackets. Use to group elements.</a>
+
+						<ul>
+							<li><span><pre class="lcars-rust-color">right</pre>: right bracket </span></li>
+							<li><span><pre class="lcars-rust-color">left</pre>: left bracket </span></li>
+							<li><span><pre class="lcars-rust-color">top</pre>: top bracket </span></li>
+							<li><span><pre class="lcars-rust-color">bottom</pre>: bottom bracket </span></li>
+						</ul>
+					</p>
+
+					<h3>Example</h3>
+
+					<p>
+						<div class="lcars-row">
+							<div class="lcars-bracket left"></div>
+							<div class="lcars-column">
+
+								<div class="lcars-element lcars-u-2-1">
+									<a href="/camera/1/" class="lcars-dodger-blue-color lcars-tan-bg">Camera 1</a>
+								</div>
+
+								<div class="lcars-element lcars-u-2-1">
+									<a href="/camera/2/" class="lcars-dodger-blue-color lcars-tan-bg">Camera 2</a>
+								</div>
+
+								<div class="lcars-element lcars-u-2-1">
+									<a href="/camera/3/" class="lcars-dodger-blue-color lcars-tan-bg">Camera 3</a>
+								</div>
+
+								<div class="lcars-element lcars-u-2-1">
+									<a href="/camera/4/" class="lcars-dodger-blue-color lcars-tan-bg">Camera 4</a> 
+								</div>
+
+								<div class="lcars-element lcars-u-2-1">
+									<a href="/camera/5/" class="lcars-dodger-blue-color lcars-tan-bg">Camera 5</a> 
+								</div>
+
+								<div class="lcars-element lcars-u-2-1">
+									<a href="/camera/6/" class="lcars-dodger-blue-color lcars-tan-bg">Camera 6</a> 
+								</div>
+
+							</div>
+							<!-- div class="lcars-bracket right"></div -->
+						</div>
+
+					<!-- Services>
 					{% for l_service in house_proxy_services %}
 						<div class="lcar-row full-centered">
-							<div class="lcars-element lcars-u-1 button">
+							<div class="lcars-element rounded lcars-u-2-1 button">
 								<div>{{ l_service }}</div>
 							</div>
 						</div>
 					{% endfor %}
+					< Services -->
 
 				</div>
 			</div>
