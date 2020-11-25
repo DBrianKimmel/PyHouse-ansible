@@ -60,6 +60,7 @@
     - restart proxy
 
 - name: Task-07(Proxy) - install proxy config file.
+#  ANSIBLE_DEBUG=1
   template:
     src: proxy-main.j2
     dest: /etc/nginx/sites-available/proxy-main
@@ -75,36 +76,7 @@
     group: root
     state: link
 
-- name: Task-09(Proxy) - install proxy config file.
-  template:
-    src: proxy-node-red.j2
-    dest: /etc/nginx/sites-available/proxy-node-red
-    owner: root
-    group: root
-    mode: 0644
-
-- name: Task-10(Proxy) - Create a symbolic link.
-  file:
-    src: /etc/nginx/sites-available/proxy-node-red
-    dest: /etc/nginx/sites-enabled/11-proxy-node-red
-    owner: root
-    group: root
-    state: link
-
-- name: Task-11(Proxy) - install proxy config file.
-  template:
-    src: proxy-pihole.j2
-    dest: /etc/nginx/sites-available/proxy-pihole
-    owner: root
-    group: root
-    mode: 0644
-
-- name: Task-12(Proxy) - Create a symbolic link.
-  file:
-    src: /etc/nginx/sites-available/proxy-pihole
-    dest: /etc/nginx/sites-enabled/12-proxy-pihole
-    owner: root
-    group: root
-    state: link
+- name: sites & links
+  include_tasks: sites.yaml
 
 ### END DBK

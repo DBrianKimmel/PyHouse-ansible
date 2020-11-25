@@ -1,0 +1,65 @@
+
+- name: Task-01(Sites) - install proxy config file.
+  template:
+    src: proxy-node-red.j2
+    dest: /etc/nginx/sites-available/proxy-node-red
+    owner: root
+    group: root
+    mode: 0644
+- name: Task-02(Sites) - Create a symbolic link.
+  file:
+    src: /etc/nginx/sites-available/proxy-node-red
+    dest: /etc/nginx/sites-enabled/11-proxy-node-red
+    owner: root
+    group: root
+    state: link
+
+
+- name: Task-03(Sites) - install proxy config file.
+  template:
+    src: proxy-pihole.j2
+    dest: /etc/nginx/sites-available/proxy-pihole
+    owner: root
+    group: root
+    mode: 0644
+- name: Task-04(Sites) - Create a symbolic link.
+  file:
+    src: /etc/nginx/sites-available/proxy-pihole
+    dest: /etc/nginx/sites-enabled/12-proxy-pihole
+    owner: root
+    group: root
+    state: link
+
+
+- name: Task-05(Sites) - install proxy config file.
+  template:
+    src: pinkpoppy.net.j2
+    dest: /etc/nginx/sites-available/pinkpoppy.net
+    owner: root
+    group: root
+    mode: 0644
+- name: Task-06(Sites) - Create a symbolic link.
+  file:
+    src: /etc/nginx/sites-available/pinkpoppy.net
+    dest: /etc/nginx/sites-enabled/02-pinkpoppy.net
+    owner: root
+    group: root
+    state: link
+
+
+- name: Task-07(Sites) - install proxy config file.
+  template:
+    src: proxy-homeassistant.j2
+    dest: /etc/nginx/sites-available/proxy-homeassistant
+    owner: root
+    group: root
+    mode: 0644
+- name: Task-08(Sites) - Create a symbolic link.
+  file:
+    src: /etc/nginx/sites-available/proxy-homeassistant
+    dest: /etc/nginx/sites-enabled/13-proxy-homeassistant
+    owner: root
+    group: root
+    state: link
+
+### END DBK

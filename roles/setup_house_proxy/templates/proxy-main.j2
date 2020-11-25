@@ -2,42 +2,75 @@
 # Updated: 2020-11-15
 
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+	listen		80 default_server;
+	listen		[::]:80 default_server;
+	#listen		80;
+	#listen		[::]:80;
 
 	# SSL configuration
-	# listen 443 ssl default_server;
-	# listen [::]:443 ssl default_server;
+	# listen	443 ssl default_server;
+	# listen	[::]:443 ssl default_server;
 
 	# The default root location
-	root /var/www/html/;
+	root		/var/www/html/;
 
-	index index.html;
+	index		index.html;
 
-	server_name _;
+	server_name		_;
+	server_name		cannontrail.baselinux.net;
 
 	location / {
 		try_files $uri $uri/ =404;
 	}
 
+
+	
+	location /sonoff/1/ {
+		proxy_pass				http://172.16.15.1:80/$uri/;
+		proxy_http_version		1.1;
+		#proxy_set_header		Upgrade				$http_upgrade;
+		#proxy_set_header		Connection			"upgrade";
+		proxy_set_header		X-Forwarded-Host	$proxy_host:$server_port;
+		proxy_set_header		X-Forwarded-Server	$host/$uri;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+        }
+	location /sonoff/2/ {
+		proxy_pass				http://172.16.15.2:80/$uri/;
+		proxy_http_version		1.1;
+		#proxy_set_header		Upgrade				$http_upgrade;
+		#proxy_set_header		Connection			"upgrade";
+		proxy_set_header		X-Forwarded-Host	$proxy_host:$server_port;
+		proxy_set_header		X-Forwarded-Server	$host/$uri;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+        }
+
+	location /sonoff/3/ {
+		proxy_pass				http://172.16.15.3:80/;
+		proxy_http_version		1.1;
+		proxy_set_header		Upgrade				$http_upgrade;
+		proxy_set_header		Connection			"upgrade";
+	}
+
 	location /nodered/ {
-		proxy_pass				http://172.16.2.4:1880;
-		proxy_set_header		Host $host;
-		proxy_set_header		X-Real-IP $remote_addr;
-		proxy_set_header		X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header		X-Forwarded-Proto $scheme;
+		proxy_pass				http://172.16.2.4:1880/;
+		proxy_set_header		Host				$host;
+		proxy_http_version		1.1;
+		proxy_set_header		X-Real-IP			$remote_addr;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+		proxy_set_header		X-Forwarded-Proto	$scheme;
 	}
 
 	location /pihole/ {
-		proxy_pass				http://172.16.2.12;
-		proxy_set_header		Host $host;
-		proxy_set_header		X-Real-IP $remote_addr;
-		proxy_set_header		X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_pass				http://172.16.2.12/admin/;
+		proxy_set_header		Host				$host;
+		proxy_http_version		1.1;
+		proxy_set_header		X-Real-IP			$remote_addr;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
 		proxy_set_header		X-Forwarded-Proto	$scheme;
 	}
 
 	location /camera/1/ {
-		proxy_pass				http://172.16.8.1;
+		proxy_pass				http://172.16.8.1/;
 		proxy_http_version		1.1;
 		proxy_set_header		Host				$host;
 		proxy_set_header		X-Real-IP			$remote_addr;
@@ -48,20 +81,56 @@ server {
 	}
 
 	location /camera/2/ {
-		proxy_pass				http://172.16.8.2;
+		proxy_pass				http://172.16.8.2/;
 		proxy_set_header		Host				$host;
+		proxy_http_version		1.1;
+		proxy_set_header		X-Real-IP			$remote_addr;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+		proxy_set_header		X-Forwarded-Proto	$scheme;
+	}
+
+	location /camera/3/ {
+		proxy_pass				http://172.16.8.3/;
+		proxy_set_header		Host				$host;
+		proxy_http_version		1.1;
+		proxy_set_header		X-Real-IP			$remote_addr;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+		proxy_set_header		X-Forwarded-Proto	$scheme;
+	}
+
+	location /camera/4/ {
+		proxy_pass				http://172.16.8.4/;
+		proxy_set_header		Host				$host;
+		proxy_http_version		1.1;
+		proxy_set_header		X-Real-IP			$remote_addr;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+		proxy_set_header		X-Forwarded-Proto	$scheme;
+	}
+
+	location /camera/5/ {
+		proxy_pass				http://172.16.8.5/;
+		proxy_set_header		Host				$host;
+		proxy_http_version		1.1;
+		proxy_set_header		X-Real-IP			$remote_addr;
+		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
+		proxy_set_header		X-Forwarded-Proto	$scheme;
+	}
+
+	location /camera/6/ {
+		proxy_pass				http://172.16.8.6/;
+		proxy_set_header		Host				$host;
+		proxy_http_version		1.1;
 		proxy_set_header		X-Real-IP			$remote_addr;
 		proxy_set_header		X-Forwarded-For		$proxy_add_x_forwarded_for;
 		proxy_set_header		X-Forwarded-Proto	$scheme;
 	}
 
 	#location /wsapp/ {
-	#	proxy_pass				http://wsbackend;
+	#	proxy_pass				http://wsbackend/;
 	#	proxy_http_version		1.1;
 	#	proxy_set_header 		Upgrade				$http_upgrade;
 	#	proxy_set_header		Connection			"upgrade";
 	#}
-
 }
 
 ### END DBK
