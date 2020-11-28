@@ -15,6 +15,7 @@ wireguard_address: "10.12.14.112/24"
 #usb_storage_drive_id: /dev/sdb
 
 host_functions:
+   - install_vnc
    #- function_pihole
    - function_none
 
