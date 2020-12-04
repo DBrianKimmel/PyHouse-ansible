@@ -1,0 +1,60 @@
+# Name:   roles/function_octoprint/tasks/update.yaml
+# Updated: 2020-12-03
+
+---
+
+- name: Task-00(Update)
+  debug:
+    msg:
+      - "     Path: {{ virtualenv_path }} = {{ _virtualenv_path }}"
+
+- name: Task-01(Update) - remove existing virtualenv
+  file:
+    path: "{{ _virtualenv_path }}"
+    state: absent
+  when: virtualenv_recreate
+
+- name: Task-02(Update) - create virtualenv
+  ignore_errors: true
+  pip:
+    name: "{{ virtualenv_default_package | default('pip') }}"
+    virtualenv: "{{ _virtualenv_path }}"
+    virtualenv_command: "{{ virtualenv_command | default(omit) }}"
+    virtualenv_python: "{{ virtualenv_python | default(omit) }}"
+    virtualenv_site_packages: "{{ virtualenv_site_packages | default(omit) }}"
+  register: _virtualenv_create_result
+  changed_when: >-
+    _virtualenv_create_result is succeeded and
+    (_virtualenv_create_result.stdout is search('New python executable') or
+    _virtualenv_create_result.stdout is search('created virtual environment'))
+  notify: "{{ virtualenv_notify_on_updated | default('virtualenv updated', true) }}"
+
+- name: Task-03(Update) - install virtualenv pre packages
+  ignore_errors: true
+  pip:
+    name: "{{ item.name | default(item, true) }}"
+    version: "{{ item.version | default(omit, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+    virtualenv: "{{ _virtualenv_path }}"
+  with_items: "{{ virtualenv_pre_packages }}"
+  notify: "{{ virtualenv_notify_on_updated | default('virtualenv updated', true) }}"
+
+- name: Task-04(Update) - install virtualenv requirements
+  ignore_errors: true
+  pip:
+    requirements: "{{ item }}"
+    virtualenv: "{{ _virtualenv_path }}"
+  with_items: "{{ virtualenv_requirements }}"
+  notify: "{{ virtualenv_notify_on_updated | default('virtualenv updated', true) }}"
+
+- name: Task-05(Update) - install virtualenv post packages
+  ignore_errors: true
+  pip:
+    name: "{{ virtualenv_post_packages }}"
+    version: "{{ item.version | default(omit, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+    virtualenv: "{{ _virtualenv_path }}"
+  notify: "{{ virtualenv_notify_on_updated | default('virtualenv updated', true) }}"
+
+  ### END DBK
+  

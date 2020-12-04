@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include setup_duckdns"
+      include_role:
+        name: "setup_duckdns"

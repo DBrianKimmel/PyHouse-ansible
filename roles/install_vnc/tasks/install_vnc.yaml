@@ -11,12 +11,36 @@
     - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
     - '{{ ansible_facts.os_family }}.yaml'
 
+- name: Task-02(TightVnc) - Info about variables
+  debug:
+    msg:
+      - "         Role: Install Vnc"
+      - " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
+      - "   Admin User: {{ admin_user_name }}"
+
 
 # Ignore errors if internet is down
-- name: Task-02(TightVnc) - install VNC server
+- name: Task-03(TightVnc) - install necessary packages.
   ignore_errors: true # Ignore errors if internet is down
   apt:
     name: "{{ vnc_package_list }}"
     state: present
+
+- name: Task-04(TightVnc) - Install service file.
+  ignore_errors: yes
+  template:
+    src: tightvnc.system.j2
+    dest: /lib/systemd/system/tightvnc.service
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Task-05(TightVnc) - Enable & start vnc.
+  ignore_errors: yes
+  systemd:
+    daemon_reload: true
+    enabled: true
+    state: restarted
+    name: tightvnc
 
 ### END DBK

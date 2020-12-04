@@ -1,0 +1,10 @@
+# Name:   roles/function_octoprint/tasks/main.yaml
+# Updated: 2020-11-12
+---
+
+# Allow this role to be skipped.
+- name: Task-01 
+  include_tasks: install.yaml
+  when: octoprint_role_enabled | bool
+
+### END DBK

@@ -15,7 +15,7 @@ wireguard_address: "10.12.14.108/24"
 #usb_storage_drive_id: /dev/sdb
 
 host_functions:
-   #- function_octoprint
+   - function_octoprint
    - function_none
 
 # ==============================

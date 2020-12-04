@@ -7,9 +7,8 @@ Description=TightVNC remote desktop server
 After=sshd.service 
 
 [Service] 
-Type=dbus 
 ExecStart=/usr/bin/tightvncserver :1 
-User=pi 
+User={{ admin_user_name }}
 Type=forking 
 
 [Install] 

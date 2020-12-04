@@ -1,0 +1,40 @@
+# Name:   roles/function_octoprint/defaults/main.yaml
+# Updated: 2020-12-03
+
+---
+
+octoprint_role_enabled: true
+octoprint_user_name: octo
+octoprint_dir: OctoPrint
+octoprint_path: '/home/{{ octoprint_user_name }}/{{ octoprint_dir }}/'
+octoprint_groups: "dialout,audio,video"
+
+pyh_octo_listen_port:           5000
+pyh_octo_webcam_port:           5111
+
+#=======================
+# Virtualenv definitions
+
+virtualenv_user: '{{ octoprint_user_name }}'
+virtualenv_path: '{{ octoprint_path }}/venv'
+virtualenv_os_packages: {}
+virtualenv_easy_install_packages: []
+virtualenv_global_packages: []
+virtualenv_pre_packages: []
+virtualenv_requirements: []
+virtualenv_post_packages:
+   - OctoPrint
+virtualenv_recreate: false
+
+virtualenv_default_os_packages:
+  apt:
+    - "{{ (ansible_distribution_major_version is version('20', '>=')) | ternary('python3-dev', 'python-dev') }}"
+    - "{{ (ansible_distribution_major_version is version('20', '>=')) | ternary('python3-virtualenv', 'python-virtualenv') }}"
+  dnf:
+    - python3-devel
+    - python3-virtualenv
+  yum:
+    - python-devel
+    - python-virtualenv
+
+### END DBK

@@ -1,0 +1,68 @@
+# Name:   roles/function_octoprint/tasks/main.yaml
+# Updated: 2020-12-03
+
+# tasks file for function_octoprint
+
+---
+
+- name: Task-01(Install) - determine current user
+  command: whoami
+  register: _virtualenv_whoami_result
+  changed_when: false
+  check_mode: false
+
+- name: Task-02(Install) - determine current user vs. actual user
+  set_fact:
+    _virtualenv_current_user: "{{ ansible_user | default(ansible_ssh_user, true) | default(ansible_user_id, true) | default(lookup('env', 'USER')) }}"
+    _virtualenv_actual_user: "{{ _virtualenv_whoami_result.stdout }}"
+
+- name: Task-03(Install) - initialize default role variables
+  set_fact:
+    _virtualenv_path: "{{ virtualenv_path | mandatory }}"
+    _virtualenv_user: "{{ virtualenv_user | default(_virtualenv_current_user, true) }}"
+    _virtualenv_becoming: "{{ (_virtualenv_actual_user != _virtualenv_current_user or _virtualenv_actual_user == 'root') | bool }}"
+
+- name: Task-04(Install) - install required os packages to create virtualenv
+  package:
+    name: "{{ item.name | default(item, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+  with_items: "{{ virtualenv_default_os_packages[ansible_pkg_mgr | default(none, true)] | default([]) }}"
+  when: _virtualenv_becoming
+
+- name: Task-05(Install) - install additional os packages to support virtualenv
+  package:
+    name: "{{ item.name | default(item, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+  with_items: "{{ virtualenv_os_packages[ansible_pkg_mgr | default(none, true)] | default([]) }}"
+  when: _virtualenv_becoming
+
+- name: Task-06(Install) - install global python packages with easy_install
+  easy_install:
+    executable: "{{ virtualenv_easy_install_executable | default(omit) }}"
+    name: "{{ item.name | default(item, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+  with_items: "{{ virtualenv_easy_install_packages }}"
+  when: _virtualenv_becoming
+
+- name: Task-07(Install) - install global python packages with pip
+  pip:
+    executable: "{{ virtualenv_pip_executable | default(omit) }}"
+    name: "{{ item.name | default(item, true) }}"
+    version: "{{ item.version | default(omit, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+  with_items: "{{ virtualenv_global_packages }}"
+  when: _virtualenv_becoming
+
+- name: Task-08(Install) - run update tasks with become
+  import_tasks: update.yaml
+  when: _virtualenv_user != _virtualenv_actual_user
+  become: true
+  become_user: "{{ _virtualenv_user }}"
+
+- name: Task-09(Install) - run update tasks without become
+  import_tasks: update.yaml
+  when: _virtualenv_user == _virtualenv_actual_user
+  become: false
+
+  ### END DBK
+  

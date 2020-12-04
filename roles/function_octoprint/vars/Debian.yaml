@@ -1,0 +1,9 @@
+# Name:   roles/function_octoprint/vars/Debian.yaml
+# Updated: 2020-12-03
+#
+#---
+
+pihole_package_list:
+   - python3-virtualenv
+
+### END DBK
