@@ -1,0 +1,7 @@
+# Name:   roles/function_email/defaults/main.yaml
+# Updated: 2020-12-07
+---
+
+email_role_enabled: true
+
+### END DBK

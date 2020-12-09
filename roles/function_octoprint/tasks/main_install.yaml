@@ -1,0 +1,23 @@
+# Name:   roles/function_octoprint/tasks/main_install.yaml
+# Updated: 2020-12-04
+
+---
+
+- name: Task-01(Install) - Info
+  debug:
+    msg:
+      - "Install Octoprint system (Main)    * * * O C T O P R I N T * * *"
+      - "Dist:            {{ ansible_os_family }}"
+      - "Admin User:      {{ admin_user_name }}"
+      - "Octoprint User:  {{ octoprint_user_name }}"
+
+- name: Task-02(Install) - Add the octo user
+  include_tasks: setup_octo_user.yaml
+
+- name: Task-03(Install) - Create the virtual environment
+  include_tasks: setup_virtualenv.yaml
+
+
+
+  ### END DBK
+  

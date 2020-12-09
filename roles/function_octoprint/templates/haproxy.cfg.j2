@@ -1,8 +1,5 @@
-# Name:    PyHouse-ansible/roles/install-octoprint/templates/haproxy.cfg.j2
-# Author:  D. Brian Kimmel
-# Created: 2018-07-07
-# Updated: 2018-07-08
-#
+# Name:    roles/function_octoprint/templates/haproxy.cfg.j2
+# Updated: 2020-12-03
 
 global
         maxconn 4096
@@ -33,10 +30,10 @@ frontend public
 backend octoprint
         reqrep ^([^\ :]*)\ /(.*)     \1\ /\2
         option forwardfor
-        server octoprint1 127.0.0.1:{{ pyh_octo_listen_port }}
+        server octoprint1 127.0.0.1:{{ octoprint_listen_port }}
 
 backend webcam
         reqrep ^([^\ :]*)\ /webcam/(.*)     \1\ /\2
-        server webcam1  127.0.0.1:{{ pyh_octo_webcam_port }}
+        server webcam1  127.0.0.1:{{ octoprint_webcam_port }}
 
 ### END DBK

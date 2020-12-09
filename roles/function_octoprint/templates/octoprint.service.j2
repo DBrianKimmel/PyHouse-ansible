@@ -1,0 +1,23 @@
+# Name:    roles/function_octoprint/templates/octpoprint.service.j2
+# Updated: 2020-12-04
+#
+
+[Unit]
+Description=The snappy web interface for your 3D printer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=PORT={{ octoprint_listen_port }}
+Environment=BASEDIR={{ octoprint_path }}/.octoprint
+Environment=CONFIGFILE={{ octoprint_path }}/.octoprint/config.yaml
+User={{ octoprint_user_name }}
+Group={{ octoprint_user_name }}
+Nice=-2
+ExecStart={{ virtualenv_dir }}/bin/octoprint serve --basedir ${BASEDIR} --config ${CONFIGFILE} --port ${PORT}
+
+[Install]
+WantedBy=multi-user.target
+
+### END DBK

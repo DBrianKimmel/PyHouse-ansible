@@ -16,6 +16,7 @@ wireguard_address: "10.12.14.105/24"
 
 host_functions:
    #- function_mqtt
+   - function_email
    - function_none
 
 vpn_enabled: yes

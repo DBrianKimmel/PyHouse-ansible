@@ -1,0 +1,28 @@
+# Name:   roles/function_email/tasks/main_install.yaml
+# Updated: 2020-12-07
+---
+
+- name: Task-01(Install) - Info about each computer in this play...
+  debug:
+    msg:
+      - " Roll: Function_email"
+      - "         Host: {{ ansible_host }}"
+      - " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
+
+- name: Task-02(Install) - set OS dependent variables.
+  include_vars: '{{ distribution_item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+  loop_control:
+     loop_var: distribution_item
+
+- name: Task-03(Install) - Install packages
+  package:
+    name: "{{ email_package_list }}"
+    state: present
+
+
+### END DBK

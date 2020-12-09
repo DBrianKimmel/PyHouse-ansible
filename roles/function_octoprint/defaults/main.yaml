@@ -4,13 +4,16 @@
 ---
 
 octoprint_role_enabled: true
+
 octoprint_user_name: octo
+octoprint_user_comment: Octoprint User
+octoprint_user_groups: "dialout,audio,video"
+
 octoprint_dir: OctoPrint
 octoprint_path: '/home/{{ octoprint_user_name }}/{{ octoprint_dir }}/'
-octoprint_groups: "dialout,audio,video"
 
-pyh_octo_listen_port:           5000
-pyh_octo_webcam_port:           5111
+octoprint_listen_port: 5000
+octoprint_webcam_port: 5111
 
 #=======================
 # Virtualenv definitions

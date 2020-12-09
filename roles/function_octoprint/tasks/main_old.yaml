@@ -13,52 +13,6 @@
 
 ---
 
-- name: MainTask-00 - main info for the role.
-  debug:
-    msg:
-      - "Install Octoprint system (Main)    * * * O C T O P R I N T * * *"
-      - " "
-      - "Dist:            {{ ansible_os_family }}"
-      - "Lsb:             {{ ansible_lsb }}"
-      - "Admin User:      {{admin_user_name}}"
-      - "Octoprint User:  {{pyh_octoprint_user}}"
-
-
-- name: MainTask-01 - Install apt packages
-  include_tasks:         ../roles/install-octoprint/tasks/install-extra-packages.yaml
-
-- name: MainTask-02 - Add User "octo"
-  include_tasks:            ../roles/common/tasks/add-user.yaml
-  vars:
-          p_user:           "{{ pyh_octo_user_name }}"
-          p_comment:        "{{ pyh_octo_user_comment}}"
-          p_groups:         "{{ pyh_octo_user_groups }}"
-
-- name: MainTask-03 - Create OctoPrint dir
-  ignore_errors:        yes
-  become_user:          root
-  become:               yes
-  file:
-    name:               "{{ pyh_octoprint_path }}"
-    state:              directory
-    owner:              "{{ pyh_octo_user_name }}"
-    group:              "{{ pyh_octo_user_name }}"
-    mode:               0755
-
-- name: MainTask-04 - Create Directory  ~/bin
-  ignore_errors:        yes
-  become_user:          root
-  become:               yes
-  file:
-    name:               "/home/{{ pyh_octo_user_name }}/bin"
-    state:              directory
-    owner:              '{{ pyh_octo_user_name }}'
-    group:              '{{ pyh_octo_user_name }}'
-    mode:               0755
-
-- name: MainTask-05 - Install virtualenv
-  include_tasks:         ../roles/install-octoprint/tasks/venv-setup.yaml
-
 - name: MainTask-06 - Copy files to ~/bin
   copy:
     src:                "./bin/"
@@ -66,15 +20,6 @@
     owner:              '{{ pyh_octo_user_name }}'
     group:              '{{ pyh_octo_user_name }}'
     mode:               0755
-
-#virtualenv venv
-#source venv/bin/activate
-#pip install pip --upgrade
-#pip install https://get.octoprint.org/latest
-
-
-
-
 
 
 # From: github.com/alanquillin/OctoPrint-Ansible

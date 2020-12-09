@@ -1,0 +1,26 @@
+# Name:    roles/function_octoprint/tasks/haproxy.yaml
+# Updated: 2020-12-04
+
+---
+
+- name: Task-01(HaProxy) - Copy haproxy.cfg
+  template:
+    src:                haproxy.cfg.j2
+    dest:               /etc/haproxy/haproxy.cfg
+  tags:
+    - haproxy
+
+- name: Task-01(HaProxy) - Update /etc/default/haproxy
+  lineinfile:
+    dest:               /etc/default/haproxy
+    state:              present
+    regexp:             '^#?\s*ENABLED\s*=\s*'
+    line:               'ENABLED=1'
+
+- name: Task-03(HaProxy) - Enable and start haproxy service
+  service:
+    name:               haproxy
+    enabled:            yes
+    state:              started
+
+### END DBK

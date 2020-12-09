@@ -1,0 +1,12 @@
+# Name:   roles/function_pihole/vars/Debian.yaml
+# Updated: 2020-11-12
+#
+#---
+
+email_package_list:
+   - postfix
+   - mailutils
+   - dovecot-common
+   - dovecot-imapd
+
+### END DBK

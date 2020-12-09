@@ -1,10 +1,10 @@
-# Name:   roles/function_octoprint/tasks/main.yaml
-# Updated: 2020-11-12
+# Name:   roles/function_email/tasks/main.yaml
+# Updated: 2020-12-07
 ---
 
 # Allow this role to be skipped.
 - name: Task-01(Main) - Are we going to do this?
   include_tasks: main_install.yaml
-  when: octoprint_role_enabled | bool
+  when: email_role_enabled | bool
 
 ### END DBK
