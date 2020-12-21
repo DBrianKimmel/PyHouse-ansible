@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include function_rtlsdr"
+      include_role:
+        name: "function_rtlsdr"

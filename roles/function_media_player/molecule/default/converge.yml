@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include function_media_player"
+      include_role:
+        name: "function_media_player"

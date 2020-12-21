@@ -15,6 +15,7 @@ wireguard_address: "10.12.14.111/24"
 #usb_storage_drive_id: /dev/sdb
 
 host_functions:
+   - function_rtlsdr
    - function_none
 
 # ==============================

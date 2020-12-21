@@ -4,7 +4,7 @@
 ---
 
 - name: Task-01(User) - Add User "octo"
-  include_tasks:            ../roles/common/tasks/add-user.yaml
+  include_tasks:            ../../roles/common/tasks/add_user.yaml
   vars:
           p_user:           "{{ octoprint_user_name }}"
           p_comment:        "{{ octoprint_user_comment }}"

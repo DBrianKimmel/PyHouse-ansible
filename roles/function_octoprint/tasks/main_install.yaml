@@ -14,10 +14,7 @@
 - name: Task-02(Install) - Add the octo user
   include_tasks: setup_octo_user.yaml
 
-- name: Task-03(Install) - Create the virtual environment
-  include_tasks: setup_virtualenv.yaml
+#- name: Task-03(Install) - Create the virtual environment
+#  include_tasks: setup_virtualenv.yaml
 
-
-
-  ### END DBK
-  
+## END DBK

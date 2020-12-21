@@ -1,0 +1,22 @@
+# Name:    PyHouse-ansible/roles/common/tasks/add-user.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-09-18
+# Updated: 2018-06-30
+
+#   include_tasks:         "../roles/common/tasks/add-user.yaml p_user={{ pyh_user_name }} p_comment={{ pyh_user_comment}} p_groups={{ pyh_user_groups }}"
+
+# TODO: Add user to /etc/sudoers.d/user
+
+
+---
+
+# Create the user
+
+# Called with include_task: add-user pyh_user_name pyh_user_comment pyh_user_groups
+- name: Add_user-task-01 - Add User
+  user:
+    name: "{{ p_user }}"
+    comment: "{{ p_comment }}"
+    groups: "{{ p_groups }}"
+
+### END DBK

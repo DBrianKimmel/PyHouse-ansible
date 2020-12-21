@@ -10,8 +10,8 @@ basic_hostname: pi-07-ct
 wireguard_address: "10.12.14.107/24"
 
 host_functions:
-  - harden_linux
-  - finalize
+   - function_media_player
+   - function_none
 
 # ==============================
 # The following should probably be left as defined.
