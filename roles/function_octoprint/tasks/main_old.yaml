@@ -26,13 +26,13 @@
 
 - name: MainTask-07 - set fact
   set_fact:
-    virtualenv_dir:     "{{ pyh_octoprint_path }}/.env"
+    virtualenv_dir:     "{{ pyh_octoprint_rc_path }}/.env"
     listen_port:        "{{ pyh_octo_listen_port }}"
 
 - name: MainTask-08 - Download OctoPrint source
   git:
     repo:               https://github.com/foosel/OctoPrint.git
-    dest:               "{{ pyh_octoprint_path }}/clone"
+    dest:               "{{ pyh_octoprint_src_path }}/clone"
   become:               yes
   become_user:          "{{ pyh_octo_user_name }}"
 

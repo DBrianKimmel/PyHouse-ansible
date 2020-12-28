@@ -2,6 +2,8 @@
 
 Install octoprint in s virtual environment on a remote Rasperry Pi.
 
+https://community.octoprint.org/t/setting-up-octoprint-on-a-raspberry-pi-running-raspbian-or-raspberry-pi-os/2337
+
 ## Requirements
 
 Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here.
@@ -11,14 +13,12 @@ For instance, if the role uses the EC2 module, it may be a good idea to mention 
 
 The following variables may be defined to customize this role:
 
-- `virtualenv_path`: Target directory in which to create/update virtualenv (required).
+- `octoprint_venv_path`: Target directory in which to create/update virtualenv (required).
 - `virtualenv_user`: User to become for creating/updating the virtualenv;
    default is the current user (i.e. `ansible_user` or `ansible_ssh_user`).
 - `virtualenv_default_os_packages`: OS packages required in order to create a virtualenv
    There is usually no need to change this option unless running on a system using a different `ansible_pkg_mgr`;
    default is `{ apt: ['python-dev', 'python-virtualenv'], yum: ['python-devel', 'python-virtualenv'] }`.
-- `virtualenv_os_packages`: OS packages to install to support the virtualenv, indexed by `ansible_pkg_mgr`;
-   default is `{}`.
 - `virtualenv_easy_install_packages`: Python packages to install globally using `easy_install`;
    default is `[]`.
 - `virtualenv_easy_install_executable`: Alternate executable to use for global `easy_install` packages;
@@ -108,7 +108,7 @@ requirements, then removes an old package no longer needed:
       roles:
         - name: cchurch.virtualenv
           vars:
-            virtualenv_path: ~/env
+            octoprint_venv_path: ~/env
             virtualenv_os_packages:
               apt: [libjpeg-dev]
               yum: [libjpeg-devel]
@@ -124,7 +124,7 @@ requirements, then removes an old package no longer needed:
       handlers:
         - name: custom virtualenv handler
           debug:
-            msg: "virtualenv in {{ virtualenv_path }} was updated."
+            msg: "virtualenv in {{ octoprint_venv_path }} was updated."
           listen: virtualenv updated
 ```
 

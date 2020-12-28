@@ -1,0 +1,36 @@
+# Name: roles/function_octopeint/tasks/setup_3_octoprint_latest.yaml
+# Updated: 2020-12-22
+
+---
+
+- name: Task-01(Octo) - Check if /home/octo/OctoPrint/.git exists.
+  stat:
+    path: "{{ octoprint_src_path }}"
+  register: stat_result_octoprint
+
+- name: Task-02(Octo) - Info.
+  debug:
+    msg:
+      - "Install Octoprint main package"
+      - " .git Stat_results: {{ stat_result_octoprint }}"
+
+- name: Task-03(Octo) - Upgrade OctoPrint source.
+  shell: "/home/octo/venv/bin/pip3 install --no-cache-dir octoprint --upgrade"
+  become: true
+  become_user: "{{ octoprint_user_name }}"
+  ignore_errors: true
+  when: stat_result_octoprint.stat.exists == True
+
+- name: Task-04(Octo) - Fresh install of OctoPrint source on new installation.
+  shell: "/home/octo/venv/bin/pip3 install --no-cache-dir octoprint"
+  become: true
+  become_user: "{{ octoprint_user_name }}"
+  ignore_errors: true
+  when: stat_result_octoprint.stat.exists != True
+
+- name: Task-05(Octo) - Install OctoPrint systemd service Unit.
+  template:
+    src: octoprint.service.j2
+    dest: "/etc/systemd/system/octoprint.service"
+
+### END DBK

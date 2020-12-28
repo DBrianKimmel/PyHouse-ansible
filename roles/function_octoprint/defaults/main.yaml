@@ -7,20 +7,44 @@ octoprint_role_enabled: true
 
 octoprint_user_name: octo
 octoprint_user_comment: Octoprint User
-octoprint_user_groups: "dialout,audio,video"
+octoprint_user_groups: "dialout,audio,video,sudo"
 
-octoprint_dir: OctoPrint
-octoprint_path: '/home/{{ octoprint_user_name }}/{{ octoprint_dir }}/'
+octoprint_src_dir_name: OctoPrint
+octoprint_streamer_dir_name: mjpg-streamer
+octoprint_config_dir_name: .octoprint
+octoprint_venv_dir_name: venv
+
+octoprint_home_dir: '/home/{{ octoprint_user_name }}'
+octoprint_additional_directories:
+   - bin
+   - "{{ octoprint_config_dir_name }}"
+   - "{{ octoprint_src_dir_name }}"
+   - "{{ octoprint_streamer_dir_name }}"
+   - "{{ octoprint_venv_dir_name }}"
+
+octoprint_src_path: '{{ octoprint_home_dir }}/{{ octoprint_src_dir_name }}'
+octoprint_streamer_path: "{{ octoprint_home_dir }}/{{ octoprint_streamer_dir_name }}"
+octoprint_config_path: "{{ octoprint_home_dir }}/{{ octoprint_config_dir_name }}"
+octoprint_venv_path: "{{ octoprint_home_dir }}/{{ octoprint_venv_dir_name }}"
+
+# venv
+octoprint_venv_becomming_user: "{{ octoprint_user_name }}"
+octoprint_venv_os_package_list: []
+
+octoprint_main_git_url: https://github.com/foosel/OctoPrint.git
+octoprint_streamer_git_url:  https://github.com/jacksonliam/mjpg-streamer.git
 
 octoprint_listen_port: 5000
-octoprint_webcam_port: 5111
+octoprint_camera_port: 5111
+
+octoprint_main_package_list: []
+octoprint_camera_package_list: []
+
 
 #=======================
 # Virtualenv definitions
 
 virtualenv_user: '{{ octoprint_user_name }}'
-virtualenv_path: '{{ octoprint_path }}/venv'
-virtualenv_os_packages: {}
 virtualenv_easy_install_packages: []
 virtualenv_global_packages: []
 virtualenv_pre_packages: []
@@ -29,15 +53,23 @@ virtualenv_post_packages:
    - OctoPrint
 virtualenv_recreate: false
 
-virtualenv_default_os_packages:
-  apt:
-    - "{{ (ansible_distribution_major_version is version('20', '>=')) | ternary('python3-dev', 'python-dev') }}"
-    - "{{ (ansible_distribution_major_version is version('20', '>=')) | ternary('python3-virtualenv', 'python-virtualenv') }}"
-  dnf:
-    - python3-devel
-    - python3-virtualenv
-  yum:
-    - python-devel
-    - python-virtualenv
+# /home
+# └── octo
+#     ├── bin
+#     │   ├── start-camera
+#     │   ├── start-octoprint
+#     │   └── stop-octoprint
+#     ├── mjpg-streamer
+#     ├── OctoPrint
+#     ├── .octoprint
+#     └── venv
+#         ├── bin
+#         │   ├── activate
+#         │   ├── easy-install
+#         │   └── octoprint
+#         ├── include
+#         ├── lib
+#         └── share
+
 
 ### END DBK

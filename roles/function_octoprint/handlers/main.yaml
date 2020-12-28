@@ -6,7 +6,7 @@
 
 - name: virtualenv default handler
   debug:
-    msg: 'Updated virtualenv at {{ virtualenv_path }}.'
+    msg: 'Updated virtualenv at {{ octoprint_venv_path }}.'
   listen: virtualenv updated
 
 ### END DBK

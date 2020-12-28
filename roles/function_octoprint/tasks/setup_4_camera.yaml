@@ -1,0 +1,36 @@
+# Name:    roles/functionoctoprint/tasks/setup-camera.yaml
+# Author:  D. Brian Kimmel
+# Created: 2018-07-05
+# Updated: 2020-12-21
+
+---
+
+- name: Task-01(Camera) - Check if /home/octo/mjpg-streamer/.git exists.
+  stat:
+    path: "{{ octoprint_src_path }}"
+  register: stat_result_streamer
+
+# sudo apt install subversion libjpeg62-turbo-dev imagemagick ffmpeg libv4l-dev cmake
+- name: Task-03(Camera) - install required OS packages to create streamer.
+  package:
+    name: "{{ item.name | default(item, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+  with_items: "{{ octoprint_camera_package_list | default([]) }}"
+  #when: _virtualenv_becoming
+
+# git clone https://github.com/jacksonliam/mjpg-streamer.git
+- name: Task-05(Camera) - Download mjpg streamer source.
+  git:
+    repo: "{{ octoprint_streamer_git_url }}"
+    dest: "{{ octoprint_home_dir }}/{{ octoprint_streamer_dir_name }}"
+    update: true
+  become: true
+  become_user: "{{ octoprint_user_name }}"
+  ignore_errors: true
+  when: stat_result_streamer.stat.exists != True
+
+# cd mjpg-streamer/mjpg-streamer-experimental
+# export LD_LIBRARY_PATH=.
+# make
+
+### END DBK

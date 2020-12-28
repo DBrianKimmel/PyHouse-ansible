@@ -4,7 +4,7 @@ MY_NAME="all-pis"
 
 INVENTORY="-i ./inventories/hosts.yaml "
 PLAYBOOK="playbooks/${MY_NAME}/${MY_NAME}.yaml"
-DEBUG+" "
+DEBUG=" "
 #DEBUG="-vvv "
 
 CUR_DIR=`pwd`

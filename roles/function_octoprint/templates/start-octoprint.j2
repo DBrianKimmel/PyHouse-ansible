@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# name:      roles/function_octoprint/files/bin/start-octoprint
+# author:    D. Brian Kimmel
+# copyright: (c) 2018-2021 by D. Brian Kimmel
+# license:   MIT License
+# Summary:   This starts OctoPrint
+# Created: 2018-07-05
+# Updated: 2020-12-21
+
+echo "Starting the OctoPrint system"
+cd ~
+source '{{ octoprint_venv_path }}/bin/activate'
+> nohup.out
+nohup '{{ octoprint_venv_path }}'/bin/octoprint serve  1>/dev/null 2>&1 </dev/null &
+cd
+
+### END DBK

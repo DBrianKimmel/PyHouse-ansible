@@ -1,20 +1,63 @@
 # Name:   roles/function_octoprint/tasks/main_install.yaml
-# Updated: 2020-12-04
+# Updated: 2020-12-24
 
 ---
 
-- name: Task-01(Install) - Info
+# cd ~
+# sudo apt update
+# sudo apt install python3-pip python3-dev python3-setuptools python3-venv git libyaml-dev build-essential
+# mkdir OctoPrint && cd OctoPrint
+# python3 -m venv venv
+# source venv/bin/activate
+
+- name: Task-01(Install) - Starting install of OctoPrint on the following computers.
   debug:
     msg:
       - "Install Octoprint system (Main)    * * * O C T O P R I N T * * *"
-      - "Dist:            {{ ansible_os_family }}"
-      - "Admin User:      {{ admin_user_name }}"
-      - "Octoprint User:  {{ octoprint_user_name }}"
+      - "         Host: {{ ansible_host }}"
+      - " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
 
-- name: Task-02(Install) - Add the octo user
-  include_tasks: setup_octo_user.yaml
+- name: Task-02(Install) - set OS dependent variables.
+  include_vars: '{{ distribution_item }}'
+  with_first_found:
+    - '{{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.distribution }}.yaml'
+    - '{{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml'
+    - '{{ ansible_facts.os_family }}.yaml'
+  loop_control:
+     loop_var: distribution_item
 
-#- name: Task-03(Install) - Create the virtual environment
-#  include_tasks: setup_virtualenv.yaml
+- name: Task-03(Install) - Add the octo user
+  ignore_errors: true
+  include_tasks: setup_1_octo_user.yaml
+
+- name: Task-04(Install) - Create the virtual environment
+  ignore_errors: true
+  include_tasks: setup_2_virtualenv.yaml
+
+- name: Task-05(Install) - Create the virtual environment
+  ignore_errors: true
+  include_tasks: setup_3_octoprint_latest.yaml
+
+- name: Task-06(Install) - Create 
+  ignore_errors: true
+  include_tasks: setup_4_camera.yaml
+
+- name: Task-07(Install) - Create 
+  ignore_errors: true
+  include_tasks: setup_5_haproxy.yaml
+
+- name: Task-08(Install) - Create
+  ignore_errors: true
+  include_tasks: setup_6_autologin.yaml
+
+- name: Task-09Install) - Create 
+  ignore_errors: true
+  include_tasks: setup_7_avahi.yaml
+
+- name: Task-99(Install) - Finished install of OctoPrint.
+  debug:
+    msg:
+      - "Install Octoprint system (Main)    * * * O C T O P R I N T * * *"
 
 ## END DBK

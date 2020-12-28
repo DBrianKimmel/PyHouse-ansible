@@ -15,18 +15,20 @@
 # format: :[current folder]-(num files and total size)-Cores: (num active cores) at (cpu temperature)>
 # CPU readings thanks to DietPi (/DietPi/dietpi/dietpi-cpuinfo)
 
-ESC="\033["
+ESC="\e["
 END="\]"
-NORMAL="\033[m"
-MAGENTA="\033[35m"
+NORMAL="\e[m"
+MAGENTA="\e[35m"
+BRT_BLUE="\e[94m"
 BRT_RED="\033[38;5;9m"
 BRT_GREEN="\033[92m"
 BRT_YELLOW="\033[93m"
 BRT_CYAN="\033[96m"
 BRT_WHITE="\033[97m"
+PS_AT="${BRT_WHITE}@"
 
 # The celcius character
-CEL=$'\xE2\x84\x83'
+DEGREE=$( echo -e "\xE2\x84\x83C${NORMAL}" )
 
 CPU_TEMP_CURRENT='Unknown'
 CPU_TEMP_PRINT='Unknown'
@@ -40,8 +42,7 @@ aFP_TEMPERATURE=(
 )
 
 Obtain_Cpu_Temp(){
-	for ((i=0; i<${#aFP_TEMPERATURE[@]}; i++))
-	do
+	for ((i=0; i<${#aFP_TEMPERATURE[@]}; i++)); do
 		if [ -f "${aFP_TEMPERATURE[$i]}" ]; then
 			CPU_TEMP_CURRENT=$(cat "${aFP_TEMPERATURE[$i]}")
 			# - Some devices (pine) provide 2 digit output, some provide a 5 digit ouput.
@@ -50,17 +51,17 @@ Obtain_Cpu_Temp(){
 				CPU_TEMP_CURRENT=$( echo -e "$CPU_TEMP_CURRENT" | awk '{print $1/1000}' | xargs printf "%0.0f" )
             fi
             if (( $CPU_TEMP_CURRENT >= 70 )); then
-				CPU_TEMP_PRINT="${BRT_RED}Warning: $CPU_TEMP_CURRENT'c${NORMAL}"
+				CPU_TEMP_PRINT="${BRT_RED}Warning: $CPU_TEMP_CURRENT${DEGREE}"
             elif (( $CPU_TEMP_CURRENT >= 60 )); then
-				CPU_TEMP_PRINT="\e[38;5;202m$CPU_TEMP_CURRENT'c\e[0m"
+				CPU_TEMP_PRINT="\e[38;5;202m$CPU_TEMP_CURRENT${DEGREE}"
             elif (( $CPU_TEMP_CURRENT >= 50 )); then
-				CPU_TEMP_PRINT="${BRT_YELLOW}$CPU_TEMP_CURRENT'c\e[0m"
+				CPU_TEMP_PRINT="${BRT_YELLOW}$CPU_TEMP_CURRENT${DEGREE}"
             elif (( $CPU_TEMP_CURRENT >= 40 )); then
-				CPU_TEMP_PRINT="${BRT_GREEN}$CPU_TEMP_CURRENT'c\e[0m"
+				CPU_TEMP_PRINT="${BRT_GREEN}$CPU_TEMP_CURRENT${DEGREE}"
             elif (( $CPU_TEMP_CURRENT >= 30 )); then
-            	CPU_TEMP_PRINT="${BRT_CYAN}$CPU_TEMP_CURRENT${CEL}${NORMAL}"
+            	CPU_TEMP_PRINT="${BRT_CYAN}$CPU_TEMP_CURRENT${DEGREE}"
             else
-				CPU_TEMP_PRINT="${BRT_CYAN}$CPU_TEMP_CURRENT${CEL}${NORMAL}"
+				CPU_TEMP_PRINT="${BRT_CYAN}$CPU_TEMP_CURRENT${DEGREE}"
             fi
 			break
 		fi
@@ -68,22 +69,16 @@ Obtain_Cpu_Temp(){
 }
 
 Obtain_Cpu_Temp
-
 PS_TIME="${NORMAL}|${MAGENTA}\t${NORMAL}|"
-PS_HOST="${BRT_GREEN}\h${NORMAL} "
-
 if [ "`id -u`" -eq 0 ]; then
 	PS_USER="${BRT_RED}\u${NORMAL}"
 else
 	PS_USER="${NORMAL}\u${NORMAL}"
 fi
-
-PS_CORES="  ${BRT_WHITE}${ACTIVECORES} Cores @ "
-
-PS_TEMP="${PS_RANGE}${CPU_TEMP_CURRENT}${CEL}${ESC}0m${END}"
-
-FOLDER="${ESC}0m${END}:${ESC}0m${END}${ESC}1;32m${END}[\w]${ESC}0m${END}-${ESC}36;1m${END}(\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed 's: ::g') files, \$(LC_ALL=C /bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')b)"
-
-PS1="${PS_TIME}${PS_USER}${BRT_WHITE}@${NORMAL} ${PS_HOST} ${PS_CORES} $CPU_TEMP_PRINT\e[32m> \[\e[0m\]"
+PS_HOST="${BRT_GREEN}\h${NORMAL}:"
+PS_CORES="${BRT_WHITE}${ACTIVECORES}-Cores@"
+PS_TEMP="${PS_RANGE}${CPU_TEMP_CURRENT}${CEL}"
+FOLDER="${NORMAL}:${ESC}1;32m${END}[\w]${ESC}0m${END}-${ESC}36;1m${END}(\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed 's: ::g') files, \$(LC_ALL=C /bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')b)"
+PS1="${PS_TIME}${PS_USER}${PS_AT}${PS_HOST}${PS_CORES}${CPU_TEMP_PRINT}${FOLDER}${NORMAL}> "
 
 ### END DBK

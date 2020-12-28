@@ -5,81 +5,21 @@
 
 ---
 
-- name: OctoprintTask-01 - Create OctoPrint dir
-  ignore_errors:        yes
-  become_user:          root
-  become:               yes
-  file:
-    name:               "{{ pyh_octoprint_path }}"
-    state:              directory
-    owner:              "{{ pyh_octo_user_name }}"
-    group:              "{{ pyh_octo_user_name }}"
-    mode:               0755
-
-- name: MainTask-04 - Create Directory  ~/bin
-  ignore_errors:        yes
-  become_user:          root
-  become:               yes
-  file:
-    name:               "/home/{{ pyh_octo_user_name }}/bin"
-    state:              directory
-    owner:              '{{ pyh_octo_user_name }}'
-    group:              '{{ pyh_octo_user_name }}'
-    mode:               0755
-
-- name: MainTask-05 - Install virtualenv
-  include_tasks:         ../roles/install-octoprint/tasks/venv-setup.yaml
-
-- name: MainTask-06 - Copy files to ~/bin
-  copy:
-    src:                "./bin/"
-    dest:               "/home/{{ pyh_octo_user_name }}/bin"
-    owner:              '{{ pyh_octo_user_name }}'
-    group:              '{{ pyh_octo_user_name }}'
-    mode:               0755
 
 #virtualenv venv
 #source venv/bin/activate
 #pip install pip --upgrade
 #pip install https://get.octoprint.org/latest
 
-
-
-
-
-
-# From: github.com/alanquillin/OctoPrint-Ansible
-
 - name: MainTask-07 - set fact
   set_fact:
-    virtualenv_dir:     "{{ pyh_octoprint_path }}/.env"
+    virtualenv_dir:     "{{ pyh_octoprint_src_path }}/.env"
     listen_port:        "{{ pyh_octo_listen_port }}"
 
 - name: MainTask-08 - Download OctoPrint source
   git:
     repo:               https://github.com/foosel/OctoPrint.git
-    dest:               "{{ pyh_octoprint_path }}/clone"
-  become:               yes
-  become_user:          "{{ pyh_octo_user_name }}"
-
-- name: MainTask-09
-  stat:
-    path:               "{{ virtualenv_dir }}/bin/activate"
-  register:             virtualenv_stats
-
-- name: MainTask-10 - Create virtualenv {{ virtualenv_dir }} (if it does not already exist)
-  command: "{{item}}"
-  with_items:
-    - virtualenv --prompt="(OctoPrint) " {{ virtualenv_dir }}
-  become:               yes
-  become_user:          "{{ pyh_octo_user_name }}"
-  when:                 not virtualenv_stats.stat.exists
-
-- name: MainTask-11 - Update pip
-  pip: 
-    name:               pip
-    state:              latest
-    virtualenv:         "{{ virtualenv_dir }}"
+    dest:               "{{ pyh_octoprint_src_path }}/clone"
   become:               yes
   become_user:          "{{ pyh_octo_user_name }}"
 

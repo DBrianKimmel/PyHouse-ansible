@@ -1,5 +1,5 @@
 # Name:    roles/function_octoprint/templates/octpoprint.service.j2
-# Updated: 2020-12-04
+# Updated: 2020-12-22
 #
 
 [Unit]
@@ -10,12 +10,13 @@ Wants=network-online.target
 [Service]
 Type=simple
 Environment=PORT={{ octoprint_listen_port }}
-Environment=BASEDIR={{ octoprint_path }}/.octoprint
-Environment=CONFIGFILE={{ octoprint_path }}/.octoprint/config.yaml
+Environment=BASEDIR={{ octoprint_home_dir }}/.octoprint
+Environment=CONFIGFILE={{ octoprint_home_dir }}/.octoprint/config.yaml
 User={{ octoprint_user_name }}
 Group={{ octoprint_user_name }}
 Nice=-2
-ExecStart={{ virtualenv_dir }}/bin/octoprint serve --basedir ${BASEDIR} --config ${CONFIGFILE} --port ${PORT}
+# /home/octo/OctoPrint/venv/bin/octoprint
+ExecStart={{ octoprint_venv_path }}/bin/octoprint serve --basedir ${BASEDIR} --config ${CONFIGFILE} --port ${PORT}
 
 [Install]
 WantedBy=multi-user.target
