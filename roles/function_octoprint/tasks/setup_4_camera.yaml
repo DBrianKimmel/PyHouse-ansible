@@ -1,7 +1,6 @@
-# Name:    roles/functionoctoprint/tasks/setup-camera.yaml
+# Name:    roles/function_octoprint/tasks/setup_4_camera.yaml
 # Author:  D. Brian Kimmel
-# Created: 2018-07-05
-# Updated: 2020-12-21
+# Updated: 2020-12-28
 
 ---
 
@@ -29,7 +28,13 @@
   ignore_errors: true
   when: stat_result_streamer.stat.exists != True
 
-# cd mjpg-streamer/mjpg-streamer-experimental
+- name: Task-06(Camera) - Make
+  environment:
+     LD_LIBRARY_PATH: '.'
+  community.general.make:
+     chdir: "{{ octoprint_streamer_src_path }}"
+     target: all
+# cd ~/mjpg-streamer/mjpg-streamer-experimental
 # export LD_LIBRARY_PATH=.
 # make
 

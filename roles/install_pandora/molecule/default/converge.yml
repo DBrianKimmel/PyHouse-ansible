@@ -1,7 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-    - name: "Include install_pandora"
-      include_role:
-        name: "install_pandora"

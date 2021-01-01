@@ -16,6 +16,10 @@
       - "Install Octoprint system (Main)    * * * O C T O P R I N T * * *"
       - "         Host: {{ ansible_host }}"
       - " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
+      - " Distribution: {{ ansible_distribution }}, {{ ansible_facts.distribution }}"
+      - " MajorVersion: {{ ansible_facts.distribution_major_version }}"
+      - "    Os Family: {{ ansible_os_family }}"
+      - "          Lsb: {{ ansible_lsb }}"
 
 - name: Task-02(Install) - set OS dependent variables.
   include_vars: '{{ distribution_item }}'
@@ -27,31 +31,42 @@
   loop_control:
      loop_var: distribution_item
 
-- name: Task-03(Install) - Add the octo user
+- name: Task-03(install) - Check if /home/octo exists.
+  stat:
+     path: "{{ octoprint_home_dir }}"
+  register: stat_result_user
+
+- name: Task-04(Install) - Fresh install or not.
+  set_fact:
+     octoprint_initial_install: true
+  when: stat_result_user.stat.exists != true
+
+- name: Task-05(Install) - Add the octo user
   ignore_errors: true
   include_tasks: setup_1_octo_user.yaml
+  when: octoprint_initial_install
 
-- name: Task-04(Install) - Create the virtual environment
+- name: Task-06(Install) - Create the virtual environment
   ignore_errors: true
   include_tasks: setup_2_virtualenv.yaml
 
-- name: Task-05(Install) - Create the virtual environment
+- name: Task-07(Install) - Create the virtual environment
   ignore_errors: true
   include_tasks: setup_3_octoprint_latest.yaml
 
-- name: Task-06(Install) - Create 
+- name: Task-08(Install) - Create 
   ignore_errors: true
   include_tasks: setup_4_camera.yaml
 
-- name: Task-07(Install) - Create 
+- name: Task-09(Install) - Create 
   ignore_errors: true
   include_tasks: setup_5_haproxy.yaml
 
-- name: Task-08(Install) - Create
+- name: Task-10(Install) - Create
   ignore_errors: true
   include_tasks: setup_6_autologin.yaml
 
-- name: Task-09Install) - Create 
+- name: Task-11Install) - Create 
   ignore_errors: true
   include_tasks: setup_7_avahi.yaml
 

@@ -1,9 +1,5 @@
-# Name:    PyHouse-ansible/roles/install-pandora/tasks/install-extra-packages.yaml
-# Author:  D. Brian Kimmel
-# Created: 2018-06-20
-# Updated: 2018-06-20
-#
-# The extra node  names are stored in "pyh_extra_apt_packages" in each host_vars file that installs .
+# Name:    roles/function_media_player/tasks/install_packages.yaml
+# Updated: 2020-12-30
 #
 ---
 

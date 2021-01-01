@@ -29,6 +29,7 @@
       - "Current User: {{ _virtualenv_current_user }}"
       - " Actual User: {{ _virtualenv_actual_user }}"
       - "    Becoming: {{ _virtualenv_becoming }} - {{ virtualenv_user }}"
+      - " InitialInstall: {{ octoprint_initial_install }}"
 
 - name: Task-05(VirtualEnv) - install required OS packages to create virtualenv.
   package:

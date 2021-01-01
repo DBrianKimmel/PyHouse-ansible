@@ -13,6 +13,7 @@
     create_home: true
     password: $6$tiuFB7p31L$G2Z/NoFyTEz18HwOsbaTPh4fM5rSq1nratdP8YhFjyR7U6xwC7KLg4GKOGaKXLOBr6TfZBTzUN63Afp11ZOan.
     state: present
+  when: octoprint_initial_install
 
 - name: Task-02(User) - Create 'OctoPrint' directory.
   package:
@@ -84,12 +85,12 @@
   template:
     src:                "sudoers.j2"
     dest:               "/etc/sudoers.d/{{ octoprint_user_name }}"
-    mode:               0755
+    mode:               0600
 
 - name: Task-04(User) - Create '~/.ssh' directory.
   ignore_errors:        yes
   file:
-    name:               "{{ octoprint_home_dir }}/ssh"
+    name:               "{{ octoprint_home_dir }}/.ssh"
     state:              directory
     owner:              '{{ octoprint_user_name }}'
     group:              '{{ octoprint_user_name }}'

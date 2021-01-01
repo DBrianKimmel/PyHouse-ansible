@@ -7,8 +7,8 @@
   template:
     src:                haproxy.cfg.j2
     dest:               /etc/haproxy/haproxy.cfg
-  tags:
-    - haproxy
+#  tags:
+#    - haproxy
 
 - name: Task-02(HaProxy) - Update /etc/default/haproxy.
   lineinfile:

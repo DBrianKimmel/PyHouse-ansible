@@ -17,6 +17,7 @@ octoprint_venv_dir_name: venv
 octoprint_home_dir: '/home/{{ octoprint_user_name }}'
 octoprint_additional_directories:
    - bin
+   - .ssh
    - "{{ octoprint_config_dir_name }}"
    - "{{ octoprint_src_dir_name }}"
    - "{{ octoprint_streamer_dir_name }}"
@@ -24,6 +25,7 @@ octoprint_additional_directories:
 
 octoprint_src_path: '{{ octoprint_home_dir }}/{{ octoprint_src_dir_name }}'
 octoprint_streamer_path: "{{ octoprint_home_dir }}/{{ octoprint_streamer_dir_name }}"
+octoprint_streamer_src_path: "{{ octoprint_streamer_path }}/mjpg-streamer-experimental"
 octoprint_config_path: "{{ octoprint_home_dir }}/{{ octoprint_config_dir_name }}"
 octoprint_venv_path: "{{ octoprint_home_dir }}/{{ octoprint_venv_dir_name }}"
 
@@ -40,6 +42,7 @@ octoprint_camera_port: 5111
 octoprint_main_package_list: []
 octoprint_camera_package_list: []
 
+octoprint_initial_install: false
 
 #=======================
 # Virtualenv definitions
@@ -61,15 +64,15 @@ virtualenv_recreate: false
 #     │   └── stop-octoprint
 #     ├── mjpg-streamer
 #     ├── OctoPrint
+#     │   └── venv
+#     │       ├── bin
+#     │       │   ├── activate
+#     │       │   ├── easy-install
+#     │       │   └── octoprint
+#     │       ├── include
+#     │       ├── lib
+#     │       └── share
 #     ├── .octoprint
-#     └── venv
-#         ├── bin
-#         │   ├── activate
-#         │   ├── easy-install
-#         │   └── octoprint
-#         ├── include
-#         ├── lib
-#         └── share
-
+#     └── .ssh
 
 ### END DBK

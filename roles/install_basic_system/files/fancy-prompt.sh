@@ -1,84 +1,96 @@
 # Name:    PyHouse-ansible/roles/install-basic-system/files/fancy-prompt.sh
 # Author:  D. Brian Kimmel
 # Created: 2018-07-19
-# Updated: 2020-10-03
-#
-# This will 
-#
-# add to .bashrc
-# |<Time>|<User>@<HostName>:<Current-Dir>
-# <Time> = Current Time (light red)
-# <User> = Logged in user (black bold = Normal user; Red = Root)
-# <HostName> = Host Name (green = last command OK; red = error occurred)
-# <Current-dir> = Current Directory ()
+# Updated: 2021-01-01
 
-# format: :[current folder]-(num files and total size)-Cores: (num active cores) at (cpu temperature)>
-# CPU readings thanks to DietPi (/DietPi/dietpi/dietpi-cpuinfo)
+NORMAL="\[\e[0m\]"
+RED="\[\e[0;31m\]"
+GREEN="\[\e[0;32m\]"
+YELLOW="\[\e[0;33m\]"
+BLUE="\[\e[0;34m\]"
+MAGENTA="\[\e[0;35m\]"
+CYAN="\[\e[0;36m\]"
+WHITE="\[\e[0;37m\]"
+BRT_RED="\[\e[1;31m\]"
+BRT_GREEN="\[\e[1;32m\]"
+BRT_YELLOW="\[\e[1;33m\]"
+BRT_BLUE="\[\e[94m\]"
+BRT_CYAN="\[\e[96m\]"
+BRT_WHITE="\[\e[97m\]"
 
-ESC="\e["
-END="\]"
-NORMAL="\e[m"
-MAGENTA="\e[35m"
-BRT_BLUE="\e[94m"
-BRT_RED="\033[38;5;9m"
-BRT_GREEN="\033[92m"
-BRT_YELLOW="\033[93m"
-BRT_CYAN="\033[96m"
-BRT_WHITE="\033[97m"
-PS_AT="${BRT_WHITE}@"
-
-# The celcius character
-DEGREE=$( echo -e "\xE2\x84\x83C${NORMAL}" )
-
-CPU_TEMP_CURRENT='Unknown'
-CPU_TEMP_PRINT='Unknown'
+TEMP=9876.543
 ACTIVECORES=$(grep -c processor /proc/cpuinfo)
 
-#Array to store possible locations for temp read.
-aFP_TEMPERATURE=(
-        '/sys/class/thermal/thermal_zone0/temp'
-        '/sys/devices/platform/sunxi-i2c.0/i2c-0/0-0034/temp1_input'
-        '/sys/class/hwmon/hwmon0/device/temp_label'
-)
-
-Obtain_Cpu_Temp(){
-	for ((i=0; i<${#aFP_TEMPERATURE[@]}; i++)); do
-		if [ -f "${aFP_TEMPERATURE[$i]}" ]; then
-			CPU_TEMP_CURRENT=$(cat "${aFP_TEMPERATURE[$i]}")
-			# - Some devices (pine) provide 2 digit output, some provide a 5 digit ouput.
-			#       So, If the value is over 1000, we can assume it needs converting to 1'c
-			if (( $CPU_TEMP_CURRENT >= 1000 )); then
-				CPU_TEMP_CURRENT=$( echo -e "$CPU_TEMP_CURRENT" | awk '{print $1/1000}' | xargs printf "%0.0f" )
-            fi
-            if (( $CPU_TEMP_CURRENT >= 70 )); then
-				CPU_TEMP_PRINT="${BRT_RED}Warning: $CPU_TEMP_CURRENT${DEGREE}"
-            elif (( $CPU_TEMP_CURRENT >= 60 )); then
-				CPU_TEMP_PRINT="\e[38;5;202m$CPU_TEMP_CURRENT${DEGREE}"
-            elif (( $CPU_TEMP_CURRENT >= 50 )); then
-				CPU_TEMP_PRINT="${BRT_YELLOW}$CPU_TEMP_CURRENT${DEGREE}"
-            elif (( $CPU_TEMP_CURRENT >= 40 )); then
-				CPU_TEMP_PRINT="${BRT_GREEN}$CPU_TEMP_CURRENT${DEGREE}"
-            elif (( $CPU_TEMP_CURRENT >= 30 )); then
-            	CPU_TEMP_PRINT="${BRT_CYAN}$CPU_TEMP_CURRENT${DEGREE}"
-            else
-				CPU_TEMP_PRINT="${BRT_CYAN}$CPU_TEMP_CURRENT${DEGREE}"
-            fi
-			break
-		fi
-	done
-}
-
-Obtain_Cpu_Temp
+# The celcius character
+PS_DEGREE=$( echo -e "\xE2\x84\x83C${NORMAL}" )
+PS_AT="${BRT_WHITE}@"
+PS_CORES="${BRT_WHITE}${ACTIVECORES}-Cores@"
 PS_TIME="${NORMAL}|${MAGENTA}\t${NORMAL}|"
 if [ "`id -u`" -eq 0 ]; then
 	PS_USER="${BRT_RED}\u${NORMAL}"
 else
-	PS_USER="${NORMAL}\u${NORMAL}"
+	PS_USER="${GREEN}\u${NORMAL}"
 fi
 PS_HOST="${BRT_GREEN}\h${NORMAL}:"
-PS_CORES="${BRT_WHITE}${ACTIVECORES}-Cores@"
-PS_TEMP="${PS_RANGE}${CPU_TEMP_CURRENT}${CEL}"
-FOLDER="${NORMAL}:${ESC}1;32m${END}[\w]${ESC}0m${END}-${ESC}36;1m${END}(\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed 's: ::g') files, \$(LC_ALL=C /bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')b)"
-PS1="${PS_TIME}${PS_USER}${PS_AT}${PS_HOST}${PS_CORES}${CPU_TEMP_PRINT}${FOLDER}${NORMAL}> "
+PS_FOLDER="${NORMAL}:${BRT_GREEN}[\w]${NORMAL}-${BRT_CYAN}(\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed 's: ::g') files, \$(LC_ALL=C /bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')b)"
+
+#######################################
+# Classify the temp
+#######################################
+classify_temp () {
+	PS_RANGE="Unclassified: "
+    if   (( ${TEMP} >= 70 )); then
+		PS_RANGE="${BRT_RED}Danger: "
+    elif (( ${TEMP} >= 60 )); then
+		PS_RANGE="${RED}Warning: "
+    elif (( ${TEMP} >= 50 )); then
+		PS_RANGE="${BRT_YELLOW}Caution: "
+    elif (( ${TEMP} >= 40 )); then
+		PS_RANGE="${BRT_GREEN}Good: "
+    elif (( ${TEMP} >= 30 )); then
+    	PS_RANGE="${BRT_CYAN}Normal: "
+    else
+    	PS_RANGE="${WITE}Guess: "
+    fi
+}
+#######################################
+# Normalize the temperature
+# - Some devices (pine) provide 2 digit output, some provide a 5 digit ouput.
+#   If the value is over 1000, we can assume it needs converting.
+#######################################
+function normalize_temp () {
+	if (( ${TEMP} >= 1000 )); then
+		TEMP=$( echo -e "${TEMP}" | awk '{print $1/1000}' | xargs printf "%0.0f" )
+    fi
+}
+#Array to store possible locations for temp read.
+aFP_TEMPERATURE=(
+    '/sys/class/thermal/thermal_zone0/temp'
+    '/sys/devices/platform/sunxi-i2c.0/i2c-0/0-0034/temp1_input'
+    '/sys/class/hwmon/hwmon0/device/temp_label'
+)
+#######################################
+# Obtain the CPU temperature
+# GLOBALS:
+#   TEMP
+#######################################
+function get_temp () {
+	TEMP=1
+	for (( ix=0; i<${#aFP_TEMPERATURE[@]}; ix++ )); do
+		if [ -f "${aFP_TEMPERATURE[$ix]}" ]; then
+			TEMP=$(cat "${aFP_TEMPERATURE[$ix]}")
+			normalize_temp
+			classify_temp
+			PS_TEMP="${PS_RANGE}${TEMP}${PS_DEGREE}"
+			break
+		fi
+	done
+}
+function build_prompt () {
+	get_temp
+	PS1="${PS_TIME}${PS_USER}${PS_AT}${PS_HOST}${PS_CORES}${PS_TEMP}${PS_FOLDER}${NORMAL}> "
+}
+
+PROMPT_COMMAND=build_prompt
 
 ### END DBK

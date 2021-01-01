@@ -22,7 +22,7 @@
   when: stat_result_octoprint.stat.exists == True
 
 - name: Task-04(Octo) - Fresh install of OctoPrint source on new installation.
-  shell: "/home/octo/venv/bin/pip3 install --no-cache-dir octoprint"
+  shell: "/home/octo/venv/bin/pip install --no-cache-dir octoprint"
   become: true
   become_user: "{{ octoprint_user_name }}"
   ignore_errors: true

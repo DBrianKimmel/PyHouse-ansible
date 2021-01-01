@@ -1,0 +1,11 @@
+---
+
+octoprint_main_package_list:
+   - git
+
+octoprint_venv_os_package_list:
+   - python3-venv
+
+octoprint_camera_package_list: []
+
+### END DBK

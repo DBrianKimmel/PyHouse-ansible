@@ -1,12 +1,10 @@
-# Name:    PyHouse-ansible/roles/install-pandora/vars/pandora.yaml
-# Author:  D. Brian Kimmel
-# Created: 2018-06-20
+# Name:    roles/function_media_player/vars/Debian.yaml
 # Updated: 2018-06-20
 
 ---
 
 # These packages are needed before we can install the PyHouse git repository
-pyh_extra_apt_packages:
+media_player_packages:
     - git
     - screen
     - pianobar
