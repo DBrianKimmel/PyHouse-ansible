@@ -1,0 +1,17 @@
+# Name:     inventories/host_vars/alki-01-pp.yaml
+# Author:  D. Brian Kimmel
+# Created: 2017-10-13
+# Updated: 2021-05-16
+
+---
+ansible_host: pinkpoppy.asuscomm.com
+ansible_port: 2254
+
+pyh_hostname: Alki
+pyh_ipv4_ethernet_addr: 172.16.1.54
+pyh_ipv4_wifi_addr: 172.16.1.54
+pyh_roles: control,ansible,pyhouse,ipv6tunnel
+
+admin_user_groups: dialout,sudo,audio,video,plugdev,input
+
+### END DBK

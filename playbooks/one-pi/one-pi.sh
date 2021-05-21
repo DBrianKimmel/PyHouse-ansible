@@ -4,7 +4,7 @@ MY_NAME="one-pi"
 
 INVENTORY="-i ./inventories/hosts.yaml "
 PLAYBOOK="playbooks/${MY_NAME}/${MY_NAME}.yaml"
-DEBUG=" "
+DEBUG=" -vvv "  # -vvv "
 
 CUR_DIR=`pwd`
 WORK_DIR=${HOME}

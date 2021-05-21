@@ -1,7 +1,7 @@
-# Name:    PyHouse-ansible/inventories/hosts.yaml
+# Name:    PyHouse-ansible/inventories/host_vars/alki-01-pp.yaml
 # Author:  D. Brian Kimmel
 # Created: 2017-09-18
-# Updated: 2020-10-04
+# Updated: 2021-05-16
 #
 # localhost ansible_connection=local
 #   [localhost]
@@ -15,7 +15,7 @@ all:
       pinkpoppy:
          hosts:
             pi-01-pp:
-            #pi-02-pp:
+            pi-02-pp:
             pi-03-pp:
             pi-04-pp:
             pi-05-pp:
@@ -26,6 +26,7 @@ all:
             pi-10-pp:
             pi-11-pp:
             pi-12-pp:
+            alki-01-pp:
             # nuc-01-pp:
             # nas-01-pp:
             # router01-pp:

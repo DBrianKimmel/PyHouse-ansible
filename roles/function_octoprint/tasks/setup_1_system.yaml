@@ -1,0 +1,14 @@
+# Name: roles/function_octoprint/tasks/setup_1_system.yaml
+# Updated: 2021-01-02
+
+# The first step of creating an octoprint Raspbrry Pi.
+# Update the system software 
+---
+
+- name: Task-01(System) - install required OS packages.
+  package:
+    name: "{{ item.name | default(item, true) }}"
+    state: "{{ item.state | default('present', true) }}"
+  with_items: "{{ octoprint_os_package_list | default([]) }}"
+
+### END DBK

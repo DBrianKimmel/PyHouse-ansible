@@ -1,11 +1,22 @@
-# Name: roles/function_octoprint/tasks/setup_octo_user.yml
+# Name: roles/function_octoprint/tasks/setup_octo_user.yaml
 # Updated: 2020-12-24
 
 # The first step of creating an octoprint Raspbrry Pi.
 # Create the user 'octo' that will run octoprint on powerup.
 ---
 
-- name: Task-01(User) - Add User "octo".
+- name: Task-01(User) - Check if /home/octo exists.
+  stat:
+     path: "{{ octoprint_home_dir }}"
+  register: stat_result_user
+
+- name: Task-02(User) - Fresh install or not.
+  set_fact:
+     octoprint_initial_install: true
+  when: stat_result_user.stat.exists != true
+
+
+- name: Task-03(User) - Add User "octo".
   user:
     name: "{{ octoprint_user_name }}"
     comment: "{{ octoprint_user_comment }}"
@@ -15,49 +26,17 @@
     state: present
   when: octoprint_initial_install
 
-- name: Task-02(User) - Create 'OctoPrint' directory.
-  package:
-    name: "{{ item.name | default(item, true) }}"
-    state: "{{ item.state | default('present', true) }}"
-  with_items: "{{ octoprint_main_package_list | default([]) }}"
-
-- name: Task-03(User) - Create 'OctoPrint' directory.
+- name: Task-04(User) - Create all the user dirs we will need.
   ignore_errors:        yes
   file:
-    name:               "{{ octoprint_src_path }}"
+    name: "{{ item.name | default(item, true) }}"
     state:              directory
     owner:              "{{ octoprint_user_name }}"
     group:              "{{ octoprint_user_name }}"
-    mode:               0755
+    mode:               0750
+  with_items: "{{ octoprint_additional_directories }}"
 
-- name: Task-04(User) - Create '~/bin' directory.
-  ignore_errors:        yes
-  file:
-    name:               "{{ octoprint_home_dir }}/bin"
-    state:              directory
-    owner:              '{{ octoprint_user_name }}'
-    group:              '{{ octoprint_user_name }}'
-    mode:               0755
-
-- name: Task-05(User) - Create '~/.octoprint' directory.
-  ignore_errors:        yes
-  file:
-    name:               "{{ octoprint_home_dir }}/.octoprint"
-    state:              directory
-    owner:              '{{ octoprint_user_name }}'
-    group:              '{{ octoprint_user_name }}'
-    mode:               0755
-
-- name: Task-06(User) - Create '~/venv' directory.
-  ignore_errors:        yes
-  file:
-    name:               "{{ octoprint_home_dir }}/venv"
-    state:              directory
-    owner:              '{{ octoprint_user_name }}'
-    group:              '{{ octoprint_user_name }}'
-    mode:               0755
-
-- name: Task-07(User) - Create start-octoprint command in ~/bin directory.
+- name: Task-05(User) - Create start-octoprint command in ~/bin directory.
   template:
     src:                "start-octoprint.j2"
     dest:               "{{ octoprint_home_dir }}/bin/start-octoprint"
@@ -65,7 +44,7 @@
     group:              '{{ octoprint_user_name }}'
     mode:               0755
 
-- name: Task-08(User) - Create stop-octoprint command in ~/bin directory.
+- name: Task-06(User) - Create stop-octoprint command in ~/bin directory.
   template:
     src:                "stop-octoprint.j2"
     dest:               "{{ octoprint_home_dir }}/bin/stop-octoprint"
@@ -73,7 +52,7 @@
     group:              '{{ octoprint_user_name }}'
     mode:               0755
 
-- name: Task-09(User) - Create start-camera command in ~/bin directory.
+- name: Task-07(User) - Create start-camera command in ~/bin directory.
   template:
     src:                "start-camera.j2"
     dest:               "{{ octoprint_home_dir }}/bin/start-camera"
@@ -81,19 +60,10 @@
     group:              '{{ octoprint_user_name }}'
     mode:               0755
 
-- name: Task-10(User) - Create sudoers file
+- name: Task-08(User) - Create sudoers file
   template:
     src:                "sudoers.j2"
     dest:               "/etc/sudoers.d/{{ octoprint_user_name }}"
     mode:               0600
-
-- name: Task-04(User) - Create '~/.ssh' directory.
-  ignore_errors:        yes
-  file:
-    name:               "{{ octoprint_home_dir }}/.ssh"
-    state:              directory
-    owner:              '{{ octoprint_user_name }}'
-    group:              '{{ octoprint_user_name }}'
-    mode:               0700
 
 ### END DBK

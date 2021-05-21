@@ -1,4 +1,4 @@
-# Name:    PyHouse-ansible/roles/install-basic-system/files/fancy-prompt.sh
+# Name:    roles/install-basic-system/files/fancy-prompt.sh
 # Author:  D. Brian Kimmel
 # Created: 2018-07-19
 # Updated: 2021-01-01

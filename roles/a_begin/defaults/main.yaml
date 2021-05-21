@@ -5,7 +5,7 @@
 # defaults file for a_begin
 
 # To allow this role to be turned off.
-begin_role_enabled: false
+begin_role_enabled: true
 
 begin_roles_to_run:
    - update_system

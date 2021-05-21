@@ -1,0 +1,26 @@
+# Name:   inventories/group_vars/pinkpoppy/network.yaml
+# Updated: 2020-10-04
+#
+---
+
+network_prefix: '172.16.'
+network_ipv4_gateway: 172.16.0.5
+
+
+
+pyh_ipv4_ethernet_addr: 172.16.2.6
+pyh_ipv4_wifi_addr: 172.16.4.6
+pyh_ipv6_ethernet_addr: ':2:6'
+pyh_ipv6_wifi_addr: ':3:6'
+pyh_roles: setup
+
+# These are only for setup - normally they are in a group_vars file for the house we are using
+pyh_ipv4_router_addr: 172.16.0.5
+pyh_ipv4_router_prefix_len: 19
+wifi_access_points: {'PinkPoppy': 'Koepfinger-59'}
+pyh_router_nameservers: "172.16.2.5 1.1.1.1"
+
+# these are normaly in a group_vars file for the type of computer
+admin_user_groups: adm,dialout,sudo,audio,video,plugdev,input,netdev,spi,i2c,gpio
+
+### END DBK

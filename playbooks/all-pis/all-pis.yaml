@@ -1,5 +1,5 @@
 # Name:    playbooks/all-pis.yaml
-# Updated: 2020-10-29
+# Updated: 2021-05-16
 
 # This playbook will first install the basic system that goes on every computer.
 # Then it will add the pyh_roles to specialize that computer.
@@ -10,7 +10,7 @@
 
 - name: Play-01 - All-Pis - Starting play;;;
   # hosts: pi-05-pp
-  hosts: pinkpoppy
+  hosts: pinkpoppy # all cannontrail pinkpoppy
   connection: ssh
   remote_user: root
   become: true

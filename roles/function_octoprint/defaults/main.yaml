@@ -21,7 +21,7 @@ octoprint_additional_directories:
    - "{{ octoprint_config_dir_name }}"
    - "{{ octoprint_src_dir_name }}"
    - "{{ octoprint_streamer_dir_name }}"
-   - "{{ octoprint_venv_dir_name }}"
+   # - "{{ octoprint_venv_dir_name }}"
 
 octoprint_src_path: '{{ octoprint_home_dir }}/{{ octoprint_src_dir_name }}'
 octoprint_streamer_path: "{{ octoprint_home_dir }}/{{ octoprint_streamer_dir_name }}"
@@ -31,7 +31,7 @@ octoprint_venv_path: "{{ octoprint_home_dir }}/{{ octoprint_venv_dir_name }}"
 
 # venv
 octoprint_venv_becomming_user: "{{ octoprint_user_name }}"
-octoprint_venv_os_package_list: []
+octoprint_os_package_list: []
 
 octoprint_main_git_url: https://github.com/foosel/OctoPrint.git
 octoprint_streamer_git_url:  https://github.com/jacksonliam/mjpg-streamer.git
@@ -39,7 +39,6 @@ octoprint_streamer_git_url:  https://github.com/jacksonliam/mjpg-streamer.git
 octoprint_listen_port: 5000
 octoprint_camera_port: 5111
 
-octoprint_main_package_list: []
 octoprint_camera_package_list: []
 
 octoprint_initial_install: false

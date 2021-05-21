@@ -1,5 +1,5 @@
 # Name: roles/function_octopeint/tasks/setup_virtualenv.yml
-# Updated: 2020-12-22
+# Updated: 2021-01-03
 
 # Based on:  https://github.com/cchurch/ansible-role-virtualenv
 ---
@@ -30,13 +30,6 @@
       - " Actual User: {{ _virtualenv_actual_user }}"
       - "    Becoming: {{ _virtualenv_becoming }} - {{ virtualenv_user }}"
       - " InitialInstall: {{ octoprint_initial_install }}"
-
-- name: Task-05(VirtualEnv) - install required OS packages to create virtualenv.
-  package:
-    name: "{{ item.name | default(item, true) }}"
-    state: "{{ item.state | default('present', true) }}"
-  with_items: "{{ octoprint_venv_os_package_list | default([]) }}"
-  when: _virtualenv_becoming
 
 - name: Task-06(VirtualEnv) - install global python packages with easy_install.
   easy_install:

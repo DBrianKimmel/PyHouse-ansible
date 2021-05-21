@@ -10,6 +10,14 @@
 # python3 -m venv venv
 # source venv/bin/activate
 
+# pip install pip --upgrade
+# pip install octoprint
+
+# sudo usermod -a -G tty pi
+# sudo usermod -a -G dialout pi
+
+
+
 - name: Task-01(Install) - Starting install of OctoPrint on the following computers.
   debug:
     msg:
@@ -31,22 +39,20 @@
   loop_control:
      loop_var: distribution_item
 
-- name: Task-03(install) - Check if /home/octo exists.
-  stat:
-     path: "{{ octoprint_home_dir }}"
-  register: stat_result_user
 
-- name: Task-04(Install) - Fresh install or not.
-  set_fact:
-     octoprint_initial_install: true
-  when: stat_result_user.stat.exists != true
-
-- name: Task-05(Install) - Add the octo user
+- name: Task-03(Install) - Prepare the system for octoprint.
   ignore_errors: true
-  include_tasks: setup_1_octo_user.yaml
+  include_tasks: setup_1_system.yaml
   when: octoprint_initial_install
 
-- name: Task-06(Install) - Create the virtual environment
+
+- name: Task-06(Install) - Add the octo user
+  ignore_errors: true
+  include_tasks: setup_2_octo_user.yaml
+  when: octoprint_initial_install
+
+
+- name: Task-07(Install) - Create the virtual environment
   ignore_errors: true
   include_tasks: setup_2_virtualenv.yaml
 
