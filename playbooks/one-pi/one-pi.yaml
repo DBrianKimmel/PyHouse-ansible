@@ -8,7 +8,7 @@
 ---
 
 - name: Play-01 - All-Pis - Starting play;;;
-  hosts: pi-03-ct
+  hosts: pi-04-pp
   remote_user: root
   become: true
 
