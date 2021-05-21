@@ -1,4 +1,5 @@
 #!/bin/bash
+# 
 
 # It used to be that the workspace was kept on some local computer.
 # Now it is kept on the NAS box and a copy is fetched when starting up work (somehow?)
