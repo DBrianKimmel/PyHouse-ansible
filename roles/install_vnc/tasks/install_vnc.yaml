@@ -1,5 +1,5 @@
 # Name:   roles/install_vnc/tasks/install_vnc.yaml
-# Updated: 2020-10-20
+# Updated: 2021-05-21
 #
 ---
 
@@ -35,7 +35,31 @@
     group: root
     mode: 0600
 
-- name: Task-05(TightVnc) - Enable & start vnc.
+- name: Task-05(TightVnc) - Create .vnc dirs
+  file:
+    path: "/home/{{ admin_user_name }}/.vnc"
+    state: directory
+    mode: 0755
+    owner: "{{ admin_user_name }}"
+    group: "{{ admin_user_name }}"
+
+- name: Task-06(TightVnc) - Set vnc passwords tightvnc
+  shell: |
+    set -o pipefail
+    echo {{ vnc_server_password }} | vncpasswd -f > /home/{{ admin_user_name }}/.vnc/passwd
+  args:
+    chdir: "/home/{{ admin_user_name }}/.vnc"
+    creates: "/home/{{ admin_user_name }}/.vnc/passwd"
+    executable: /bin/bash
+
+- name: Task-07(TightVnc) - Set perms on vnc passwords
+  file:
+    path: "/home/{{ admin_user_name }}/.vnc/passwd"
+    owner: "{{ admin_user_name }}"
+    group: "{{ admin_user_name }}"
+    mode: 0700
+
+- name: Task-08(TightVnc) - Enable & start vnc.
   ignore_errors: yes
   systemd:
     daemon_reload: true

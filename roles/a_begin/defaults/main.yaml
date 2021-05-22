@@ -8,13 +8,14 @@
 begin_role_enabled: true
 
 begin_roles_to_run:
-   - update_system
+   - update_system  # Be sure apt is up to date
    - setup_avahi
    - setup_hostname
    - setup_security
    - setup_ssh
-   - setup_time_service
+   - setup_time_services
    - setup_usb_boot
+   - install_vnc
 
 # packages used on all computers - by distribution, release type.
 begin_basic_package_list: []

@@ -2,14 +2,15 @@
 
 MY_NAME="all-pis"
 
-NFS_DIR="/NFS/Vcs/Workbenches/PyHouse-ansible/"
+NFS_DIR="/NFS/Vcs/Workbenches/"
 INVENTORY="-i ./inventories/hosts.yaml "
 PLAYBOOK="playbooks/${MY_NAME}/${MY_NAME}.yaml"
 DEBUG=" "
 #DEBUG=" -vvv "
 
 CUR_DIR=`pwd`
-WORK_DIR=${HOME}
+#WORK_DIR=${HOME}
+WORK_DIR=${NFS_DIR}
 
 # Add 'Shared' if it is in the path (New scheme)
 if [ -d ${WORK_DIR}/Shared ] ; then

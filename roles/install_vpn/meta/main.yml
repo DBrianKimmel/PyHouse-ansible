@@ -1,9 +1,9 @@
 # Name:   roles/install_vpn/meta/main.yaml
 ---
 galaxy_info:
-  author: your nameD. Brian Kimmel
+  author: D. Brian Kimmel
   description: Creator
-  company: PyHousse.org
+  company: PyHouse.org
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value

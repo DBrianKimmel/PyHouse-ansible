@@ -9,4 +9,7 @@ vnc_tightvnc_enabled: true
 # A list of packages to be instlled by this role
 vnc_package_list: []
 
+# A default password (This is a bad thing!)
+vnc_server_password: 'evilpass'
+
 ### END DBK
