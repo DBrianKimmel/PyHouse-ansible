@@ -1,7 +1,7 @@
 # Name:    PyHouse-ansible/roles/install_basic_system/tasks/main.yaml
 # Author:  D. Brian Kimmel
 # Created: 2018-06-27
-# Updated: 2020-10-12
+# Updated: 2021-05-23
 #
 # This role will do the basics on each computer.
 #
@@ -19,14 +19,14 @@
 
 - name: Task-02 - main info for debugging the role.
   debug:
-    msg:
-      - "      Lsb: {{ ansible_lsb | default('test_default_token') }}"
-      - "     User: {{ admin_user_name | default('test_default_token') }}"
-      - "     Dist: {{ ansible_os_family | default('test_default_token') }}"
-      - "     Host: {{ hostname_hostname | default('test_default_token') }}"
-      - "     Role: {{ pyh_roles | default('test_default_token') }}"
-      - "  Gateway: {{ gateway_router | default('test_default_totken') }}"
-      - "Host Role: {{ host_roles | default('test_default_totken') }}"
+    msg: |
+      "Lsb: {{ ansible_lsb | default('test_default_token') }}"
+      "User: {{ admin_user_name | default('test_default_token') }}"
+      "Dist: {{ ansible_os_family | default('test_default_token') }}"
+      "Host: {{ hostname_hostname | default('test_default_token') }}"
+      "Role: {{ pyh_roles | default('test_default_token') }}"
+      "Gateway: {{ gateway_router | default('test_default_totken') }}"
+      "Host Role: {{ host_roles | default('test_default_totken') }}"
 
 - name: Task-02 - setup Host
   include_tasks: setup_hostname.yaml

@@ -1,4 +1,5 @@
 # Name:   install-wifi/tasks/main.yaml
+# Updated: 2021-05-23
 ---
 
 - name: Task-01 - Ensure /etc/wpa_supplicant exists and is group writable.
@@ -16,9 +17,9 @@
 - name: Install-WiFi-Task-02 - debug
   ignore_errors: true
   debug:
-    msg:
-      - "User: {{ admin_user_name }}"
-      - "AP:   {{ wifi_access_points }}"
+    msg: |
+      "User: {{ admin_user_name }}"
+      "AP:   {{ wifi_access_points }}"
 
 - name: Install-WiFi WiFi-Task-03 - Install the wpa_supplicant file
   ignore_errors: true

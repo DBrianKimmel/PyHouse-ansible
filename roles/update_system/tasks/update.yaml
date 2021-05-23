@@ -1,14 +1,14 @@
 # Name    roles/update_system/tasks/update.yaml
-# Updated: 2020-11-08
+# Updated: 2021-05-23
 #
 ---
 
 - name: Task-01(Update) - Info
   debug:
-    msg:
-      - " Role Update System"
-      - "  Distribution: {{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}"
-      - "     OS Family: {{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml"
+    msg: |
+      " Role: Update System"
+      "  Distribution: {{ ansible_facts.distribution }}_{{ ansible_facts.distribution_major_version }}"
+      "     OS Family: {{ ansible_facts.os_family }}_{{ ansible_facts.distribution_major_version }}.yaml"
 
 - name: Task-02(Update) - set OS dependent variables.
   include_vars: '{{ item }}'

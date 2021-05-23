@@ -13,10 +13,10 @@
 
 - name: Task-02(TightVnc) - Info about variables
   debug:
-    msg:
-      - "         Role: Install Vnc"
-      - " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
-      - "   Admin User: {{ admin_user_name }}"
+    msg: |
+      " Role: Install Vnc"
+      " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
+      "   Admin User: {{ admin_user_name }}"
 
 
 # Ignore errors if internet is down

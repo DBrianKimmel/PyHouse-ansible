@@ -1,25 +1,19 @@
 # Name:   roles/a_begin/tasks/a_begin.yaml
-# Updated: 2020-10-18
-#
-# Set up all computers the same with basic functionality for me.
-#
-#---
+# Updated: 2021-05-23
+---
 
 - name: Task-01(Begin) - Info about each computer in this play...
   debug:
-    msg:
-      - "         Role:   a_begin/tasks/a_begin.yaml"
-      - "   Admin_User: {{ admin_user_name | default('Missing Admin_user_name') }}"
-      - "         Host: {{ ansible_facts.hostname | default('Missing Host Name') }}"
-      - " Distribution: {{ ansible_facts.distribution }}: {{ ansible_facts.distribution_major_version }}"
-
-
-#      - "    Os Family: {{ ansible_os_family }}"
-#      - "          Lsb: {{ ansible_lsb }}"
+    msg: |
+      "         Role:   a_begin/tasks/a_begin.yaml"
+      "   Admin_User: {{ admin_user_name | default('Missing Admin_user_name') }}"
+      "         Host: {{ ansible_facts.hostname | default('Missing Host Name') }}"
+      " Distribution: {{ ansible_facts.distribution }}: {{ ansible_facts.distribution_major_version }}"
+#      "    Os Family: {{ ansible_os_family }}"
+#      "          Lsb: {{ ansible_lsb }}"
 
 # ansible_os_family:   Debian, RedHat, Suse, Darwin, 
 # ansible_lsb.id:   Raspbian, Ubuntu, Suse
-#
 
 - name: Task-02(Begin) - do the next step in 'begin_roles_to_run'.
   include_role:

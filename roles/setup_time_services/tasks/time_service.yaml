@@ -3,9 +3,9 @@
 #
 ---
 
-- name: Task_01(Timeervice) Debug
+- name: Task_01(TimeService) - Debug.
   debug:
-    msg:
-      - "Time Services"
+    msg: |
+      "Time Services"
 
 ### END DBK

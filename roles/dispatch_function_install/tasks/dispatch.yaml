@@ -5,9 +5,9 @@
 
 - name: Task-01(Dispatch) - Dispatch
   debug:
-    msg:
-      - "--- Dispatch_function_install ---"
-      - "   Host Functions: {{ host_functions }}"
+    msg: |
+      "--- Role: Dispatch_function_install ---"
+      "   Host Functions: {{ host_functions }}"
 
 - name: Task-02(Dispatch) - do the next step in host_functions (defined in the given host_vars yaml file).
   ignore_errors: true

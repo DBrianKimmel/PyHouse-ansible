@@ -1,14 +1,11 @@
 # Name:   roles/a_begin/defaults/main.yaml
-# Updated: 2020-11-08
-#
+# Updated: 2021-05-23
 ---
-# defaults file for a_begin
-
 # To allow this role to be turned off.
 begin_role_enabled: true
 
 begin_roles_to_run:
-   - update_system  # Be sure apt is up to date
+   - update_system  # Be sure 'apt' is up to date
    - setup_avahi
    - setup_hostname
    - setup_security
