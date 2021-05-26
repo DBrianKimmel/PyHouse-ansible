@@ -1,17 +1,14 @@
 # Name:    roles/function_pihole/tasks/install.yaml
-# Updated: 2020-11-12
-
+# Updated: 2021-05-24
 ---
 
 - name: Task-01(Install) - Info about each computer in this play...
   debug:
-    msg:
-      - " Roll: Function_pihole"
-      - "         Host: {{ ansible_host }}"
-      - " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
-# ansible_os_family:   Debian, RedHat, Suse, Darwin, 
-# ansible_lsb.id:   Raspbian, Ubuntu, Suse
-#
+    msg: |
+      " Roll: Function_pihole"
+      "         Host: {{ ansible_host }}"
+      " Distribution: {{ ansible_distribution }}: {{ ansible_facts.distribution_major_version }}"
+
 - name: Task-02(Install) - set OS dependent variables.
   include_vars: '{{ distribution_item }}'
   with_first_found:
@@ -27,3 +24,4 @@
     name: "{{ pihole_package_list }}"
     state: present
 
+### END DBK

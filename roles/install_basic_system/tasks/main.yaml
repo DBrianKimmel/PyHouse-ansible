@@ -2,12 +2,6 @@
 # Author:  D. Brian Kimmel
 # Created: 2018-06-27
 # Updated: 2021-05-23
-#
-# This role will do the basics on each computer.
-#
-# MOTD
-# SSH and VNC access
-
 ---
 
 - name: Task-01 - Fail if Ansible is ancient
@@ -28,36 +22,36 @@
       "Gateway: {{ gateway_router | default('test_default_totken') }}"
       "Host Role: {{ host_roles | default('test_default_totken') }}"
 
-- name: Task-02 - setup Host
+- name: Task-03 - setup Host
   include_tasks: setup_hostname.yaml
 
-- name: Task-03 - Update and upgrade apt packages
+- name: Task-04 - Update and upgrade apt packages
   apt:
     upgrade: 'True'
     update_cache: 'True'
 
 ## sudo apt install python-pip python-dev python-setuptools python-virtualenv git libyaml-dev build-essential
-- name: Main Task-04 - Install needed packages.
+- name: Task-05 - Install needed packages.
   package:
      name: "{{ basic_apt_package_list }}"
      state: present
 
-- name: Main Task-03 - Set up autoreboot.
+- name: Task-06 - Set up autoreboot.
   include_tasks: auto-reboot.yaml
 
-- name: Main Task-04 - Set up avahi.
+- name: Task-07 - Set up avahi.
   include_tasks: setup-avahi.yaml
 
-- name: Main Task-05 - Set up time/timezone.
+- name: Task-08 - Set up time/timezone.
   include_tasks: setup-time.yaml
 
-- name: Main Task-06 - Set up the weekly os software update
+- name: Task-09 - Set up the weekly os software update
   include_tasks: update-os.yaml
 
-#- name: Main Task-07 - Set up Backup with rpi-clone
+#- name: Task-10 - Set up Backup with rpi-clone
 #  include_tasks: backup_system.yaml
 
-#- name: Main Task-08 - Setup basic firewall
+#- name: Task-11 - Setup basic firewall
 #  include_role:
 #    name: setup_firewall
 
