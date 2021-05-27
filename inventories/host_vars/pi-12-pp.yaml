@@ -16,7 +16,7 @@ wireguard_address: "10.12.14.112/24"
 
 host_functions:
    #- install_vnc
-   #- function_pihole
+   - function_pihole
    - function_none
 
 # ==============================
