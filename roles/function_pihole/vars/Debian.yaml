@@ -5,5 +5,6 @@
 
 pihole_package_list:
    - pihole
+   - unbound
 
 ### END DBK

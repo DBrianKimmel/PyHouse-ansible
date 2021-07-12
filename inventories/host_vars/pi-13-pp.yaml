@@ -16,6 +16,7 @@ wireguard_address: "10.12.14.113/24"
 
 host_functions:
   #- setup_house_proxy
+  - function_pihole
   - function_none
 
 # ==============================
